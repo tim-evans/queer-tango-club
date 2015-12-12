@@ -14,6 +14,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unirest' # Used to access Square Connect
 gem 'stripe'
 
+gem 'money-rails' # Used to parse money
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
