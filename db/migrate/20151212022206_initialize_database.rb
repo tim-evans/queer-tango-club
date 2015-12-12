@@ -1,16 +1,16 @@
 class InitializeDatabase < ActiveRecord::Migration
   def change
-    create_table :package do |t|
-      t.string :title
-      t.text   :description
-      t.string :image_url
-      t.date   :starts_at
-      t.date   :ends_at
+    create_table :packages do |t|
+      t.string  :title
+      t.text    :description
+      t.string  :image_url
+      t.date    :starts_at
+      t.date    :ends_at
 
       t.timestamps null: false
     end
 
-    create_table :event do |t|
+    create_table :events do |t|
       t.datetime :starts_at
       t.datetime :ends_at
       t.string   :taught_by
@@ -19,19 +19,37 @@ class InitializeDatabase < ActiveRecord::Migration
       t.text     :description
       t.string   :image_url
       t.integer  :package_id
+      t.integer  :location_id
       t.string   :sku
 
       t.timestamps null: false
     end
 
-    add_index :event, :package_id
-    add_index :event, :sku
-    add_index :event, :type
+    add_index :events, :package_id
+    add_index :events, :location_id
+    add_index :events, :sku
+    add_index :events, :type
 
-    create_table :attendee do |t|
+    create_table :locations do |t|
+      t.string   :name
+      t.string   :url
+      t.string   :address_line
+      t.string   :extended_address
+      t.string   :city
+      t.string   :region_code
+      t.string   :postal_code
+      t.string   :image_url
+      t.string   :latitude
+      t.string   :longitude
+
+      t.timestamps null: false
+    end
+
+    create_table :attendees do |t|
       t.integer :member_id
       t.integer :event_id
       t.string  :payment_method
+      t.string  :payment_amount
       t.string  :payment_url
       t.timestamp :paid_at
       t.boolean :attended
@@ -39,8 +57,8 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :attendee, :event_id
-    add_index :attendee, :member_id
+    add_index :attendees, :event_id
+    add_index :attendees, :member_id
 
     create_table :members do |t|
       t.string :name

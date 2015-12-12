@@ -16,10 +16,11 @@ ActiveRecord::Schema.define(version: 20151212022206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attendee", force: :cascade do |t|
+  create_table "attendees", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "event_id"
     t.string   "payment_method"
+    t.string   "payment_amount"
     t.string   "payment_url"
     t.datetime "paid_at"
     t.boolean  "attended"
@@ -27,10 +28,10 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "attendee", ["event_id"], name: "index_attendee_on_event_id", using: :btree
-  add_index "attendee", ["member_id"], name: "index_attendee_on_member_id", using: :btree
+  add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree
+  add_index "attendees", ["member_id"], name: "index_attendees_on_member_id", using: :btree
 
-  create_table "event", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.string   "taught_by"
@@ -39,14 +40,31 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.text     "description"
     t.string   "image_url"
     t.integer  "package_id"
+    t.integer  "location_id"
     t.string   "sku"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "event", ["package_id"], name: "index_event_on_package_id", using: :btree
-  add_index "event", ["sku"], name: "index_event_on_sku", using: :btree
-  add_index "event", ["type"], name: "index_event_on_type", using: :btree
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
+  add_index "events", ["package_id"], name: "index_events_on_package_id", using: :btree
+  add_index "events", ["sku"], name: "index_events_on_sku", using: :btree
+  add_index "events", ["type"], name: "index_events_on_type", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "address_line"
+    t.string   "extended_address"
+    t.string   "city"
+    t.string   "region_code"
+    t.string   "postal_code"
+    t.string   "image_url"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
@@ -57,7 +75,7 @@ ActiveRecord::Schema.define(version: 20151212022206) do
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
 
-  create_table "package", force: :cascade do |t|
+  create_table "packages", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "image_url"
