@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.integer  "member_id"
     t.integer  "event_id"
     t.string   "payment_method"
-    t.string   "payment_amount"
+    t.integer  "payment_amount"
+    t.string   "payment_currency"
     t.string   "payment_url"
     t.datetime "paid_at"
     t.boolean  "attended"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree

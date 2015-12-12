@@ -49,7 +49,8 @@ class InitializeDatabase < ActiveRecord::Migration
       t.integer :member_id
       t.integer :event_id
       t.string  :payment_method
-      t.string  :payment_amount
+      t.integer :payment_amount
+      t.string  :payment_currency
       t.string  :payment_url
       t.timestamp :paid_at
       t.boolean :attended
