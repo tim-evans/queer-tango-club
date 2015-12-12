@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: tango_dev
+
+test:
+  <<: *default
+  database: tango_test
+
+production:
+  <<: *default
+  database: tango
+  username: tanguero
+  password: <%= ENV['PG_PASSWORD'] %>
