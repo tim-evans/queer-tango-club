@@ -15,7 +15,7 @@ class SyncSkusService
       id: @event.sku,
       product: product.id,
       price: @event.ticket_cost,
-      currency: 'USD',
+      currency: @event.ticket_currency,
       inventory: {
         type: 'finite'
         quantity: @event.max_attendees
@@ -29,7 +29,7 @@ class SyncSkusService
         name: @event.name,
         sku: @event.sku
         price_money: {
-          currency_code: 'USD',
+          currency_code: @event.ticket_currency,
           amount: @event.ticket_cost
         }
       }]
