@@ -27,7 +27,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     add_index :events, :package_id
     add_index :events, :location_id
-    add_index :events, :sku
+    add_index :events, :sku, unique: true
     add_index :events, :type
 
     create_table :locations do |t|
