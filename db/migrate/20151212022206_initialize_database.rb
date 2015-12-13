@@ -18,6 +18,9 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string   :type
       t.text     :description
       t.string   :image_url
+      t.integer  :ticket_cost
+      t.string   :ticket_currency
+      t.integer  :max_attendees
       t.integer  :package_id
       t.integer  :location_id
       t.string   :sku

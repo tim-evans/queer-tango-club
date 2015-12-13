@@ -40,16 +40,19 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "type"
     t.text     "description"
     t.string   "image_url"
+    t.integer  "ticket_cost"
+    t.string   "ticket_currency"
+    t.integer  "max_attendees"
     t.integer  "package_id"
     t.integer  "location_id"
     t.string   "sku"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["package_id"], name: "index_events_on_package_id", using: :btree
-  add_index "events", ["sku"], name: "index_events_on_sku", using: :btree
+  add_index "events", ["sku"], name: "index_events_on_sku", unique: true, using: :btree
   add_index "events", ["type"], name: "index_events_on_type", using: :btree
 
   create_table "locations", force: :cascade do |t|
