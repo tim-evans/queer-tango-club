@@ -63,6 +63,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     add_index :attendees, :event_id
     add_index :attendees, :member_id
+    add_index :attendees, [:event_id, :member_id], unique: true
 
     create_table :members do |t|
       t.string :name

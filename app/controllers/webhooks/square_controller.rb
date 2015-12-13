@@ -1,4 +1,6 @@
-class Webhooks::SquareController < ActionController::Base
+class Webhooks::SquareController < ApplicationController
+
+  protect_from_forgery except: :receive
 
   WEBHOOK_URL = 'http://api.queertangoclub.nyc/webhooks/square'
 
@@ -17,21 +19,34 @@ class Webhooks::SquareController < ActionController::Base
   end
 
   def payment_updated(json)
-    order = retrieve_order_summary(json['entity_id'])
+    payment = Square::Payment.retrieve(json['entity_id'])
+    skus = payment.itemizations.map { |item| item.item_detail.sku }
 
-    member = Member.create_with(name: order[:buyer_name])
-                   .find_or_create_by(email: payment[:buyer_email])
+    notes = payment.itemizations.map { |item| item.notes }.compact
+    # Notes may include the user's name or email
+    email = notes.find { |note| note.include?('@') }
+    name = notes.find { |note| !note.include?('@') }
+    member = if email
+               Member.find_or_create_by(email: email.strip)
+             elsif name
+               Member.find_or_create_by(name: name.strip)
+             else
+               Member.create
+             end
 
-    # Create attendees for each of the classes bought
-    order[:skus].each do |sku|
-      attendee = Attendee.create(
-        payment_method: 'Square',
-        payment_url: order[:payment_url],
-        paid_at: Time.parse(order[:paid_at]),
+    # Create members / attendees for each of the classes bought
+    skus.each do |sku|
+      event = Event.find_by_sku(sku)
+      next if Attendee.where(member_id: member.id,
+                             event_id: event.id).count
+
+      Attendee.create(
+        payment_method: 'square',
+        payment_url: payment.payment_url,
+        paid_at: Time.parse(payment.created_at),
+        member: member,
+        event: event
       )
-      attendee.member = member
-      attendee.workshop = Class.find_by_sku(sku)
-      attendee.save!
     end
   end
 
@@ -48,16 +63,5 @@ class Webhooks::SquareController < ActionController::Base
   end
 
   def retrieve_order_summary(payment_id)
-    payment = Square::Payment.retrieve(payment_id)
-    orders = Square::Order.list(order: 'DESC')
-    order = orders.find { |order| order.payment_id == payment_id }
-
-    {
-      payment_url: payment.payment_url,
-      paid_at: Time.parse(payment.created_at),
-      buyer_name: order.recipient_name,
-      buyer_email: order.buyer_email,
-      skus: payment.itemizations.map { |item| item.item_detail.sku }
-    }
   end
 end
