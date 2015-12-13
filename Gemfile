@@ -11,8 +11,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 
-gem 'unirest' # Used to access Square Connect
+gem 'unirest' # Used for HTTP requests
 gem 'stripe'
+gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
 
 gem 'money-rails' # Used to parse money
 

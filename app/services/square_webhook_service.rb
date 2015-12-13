@@ -13,15 +13,15 @@ class SquareWebhookService
 
     order = retrieve_order_summary(json['entity_id'])
 
-    member = Member.create_with(name: order[:name])
-                   .find_or_create_by(email: payment[:email])
+    member = Member.create_with(name: order[:buyer_name])
+                   .find_or_create_by(email: payment[:buyer_email])
 
     # Create attendees for each of the classes bought
     order[:skus].each do |sku|
       attendee = Attendee.create(
         payment_method: 'Square',
-        payment_url: payment_json['payment_url'],
-        paid_at: Time.parse(payment_json['created_at']),
+        payment_url: order[:payment_url],
+        paid_at: Time.parse(order[:paid_at]),
       )
       attendee.member = member
       attendee.workshop = Class.find_by_sku(sku)
@@ -47,28 +47,16 @@ class SquareWebhookService
   end
 
   def retrieve_order_summary(payment_id)
-    payment = Unirest.get("https://connect.squareup.com/v1/me/payments/#{payment_id}",
-                          headers: {
-                            'Authorization': "Bearer #{ENV['SQUARE_ACCESS_TOKEN']}",
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                          })
-    payment_json = JSON.parse(payment.body)
-
-    order = Unirest.get("https://connect.squareup.com/v1/me/orders?payment_id=#{payment_id}",
-                        headers: {
-                          'Authorization': "Bearer #{ENV['SQUARE_ACCESS_TOKEN']}",
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                        })
-    order_json = JSON.parse(order.body)
+    payment = Square::Payment.retrieve(payment_id)
+    orders = Square::Order.list(order: 'DESC')
+    order = orders.find { |order| order.payment_id == payment_id }
 
     {
-      payment_url: payment_json['payment_url'],
-      paid_at: Time.parse(payment_json['created_at']),
-      name: order_json['recipient_name'],
-      email: order_json['buyer_email'],
-      skus: payment_json['itemizations'].map { |item| item['item_detail']['sku'] }
+      payment_url: payment.payment_url,
+      paid_at: Time.parse(payment.created_at),
+      buyer_name: order.recipient_name,
+      buyer_email: order.buyer_email,
+      skus: payment.itemizations.map { |item| item.item_detail.sku }
     }
   end
 end
