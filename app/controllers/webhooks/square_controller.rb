@@ -1,16 +1,22 @@
-class SquareWebhookService
-  def receive(request)
-    body = request.body.string
-    signature = request.env['HTTP_X_SQUARE_SIGNATURE']
+class Webhooks::SquareController < ActionController::Base
 
-    if signature_valid?(body, signature)
+  WEBHOOK_URL = 'http://api.queertangoclub.nyc/webhooks/square'
+
+  def receive(request)
+    unless valid_request?(request)
       puts 'Webhook with invalid signature detected'
-      return
+      head :bad_request
     end
 
-    json = JSON.parse(body)
-    return unless handles_request?(json)
+    json = JSON.parse(request.body.string)
+    event_type = json['event_type'].try(:downcase)
+    if event_type && self.respond_to?(event_type)
+      self.send(event_type, json)
+    end
+    head :ok
+  end
 
+  def payment_updated(json)
     order = retrieve_order_summary(json['entity_id'])
 
     member = Member.create_with(name: order[:buyer_name])
@@ -29,9 +35,9 @@ class SquareWebhookService
     end
   end
 
-  WEBHOOK_URL = 'http://api.queertangoclub.nyc/webhooks/square'
-
-  def signature_valid?(body, signature)
+  def valid_request?(request)
+    body = request.body.string
+    signature = request.env['HTTP_X_SQUARE_SIGNATURE']
     string_to_sign = WEBHOOK_URL + body
 
     generated_signature = Base64.strict_encode64(
@@ -39,11 +45,6 @@ class SquareWebhookService
     )
 
     Digest::SHA1.base64digest(generated_signature) == Digest::SHA1.base64digest(signature)
-  end
-
-  # Only handle PAYMENT_UPDATED webhooks
-  def handles_request?(json)
-    json.has_key?('event_type') && json['event_type'] === 'PAYMENT_UPDATED'
   end
 
   def retrieve_order_summary(payment_id)
