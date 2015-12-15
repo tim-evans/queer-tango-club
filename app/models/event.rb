@@ -7,6 +7,4 @@ class Event < ActiveRecord::Base
 
   # All events have a location
   belongs_to :location
-
-  validates :type, inclusion: { in: %(milonga workshop) }
 end

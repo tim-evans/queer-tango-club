@@ -1,0 +1,18 @@
+<% @milongas.each do |event| %>
+  <div class="event-item">
+    <h3><%= link_to event.title, milonga_path(event) %></h3>
+    <aside>
+      <div class="date"><%= event.starts_at.try(:format, "%B %e, %Y") %></div>
+      {{#each event.info as |info|}}
+        <span class="smcp {{info.type}}">{{info.type}}</span> {{time-range info.startsAt info.endsAt}}<br>
+      {{/each}}
+    </aside>
+    <div class="event-poster">
+      <%= link_to(milonga_path(event)) do %>
+        <%# event.guests.each do |guest| %>
+          <div class="poster"><img src="<%#= guest.image_url %>" alt="<%= event.title %>"/></div>
+        <%# end %>
+      <% end %>
+  </div>
+</div>
+<% end %>

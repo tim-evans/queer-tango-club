@@ -1,0 +1,18 @@
+<% content_for :title, "#{@milonga.title} | Queer Tango Club" %>
+
+<h4><%= @milonga.title %></h4>
+<% if @milonga.starts_at < Date.today %>
+  {{photo-gallery photos=model.photos}}
+<% else %>
+  <br>
+  <aside>
+    <p><%= simple_format(@milonga.description) %></p><br><br>
+    <h5>Location</h5>
+    <hr>
+    {{format-address model.location}}
+
+  </aside><aside>
+    <img src="<%= @milonga.location.map_url(width: 300, height: 300) %>" alt="Map for <%= @milonga.location.name %>" width=300 height=300/>
+    <a href="<%= @milonga.location.directions_url %>">Directions</a>
+  </aside>
+<% end %>
