@@ -10,8 +10,8 @@ class Location < ActiveRecord::Base
     true
   end
 
-  def map_url
-    "https://api.mapbox.com/v4/mapbox.light/pin-m+FF3800(#{longitude},#{latitude})/#{longitude},#{latitude},15/300x300.png?access_token=#{ENV['MAPBOX_TOKEN']}"
+  def map_url(width: 300, height: 300)
+    "https://api.mapbox.com/v4/mapbox.light/pin-m+FF3800(#{longitude},#{latitude})/#{longitude},#{latitude},15/#{width}x#{height}@2x.png?access_token=#{ENV['MAPBOX_TOKEN']}"
   end
 
   def directions_url

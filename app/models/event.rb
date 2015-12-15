@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   # An event may be part of a package deal
   belongs_to :package
 
-  # All events have locations
+  # All events have a location
   belongs_to :location
 
   validates :type, inclusion: { in: %(milonga workshop) }
