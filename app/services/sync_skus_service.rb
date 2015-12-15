@@ -17,7 +17,7 @@ class SyncSkusService
       price: @event.ticket_cost,
       currency: @event.ticket_currency,
       inventory: {
-        type: 'finite'
+        type: 'finite',
         quantity: @event.max_attendees
       }
     )
