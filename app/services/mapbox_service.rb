@@ -6,8 +6,8 @@ class MapboxService
 
     places = Unirest.get("#{QUERY_URL}/#{query.gsub(' ', '+')}.json?access_token=#{ENV['MAPBOX_TOKEN']}",
                          headers: {
-                           'Accept': 'application/json',
-                           'Content-Type': 'application/json'
+                           'Accept' => 'application/json',
+                           'Content-Type' => 'application/json'
                          }).body
 
     places['features'][0]['center']
