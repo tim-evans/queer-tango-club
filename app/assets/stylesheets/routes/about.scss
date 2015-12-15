@@ -1,0 +1,23 @@
+#about {
+  .signatures {
+    text-align: right;
+    .et {
+      position: relative;
+      top: -8px;
+      font-weight: normal;
+      font-style: italic;
+      font-size: 26px;
+      padding: 0 10px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .signatures {
+      text-align: center;
+      .et {
+        line-height: 40px;
+        display: block;
+      }
+    }
+  }
+}

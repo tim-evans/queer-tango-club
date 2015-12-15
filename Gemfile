@@ -17,6 +17,9 @@ gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
 
 gem 'money-rails' # Used to parse money
 
+gem 'inline_svg'
+gem 'jquery-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

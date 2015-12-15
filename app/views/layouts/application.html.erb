@@ -6,9 +6,32 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body id="<%= controller.controller_name %>">
+  <% if controller.controller_name == 'home' %>
+    <%= yield %>
+  <% else %>
+    <header>
+     <h1>
+      <%= link_to(root_path) do %>
+        <span class="q">Queer</span>
+        <span class="t">Tango</span>
+        <span class="c">Club</span>
+      <% end %>
+    </h1>
+    <nav>
+      <%= link_to('About', about_path) %>
+      <%= link_to('Events', events_path) %>
+      <%= mail_to('nyqtangoclub@gmail.com', 'Contact') %>
+    </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <a href="https://facebook.com/nycqueertangoclub" target="_blank">
+        <%= inline_svg("facebook") %> nycqueertangoclub
+      </a>
+    </footer>
+  <% end %>
 </body>
 </html>

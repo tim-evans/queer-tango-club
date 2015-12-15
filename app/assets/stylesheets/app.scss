@@ -1,0 +1,173 @@
+@import "colors";
+@import "routes/home";
+@import "routes/about";
+@import "routes/events";
+@import "routes/event";
+
+@font-face {
+  font-family: 'Arial Black';
+  src: font-url('kcalB-lairA.eot');
+  src: font-url('kcalB-lairA.eot?#iefix') format('embedded-opentype'),
+       font-url('kcalB-lairA.woff') format('woff'),
+       font-url('kcalB-lairA.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Baskerville;
+  font-weight: 600;
+  color: $black;
+}
+
+header {
+  padding: 0;
+  margin: 0;
+
+  h1 a {
+    display: block;
+    font-family: 'Arial Black';
+    font-size: 70px;
+    text-transform: uppercase;
+    line-height: 60px;
+    margin: 15vh auto;
+    width: 300px;
+    margin: 0 auto;
+    color: $theme;
+    text-align: center;
+    transition: color .25s;
+    text-decoration: none;
+
+    span {
+      display: block;
+    }
+    .q {
+      letter-spacing: 2.5px;
+    }
+    .t {
+      letter-spacing: 0;
+    }
+    .c {
+      margin-left: 15px;
+      letter-spacing: 20px;
+    }
+    &:after {
+      height: 5px;
+      background: $theme;
+    }
+  }
+}
+nav {
+  padding-top: 0px;
+  padding-bottom: 50px;
+  text-align: center;
+  width: 100%;
+
+  a {
+    display: inline-block;
+    letter-spacing: 5px;
+    color: $black;
+    text-transform: uppercase;
+    font-size: 13px;
+    text-decoration: none;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    transition: all 0.25s;
+  }
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: -1;
+  overflow: hidden;
+}
+.hero-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+p {
+  padding: 10px 15px;
+  margin: 0 auto;
+  font-style: italic;
+  letter-spacing: 2px;
+  line-height: 25px;
+  max-width: 440px;
+}
+
+footer {
+  text-align: center;
+  font-family: 'Arial Black';
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 20px 0;
+  svg {
+    position: relative;
+    top: 6px;
+    path {
+      fill: $theme;
+      transition: all .25s;
+    }
+  }
+  a {
+    display: inline-block;
+    color: $theme;
+    line-height: 20px;
+    text-decoration: none;
+    transition: all .25s;
+    &:after {
+      bottom: -7px;
+      background: $theme;
+    }
+  }
+}
+
+a:after {
+  margin: 0 auto;
+  position: relative;
+  bottom: -5px;
+  left: -2px;
+  height: 2px;
+  display: block;
+  content: ' ';
+  background: #050505;
+  width: 0%;
+  transition: width .25s;
+}
+a:hover {
+  &:after {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  header nav a {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  header nav a {
+    padding-left: 10px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  footer {
+    letter-spacing: 2px;
+  }
+}
+
+.smcp {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
