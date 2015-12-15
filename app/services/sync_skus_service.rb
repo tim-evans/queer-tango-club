@@ -27,7 +27,7 @@ class SyncSkusService
       description: @event.description,
       variations: [{
         name: @event.name,
-        sku: @event.sku
+        sku: @event.sku,
         price_money: {
           currency_code: @event.ticket_currency,
           amount: @event.ticket_cost
