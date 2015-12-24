@@ -1,8 +1,10 @@
 @import "colors";
+@import "grid";
 @import "routes/home";
 @import "routes/about";
-@import "routes/events";
 @import "routes/event";
+
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic,700,400);
 
 @font-face {
   font-family: 'Arial Black';
@@ -17,8 +19,9 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: Baskerville;
-  font-weight: 600;
+  font-family: 'Libre Baskerville';
+  font-weight: 400;
+  font-size: 16px;
   color: $black;
 }
 
@@ -26,15 +29,24 @@ header {
   padding: 0;
   margin: 0;
 
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h1 {
+    padding-right: 3rem;
+  }
+
   h1 a {
-    display: block;
+    position: relative;
+    left: -1rem;
+    display: inline-block;
     font-family: 'Arial Black';
-    font-size: 70px;
+    font-size: 3.75rem;
     text-transform: uppercase;
-    line-height: 60px;
-    margin: 15vh auto;
-    width: 300px;
-    margin: 0 auto;
+    line-height: 3.375rem;
+    width: 18.75rem;
     color: $theme;
     text-align: center;
     transition: color .25s;
@@ -44,33 +56,30 @@ header {
       display: block;
     }
     .q {
-      letter-spacing: 2.5px;
+      letter-spacing: 0.15rem;
     }
     .t {
       letter-spacing: 0;
     }
     .c {
-      margin-left: 15px;
-      letter-spacing: 20px;
-    }
-    &:after {
-      height: 5px;
-      background: $theme;
+      margin-left: 1rem;
+      letter-spacing: 1.25rem;
     }
   }
+
+  nav {
+    display: inline-block;
+  }
 }
+
 nav {
-  padding-top: 0px;
-  padding-bottom: 50px;
-  text-align: center;
-  width: 100%;
+  padding-top: 2em;
 
   a {
+    @extend .smcp;
+
     display: inline-block;
-    letter-spacing: 5px;
     color: $black;
-    text-transform: uppercase;
-    font-size: 13px;
     text-decoration: none;
     padding-left: 30px;
     padding-bottom: 10px;
@@ -93,59 +102,58 @@ nav {
   z-index: -1;
 }
 
+h2 {
+  font-size: 1.75rem;
+  padding: 0.5rem 0;
+  font-weight: 900;
+  border-bottom: 5px solid $black;
+}
+
 p {
-  padding: 10px 15px;
+  font-size: 1rem;
+  padding: 0.5rem 0;
   margin: 0 auto;
-  font-style: italic;
-  letter-spacing: 2px;
-  line-height: 25px;
-  max-width: 440px;
+  letter-spacing: 0.1rem;
+  line-height: 1.5rem;
 }
 
 footer {
-  text-align: center;
-  font-family: 'Arial Black';
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  margin: 20px 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.2rem;
+  line-height: 2rem;
+  padding: 10px 0;
+  color: $white;
+
+  background: $black;
+
+  a {
+    color: $white;
+  }
+
+  .vr {
+    display: inline-block;
+    content: ' ';
+    width: 1px;
+    background: $white;
+    height: 1.5rem;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0.5rem;
+  }
+
   svg {
     position: relative;
     top: 6px;
+    margin-right: 10px;
     path {
-      fill: $theme;
+      fill: $white;
       transition: all .25s;
-    }
-  }
-  a {
-    display: inline-block;
-    color: $theme;
-    line-height: 20px;
-    text-decoration: none;
-    transition: all .25s;
-    &:after {
-      bottom: -7px;
-      background: $theme;
     }
   }
 }
 
-a:after {
-  margin: 0 auto;
-  position: relative;
-  bottom: -5px;
-  left: -2px;
-  height: 2px;
-  display: block;
-  content: ' ';
-  background: #050505;
-  width: 0%;
-  transition: width .25s;
-}
-a:hover {
-  &:after {
-    width: 100%;
-  }
+.nolink {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 475px) {
@@ -160,14 +168,23 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 350px) {
-  footer {
-    letter-spacing: 2px;
-  }
+.smcp {
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
 }
 
-.smcp {
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+.photo-overlay {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0;
+  margin-bottom: 10px;
+  background: $white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+
+  &.dark {
+    background: $black;
+    color: $white;
+  }
 }

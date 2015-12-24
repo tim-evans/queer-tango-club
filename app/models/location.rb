@@ -1,4 +1,7 @@
 class Location < ActiveRecord::Base
+  has_many :nearby_locations, class_name: 'Location',
+                              foreign_key: 'event_location_id'
+
   before_create :geolocate
 
   def geolocate
@@ -10,11 +13,11 @@ class Location < ActiveRecord::Base
     true
   end
 
-  def map_url(width: 300, height: 300)
-    "https://api.mapbox.com/v4/mapbox.light/pin-m+FF3800(#{longitude},#{latitude})/#{longitude},#{latitude},15/#{width}x#{height}@2x.png?access_token=#{ENV['MAPBOX_TOKEN']}"
-  end
-
-  def directions_url
-    "https://www.google.com/maps/dir//#{latitude},#{longitude}/@#{latitude},#{longitude},15z"
+  def directions_url(origin=nil)
+    if origin
+      "https://www.google.com/maps/dir/#{origin.latitude},#{origin.longitude}/#{latitude},#{longitude}/@#{latitude},#{longitude},15z"
+    else
+      "https://www.google.com/maps/dir//#{latitude},#{longitude}/@#{latitude},#{longitude},15z"
+    end
   end
 end

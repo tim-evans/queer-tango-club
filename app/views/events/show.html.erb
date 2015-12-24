@@ -1,0 +1,29 @@
+<% content_for :title, "#{@event.title} | Queer Tango Club" %>
+
+<div class="container">
+  <h2><% if @event.guests.count > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
+  <section id="guests">
+    <% @event.guests.each do |guest| %>
+      <div class="container half">
+        <div class="lhs">
+          <% guest.photos.each do |photo| %>
+            <img src="<%= photo.src %>" />
+          <% end %>
+        </div>
+        <div class="rhs">
+          <h3><%= link_to guest.name, guest.url %></h3>
+          <%= guest.role %>
+          <%= simple_format guest.bio %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+  <section id="schedule">
+  </section>
+  <%= render partial: 'location', locals: { location: @event.location } %>
+  </section>
+  <% if @event.photos %>
+    <section id="photos">
+    </section>
+  <% end %>
+</div>

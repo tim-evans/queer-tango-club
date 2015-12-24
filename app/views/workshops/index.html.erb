@@ -1,8 +1,8 @@
 <section>
   <div class="container">
-    <h2>Events</h2>
+    <h2>Workshops</h2>
   </div>
-  <% @milongas.each do |event| %>
+  <% @workshops.each do |event| %>
     <div class="event">
       <% event.guests.each do |guest| %>
         <div class="poster"><img src="<%= guest.image_url %>" alt="<%= event.title %>"/></div>
@@ -12,9 +12,12 @@
           <h3 class="photo-overlay"><%= event.title %></h3>
         <% end %>
         <h4 class="photo-overlay">
-          <%= format_range(event.starts_at, event.ends_at) %><br>
+          <%= event.starts_at %><br>
           <%= event.location.name %>
         </h4>
+        <button class="dark photo-overlay">
+          Purchase Tickets
+        </button>
       </div>
     </div>
   <% end %>

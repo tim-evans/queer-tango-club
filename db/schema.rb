@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20151212022206) do
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "member_id"
-    t.integer  "event_id"
+    t.integer  "session_id"
     t.string   "payment_method"
     t.integer  "payment_amount"
     t.string   "payment_currency"
@@ -29,31 +29,34 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree
   add_index "attendees", ["member_id"], name: "index_attendees_on_member_id", using: :btree
+  add_index "attendees", ["session_id", "member_id"], name: "index_attendees_on_session_id_and_member_id", unique: true, using: :btree
+  add_index "attendees", ["session_id"], name: "index_attendees_on_session_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.datetime "starts_at"
-    t.datetime "ends_at"
-    t.string   "taught_by"
     t.string   "title"
-    t.string   "type"
     t.text     "description"
-    t.string   "image_url"
-    t.integer  "ticket_cost"
-    t.string   "ticket_currency"
-    t.integer  "max_attendees"
-    t.integer  "package_id"
+    t.string   "type"
     t.integer  "location_id"
-    t.string   "sku"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.date     "starts_at"
+    t.date     "ends_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
-  add_index "events", ["package_id"], name: "index_events_on_package_id", using: :btree
-  add_index "events", ["sku"], name: "index_events_on_sku", unique: true, using: :btree
   add_index "events", ["type"], name: "index_events_on_type", using: :btree
+
+  create_table "guests", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "session_id"
+    t.string   "role"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "guests", ["teacher_id", "session_id"], name: "index_guests_on_teacher_id_and_session_id", unique: true, using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -66,8 +69,11 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "image_url"
     t.string   "latitude"
     t.string   "longitude"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "category"
+    t.integer  "event_location_id"
+    t.boolean  "safe_space"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -79,14 +85,30 @@ ActiveRecord::Schema.define(version: 20151212022206) do
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
 
-  create_table "packages", force: :cascade do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "image_url"
-    t.date     "starts_at"
-    t.date     "ends_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "guest_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.integer  "ticket_cost"
+    t.string   "ticket_currency"
+    t.integer  "max_attendees"
+    t.integer  "event_id"
+    t.string   "sku"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "sessions", ["event_id"], name: "index_sessions_on_event_id", using: :btree
+  add_index "sessions", ["sku"], name: "index_sessions_on_sku", unique: true, using: :btree
+
+  create_table "teachers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

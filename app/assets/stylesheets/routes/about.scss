@@ -1,12 +1,11 @@
 #about {
   .signatures {
-    text-align: right;
     .et {
       position: relative;
       top: -8px;
       font-weight: normal;
       font-style: italic;
-      font-size: 26px;
+      font-size: 1.2rem;
       padding: 0 10px;
     }
   }
@@ -15,7 +14,7 @@
     .signatures {
       text-align: center;
       .et {
-        line-height: 40px;
+        line-height: 2.2rem;
         display: block;
       }
     }

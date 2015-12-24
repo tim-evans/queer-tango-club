@@ -11,27 +11,25 @@
     <%= yield %>
   <% else %>
     <header>
-     <h1>
-      <%= link_to(root_path) do %>
-        <span class="q">Queer</span>
-        <span class="t">Tango</span>
-        <span class="c">Club</span>
-      <% end %>
-    </h1>
-    <nav>
-      <%= link_to('About', about_path) %>
-      <%= link_to('Events', milongas_path) %>
-      <%= mail_to('nyqtangoclub@gmail.com', 'Contact') %>
-    </nav>
+      <div class="container">
+        <h1>
+          <%= link_to(root_path) do %>
+            <span class="q">Queer</span>
+            <span class="t">Tango</span>
+            <span class="c">Club</span>
+          <% end %>
+        </h1>
+        <nav>
+          <%= link_to('About', about_path) %>
+          <%= link_to('Events', milongas_path) %>
+          <%= link_to('Workshops', workshops_path) %>
+        </nav>
+      </div>
     </header>
     <main>
       <%= yield %>
     </main>
-    <footer>
-      <a href="https://facebook.com/nycqueertangoclub" target="_blank">
-        <%= inline_svg("facebook") %> nycqueertangoclub
-      </a>
-    </footer>
+    <%= render partial: 'footer' %>
   <% end %>
 </body>
 </html>

@@ -1,37 +1,55 @@
 class InitializeDatabase < ActiveRecord::Migration
   def change
-    create_table :packages do |t|
+    create_table :events do |t|
       t.string  :title
       t.text    :description
-      t.string  :image_url
+      t.string  :type
+      t.integer :location_id
       t.date    :starts_at
       t.date    :ends_at
 
       t.timestamps null: false
     end
 
-    create_table :events do |t|
+    add_index :events, :location_id
+    add_index :events, :type
+
+    create_table :guests do |t|
+      t.integer :teacher_id
+      t.integer :session_id
+      t.string  :role
+      t.text    :description
+
+      t.timestamps null: false
+    end
+
+    add_index :guests, [:teacher_id, :session_id], unique: true
+
+    create_table :teachers do |t|
+      t.string :name
+      t.string :url
+      t.text   :bio
+
+      t.timestamps null: false
+    end
+
+    create_table :sessions do |t|
+      t.string   :title
+      t.text     :description
+      t.integer  :guest_id
       t.datetime :starts_at
       t.datetime :ends_at
-      t.string   :taught_by
-      t.string   :title
-      t.string   :type
-      t.text     :description
-      t.string   :image_url
       t.integer  :ticket_cost
       t.string   :ticket_currency
       t.integer  :max_attendees
-      t.integer  :package_id
-      t.integer  :location_id
+      t.integer  :event_id
       t.string   :sku
 
       t.timestamps null: false
     end
 
-    add_index :events, :package_id
-    add_index :events, :location_id
-    add_index :events, :sku, unique: true
-    add_index :events, :type
+    add_index :sessions, :event_id
+    add_index :sessions, :sku, unique: true
 
     create_table :locations do |t|
       t.string   :name
@@ -45,12 +63,16 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string   :latitude
       t.string   :longitude
 
+      t.string   :category
+      t.integer  :event_location_id
+      t.boolean  :safe_space
+
       t.timestamps null: false
     end
 
     create_table :attendees do |t|
       t.integer :member_id
-      t.integer :event_id
+      t.integer :session_id
       t.string  :payment_method
       t.integer :payment_amount
       t.string  :payment_currency
@@ -61,9 +83,9 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :attendees, :event_id
+    add_index :attendees, :session_id
     add_index :attendees, :member_id
-    add_index :attendees, [:event_id, :member_id], unique: true
+    add_index :attendees, [:session_id, :member_id], unique: true
 
     create_table :members do |t|
       t.string :name

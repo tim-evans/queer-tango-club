@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/about' => 'about#index'
 
-  resources :milongas, only: [:index, :show]
+  resources :events, only: [:show]
+  resources :milongas, only: [:index]
+  resources :workshops, only: [:index]
 
   namespace :webhooks do
     post 'square', to: 'square#receive'

@@ -1,9 +1,11 @@
 <header>
-  <nav>
-    <%= link_to('About', about_path) %>
-    <%= link_to('Events', milongas_path) %>
-    <%= mail_to('nyqtangoclub@gmail.com', 'Contact') %>
-  </nav>
+  <div class="container">
+    <nav>
+      <%= link_to('About', about_path) %>
+      <%= link_to('Events', milongas_path) %>
+      <%= link_to('Workshops', workshops_path) %>
+    </nav>
+  </div>
   <h1>
     <span class="q">Queer</span>
     <span class="t">Tango</span>
@@ -11,12 +13,16 @@
   </h1>
 </header>
 <main>
+  <div class="container">
+    <h4 class="dark photo-overlay">Upcoming Events</h4><br>
+    <% Event.all.each do |event| %>
+      <%= link_to event_path(event) do %>
+        <h3 class="photo-overlay"><%= event.title %></h3>
+      <% end %>
+    <% end %>
+  </div>
 </main>
-<footer>
-  <a href="https://facebook.com/nycqueertangoclub" target="_blank">
-    <%= inline_svg("facebook") %> nycqueertangoclub
-  </a>
-</footer>
+<%= render partial: 'footer' %>
 <div class="hero-image">
-  <%= image_tag("IMG_3044.jpg") %>
+  <%= image_tag("IMG_4024.jpg") %>
 </div>

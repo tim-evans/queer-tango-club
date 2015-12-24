@@ -1,4 +1,27 @@
-<div class="location">
-  <img src="<%= location.map_url(width: 300, height: 300) %>" alt="Map for <%= location.name %>" width=300 height=300/>
-  <a href="<%= location.directions_url %>">Directions to <%= location.name %></a>
-</div>
+<section id="location">
+  <img src="<%= location.photo %>" alt="<%= location.name %>" />
+  <div class="container">
+    <h3><%= link_to location.name, location.url %></h3>
+    <aside>
+      <%= location.address_line %><br>
+      <%= location.extended_address %><br>
+      <%= location.city %>, <%= location.region_code %> <%= location.postal_code %><br>
+    </aside>
+    <a href="<%= location.directions_url %>">Directions</a>
+  </div>
+
+  <div class="container">
+    <h2>Nearby Caf&eacute;s</h2>
+    <%= location.nearby_locations do |nearby| %>
+      <img src="<%= nearby.photo %>" alt="<%= nearby.name %>" />
+      <aside>
+        <h3><%= link_to nearby.name, nearby.url %></h3>
+        <%= nearby.address_line %><br>
+        <%= nearby.extended_address %><br>
+        <%= nearby.city %>, <%= nearby.region_code %> <%= nearby.postal_code %><br>
+      </aside>
+      <a href="<%= nearby.directions_url(location) %>">Directions</a>
+    <% end %>
+  </div>
+</section>
+
