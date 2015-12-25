@@ -1,25 +1,35 @@
+<% content_for :title, "Queer Tango Club" %>
+
 <header>
   <div class="container">
-    <nav>
-      <%= link_to('About', about_path) %>
-      <%= link_to('Events', milongas_path) %>
-      <%= link_to('Workshops', workshops_path) %>
-    </nav>
+    <div class="row end">
+      <nav>
+        <%= link_to('About', about_path) %>
+        <%= link_to('Events', milongas_path) %>
+        <%= link_to('Workshops', workshops_path) %>
+      </nav>
+    </div>
   </div>
-  <h1>
-    <span class="q">Queer</span>
-    <span class="t">Tango</span>
-    <span class="c">Club</span>
-  </h1>
 </header>
 <main>
   <div class="container">
-    <h4 class="dark photo-overlay">Upcoming Events</h4><br>
-    <% Event.all.each do |event| %>
-      <%= link_to event_path(event) do %>
+    <div class="row">
+      <h1 class="logo">
+        <span class="q">Queer</span>
+        <span class="t">Tango</span>
+        <span class="c">Club</span>
+      </h1>
+    </div>
+    <div class="row end">
+      <section id="upcoming-events">
+        <h4 class="dark photo-overlay">Upcoming Events</h4><br>
+        <% Event.all.each do |event| %>
+        <%= link_to event_path(event) do %>
         <h3 class="photo-overlay"><%= event.title %></h3>
-      <% end %>
-    <% end %>
+        <% end %>
+        <% end %>
+      </section>
+    </div>
   </div>
 </main>
 <%= render partial: 'footer' %>

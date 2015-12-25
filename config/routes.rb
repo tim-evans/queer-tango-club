@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/about' => 'about#index'
 
-  resources :events, only: [:show]
+  resources :events, only: [:show, :new, :edit]
   resources :milongas, only: [:index]
   resources :workshops, only: [:index]
 

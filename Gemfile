@@ -20,6 +20,8 @@ gem 'money-rails' # Used to parse money
 gem 'inline_svg'
 gem 'jquery-rails'
 
+gem 'paperclip', '~> 4.3.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

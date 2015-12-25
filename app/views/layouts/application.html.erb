@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Queer Tango Club</title>
+  <title><%= yield :title %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -10,9 +10,9 @@
   <% if controller.controller_name == 'home' %>
     <%= yield %>
   <% else %>
-    <header>
-      <div class="container">
-        <h1>
+    <header class="container">
+      <div class="row between">
+        <h1 class="logo">
           <%= link_to(root_path) do %>
             <span class="q">Queer</span>
             <span class="t">Tango</span>

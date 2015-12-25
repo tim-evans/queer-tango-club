@@ -27,8 +27,13 @@ $(function () {
   }())
 
   function onresize() {
+    var display = element.style.display;
+    element.style.display = 'none';
+    var height = $(document).height();
+    element.style.display = display;
+
     tile({
-      height: $(document).height(),
+      height: height,
       width: window.innerWidth
     });
   }
