@@ -24,4 +24,8 @@ module ApplicationHelper
       time.strftime('%l:%M')
     end
   end
+
+  def icon(name)
+    inline_svg("icons/#{name}", class: 'icon')
+  end
 end

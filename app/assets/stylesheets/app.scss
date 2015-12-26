@@ -122,6 +122,39 @@ p {
   line-height: 1.5rem;
 }
 
+button,
+a.button {
+  background: $black;
+  color: $white;
+  font-family: 'Libre Baskerville';
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  text-decoration: none;
+
+  &:hover {
+    background: $gray;
+  }
+
+  &.with-icon {
+    padding-left: 4rem;
+
+    svg {
+      position: absolute;
+      top: 0.7rem;
+      left: 1.5rem;
+      path {
+        fill: $white;
+      }
+    }
+  }
+}
+
+
 footer {
   font-size: 0.8rem;
   letter-spacing: 0.125rem;
@@ -148,7 +181,7 @@ footer {
 
   svg {
     position: relative;
-    top: 10px;
+    top: 0.6rem;
     margin-right: 5px;
     path {
       fill: $white;
@@ -161,9 +194,18 @@ footer {
   text-decoration: none;
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
 @media screen and (min-width: 1024px) {
   html, body {
     font-size: 18px;
+  }
+  .icon {
+    width: 30px;
+    height: 30px;
   }
 }
 

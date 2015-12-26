@@ -19,6 +19,9 @@
 </section>
 <section id="schedule" class="container padding">
   <h2>Schedule</h2>
+  <%= link_to cart_event_path(@event), class: 'button with-icon' do %>
+    <%= icon("ticket") %> Purchase Tickets
+  <% end %>
   <% @event.sessions_by_day.each do |sessions| %>
     <h3><%= sessions.first.starts_at.strftime("%B %d, %Y") %></h3>
     <ul class="sessions">
