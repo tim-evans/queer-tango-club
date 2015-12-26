@@ -23,7 +23,7 @@
     <div class="row end">
       <section id="upcoming-events">
         <h4 class="dark photo-overlay">Upcoming Events</h4><br>
-        <% Event.all.each do |event| %>
+        <% @upcoming.each do |event| %>
         <%= link_to event_path(event) do %>
         <h3 class="photo-overlay"><%= event.title %></h3>
         <% end %>

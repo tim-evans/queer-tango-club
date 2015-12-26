@@ -3,7 +3,7 @@ class MilongasController < ApplicationController
 
   # GET /milongas
   def index
-    @milongas = Milonga.all
+    @milongas = Milonga.all.order(starts_at: :desc)
   end
 
   # GET /milongas/1

@@ -1,3 +1,24 @@
+.event {
+  position: relative;
+  height: 400px;
+
+  .cover-photo {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    background: red;
+  }
+
+  .container {
+    position: relative;
+    height: 350px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 50px;
+  }
+}
+
 .photo-gallery {
   width: 100%;
 

@@ -6,17 +6,19 @@
   </div>
   <% @milongas.each do |event| %>
     <div class="event">
-      <% event.guests.each do |guest| %>
-        <div class="poster"><img src="<%= guest.image_url %>" alt="<%= event.title %>"/></div>
-      <% end %>
+      <div class="cover-photo"><img src="<%= event.cover %>" alt="<%= event.title %>"/></div>
       <div class="container">
-        <%= link_to event_path(event) do %>
-          <h3 class="photo-overlay"><%= event.title %></h3>
-        <% end %>
-        <h4 class="photo-overlay">
-          <%= format_date_range(event.starts_at, event.ends_at) %><br>
-          <%= event.location.name %>
-        </h4>
+        <div class="col end">
+          <%= link_to event_path(event) do %>
+            <h3 class="photo-overlay"><%= event.title %></h3>
+          <% end %>
+          <div>
+            <h4 class="photo-overlay">
+              <%= format_date_range(event.starts_at, event.ends_at) %><br>
+              <% if event.location %><%= event.location.name %><% end %>
+            </h4>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

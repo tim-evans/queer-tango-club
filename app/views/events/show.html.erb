@@ -35,7 +35,9 @@
     </ul>
   <% end %>
 </section>
+<% if @event.location %>
 <%= render partial: 'location', locals: { location: @event.location } %>
+<% end %>
 
 <%# if @event.photos %>
 <section id="photos">

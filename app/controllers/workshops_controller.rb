@@ -3,7 +3,7 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops
   def index
-    @workshops = Workshop.all
+    @workshops = Workshop.all.order(starts_at: :desc)
   end
 
   # GET /workshops/1

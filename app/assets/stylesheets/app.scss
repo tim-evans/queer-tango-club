@@ -137,7 +137,7 @@ a.button {
   text-decoration: none;
 
   &:hover {
-    background: $gray;
+    background: $soot;
   }
 
   &.with-icon {
@@ -265,5 +265,13 @@ footer {
   &.dark {
     background: $black;
     color: $white;
+  }
+
+  a & {
+    transition: all 0.2s;
+    color: $black;
+    &:hover {
+      background: $cloudy;
+    }
   }
 }

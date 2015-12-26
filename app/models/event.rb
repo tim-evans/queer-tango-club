@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  # has_attached_file :cover, styles: { jumbo: 'x550', large: 'x400' }
+  has_attached_file :cover, styles: { jumbo: 'x550', large: 'x400' }
 
   has_many :sessions
   has_many :guests, -> { distinct }, through: 'sessions'
