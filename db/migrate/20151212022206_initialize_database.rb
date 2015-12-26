@@ -4,14 +4,12 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string  :title
       t.text    :description
       t.string  :type
-      t.integer :location_id
       t.date    :starts_at
       t.date    :ends_at
 
       t.timestamps null: false
     end
 
-    add_index :events, :location_id
     add_index :events, :type
 
     create_table :guests do |t|
@@ -37,6 +35,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string   :title
       t.text     :description
       t.integer  :guest_id
+      t.integer  :location_id
       t.datetime :starts_at
       t.datetime :ends_at
       t.integer  :ticket_cost
@@ -49,6 +48,7 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     add_index :sessions, :event_id
+    add_index :sessions, :location_id
     add_index :sessions, :sku, unique: true
 
     create_table :locations do |t|

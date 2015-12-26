@@ -14,7 +14,7 @@
           <h3 class="photo-overlay"><%= event.title %></h3>
         <% end %>
         <h4 class="photo-overlay">
-          <%= format_range(event.starts_at, event.ends_at) %><br>
+          <%= format_date_range(event.starts_at, event.ends_at) %><br>
           <%= event.location.name %>
         </h4>
       </div>

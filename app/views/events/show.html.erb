@@ -1,29 +1,40 @@
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 
-<div class="container">
+<section id="guests" class="container padding">
   <h2><% if @event.guests.count > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
-  <section id="guests">
-    <% @event.guests.each do |guest| %>
-      <div class="container half">
-        <div class="lhs">
-          <% guest.photos.each do |photo| %>
-            <img src="<%= photo.src %>" />
-          <% end %>
-        </div>
-        <div class="rhs">
-          <h3><%= link_to guest.name, guest.url %></h3>
-          <%= guest.role %>
-          <%= simple_format guest.bio %>
-        </div>
+  <% @event.guests.each do |guest| %>
+    <div class="container half">
+      <div class="lhs">
+        <%# guest.photos.each do |photo| %>
+          <img src="<%#= photo.src %>" />
+        <%# end %>
       </div>
-    <% end %>
-  </section>
-  <section id="schedule">
-  </section>
-  <%= render partial: 'location', locals: { location: @event.location } %>
-  </section>
-  <% if @event.photos %>
-    <section id="photos">
-    </section>
+      <div class="rhs">
+        <h3><%= link_to guest.name, guest.url %></h3>
+        <%= guest.role %>
+        <%= simple_format guest.bio %>
+      </div>
+    </div>
   <% end %>
-</div>
+</section>
+<section id="schedule" class="container padding">
+  <h2>Schedule</h2>
+  <% @event.sessions_by_day.each do |sessions| %>
+    <h3><%= sessions.first.starts_at.strftime("%B %d, %Y") %></h3>
+    <ul class="sessions">
+      <% sessions.each do |session| %>
+        <li class="session">
+          <h4><%= session.title %></h4>
+          <%= format_time_range(session.starts_at, session.ends_at) %>
+          <%= simple_format session.description %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<%= render partial: 'location', locals: { location: @event.location } %>
+
+<%# if @event.photos %>
+<section id="photos">
+</section>
+<%# end %>

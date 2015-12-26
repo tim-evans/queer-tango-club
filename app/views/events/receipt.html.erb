@@ -1,0 +1,5 @@
+<% content_for :title, "Thank You | Queer Tango Club" %>
+
+<h2>We look forward to seeing you at <%= @event.name %></h2>
+<p>You should receive an email receipt at <%= mail_to(@attendee.email) %> with the details of this purchase.</p>
+<p>If you have any questions about your order, please contact us at <%= mail_to('nyqtangoclub@gmail.com').</p>

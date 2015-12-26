@@ -37,14 +37,12 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "title"
     t.text     "description"
     t.string   "type"
-    t.integer  "location_id"
     t.date     "starts_at"
     t.date     "ends_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["type"], name: "index_events_on_type", using: :btree
 
   create_table "guests", force: :cascade do |t|
@@ -89,6 +87,7 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "title"
     t.text     "description"
     t.integer  "guest_id"
+    t.integer  "location_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.integer  "ticket_cost"
@@ -101,6 +100,7 @@ ActiveRecord::Schema.define(version: 20151212022206) do
   end
 
   add_index "sessions", ["event_id"], name: "index_sessions_on_event_id", using: :btree
+  add_index "sessions", ["location_id"], name: "index_sessions_on_location_id", using: :btree
   add_index "sessions", ["sku"], name: "index_sessions_on_sku", unique: true, using: :btree
 
   create_table "teachers", force: :cascade do |t|

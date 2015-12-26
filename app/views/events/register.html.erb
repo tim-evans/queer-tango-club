@@ -1,0 +1,23 @@
+<% content_for :title, "#{@event.title} | Queer Tango Club" %>
+
+<section id="schedule" class="container padding">
+  <h2>Choose Your Workshops</h2>
+  <% @event.sessions_by_day.each do |sessions| %>
+    <h3><%= sessions.first.starts_at.strftime("%B %d, %Y") %></h3>
+    <ul class="sessions">
+      <% sessions.each do |session| %>
+        <li class="session">
+          <h4><%= session.title %></h4>
+          <%= format_time_range(session.starts_at, session.ends_at) %>
+          <%= simple_format session.description %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<section>
+  Subtotal $0
+  Discounts $0
+  Total $0
+</section>
+<button>Checkout</button>

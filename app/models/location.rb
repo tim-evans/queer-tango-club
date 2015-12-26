@@ -1,8 +1,9 @@
 class Location < ActiveRecord::Base
+  belongs_to :event_location, class_name: 'Location'
   has_many :nearby_locations, class_name: 'Location',
                               foreign_key: 'event_location_id'
 
-  has_attached_file :photo, styles: { wide: 'x400', thumbnail: '400x' }
+  # has_attached_file :photo, styles: { wide: 'x400', thumbnail: '400x' }
 
   before_create :geolocate
 

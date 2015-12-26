@@ -1,27 +1,31 @@
 <section id="location">
-  <img src="<%= location.photo %>" alt="<%= location.name %>" />
-  <div class="container">
+  <div class="container padding">
+    <h2>Location</h2>
+  </div>
+  <img src="<%#= location.photo %>" alt="<%= location.name %>" />
+  <div class="container padding">
     <h3><%= link_to location.name, location.url %></h3>
     <aside>
       <%= location.address_line %><br>
       <%= location.extended_address %><br>
       <%= location.city %>, <%= location.region_code %> <%= location.postal_code %><br>
     </aside>
-    <a href="<%= location.directions_url %>">Directions</a>
+    <a href="<%= location.directions_url %>"><%= inline_svg("icons/direction") %> Directions</a>
   </div>
 
-  <div class="container">
+  <div class="container padding">
     <h2>Nearby Caf&eacute;s</h2>
-    <%= location.nearby_locations do |nearby| %>
-      <img src="<%= nearby.photo %>" alt="<%= nearby.name %>" />
-      <aside>
-        <h3><%= link_to nearby.name, nearby.url %></h3>
-        <%= nearby.address_line %><br>
-        <%= nearby.extended_address %><br>
-        <%= nearby.city %>, <%= nearby.region_code %> <%= nearby.postal_code %><br>
-      </aside>
-      <a href="<%= nearby.directions_url(location) %>">Directions</a>
+    <% location.nearby_locations.to_a.each_with_index do |nearby, idx| %>
+      <div class="row <% if idx % 2 == 1 %>reverse<% end %>">
+        <img src="<%#= nearby.photo %>" alt="<%= nearby.name %>" />
+        <aside>
+          <h3><%= link_to nearby.name, nearby.url %></h3>
+          <%= nearby.address_line %><br>
+          <% if nearby.extended_address %><%= nearby.extended_address %><br><% end %>
+          <%= nearby.city %>, <%= nearby.region_code %> <%= nearby.postal_code %><br>
+          <a href="<%= nearby.directions_url(location) %>"><%= inline_svg("icons/direction") %> Directions</a>
+        </aside>
+      </div>
     <% end %>
   </div>
 </section>
-
