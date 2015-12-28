@@ -1,0 +1,17 @@
+.accordion {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  svg {
+    position: relative;
+    top: 3px;
+    left: 10px;
+    transition: all 0.2s;
+  }
+
+  &.collapsed {
+    svg {
+      transform: rotateX(180deg);
+    }
+  }
+}

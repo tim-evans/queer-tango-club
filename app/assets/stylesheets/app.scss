@@ -1,5 +1,9 @@
+@import "reset";
 @import "colors";
 @import "grid";
+@import "logo";
+@import "cover-photo";
+@import "accordion";
 @import "routes/home";
 @import "routes/about";
 @import "routes/event";
@@ -22,18 +26,27 @@ html, body {
   font-family: 'Libre Baskerville';
   font-weight: 400;
   font-size: 14px;
+  letter-spacing: 0.005rem;
+  line-height: 1.5rem;
   color: $black;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 main {
-  flex: 1;
-  padding-bottom: 50px;
+  flex: 1 0 auto;
 }
 
 header {
@@ -41,41 +54,6 @@ header {
   margin: 0;
 }
 
-.logo {
-  font-size: 50px;
-  position: relative;
-  left: -0.1em;
-  display: inline-block;
-  font-family: 'Arial Black';
-  text-transform: uppercase;
-  line-height: 0.85em;
-  width: 4.2em;
-  color: $theme;
-  text-align: center;
-  transition-property: font-size color;
-  transition-duration: 0.25s;
-
-  margin: 1.5rem 0;
-
-  span {
-    display: block;
-  }
-  .q {
-    letter-spacing: 0.024em;
-  }
-  .t {
-    letter-spacing: 0;
-  }
-  .c {
-    margin-left: 0.15em;
-    letter-spacing: 0.3em;
-  }
-
-  a {
-    color: $theme;
-    text-decoration: none;
-  }
-}
 
 nav {
   padding-top: 2rem;
@@ -107,19 +85,41 @@ nav {
   z-index: -1;
 }
 
-h2 {
-  font-size: 1.75rem;
-  padding: 0.5rem 0;
-  font-weight: 900;
-  border-bottom: 4px solid $black;
+
+hr {
+  border: 0;
+  border-bottom: 2px solid $black;
+
+  &.thick {
+    border-bottom: 4px solid $black;
+  }
+
+  &.thin {
+    border-bottom: 1px solid $black;
+  }
+}
+
+h1:not(.logo) { font-size: 1.7rem; font-weight: 900; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.4rem; font-weight: 900; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; font-weight: 900; }
+h6 { font-size: 1.2rem; }
+
+a {
+  cursor: pointer;
+  color: $black;
+
+  .icon {
+    position: relative;
+    top: 5px;
+  }
 }
 
 p {
   font-size: 1rem;
   padding: 0.5rem 0;
   margin: 0 auto;
-  letter-spacing: 0.005rem;
-  line-height: 1.5rem;
 }
 
 button,
@@ -199,16 +199,6 @@ footer {
   height: 24px;
 }
 
-@media screen and (min-width: 1024px) {
-  html, body {
-    font-size: 18px;
-  }
-  .icon {
-    width: 30px;
-    height: 30px;
-  }
-}
-
 @media screen and (max-width: 800px) {
   header .row.end {
     justify-content: center;
@@ -216,20 +206,12 @@ footer {
 }
 
 @media screen and (max-width: 610px) {
-  body:not(#home) .logo {
-    font-size: 40px;
-  }
-
   header nav a {
     padding-left: 20px;
   }
 }
 
 @media screen and (max-width: 550px) {
-  body:not(#home) .logo {
-    font-size: 35px;
-  }
-
   body:not(#home) header nav a {
     display: block;
   }

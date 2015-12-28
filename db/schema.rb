@@ -39,8 +39,12 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "type"
     t.date     "starts_at"
     t.date     "ends_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "cover_photo_file_name"
+    t.string   "cover_photo_content_type"
+    t.integer  "cover_photo_file_size"
+    t.datetime "cover_photo_updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "events", ["type"], name: "index_events_on_type", using: :btree
@@ -67,11 +71,15 @@ ActiveRecord::Schema.define(version: 20151212022206) do
     t.string   "image_url"
     t.string   "latitude"
     t.string   "longitude"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.string   "category"
     t.integer  "event_location_id"
     t.boolean  "safe_space"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -82,6 +90,20 @@ ActiveRecord::Schema.define(version: 20151212022206) do
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "event_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "photos", ["event_id"], name: "index_photos_on_event_id", using: :btree
+  add_index "photos", ["teacher_id"], name: "index_photos_on_teacher_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "title"

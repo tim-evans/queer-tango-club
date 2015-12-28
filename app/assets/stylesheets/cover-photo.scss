@@ -1,0 +1,23 @@
+.cover-photo {
+  margin: 0 auto;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+
+  img {
+    position: absolute;
+    left: 50%;
+    margin-left: -600px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cover-photo {
+    height: 300px;
+    img {
+      height: 300px;
+      margin-left: -450px;
+    }
+  }
+}

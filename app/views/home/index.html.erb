@@ -1,8 +1,8 @@
 <% content_for :title, "Queer Tango Club" %>
 
 <header>
-  <div class="container">
-    <div class="row end">
+  <div class="grid-frame">
+    <div class="row align-right">
       <nav>
         <%= link_to('About', about_path) %>
         <%= link_to('Events', milongas_path) %>
@@ -12,7 +12,7 @@
   </div>
 </header>
 <main>
-  <div class="container">
+  <div class="grid-frame no-padding">
     <div class="row">
       <h1 class="logo">
         <span class="q">Queer</span>
@@ -20,13 +20,13 @@
         <span class="c">Club</span>
       </h1>
     </div>
-    <div class="row end">
+    <div class="row align-right">
       <section id="upcoming-events">
         <h4 class="dark photo-overlay">Upcoming Events</h4><br>
         <% @upcoming.each do |event| %>
-        <%= link_to event_path(event) do %>
-        <h3 class="photo-overlay"><%= event.title %></h3>
-        <% end %>
+          <%= link_to event_path(event) do %>
+            <h3 class="photo-overlay"><%= event.title %></h3>
+          <% end %>
         <% end %>
       </section>
     </div>

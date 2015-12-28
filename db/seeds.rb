@@ -13,7 +13,8 @@ lgbt_center = Location.create({
   extended_address: 'Room 213',
   city: 'New York',
   region_code: 'NY',
-  postal_code: '10011'
+  postal_code: '10011',
+  photo: File.open('/Users/tim/Desktop/the_center.png')
 })
 
 Location.create({
@@ -43,7 +44,8 @@ sheen_center = Location.create({
   extended_address: 'Studios A & B',
   city: 'New York',
   region_code: 'NY',
-  postal_code: '10012'
+  postal_code: '10012',
+  photo: File.open('/Users/tim/Desktop/sheen_center.png')
 })
 
 Location.create({
@@ -53,7 +55,8 @@ Location.create({
   region_code: 'NY',
   postal_code: '10012',
   event_location: sheen_center,
-  safe_space: true
+  safe_space: true,
+  photo: File.open('/Users/tim/Desktop/housing_works.png')
 })
 
 Location.create({
@@ -62,7 +65,8 @@ Location.create({
   city: 'New York',
   region_code: 'NY',
   postal_code: '10003',
-  event_location: sheen_center
+  event_location: sheen_center,
+  photo: File.open('/Users/tim/Desktop/lafayette.png')
 })
 
 Location.create({
@@ -71,26 +75,156 @@ Location.create({
   city: 'New York',
   region_code: 'NY',
   postal_code: '10012',
-  event_location: sheen_center
+  event_location: sheen_center,
+  photo: File.open('/Users/tim/Desktop/la_colombe.png')
 })
 
 
 inauguration = Milonga.create({
   title: 'Inaugural Milonga',
   starts_at: DateTime.parse("2015-10-17"),
-  ends_at: DateTime.parse("2015-10-17")
+  ends_at: DateTime.parse("2015-10-17"),
+  cover_photo: File.open('/Users/tim/Desktop/inaugural_cover.png')
+})
+
+rebecca_shulman = Teacher.create({
+  name: 'Rebecca Shulman',
+  url: 'http://rebeccatango.com/',
+  bio: "Rebecca Shulman has been dancing tango full-time for over 20 years and is regarded by the international community as an expert with an encyclopedic knowledge of the dance and a gift for conveying it to her students.
+
+She's also a co-founder and artistic director of TangoMujer, an all-women dance company. From 1996-2006, TangoMujer performed a host of different choreographies telling various stories inspired in tango."
+})
+
+Photo.create({
+  teacher: rebecca_shulman,
+  attachment: File.open('/Users/tim/Desktop/rebecca_shulman.png')
+})
+
+lexa_rosean = Teacher.create({
+  name: 'Lexa Roséan',
+  url: 'http://www.lexarosean.com/tango.html',
+  bio: "Lexa is an accomplished dancer. In 1995 she discovered Argentine tango and fell in love with the dance. Lexa taught Argentine Tango and Milonga at DanceSport in NYC and she continues to teach privately. In July 2007, she placed 3rd (dancing the lead) in the U.S. Tango Salon Championship and was the first woman leader officially invited to dance in the Mundial Competition in Buenos Aires. In July 2008, Lexa and partner Gayle Madeira won 1st place in the U.S. Tango Stage Championship and Lexa held on to her 3rd place standing in Salon Tango. Lexa is also a tango dj and taught and dj'd in Tango festivals in Berlin, Hamburg, and NYC. Lexa writes the astrology column \"TangoStars\" for dancers in Reportango magazine."
+})
+
+Photo.create({
+  teacher: lexa_rosean,
+  attachment: File.open('/Users/tim/Desktop/lexa_rosean.png')
+})
+
+walter_perez = Teacher.create({
+  name: 'Walter Perez',
+  bio: 'Walter Perez began dancing tango in his hometown of Buenos Aires in 1993 and has dedicated his career to studying Argentine tango.'
+})
+
+Photo.create({
+  teacher: walter_perez,
+  attachment: File.open('/Users/tim/Desktop/walter_perez.jpg')
+})
+
+maria_jose = Teacher.create({
+  name: 'María José Sosa',
+  bio: 'María José was born in Mendoza, Argentina. She started Tango dancing with professional teachers in Mendoza and then travelled to Buenos Aires to learn with the best Tango instructors, including: Ricardo Barrios y Eugenia Ramirez, Vanina Bilous, Mario Burnissen, Aurora Lubiz y Jorge Firpo, Milena Plebs, Pablo Veron, Meina Brufman, Nito and Elva, Facundo and Kely, to name a few.'
+})
+
+Photo.create({
+  teacher: maria_jose,
+  attachment: File.open('/Users/tim/Desktop/maria_jose.jpg')
+})
+
+meg_farrell = Teacher.create({
+  name: 'Meg Farrell',
+  bio: ''
+})
+
+Photo.create({
+  teacher: meg_farrell,
+  attachment: File.open('/Users/tim/Desktop/meg_farrell.jpg')
+})
+
+Session.create({
+  title: "Beginner's Class",
+  starts_at: DateTime.parse("2015-10-17 18:30"),
+  ends_at: DateTime.parse("2015-10-17 19:30"),
+  guest: Guest.create({
+    teacher: rebecca_shulman,
+    role: 'Teacher'
+  }),
+  event: inauguration,
+  location: lgbt_center
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2015-10-17 19:30"),
+  ends_at: DateTime.parse("2015-10-17 21:45"),
+  guest: Guest.create({
+    teacher: lexa_rosean,
+    role: 'DJ'
+  }),
+  event: inauguration,
+  location: lgbt_center
 })
 
 alter_ego = Milonga.create({
   title: 'Alter Ego',
   starts_at: DateTime.parse("2015-11-21"),
-  ends_at: DateTime.parse("2015-11-21")
+  ends_at: DateTime.parse("2015-11-21"),
+  cover_photo: File.open('/Users/tim/Desktop/alter_ego_cover.png')
+})
+
+Session.create({
+  title: "Class",
+  starts_at: DateTime.parse("2015-11-21 18:30"),
+  ends_at: DateTime.parse("2015-11-21 19:30"),
+  guest: Guest.create({
+    teacher: walter_perez,
+    role: 'Teacher'
+  }),
+  event: alter_ego,
+  location: lgbt_center
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2015-11-21 19:30"),
+  ends_at: DateTime.parse("2015-11-21 21:45"),
+  guest: Guest.create({
+    teacher: walter_perez,
+    role: 'DJ'
+  }),
+  event: alter_ego,
+  location: lgbt_center
 })
 
 holiday_milonga = Milonga.create({
   title: 'Holiday Milonga',
   starts_at: DateTime.parse("2015-12-19"),
-  ends_at: DateTime.parse("2015-12-19")
+  ends_at: DateTime.parse("2015-12-19"),
+  cover_photo: File.open('/Users/tim/Desktop/holiday_cover.png')
+})
+
+Session.create({
+  title: "Class",
+  starts_at: DateTime.parse("2015-12-19 18:15"),
+  ends_at: DateTime.parse("2015-12-19 19:15"),
+  guest: Guest.create({
+    teacher: maria_jose,
+    role: 'Teacher'
+  }),
+  event: holiday_milonga,
+  location: lgbt_center
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2015-12-19 19:30"),
+  ends_at: DateTime.parse("2015-12-19 21:45"),
+  guest: Guest.create({
+    teacher: meg_farrell,
+    role: 'DJ'
+  }),
+  event: holiday_milonga,
+  location: lgbt_center
 })
 
 marc_vanzwoll = Teacher.create({
@@ -100,14 +234,34 @@ marc_vanzwoll = Teacher.create({
 Since moving to the East Coast, he has been teaching in Boston and Cape Cod. This year he was honored to teach Intercambio at the NY Queer Tango Weekend and taught with Brigitta Winkler in performance seminars exploring expression, meaning, and emotion in tango at the International QueerTango Festival Berlin. While in Boston, Marc created and co-hosted “Letras de Tango”, focusing on the poetry and meaning of tango lyrics. He also co-authored and co-taught the workshops “Axis Awareness”, “Lady Leaders Workshop”, and “Men’s Following Technique”. Marc is passionate about Argentine Tango, and encourages everyone to participate.'
 })
 
+Photo.create({
+  teacher: marc_vanzwoll,
+  attachment: File.open('/Users/tim/Desktop/marc_1.jpg')
+})
+
+Photo.create({
+  teacher: marc_vanzwoll,
+  attachment: File.open('/Users/tim/Desktop/marc_2.jpg')
+})
+
+Photo.create({
+  teacher: marc_vanzwoll,
+  attachment: File.open('/Users/tim/Desktop/marc_3.jpg')
+})
+
+Photo.create({
+  teacher: marc_vanzwoll,
+  attachment: File.open('/Users/tim/Desktop/marc_4.jpg')
+})
+
 workshop = Workshop.create({
   title: 'Workshops with Marc Vanzwoll',
   starts_at: DateTime.parse("2016-01-30"),
-  ends_at: DateTime.parse("2016-01-31")
+  ends_at: DateTime.parse("2016-01-31"),
+  cover_photo: File.open('/Users/tim/Desktop/marc_cover.png')
 })
 
-
-guest =  Guest.create({
+guest = Guest.create({
   teacher: marc_vanzwoll,
   role: 'Teacher'
 })

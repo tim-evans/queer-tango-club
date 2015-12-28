@@ -1,0 +1,47 @@
+.logo {
+  font-size: 50px;
+  position: relative;
+  left: -0.1em;
+  display: inline-block;
+  font-family: 'Arial Black';
+  text-transform: uppercase;
+  line-height: 0.85em;
+  width: 4.2em;
+  color: $theme;
+  text-align: center;
+  transition-property: font-size color;
+  transition-duration: 0.25s;
+
+  margin: 1.5rem 0;
+
+  span {
+    display: block;
+  }
+  .q {
+    letter-spacing: 0.024em;
+  }
+  .t {
+    letter-spacing: 0;
+  }
+  .c {
+    margin-left: 0.15em;
+    letter-spacing: 0.3em;
+  }
+
+  a {
+    color: $theme;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  body:not(#home) .logo {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  body:not(#home) .logo {
+    font-size: 35px;
+  }
+}

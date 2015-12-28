@@ -4,18 +4,88 @@
 
   .cover-photo {
     position: absolute;
+    text-align: center;
+    overflow: hidden;
     width: 100%;
     height: 400px;
-    background: red;
   }
 
-  .container {
+  .grid-frame {
     position: relative;
     height: 350px;
   }
 
   &:not(:last-child) {
     margin-bottom: 50px;
+  }
+}
+
+#guests {
+  img {
+    max-width: 100%;
+    padding-top: 10px;
+  }
+  .half + .half {
+    padding-top: 1rem;
+    padding-left: 1rem;
+  }
+  h4 {
+    padding: 0.4rem 0;
+  }
+  h6 {
+    padding-bottom: 1rem;
+  }
+}
+
+section {
+  padding-bottom: 3rem;
+}
+
+#schedule {
+  h2 {
+    padding-bottom: 0.5rem;
+  }
+  padding-bottom: 0;
+}
+
+.session {
+  h3 {
+    padding: 0.4rem 0;
+  }
+  h6 {
+    padding-bottom: 1rem;
+  }
+  padding-bottom: 1.4rem;
+}
+
+#location {
+  h2 {
+    padding-top: 2rem;
+  }
+
+  h5 {
+    padding-bottom: 0.4rem;
+  }
+
+  .half + .half {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  aside {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    line-height: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .event {
+    height: 300px;
+    .grid-frame {
+      position: relative;
+      height: 250px;
+    }
   }
 }
 

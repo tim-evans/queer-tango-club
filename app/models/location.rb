@@ -3,7 +3,8 @@ class Location < ActiveRecord::Base
   has_many :nearby_locations, class_name: 'Location',
                               foreign_key: 'event_location_id'
 
-  # has_attached_file :photo, styles: { wide: 'x400', thumbnail: '400x' }
+  has_attached_file :photo, styles: { wide: 'x400', thumbnail: '400x' }
+  validates_attachment_content_type :photo, content_type: %w(image/jpeg image/jpg image/png)
 
   before_create :geolocate
 
@@ -14,6 +15,11 @@ class Location < ActiveRecord::Base
     self.longitude = lon
     self.latitude = lat
     true
+  end
+
+  def inside?(location)
+    location.longitude == longitude &&
+      location.latitude == latitude
   end
 
   def directions_url(origin=nil)

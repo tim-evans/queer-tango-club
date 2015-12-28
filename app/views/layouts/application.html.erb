@@ -10,20 +10,25 @@
   <% if controller.controller_name == 'home' %>
     <%= yield %>
   <% else %>
-    <header class="container padding">
-      <div class="row between">
-        <h1 class="logo">
+    <header class="grid-frame">
+      <div class="row align-justify">
+        <h1 class="logo block">
           <%= link_to(root_path) do %>
             <span class="q">Queer</span>
             <span class="t">Tango</span>
             <span class="c">Club</span>
           <% end %>
         </h1>
-        <nav>
-          <%= link_to('About', about_path) %>
-          <%= link_to('Events', milongas_path) %>
-          <%= link_to('Workshops', workshops_path) %>
-        </nav>
+        <div class="block align-right">
+          <nav>
+            <%= link_to('About', about_path) %>
+            <%= link_to('Events', milongas_path) %>
+            <%= link_to('Workshops', workshops_path) %>
+            <div>
+              <%= yield(:banner) %>
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
     <main>

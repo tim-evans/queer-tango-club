@@ -6,6 +6,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string  :type
       t.date    :starts_at
       t.date    :ends_at
+      t.attachment :cover_photo
 
       t.timestamps null: false
     end
@@ -30,6 +31,17 @@ class InitializeDatabase < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    create_table :photos do |t|
+      t.integer :teacher_id
+      t.integer :event_id
+      t.attachment :attachment
+
+      t.timestamps null: false
+    end
+
+    add_index :photos, :teacher_id
+    add_index :photos, :event_id
 
     create_table :sessions do |t|
       t.string   :title
@@ -62,6 +74,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string   :image_url
       t.string   :latitude
       t.string   :longitude
+      t.attachment :photo
 
       t.string   :category
       t.integer  :event_location_id

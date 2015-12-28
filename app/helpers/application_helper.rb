@@ -28,4 +28,8 @@ module ApplicationHelper
   def icon(name)
     inline_svg("icons/#{name}", class: 'icon')
   end
+
+  def format_location_name(name)
+    name.gsub(/([&:])/, '\1<br>').html_safe
+  end
 end
