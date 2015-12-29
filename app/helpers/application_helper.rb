@@ -25,8 +25,13 @@ module ApplicationHelper
     end
   end
 
-  def icon(name)
-    inline_svg("icons/#{name}", class: 'icon')
+  def icon(name, options={})
+    if options[:class]
+      options[:class] += ' icon'
+    else
+      options[:class] = 'icon'
+    end
+    inline_svg("icons/#{name}", options)
   end
 
   def format_location_name(name)

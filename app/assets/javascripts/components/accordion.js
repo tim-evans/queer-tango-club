@@ -14,9 +14,9 @@ $(function () {
 
       if ($el.hasClass('collapsed')) {
         var margin = isLastChild ? 50 : 0;
-        $('#' + id).animate({ height: 0, opacity: 0, marginBottom: margin }, 500);
+        $('#' + id).animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
       } else {
-        $('#' + id).animate({ height: height, opacity: 1, marginBottom: 0 }, 500);
+        $('#' + id).animate({ height: height, opacity: 1, marginBottom: 0 }, 200);
       }
     });
   });

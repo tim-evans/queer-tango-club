@@ -46,6 +46,22 @@ section {
     padding-bottom: 0.5rem;
   }
   padding-bottom: 0;
+
+  label {
+    padding: 0;
+  }
+  .static-80 input {
+    margin-top: 10px;
+  }
+}
+
+#itemizations {
+  dt, dd {
+    padding: 0.5rem 0;
+  }
+  dl {
+    padding-bottom: 1rem;
+  }
 }
 
 .session {

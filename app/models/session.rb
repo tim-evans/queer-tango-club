@@ -6,4 +6,14 @@ class Session < ActiveRecord::Base
   belongs_to :guest
   belongs_to :event
   belongs_to :location
+
+  after_create :create_sku, if: :registerable?
+
+  def registerable?
+    !ticket_cost.blank?
+  end
+
+  def create_sku
+    SyncSkusService.new(self).create!
+  end
 end

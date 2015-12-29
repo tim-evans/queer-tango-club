@@ -1,34 +1,72 @@
 <% content_for :title, "Checkout | Queer Tango Club" %>
+<% content_for :banner do %>
+  <h1><%= @event.title %></h1>
+  <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
+  <% if @event.location %>
+    <%= format_location_name(@event.location.name) %>
+  <% end %>
+<% end %>
 
-<form class="container padding">
+<%= form_tag purchase_event_path(@event), method: :post, class: "grid-frame" do |f| %>
   <section id="information">
     <h2>Your Information</h2>
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" />
-    </fieldset>
-    <fieldset>
-      <label for="name">Email</label>
-      <input type="email" />
-    </fieldset>
+    <hr class="thick">
+    <div class="row">
+      <div class="half">
+        <%= label_tag :name %>
+        <%= text_field_tag :name, nil, class: 'whole' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <%= label_tag :email %>
+        <%= email_field_tag :email, nil, class: 'whole' %>
+      </div>
+    </div>
   </section>
   <section id="payment">
-    <fieldset>
-      <label for="cardholder_name">Name on Card</label>
-      <input type="text" />
-    </fieldset>
-    <fieldset>
-      <label for="card_number">Card Number</label>
-      <input type="text" />
-    </fieldset>
-    <fieldset>
-      <label for="card_expiration">Expiration</label>
-      <input type="text" />
-    </fieldset>
-    <fieldset>
-      <label for="card_cvc">CVC</label>
-      <input type="text" />
-    </fieldset>
+    <h2>Payment</h2>
+    <hr class="thick">
+    <div class="row">
+      <div class="half">
+        <label for="cardholder_name">Name on Card</label>
+        <input type="text" id="cardholder_name" class="whole" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <label for="card_number">Card Number</label>
+        <div class="row">
+          <input type="tel" id="card_number" class="fill" />
+          <%= image_tag("icons/credit-cards#unknown", class: "credit-card pad") %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="row">
+          <div class="fill">
+            <label for="card_expiration">Expiration</label>
+            <input type="tel" id="card_expiration" placeholder="MM / YY" />
+          </div>
+          <div class="fill pad">
+            <label for="card_cvc">CVC</label>
+            <input type="tel" id="card_cvc" />
+          </div>
+          <div class="pad">
+            <label>&nbsp;</label>
+            <%= image_tag("icons/credit-cards#cvc", class: "credit-card cvc") %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <button class="with-icon"><%= icon("purchase") %> Process Payment</button>
   </section>
-  <button>Process Payment</button>
-</form>
+<% end %>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  // This identifies your website in the createToken call below
+  Stripe.setPublishableKey("<%= ENV['STRIPE_KEY'] %>");
+</script>

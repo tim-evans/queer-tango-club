@@ -89,10 +89,7 @@ inauguration = Milonga.create({
 
 rebecca_shulman = Teacher.create({
   name: 'Rebecca Shulman',
-  url: 'http://rebeccatango.com/',
-  bio: "Rebecca Shulman has been dancing tango full-time for over 20 years and is regarded by the international community as an expert with an encyclopedic knowledge of the dance and a gift for conveying it to her students.
-
-She's also a co-founder and artistic director of TangoMujer, an all-women dance company. From 1996-2006, TangoMujer performed a host of different choreographies telling various stories inspired in tango."
+  url: 'http://rebeccatango.com/'
 })
 
 Photo.create({
@@ -102,8 +99,7 @@ Photo.create({
 
 lexa_rosean = Teacher.create({
   name: 'Lexa Roséan',
-  url: 'http://www.lexarosean.com/tango.html',
-  bio: "Lexa is an accomplished dancer. In 1995 she discovered Argentine tango and fell in love with the dance. Lexa taught Argentine Tango and Milonga at DanceSport in NYC and she continues to teach privately. In July 2007, she placed 3rd (dancing the lead) in the U.S. Tango Salon Championship and was the first woman leader officially invited to dance in the Mundial Competition in Buenos Aires. In July 2008, Lexa and partner Gayle Madeira won 1st place in the U.S. Tango Stage Championship and Lexa held on to her 3rd place standing in Salon Tango. Lexa is also a tango dj and taught and dj'd in Tango festivals in Berlin, Hamburg, and NYC. Lexa writes the astrology column \"TangoStars\" for dancers in Reportango magazine."
+  url: 'http://www.lexarosean.com/tango.html'
 })
 
 Photo.create({
@@ -112,8 +108,7 @@ Photo.create({
 })
 
 walter_perez = Teacher.create({
-  name: 'Walter Perez',
-  bio: 'Walter Perez began dancing tango in his hometown of Buenos Aires in 1993 and has dedicated his career to studying Argentine tango.'
+  name: 'Walter Perez'
 })
 
 Photo.create({
@@ -122,8 +117,7 @@ Photo.create({
 })
 
 maria_jose = Teacher.create({
-  name: 'María José Sosa',
-  bio: 'María José was born in Mendoza, Argentina. She started Tango dancing with professional teachers in Mendoza and then travelled to Buenos Aires to learn with the best Tango instructors, including: Ricardo Barrios y Eugenia Ramirez, Vanina Bilous, Mario Burnissen, Aurora Lubiz y Jorge Firpo, Milena Plebs, Pablo Veron, Meina Brufman, Nito and Elva, Facundo and Kely, to name a few.'
+  name: 'María José Sosa'
 })
 
 Photo.create({
@@ -133,12 +127,20 @@ Photo.create({
 
 meg_farrell = Teacher.create({
   name: 'Meg Farrell',
-  bio: ''
 })
 
 Photo.create({
   teacher: meg_farrell,
   attachment: File.open('/Users/tim/Desktop/meg_farrell.jpg')
+})
+
+edit_fasi = Teacher.create({
+  name: 'Edit Fasi',
+})
+
+Photo.create({
+  teacher: edit_fasi,
+  attachment: File.open('/Users/tim/Desktop/edit_fasi.jpg')
 })
 
 Session.create({
@@ -227,6 +229,37 @@ Session.create({
   location: lgbt_center
 })
 
+milonga_janus = Milonga.create({
+  title: 'Milonga Janus',
+  starts_at: DateTime.parse("2015-01-16"),
+  ends_at: DateTime.parse("2015-01-16"),
+  cover_photo: File.open('/Users/tim/Desktop/janus_cover.png')
+})
+
+Session.create({
+  title: "Class",
+  starts_at: DateTime.parse("2015-12-19 18:15"),
+  ends_at: DateTime.parse("2015-12-19 19:15"),
+  guest: Guest.create({
+    teacher: lexa_rosean,
+    role: 'Teacher'
+  }),
+  event: milonga_janus,
+  location: lgbt_center
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2015-12-19 19:30"),
+  ends_at: DateTime.parse("2015-12-19 21:45"),
+  guest: Guest.create({
+    teacher: edit_fasi,
+    role: 'DJ'
+  }),
+  event: milonga_janus,
+  location: lgbt_center
+})
+
 marc_vanzwoll = Teacher.create({
   name: 'Marc Vanzwoll',
   bio: 'Marc Vanzwoll has developed his approach to tango, which blends close connection and body awareness with individuality and balance by each partner, in San Francisco and Boston.
@@ -271,6 +304,9 @@ Session.create({
   description: 'Take the ho-hum out of your walk, and dance. 4 ways to perfect your cross system walking while developing your Jedi tango powers.',
   starts_at: DateTime.parse("2016-01-30 13:00"),
   ends_at: DateTime.parse("2016-01-30 14:30"),
+  ticket_cost: 3500,
+  ticket_currency: 'usd',
+  max_attendees: 30,
   guest: guest,
   event: workshop,
   location: sheen_center
@@ -281,6 +317,9 @@ Session.create({
   description: 'Switch roles with invisible transitions. Diversify, and make the Leader/Follower relationship dynamic. Your tango will never be the same.',
   starts_at: DateTime.parse("2016-01-30 15:00"),
   ends_at: DateTime.parse("2016-01-30 16:30"),
+  ticket_cost: 3500,
+  ticket_currency: 'usd',
+  max_attendees: 30,
   guest: guest,
   event: workshop,
   location: sheen_center
@@ -300,6 +339,9 @@ Session.create({
   description: 'A classic pattern to brighten up your tango. 4 basic steps linked together with identical foot work pattern for both Leader and Follower. Find out why this pattern travels or stays in place, and is perfect for switching roles seamlessly',
   starts_at: DateTime.parse("2016-01-31 13:00"),
   ends_at: DateTime.parse("2016-01-31 14:30"),
+  ticket_cost: 3500,
+  ticket_currency: 'usd',
+  max_attendees: 30,
   guest: guest,
   event: workshop,
   location: sheen_center
@@ -310,6 +352,9 @@ Session.create({
   description: 'Make it fun for yourself and your partner. Learn how to ocho cortado, then hack it. Small spaces? No problem. Hey Leaders and Followers, get creative!',
   starts_at: DateTime.parse("2016-01-31 15:00"),
   ends_at: DateTime.parse("2016-01-31 16:30"),
+  ticket_cost: 3500,
+  ticket_currency: 'usd',
+  max_attendees: 30,
   guest: guest,
   event: workshop,
   location: sheen_center

@@ -16,4 +16,8 @@ class Event < ActiveRecord::Base
   def sessions_by_day
     sessions.group_by { |session| session.starts_at.to_date }.values
   end
+
+  def registerable?
+    sessions.any?(&:registerable?)
+  end
 end

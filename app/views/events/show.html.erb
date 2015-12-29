@@ -39,8 +39,10 @@
 <section id="schedule" class="grid-frame">
   <div class="row align-justify">
     <h2 class="block align-bottom">Schedule</h2>
-    <%= link_to cart_event_path(@event), class: 'button with-icon' do %>
-      <%= icon("ticket") %> Purchase Tickets
+    <% if @event.registerable? %>
+      <%= link_to choose_event_path(@event), class: 'button with-icon' do %>
+        <%= icon("ticket") %> Purchase Tickets
+      <% end %>
     <% end %>
   </div>
   <hr class="thick">

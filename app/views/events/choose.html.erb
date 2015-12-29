@@ -1,0 +1,55 @@
+<% content_for :title, "#{@event.title} | Queer Tango Club" %>
+<% content_for :banner do %>
+  <h1><%= @event.title %></h1>
+  <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
+  <% if @event.location %>
+    <%= format_location_name(@event.location.name) %>
+  <% end %>
+<% end %>
+
+<%= form_tag add_to_cart_event_path(@event), method: :post, class: "grid-frame" do |f| %>
+  <section id="schedule">
+    <h2>Choose Your <%= @event.type.titleize.pluralize %></h2>
+    <hr class="thick">
+
+    <% @event.sessions_by_day.each_with_index do |sessions, idx| %>
+      <h4 class="accordion" data-accordion="accordion-<%= idx %>">
+        <%= sessions.first.starts_at.strftime("%B %d, %Y") %><%= icon("down") %>
+      </h4>
+      <hr>
+      <ul class="sessions" id="accordion-<%= idx %>">
+        <% sessions.select(&:registerable?).each do |session| %>
+          <li class="session">
+            <span class="col">
+              <span class="static-80 align-center">
+                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>">
+              </span>
+              <label for="session-<%= session.id %>">
+                <h3><%= session.title %></h3>
+                <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
+                <% if session.description %>
+                  <%= simple_format session.description %>
+                <% end %>
+              </label>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+  <hr class="thick">
+  <section id="itemizations">
+    <dl class="row">
+      <dt class="half"><h6>Subtotal</h6></dt>
+      <dd class="half align-right"><h6 id="subtotal">$0</h6></dd>
+      <dt class="half"><h6>Discounts</h6></dt>
+      <dd class="half align-right"><h6 id="discounts">$0</h6></dd>
+      <div class="whole">
+        <hr>
+      </div>
+      <dt class="half"><h5>Total</h5></dt>
+      <dd class="half align-right"><h6 id="total">$0</h6></dd>
+    </dl>
+    <button class="with-icon"><%= icon("cart") %> Checkout</button>
+  </section>
+<% end %>

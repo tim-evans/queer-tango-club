@@ -47,8 +47,24 @@
       max-width: 100%;
     }
 
+    .whole {
+      width: 100%;
+    }
+
     .half {
       width: 50%;
+    }
+
+    .fill {
+      flex: 1;
+    }
+
+    .static-80 {
+      width: 80px;
+    }
+
+    .static-80 + * {
+      width: calc(100% - 80px);
     }
   }
 
