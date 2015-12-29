@@ -231,15 +231,15 @@ Session.create({
 
 milonga_janus = Milonga.create({
   title: 'Milonga Janus',
-  starts_at: DateTime.parse("2015-01-16"),
-  ends_at: DateTime.parse("2015-01-16"),
+  starts_at: DateTime.parse("2016-01-16"),
+  ends_at: DateTime.parse("2016-01-16"),
   cover_photo: File.open('/Users/tim/Desktop/janus_cover.png')
 })
 
 Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2015-12-19 18:15"),
-  ends_at: DateTime.parse("2015-12-19 19:15"),
+  starts_at: DateTime.parse("2016-12-19 18:15"),
+  ends_at: DateTime.parse("2016-12-19 19:15"),
   guest: Guest.create({
     teacher: lexa_rosean,
     role: 'Teacher'
@@ -250,8 +250,8 @@ Session.create({
 
 Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2015-12-19 19:30"),
-  ends_at: DateTime.parse("2015-12-19 21:45"),
+  starts_at: DateTime.parse("2016-12-19 19:30"),
+  ends_at: DateTime.parse("2016-12-19 21:45"),
   guest: Guest.create({
     teacher: edit_fasi,
     role: 'DJ'
