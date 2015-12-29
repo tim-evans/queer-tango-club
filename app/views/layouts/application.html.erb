@@ -27,10 +27,12 @@
             <%= link_to('About', about_path) %>
             <%= link_to('Events', milongas_path) %>
             <%= link_to('Workshops', workshops_path) %>
-            <div>
-              <%= yield(:banner) %>
-            </div>
           </nav>
+        </div>
+      </div>
+      <div class="row align-right">
+        <div class="align-right">
+          <%= yield(:banner) %>
         </div>
       </div>
     </header>

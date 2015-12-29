@@ -101,12 +101,12 @@ section {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .event {
     height: 300px;
     .grid-frame {
       position: relative;
-      height: 250px;
+      height: 300px;
     }
   }
 }

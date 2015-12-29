@@ -97,13 +97,13 @@
 
 @media screen and (max-width: 860px) {
   .grid-frame:not(.no-padding) {
-    width: 100vw;
+    width: 100%;
     padding: 0 20px;
   }
 }
 
 @media screen and (max-width: 800px) {
   .grid-frame {
-    width: 100vw;
+    width: 100%;
   }
 }

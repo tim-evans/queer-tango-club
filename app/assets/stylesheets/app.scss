@@ -181,7 +181,7 @@ footer {
     margin: 0 0.5rem;
   }
 
-  svg {
+  .icon {
     position: relative;
     top: 0.6rem;
     margin-right: 5px;
@@ -216,6 +216,14 @@ footer {
   header nav a {
     padding-left: 20px;
   }
+
+  footer {
+    padding-left: 1rem;
+    .vr {
+      display: block;
+      height: 0;
+    }
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -225,14 +233,6 @@ footer {
 
   header nav a {
     padding-left: 15px;
-  }
-
-  footer {
-    padding-left: 1rem;
-    .vr {
-      display: block;
-      height: 0;
-    }
   }
 }
 
