@@ -22,11 +22,11 @@
     </div>
     <div class="row align-right">
       <section id="upcoming-events">
-        <h4 class="dark photo-overlay">Upcoming Events</h4><br>
+        <h6 class="dark photo-overlay">Upcoming Events</h6><br>
         <% @upcoming.each do |event| %>
           <%= link_to event_path(event) do %>
             <h3 class="photo-overlay"><%= event.title %></h3>
-          <% end %>
+          <% end %><br>
         <% end %>
       </section>
     </div>

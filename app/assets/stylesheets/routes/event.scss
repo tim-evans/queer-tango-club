@@ -15,6 +15,12 @@
     height: 350px;
   }
 
+  .align-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
   &:not(:last-child) {
     margin-bottom: 50px;
   }

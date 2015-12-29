@@ -7,6 +7,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+photos_dir = Dir.pwd + '/db/seed'
+
 lgbt_center = Location.create({
   name: 'The Lesbian, Gay, Bisexual, & Transgender Community Center',
   address_line: '207 W 13th St',
@@ -14,7 +16,7 @@ lgbt_center = Location.create({
   city: 'New York',
   region_code: 'NY',
   postal_code: '10011',
-  photo: File.open('/Users/tim/Desktop/the_center.png')
+  photo: File.open("#{photos_dir}/the_center.png")
 })
 
 Location.create({
@@ -25,7 +27,8 @@ Location.create({
   region_code: 'NY',
   postal_code: '10011',
   event_location: lgbt_center,
-  safe_space: true
+  safe_space: true,
+  photo: File.open("#{photos_dir}/the_bureau.jpg")
 })
 
 Location.create({
@@ -35,7 +38,8 @@ Location.create({
   region_code: 'NY',
   postal_code: '10011',
   event_location: lgbt_center,
-  safe_space: true
+  safe_space: true,
+  photo: File.open("#{photos_dir}/think_coffee.jpg")
 })
 
 sheen_center = Location.create({
@@ -45,7 +49,7 @@ sheen_center = Location.create({
   city: 'New York',
   region_code: 'NY',
   postal_code: '10012',
-  photo: File.open('/Users/tim/Desktop/sheen_center.png')
+  photo: File.open("#{photos_dir}/sheen_center.png")
 })
 
 Location.create({
@@ -56,7 +60,7 @@ Location.create({
   postal_code: '10012',
   event_location: sheen_center,
   safe_space: true,
-  photo: File.open('/Users/tim/Desktop/housing_works.png')
+  photo: File.open("#{photos_dir}/housing_works.png")
 })
 
 Location.create({
@@ -66,7 +70,7 @@ Location.create({
   region_code: 'NY',
   postal_code: '10003',
   event_location: sheen_center,
-  photo: File.open('/Users/tim/Desktop/lafayette.png')
+  photo: File.open("#{photos_dir}/lafayette.png")
 })
 
 Location.create({
@@ -76,7 +80,7 @@ Location.create({
   region_code: 'NY',
   postal_code: '10012',
   event_location: sheen_center,
-  photo: File.open('/Users/tim/Desktop/la_colombe.png')
+  photo: File.open("#{photos_dir}/la_colombe.png")
 })
 
 
@@ -84,7 +88,7 @@ inauguration = Milonga.create({
   title: 'Inaugural Milonga',
   starts_at: DateTime.parse("2015-10-17"),
   ends_at: DateTime.parse("2015-10-17"),
-  cover_photo: File.open('/Users/tim/Desktop/inaugural_cover.png')
+  cover_photo: File.open("#{photos_dir}/inaugural_cover.png")
 })
 
 rebecca_shulman = Teacher.create({
@@ -94,7 +98,7 @@ rebecca_shulman = Teacher.create({
 
 Photo.create({
   teacher: rebecca_shulman,
-  attachment: File.open('/Users/tim/Desktop/rebecca_shulman.png')
+  attachment: File.open("#{photos_dir}/rebecca_shulman.png")
 })
 
 lexa_rosean = Teacher.create({
@@ -104,7 +108,7 @@ lexa_rosean = Teacher.create({
 
 Photo.create({
   teacher: lexa_rosean,
-  attachment: File.open('/Users/tim/Desktop/lexa_rosean.png')
+  attachment: File.open("#{photos_dir}/lexa_rosean.png")
 })
 
 walter_perez = Teacher.create({
@@ -113,7 +117,7 @@ walter_perez = Teacher.create({
 
 Photo.create({
   teacher: walter_perez,
-  attachment: File.open('/Users/tim/Desktop/walter_perez.jpg')
+  attachment: File.open("#{photos_dir}/walter_perez.jpg")
 })
 
 maria_jose = Teacher.create({
@@ -122,7 +126,7 @@ maria_jose = Teacher.create({
 
 Photo.create({
   teacher: maria_jose,
-  attachment: File.open('/Users/tim/Desktop/maria_jose.jpg')
+  attachment: File.open("#{photos_dir}/maria_jose.jpg")
 })
 
 meg_farrell = Teacher.create({
@@ -131,7 +135,7 @@ meg_farrell = Teacher.create({
 
 Photo.create({
   teacher: meg_farrell,
-  attachment: File.open('/Users/tim/Desktop/meg_farrell.jpg')
+  attachment: File.open("#{photos_dir}/meg_farrell.jpg")
 })
 
 edit_fasi = Teacher.create({
@@ -140,7 +144,7 @@ edit_fasi = Teacher.create({
 
 Photo.create({
   teacher: edit_fasi,
-  attachment: File.open('/Users/tim/Desktop/edit_fasi.jpg')
+  attachment: File.open("#{photos_dir}/edit_fasi.jpg")
 })
 
 Session.create({
@@ -171,7 +175,7 @@ alter_ego = Milonga.create({
   title: 'Alter Ego',
   starts_at: DateTime.parse("2015-11-21"),
   ends_at: DateTime.parse("2015-11-21"),
-  cover_photo: File.open('/Users/tim/Desktop/alter_ego_cover.png')
+  cover_photo: File.open("#{photos_dir}/alter_ego_cover.png")
 })
 
 Session.create({
@@ -202,7 +206,7 @@ holiday_milonga = Milonga.create({
   title: 'Holiday Milonga',
   starts_at: DateTime.parse("2015-12-19"),
   ends_at: DateTime.parse("2015-12-19"),
-  cover_photo: File.open('/Users/tim/Desktop/holiday_cover.png')
+  cover_photo: File.open("#{photos_dir}/holiday_cover.png")
 })
 
 Session.create({
@@ -233,7 +237,7 @@ milonga_janus = Milonga.create({
   title: 'Milonga Janus',
   starts_at: DateTime.parse("2016-01-16"),
   ends_at: DateTime.parse("2016-01-16"),
-  cover_photo: File.open('/Users/tim/Desktop/janus_cover.png')
+  cover_photo: File.open("#{photos_dir}/janus_cover.png")
 })
 
 Session.create({
@@ -269,29 +273,29 @@ Since moving to the East Coast, he has been teaching in Boston and Cape Cod. Thi
 
 Photo.create({
   teacher: marc_vanzwoll,
-  attachment: File.open('/Users/tim/Desktop/marc_1.jpg')
+  attachment: File.open("#{photos_dir}/marc_1.jpg")
 })
 
 Photo.create({
   teacher: marc_vanzwoll,
-  attachment: File.open('/Users/tim/Desktop/marc_2.jpg')
+  attachment: File.open("#{photos_dir}/marc_2.jpg")
 })
 
 Photo.create({
   teacher: marc_vanzwoll,
-  attachment: File.open('/Users/tim/Desktop/marc_3.jpg')
+  attachment: File.open("#{photos_dir}/marc_3.jpg")
 })
 
 Photo.create({
   teacher: marc_vanzwoll,
-  attachment: File.open('/Users/tim/Desktop/marc_4.jpg')
+  attachment: File.open("#{photos_dir}/marc_4.jpg")
 })
 
 workshop = Workshop.create({
   title: 'Workshops with Marc Vanzwoll',
   starts_at: DateTime.parse("2016-01-30"),
   ends_at: DateTime.parse("2016-01-31"),
-  cover_photo: File.open('/Users/tim/Desktop/marc_cover.png')
+  cover_photo: File.open("#{photos_dir}/marc_cover.png")
 })
 
 guest = Guest.create({
