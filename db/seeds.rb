@@ -7,7 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-photos_dir = Dir.pwd + '/db/seed'
+photos_dir = File.expand_path(File.dirname(__FILE__)) + '/db/seed'
 
 lgbt_center = Location.create({
   name: 'The Lesbian, Gay, Bisexual, & Transgender Community Center',
