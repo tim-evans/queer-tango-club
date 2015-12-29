@@ -8,7 +8,7 @@
   <% @milongas.each do |event| %>
     <div class="event">
       <div class="cover-photo">
-        <img src="<%= event.cover_photo.url(:large) %>" alt="<%= event.title %>"/>
+        <img src="<%= event.cover_photo.url(:original) %>" alt="<%= event.title %>"/>
       </div>
       <div class="grid-frame no-padding">
         <div class="align-bottom align-right">
