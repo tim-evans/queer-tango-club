@@ -3,6 +3,6 @@
     <a class="nolink" href="https://facebook.com/nycqueertangoclub" target="_blank"><%= icon("facebook") -%></a>
     <a href="https://facebook.com/nycqueertangoclub" target="_blank">nycqueertangoclub</a>
     <span class='vr'></span>
-    <%= icon("email") %><%= mail_to('nyqtangoclub@gmail.com', nil, class: 'contact') %>
+    <%= icon("email") %><%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
   </div>
 </footer>

@@ -4,5 +4,5 @@
   <h1>We look forward to seeing you at<br><%= @event.title %></h1>
   <br>
   <p>You should receive an email receipt<br> at <%= mail_to(@current_member.email) %><br>with the details of this purchase.</p>
-  <p>If you have any questions about your order,<br>please contact us at <%= mail_to('nyqtangoclub@gmail.com') %>.</p>
+  <p>If you have any questions about your order,<br>please contact us at <%= mail_to(Rails.application.secrets.email_address) %>.</p>
 </section>
