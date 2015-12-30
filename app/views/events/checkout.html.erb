@@ -11,15 +11,18 @@
   <section id="information">
     <h2>Your Information</h2>
     <hr class="thick">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <div class="row">
       <div class="half">
-        <%= label_tag :name %>
+        <%= label_tag :name, 'Name *' %>
         <%= text_field_tag :name, nil, class: 'whole' %>
       </div>
     </div>
     <div class="row">
       <div class="half">
-        <%= label_tag :email %>
+        <%= label_tag :email, 'Email *' %>
         <%= email_field_tag :email, nil, class: 'whole' %>
       </div>
     </div>
@@ -27,15 +30,16 @@
   <section id="payment">
     <h2>Payment</h2>
     <hr class="thick">
+    <div class="payment-errors"></div>
     <div class="row">
       <div class="half">
-        <label for="cardholder_name">Name on Card</label>
+        <label for="cardholder_name">Name on Card *</label>
         <input type="text" id="cardholder_name" class="whole" />
       </div>
     </div>
     <div class="row">
       <div class="half">
-        <label for="card_number">Card Number</label>
+        <label for="card_number">Card Number *</label>
         <div class="row">
           <input type="tel" id="card_number" class="fill" />
           <iframe src="<%= asset_path("icons/credit-cards.svg#unknown") %>" class="credit-card pad"></iframe>
@@ -46,11 +50,11 @@
       <div class="half">
         <div class="row">
           <div class="fill">
-            <label for="card_expiration">Expiration</label>
+            <label for="card_expiration">Expiration *</label>
             <input type="tel" id="card_expiration" placeholder="MM / YY" />
           </div>
           <div class="fill pad">
-            <label for="card_cvc">CVC</label>
+            <label for="card_cvc">CVC *</label>
             <input type="tel" id="card_cvc" />
           </div>
           <div class="pad">

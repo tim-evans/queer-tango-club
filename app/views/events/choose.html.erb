@@ -12,6 +12,9 @@
     <h2>Choose Your <%= @event.type.titleize.pluralize %></h2>
     <hr class="thick">
 
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <% @event.sessions_by_day.each_with_index do |sessions, idx| %>
       <h4 class="accordion" data-accordion="accordion-<%= idx %>">
         <%= sessions.first.starts_at.strftime("%B %d, %Y") %><%= icon("down") %>
@@ -22,7 +25,7 @@
           <li class="session">
             <span class="col">
               <span class="static-80 align-center">
-                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>">
+                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %>>
               </span>
               <label for="session-<%= session.id %>">
                 <h3><%= session.title %></h3>

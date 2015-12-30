@@ -15,17 +15,37 @@ class EventsController < ApplicationController
   end
 
   def choose
+    @cart = session[:cart] || []
   end
 
   def add_to_cart
-    session[:cart] = params[:sessions].keys
-    redirect_to checkout_event_path(@event)
+    if params[:sessions]
+      session[:cart] = params[:sessions].keys
+      redirect_to checkout_event_path(@event)
+    else
+      if @event.is_a?(Workshop)
+        flash[:error] = "Select workshops to attend."
+      else
+        flash[:error] = "Select events to attend."
+      end
+      redirect_to choose_event_path(@event)
+    end
   end
 
   def checkout
   end
 
   def purchase
+    if params[:name].blank?
+      flash[:error] = "We require your name for registration"
+      return redirect_to checkout_event_path(@event)
+    end
+
+    if params[:email].blank?
+      flash[:error] = "We require your email for registration so we can send you a receipt"
+      return redirect_to checkout_event_path(@event)
+    end
+
     name = params[:name]
     email = params[:email]
     stripe_token = params[:stripe_token]
