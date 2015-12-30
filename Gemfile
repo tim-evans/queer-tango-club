@@ -23,8 +23,6 @@ gem 'jquery-rails'
 gem 'paperclip', '~> 4.3.2'
 gem 'aws-sdk-v1'
 
-gem 'letsencrypt_http_challenge', '~> 0.0.1'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
