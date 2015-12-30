@@ -7,64 +7,13 @@
   <% end %>
 <% end %>
 
-<section id="guests" class="grid-frame">
-  <h2><% if @event.guests.count > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
-  <hr class="thick">
-  <% @event.guests.each do |guest| %>
-    <div class="row">
-      <div class="half">
-        <div class="guest-photos">
-          <% guest.photos.each do |photo| %>
-            <img src="<%= photo.src %>" alt="<%= guest.name %>"/>
-          <% end %>
-        </div>
-      </div>
-      <div class="half">
-        <div>
-          <h4>
-            <% if guest.url %>
-              <%= link_to guest.name, guest.url %>
-            <% else %>
-              <%= guest.name%>
-            <% end %>
-          </h4>
-          <h6><%= guest.role %></h6>
-          <%= simple_format guest.bio %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</section>
-
-<section id="schedule" class="grid-frame">
-  <div class="row align-justify">
-    <h2 class="block align-bottom">Schedule</h2>
-    <% if @event.registerable? %>
-      <%= link_to choose_event_path(@event), class: 'button with-icon' do %>
-        <%= icon("ticket") %> Purchase Tickets
-      <% end %>
-    <% end %>
-  </div>
-  <hr class="thick">
-
-  <% @event.sessions_by_day.each_with_index do |sessions, idx| %>
-    <h4 class="accordion" data-accordion="accordion-<%= idx %>">
-      <%= sessions.first.starts_at.strftime("%B %d, %Y") %><%= icon("down") %>
-    </h4>
-    <hr>
-    <ul class="sessions" id="accordion-<%= idx %>">
-      <% sessions.each do |session| %>
-        <li class="session">
-          <h3><%= session.title %></h3>
-          <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
-          <% if session.description %>
-            <%= simple_format session.description %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</section>
+<% if @event.registerable? %>
+  <%= render partial: 'guests', locals: { guests: @event.guests } %>
+  <%= render partial: 'schedule', locals: { event: @event } %>
+<% else %>
+  <%= render partial: 'schedule', locals: { event: @event } %>
+  <%= render partial: 'guests', locals: { guests: @event.guests } %>
+<% end %>
 <% if @event.location %>
   <%= render partial: 'location', locals: { location: @event.location } %>
 <% end %>
