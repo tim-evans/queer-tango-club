@@ -74,6 +74,9 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  # Require SSL connections for PCI compliance
+  config.force_ssl = true
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.paperclip_defaults = {
