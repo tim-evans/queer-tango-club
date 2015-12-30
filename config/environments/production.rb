@@ -74,23 +74,8 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Require SSL connections for PCI compliance
-  config.force_ssl = true
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_host_alias: ENV['CLOUDFRONT_URL'],
-    s3_protocol: :https,
-    url: ':s3_alias_url',
-    path: '/:class/:attachment/:id_partition/:style/:filename',
-    s3_credentials: {
-      bucket: ENV['S3_BUCKET_NAME'],
-      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-    }
-  }
 end
 
 Rails.application.routes.default_url_options[:host]= 'www.queertangoclub.nyc'

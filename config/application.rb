@@ -22,7 +22,21 @@ module Tango
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.force_ssl = true if ENV['FORCE_SSL']
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+    config.paperclip_defaults = {
+      storage: :s3,
+      s3_host_alias: ENV['CLOUDFRONT_URL'],
+      s3_protocol: :https,
+      url: ':s3_alias_url',
+      path: '/:class/:attachment/:id_partition/:style/:filename',
+      s3_credentials: {
+        bucket: ENV['S3_BUCKET_NAME'],
+        access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+      }
+    }
   end
 end
