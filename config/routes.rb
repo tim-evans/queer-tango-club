@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount LetsencryptHttpChallenge::Engine => "/" unless ENV['LE_HTTP_CHALLENGE_RESPONSE'].blank?
+
   root to: 'home#index'
   get '/about' => 'about#index'
 
