@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
+  def protocol
+    if Rails.env.production?
+      'https://'
+    else
+      'http://'
+    end
+  end
+
   # GET /events/1
   def show
   end
@@ -21,14 +29,14 @@ class EventsController < ApplicationController
   def add_to_cart
     if params[:sessions]
       session[:cart] = params[:sessions].keys
-      redirect_to checkout_event_url(@event, protocol: '//')
+      redirect_to checkout_event_url(@event, protocol: protocol)
     else
       if @event.is_a?(Workshop)
         flash[:error] = "Select workshops to attend."
       else
         flash[:error] = "Select events to attend."
       end
-      redirect_to choose_event_url(@event, protocol: '//')
+      redirect_to choose_event_url(@event, protocol: protocol)
     end
   end
 
@@ -38,12 +46,12 @@ class EventsController < ApplicationController
   def purchase
     if params[:name].blank?
       flash[:error] = "We require your name for registration"
-      return redirect_to checkout_event_url(@event, protocol: '//')
+      return redirect_to checkout_event_url(@event, protocol: protocol)
     end
 
     if params[:email].blank?
       flash[:error] = "We require your email for registration so we can send you a receipt"
-      return redirect_to checkout_event_url(@event, protocol: '//')
+      return redirect_to checkout_event_url(@event, protocol: protocol)
     end
 
     name = params[:name]
@@ -119,7 +127,7 @@ class EventsController < ApplicationController
 
     session.delete(:cart)
     session[:current_member_id] = member.id
-    redirect_to receipt_event_url(@event, protocol: '//')
+    redirect_to receipt_event_url(@event, protocol: protocol)
   end
 
   def receipt
