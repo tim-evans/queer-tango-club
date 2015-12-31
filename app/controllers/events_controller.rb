@@ -1,11 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
-  before_filter :redirect_https
-  def redirect_https
-    redirect_to protocol: "https://" unless request.ssl?
-  end
-
   # GET /events/1
   def show
   end
