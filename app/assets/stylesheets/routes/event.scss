@@ -105,6 +105,12 @@ section {
   }
 }
 
+.banner {
+  position: relative;
+  top: -60px;
+  margin-bottom: -40px;
+}
+
 @media screen and (max-width: 600px) {
   .event {
     height: 300px;
@@ -112,6 +118,32 @@ section {
       position: relative;
       height: 300px;
     }
+  }
+
+  #guests, #location {
+    .half + .half {
+      padding: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  #location {
+    .align-right {
+      text-align: left;
+    }
+  }
+
+  .banner {
+    top: 0;
+    margin-bottom: 0;
+    justify-content: flex-start !important;
+    .align-right {
+      text-align: left;
+    }
+
+    padding-top: 1rem;
+    padding-bottom: 2rem;
   }
 }
 

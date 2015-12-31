@@ -62,7 +62,8 @@ class EventsController < ApplicationController
     member = Member.find_or_create_by(email: email)
     member.update_attributes(name: name)
 
-    sessions = Session.find(session[:cart])
+    # Remove all sessions that a member has already signed up for
+    sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
 
     # Create an Order with Stripe and submit payment
     items = sessions.map do |session|
