@@ -30,11 +30,15 @@
           </nav>
         </div>
       </div>
-      <div class="row align-right banner">
-        <div class="align-right">
-          <%= yield(:banner) %>
+      <% if content_for(:banner) %>
+        <div class="row align-right banner">
+          <div class="align-right">
+            <%= yield(:banner) %>
+          </div>
         </div>
-      </div>
+      <% else %>
+        <br>
+      <% end %>
     </header>
     <main>
       <%= yield %>

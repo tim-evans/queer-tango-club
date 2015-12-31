@@ -1,5 +1,5 @@
 .event {
-  position: relative;
+  position: rleative;
   height: 400px;
 
   .cover-photo {
@@ -72,6 +72,11 @@ section {
   dl {
     padding-bottom: 1rem;
   }
+}
+
+#receipt {
+  padding-bottom: 5rem;
+  max-width: 400px;
 }
 
 .session {
