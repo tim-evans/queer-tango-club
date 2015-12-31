@@ -31,6 +31,7 @@ class EventsController < ApplicationController
       session[:cart] = params[:sessions].keys
       redirect_to checkout_event_url(@event, protocol: protocol)
     else
+      session.delete(:cart)
       if @event.is_a?(Workshop)
         flash[:error] = "Select workshops to attend."
       else
