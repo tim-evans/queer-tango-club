@@ -18,6 +18,8 @@ class Event < ActiveRecord::Base
   end
 
   def registerable?
-    sessions.any?(&:registerable?)
+    first_session = sessions.order(starts_at: :asc).limit(1).first
+    Date.today < first_session.starts_at.to_date &&
+                 sessions.any?(&:registerable?)
   end
 end

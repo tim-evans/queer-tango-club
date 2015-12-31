@@ -23,7 +23,11 @@ class EventsController < ApplicationController
   end
 
   def choose
-    @cart = session[:cart] || []
+    if @event.registerable?
+      @cart = session[:cart] || []
+    else
+      redirect_to event_url(@event, protocol: protocol)
+    end
   end
 
   def add_to_cart
@@ -42,6 +46,9 @@ class EventsController < ApplicationController
   end
 
   def checkout
+    unless @event.registerable?
+      redirect_to event_url(@event, protocol: protocol)
+    end
   end
 
   def purchase
