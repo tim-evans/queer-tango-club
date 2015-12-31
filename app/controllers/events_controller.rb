@@ -21,14 +21,14 @@ class EventsController < ApplicationController
   def add_to_cart
     if params[:sessions]
       session[:cart] = params[:sessions].keys
-      redirect_to checkout_event_path(@event)
+      redirect_to checkout_event_url(@event, protocol: '//')
     else
       if @event.is_a?(Workshop)
         flash[:error] = "Select workshops to attend."
       else
         flash[:error] = "Select events to attend."
       end
-      redirect_to choose_event_path(@event)
+      redirect_to choose_event_url(@event, protocol: '//')
     end
   end
 
@@ -38,12 +38,12 @@ class EventsController < ApplicationController
   def purchase
     if params[:name].blank?
       flash[:error] = "We require your name for registration"
-      return redirect_to checkout_event_path(@event)
+      return redirect_to checkout_event_url(@event, protocol: '//')
     end
 
     if params[:email].blank?
       flash[:error] = "We require your email for registration so we can send you a receipt"
-      return redirect_to checkout_event_path(@event)
+      return redirect_to checkout_event_url(@event, protocol: '//')
     end
 
     name = params[:name]
@@ -119,7 +119,7 @@ class EventsController < ApplicationController
 
     session.delete(:cart)
     session[:current_member_id] = member.id
-    redirect_to receipt_event_path(@event)
+    redirect_to receipt_event_url(@event, protocol: '//')
   end
 
   def receipt
