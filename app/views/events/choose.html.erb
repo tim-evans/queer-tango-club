@@ -12,8 +12,12 @@
     <h2>Choose Your <%= @event.type.titleize.pluralize %></h2>
     <hr class="thick">
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% unless flash.empty? %>
+      <ul class="alert">
+        <% flash.each do |key, value| %>
+          <li class="alert-<%= key %>"><%= value %></li>
+        <% end %>
+      </ul>
     <% end %>
     <% @event.sessions_by_day.each_with_index do |sessions, idx| %>
       <h4 class="accordion" data-accordion="accordion-<%= idx %>">

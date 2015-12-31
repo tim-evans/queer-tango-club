@@ -11,8 +11,12 @@
   <section id="information">
     <h2>Your Information</h2>
     <hr class="thick">
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% unless flash.empty? %>
+      <ul class="alert">
+        <% flash.each do |key, value| %>
+          <li class="alert-<%= key %>"><%= value %></li>
+        <% end %>
+      </ul>
     <% end %>
     <div class="row">
       <div class="half">

@@ -46,10 +46,10 @@ $(function () {
       errors.push('The card you provided has expired.');
     }
 
-    if (errors) {
+    if (errors.length) {
       $form.find('.payment-errors').html('<ul class="alert">' +
                                          errors.map(function (error) {
-                                           return '<li>' + error + '</li>';
+                                           return '<li class="alert-error">' + error + '</li>';
                                          }).join('') + '</ul>');
     }
 
