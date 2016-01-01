@@ -1,4 +1,9 @@
 <% content_for :title, "Queer Tango Club" %>
+<% content_for :facebook do %>
+  <meta property="og:title" content="Queer Tango Club" />
+  <meta property="og:image" content="<%= @hero_src %>" />
+  <meta property="og:site_name" content="Queer Tango Club" />
+<% end %>
 
 <header>
   <div class="grid-frame">
@@ -34,5 +39,5 @@
 </main>
 <%= render partial: 'footer' %>
 <div class="hero-image">
-  <%= image_tag("IMG_4024.jpg") %>
+  <%= image_tag(@hero_src, alt: 'Queer Tango Club') %>
 </div>

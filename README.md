@@ -13,13 +13,14 @@ After installing these, you can launch the application by selecting the folder u
 We use dotenv to store configuration variables in our application. To setup your .env credentials correctly, you'll need the following variables in `.env` in the root folder of the application:
 
 ```
-STRIPE_KEY=xxx
-STRIPE_SECRET=xxx
-MAPBOX_TOKEN=xxx
 AWS_ACCESS_KEY_ID=xxx
 AWS_SECRET_ACCESS_KEY=xxx
-S3_BUCKET_NAME=xxx
 CLOUDFRONT_URL=xxx
+HOST=localhost:3000
+MAPBOX_TOKEN=xxx
+S3_BUCKET_NAME=xxx
+STRIPE_KEY=xxx
+STRIPE_SECRET=xxx
 ```
 
 Please ask a member of the website team for a list of these variables. These should be kept private and they should *never* be published, since some of these tie directly to a bank account. Keep it secret, keep it safe.
