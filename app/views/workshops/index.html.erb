@@ -21,11 +21,13 @@
               <% if event.location %><%= event.location.name %><% end %>
             </h6>
           </div>
-          <div>
-            <%= link_to choose_event_path(event), class: 'photo-overlay button with-icon' do %>
-              <%= icon("ticket") %> Purchase Tickets
-            <% end %>
-          </div>
+          <% if event.registerable? %>
+            <div>
+              <%= link_to choose_event_path(event), class: 'photo-overlay button with-icon' do %>
+                <%= icon("ticket") %> Sign Up
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
