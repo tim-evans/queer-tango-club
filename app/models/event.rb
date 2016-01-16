@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_attached_file :cover_photo, styles: { jumbo: 'x550', large: 'x400' }
+  has_attached_file :cover_photo, styles: { grayscale: { convert_options: '-colorspace Gray' } }
   validates_attachment_content_type :cover_photo, content_type: %w(image/jpeg image/jpg image/png)
 
   has_many :sessions
@@ -17,9 +17,16 @@ class Event < ActiveRecord::Base
     sessions.order(starts_at: :asc).group_by { |session| session.starts_at.to_date }.values
   end
 
+  def start_time
+    sessions.order(starts_at: :asc).limit(1).pluck(:starts_at).first
+  end
+
+  def start_time
+    sessions.order(ends_at: :desc).limit(1).pluck(:ends_at).first
+  end
+
   def registerable?
-    first_session = sessions.order(starts_at: :asc).limit(1).first
-    Date.today < first_session.starts_at.to_date &&
+    Date.today < start_time.to_date &&
                  sessions.any?(&:registerable?)
   end
 end

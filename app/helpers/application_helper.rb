@@ -37,4 +37,12 @@ module ApplicationHelper
   def format_location_name(name)
     name.gsub(/([&:])/, '\1<br>').html_safe
   end
+
+  def cover_photo_url(event)
+    if DateTime.now > event.start_time
+      event.cover_photo.url(:grayscale)
+    else
+      event.cover_photo.url(:original)
+    end
+  end
 end
