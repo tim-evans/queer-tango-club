@@ -278,16 +278,6 @@ Photo.create({
 
 Photo.create({
   teacher: marc_vanzwoll,
-  attachment: File.open("#{photos_dir}/marc_2.jpg")
-})
-
-Photo.create({
-  teacher: marc_vanzwoll,
-  attachment: File.open("#{photos_dir}/marc_3.jpg")
-})
-
-Photo.create({
-  teacher: marc_vanzwoll,
   attachment: File.open("#{photos_dir}/marc_4.jpg")
 })
 
