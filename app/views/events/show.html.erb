@@ -17,12 +17,14 @@
   <% end %>
 </section>
 
-<% if @event.registerable? %>
-  <%= render partial: 'guests', locals: { guests: @event.guests } %>
-  <%= render partial: 'schedule', locals: { event: @event } %>
-<% else %>
-  <%= render partial: 'schedule', locals: { event: @event } %>
-  <%= render partial: 'guests', locals: { guests: @event.guests } %>
+<%= render partial: 'schedule', locals: { event: @event } %>
+<%= render partial: 'guests', locals: { guests: @event.guests } %>
+
+<% if @event.locations.present? %>
+  <div class="grid-frame">
+    <h2><%= 'Location'.pluralize(@event.locations.count) %></h2>
+    <hr class="thick">
+  </div>
 <% end %>
 <% @event.locations.each do |location| %>
   <%= render partial: 'location', locals: { location: location } %>
