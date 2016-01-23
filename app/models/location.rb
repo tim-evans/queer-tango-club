@@ -17,6 +17,10 @@ class Location < ActiveRecord::Base
     true
   end
 
+  def slug
+    name.parameterize
+  end
+
   def inside?(location)
     location.longitude == longitude &&
       location.latitude == latitude

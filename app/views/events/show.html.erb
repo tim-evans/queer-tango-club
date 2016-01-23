@@ -6,7 +6,7 @@
 <% end %>
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 
-<section class="grid-frame">
+<section class="grid-frame banner">
   <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <%= @event.location.name %>
@@ -19,16 +19,7 @@
 
 <%= render partial: 'schedule', locals: { event: @event } %>
 <%= render partial: 'guests', locals: { guests: @event.guests } %>
-
-<% if @event.locations.present? %>
-  <div class="grid-frame">
-    <h2><%= 'Location'.pluralize(@event.locations.count) %></h2>
-    <hr class="thick">
-  </div>
-<% end %>
-<% @event.locations.each do |location| %>
-  <%= render partial: 'location', locals: { location: location } %>
-<% end %>
+<%= render partial: 'locations', locals: { locations: @event.locations } %>
 
 <% if @event.photos %>
   <section id="photos">
