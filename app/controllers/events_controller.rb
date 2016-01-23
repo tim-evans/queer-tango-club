@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt, :members]
 
   def protocol
     if Rails.env.production?
@@ -142,6 +142,8 @@ class EventsController < ApplicationController
   def receipt
     @current_member = Member.find(session[:current_member_id])
   end
+
+  def members; end
 
   # POST /events
   def create
