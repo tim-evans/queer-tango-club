@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :milongas, only: [:index]
   resources :workshops, only: [:index]
+  resources :locations, only: [:show]
 
   namespace :webhooks do
     post 'square', to: 'square#receive'

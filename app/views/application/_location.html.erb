@@ -13,34 +13,13 @@
         <%= location.city %>, <%= location.region_code %> <%= location.postal_code %><br>
       </aside>
       <div class="half align-right">
-        <a href="<%= location.directions_url %>"><%= icon("direction") %> Directions</a>
-      </div>
-    </div>
-  </div>
-
-  <% if location.nearby_locations.present? %>
-  <div class="grid-frame">
-    <h4 class="accordion collapsed" data-accordion="nearby-cafes-<%= location.id %>">
-      Nearby Caf&eacute;s<%= icon("down") %>
-    </h4>
-    <div class="nearby-cafes" id="nearby-cafes-<%= location.id %>">
-    <% location.nearby_locations.to_a.each_with_index do |nearby, idx| %>
-      <div class="row <% if idx % 2 == 1 %>reverse<% end %>">
-        <div class="half">
-          <img src="<%= nearby.photo.url %>" alt="<%= nearby.name %>" />
-        </div>
-        <aside class="half <% if idx % 2 == 1 %>align-right<% end %>">
-          <h5><%= link_to format_location_name(nearby.name), nearby.url %></h5>
-          <%= nearby.address_line %><br>
-          <% if nearby.extended_address %><%= nearby.extended_address %><br><% end %>
-          <%= nearby.city %>, <%= nearby.region_code %> <%= nearby.postal_code %><br>
-          <% unless nearby.inside?(location) %>
-            <a href="<%= nearby.directions_url(location) %>"><%= icon("direction") %> Directions</a>
+        <a href="<%= location.directions_url %>"><%= icon("direction") %> Directions</a><br>
+        <% if location.nearby_locations.present? %>
+          <%= link_to location_path(location) do %>
+            <%= icon("location") %> Nearby Caf&eacute;s
           <% end %>
-        </aside>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
-  <% end %>
 </section>
