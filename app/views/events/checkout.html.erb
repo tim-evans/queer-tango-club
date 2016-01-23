@@ -1,11 +1,11 @@
 <% content_for :title, "Checkout | Queer Tango Club" %>
-<% content_for :banner do %>
+<section class="grid-frame">
   <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <% if @event.location %>
     <%= format_location_name(@event.location.name) %>
   <% end %>
-<% end %>
+</section>
 
 <%= form_tag purchase_event_path(@event), method: :post, class: "grid-frame" do |f| %>
   <section id="information">

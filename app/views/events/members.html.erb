@@ -1,0 +1,57 @@
+<% content_for :title, "#{@event.title} | Queer Tango Club" %>
+<section class="grid-frame">
+  <h1><%= @event.title %></h1>
+  <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
+  <% if @event.location %>
+    <%= format_location_name(@event.location.name) %>
+  <% end %>
+</section>
+
+<%= form_tag add_to_cart_event_path(@event), method: :post, class: "grid-frame" do |f| %>
+  <section id="schedule">
+    <h2>Members</h2>
+    <hr class="thick">
+    <% @event.sessions.order(starts_at: :asc).each do |session| %>
+      <% if session.ticket_cost %>
+        <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
+          <%= session.title %><%= icon("down") %>
+        </h4>
+        <hr>
+        <div class="members" id="accordion-<%= session.id %>">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Paid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% session.attendees.each do |attendee| %>
+              <tr>
+                <td>
+                  <% if attendee.attended? %>
+                    <%= icon('check-solid') %>
+                  <% else %>
+                    <%= icon('check') %>
+                  <% end %>
+                </td>
+                <td><%= attendee.name %></td>
+                <td><%= attendee.email %></td>
+                <td>
+                  <% if attendee.payment_method == 'cash' %>
+                    Cash
+                  <% elsif attendee.payment_method == 'stripe' %>
+                    <a href="<%= attendee.payment_url %>">Online</a>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+        </table>
+      </div>
+    <% end %>
+  </section>
+<% end %>

@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :attendees, through: 'sessions'
   has_many :photos
 
-  has_many :locations, through: 'sessions'
+  has_many :locations, -> { distinct }, through: 'sessions'
 
   def location
     locations.first

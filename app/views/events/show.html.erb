@@ -5,13 +5,17 @@
   <meta property="og:description" content="<%= @event.description %>" />
 <% end %>
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
-<% content_for :banner do %>
+
+<section class="grid-frame">
   <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
-  <% if @event.location %>
-    <%= format_location_name(@event.location.name) %>
+  <%= @event.location.name %>
+  <% if current_user %>
+    <%= link_to members_event_path(@event) do %>
+      <%= icon("person") %> Members
+    <% end %>
   <% end %>
-<% end %>
+</section>
 
 <% if @event.registerable? %>
   <%= render partial: 'guests', locals: { guests: @event.guests } %>
@@ -20,8 +24,8 @@
   <%= render partial: 'schedule', locals: { event: @event } %>
   <%= render partial: 'guests', locals: { guests: @event.guests } %>
 <% end %>
-<% if @event.location %>
-  <%= render partial: 'location', locals: { location: @event.location } %>
+<% @event.locations.each do |location| %>
+  <%= render partial: 'location', locals: { location: location } %>
 <% end %>
 
 <% if @event.photos %>
