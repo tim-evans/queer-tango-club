@@ -15,6 +15,10 @@
       <%= icon("person") %> Members
     <% end %>
   <% end %>
+
+  <% if @event.description %>
+  <%= simple_format @event.description %>
+  <% end %>
 </section>
 
 <%= render partial: 'schedule', locals: { event: @event } %>
