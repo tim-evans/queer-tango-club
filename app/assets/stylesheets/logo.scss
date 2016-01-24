@@ -24,7 +24,7 @@
     letter-spacing: 0;
   }
   .c {
-    margin-left: 0.15em;
+    margin-left: 0.25em;
     letter-spacing: 0.3em;
   }
 
@@ -32,6 +32,10 @@
     color: $theme;
     text-decoration: none;
   }
+}
+
+body:not(#home) .logo {
+  text-shadow: 0 1px 3px transparentize($black, 0.6);
 }
 
 @media screen and (max-width: 610px) {
