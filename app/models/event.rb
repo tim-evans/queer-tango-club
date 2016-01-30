@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
     sessions.order(starts_at: :asc).limit(1).pluck(:starts_at).first
   end
 
-  def start_time
+  def end_time
     sessions.order(ends_at: :desc).limit(1).pluck(:ends_at).first
   end
 
