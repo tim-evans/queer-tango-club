@@ -88,7 +88,8 @@ inauguration = Milonga.create({
   title: 'Inaugural Milonga',
   starts_at: DateTime.parse("2015-10-17"),
   ends_at: DateTime.parse("2015-10-17"),
-  cover_photo: File.open("#{photos_dir}/inaugural_cover.png")
+  cover_photo: File.open("#{photos_dir}/inaugural_cover.png"),
+  description: "We are pleased to have the very lovely and creative dancer, performer and teacher, Rebecca Shulman as our very first guest teacher. She will be teaching a Beginner's class from 6:30 to 7:30pm right before the inaugural Milonga. Our DJ for the evening is the multi-talented Lexa Roséan."
 })
 
 rebecca_shulman = Teacher.create({
@@ -175,7 +176,8 @@ alter_ego = Milonga.create({
   title: 'Alter Ego',
   starts_at: DateTime.parse("2015-11-21"),
   ends_at: DateTime.parse("2015-11-21"),
-  cover_photo: File.open("#{photos_dir}/alter_ego_cover.png")
+  cover_photo: File.open("#{photos_dir}/alter_ego_cover.png"),
+  description: "With the change of seasons, the passing of halloween and the coming of thanksgiving, let us celebrate the duality of human nature, embrace our secret identities, and give free rein to our other selves. Let your Alter Ego loose on November 21st. Express, display, present your alter ego as freely as you desire in whatever shape or form it wishes to manifest!"
 })
 
 Session.create({
@@ -206,7 +208,8 @@ holiday_milonga = Milonga.create({
   title: 'Holiday Milonga',
   starts_at: DateTime.parse("2015-12-19"),
   ends_at: DateTime.parse("2015-12-19"),
-  cover_photo: File.open("#{photos_dir}/holiday_cover.png")
+  cover_photo: File.open("#{photos_dir}/holiday_cover.png"),
+  description: "These two ladies need no introduction!!! You ought to find out for yourself on Dec 19th if you don't know why.\n\nWe can't think of a better way to spend the third Saturday of December with two of the most lovely tangueras in New York City. Come and keep warm with your Queer Tango family before the turn of the year!"
 })
 
 Session.create({
@@ -237,13 +240,14 @@ milonga_janus = Milonga.create({
   title: 'Milonga Janus',
   starts_at: DateTime.parse("2016-01-16"),
   ends_at: DateTime.parse("2016-01-16"),
-  cover_photo: File.open("#{photos_dir}/janus_cover.png")
+  cover_photo: File.open("#{photos_dir}/janus_cover.png"),
+  description: "This January 2016 we are honoring Janus, a symbol of new beginnings and transitions. We shall enter a new doorway, and tango our way through this passage of change in warmth and embrace with one another.\n\nLeading us with her spellbinding moves is a pioneer of Queer Tango in New York, Lexa Roséan. Do not miss this rare opportunity to learn from this bewitching figure of our community.\n\nOur DJ baton will be in the hands of Edit Farsi. We are extremely excited to 'out' her as not only a great leader on the dance floor but also a terrific Dj."
 })
 
 Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2016-12-19 18:15"),
-  ends_at: DateTime.parse("2016-12-19 19:15"),
+  starts_at: DateTime.parse("2016-01-16 18:15"),
+  ends_at: DateTime.parse("2016-01-16 19:15"),
   guest: Guest.create({
     teacher: lexa_rosean,
     role: 'Teacher'
@@ -254,8 +258,8 @@ Session.create({
 
 Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2016-12-19 19:30"),
-  ends_at: DateTime.parse("2016-12-19 21:45"),
+  starts_at: DateTime.parse("2016-01-16 19:15"),
+  ends_at: DateTime.parse("2016-01-16 21:45"),
   guest: Guest.create({
     teacher: edit_fasi,
     role: 'DJ'
@@ -361,4 +365,65 @@ Session.create({
   ends_at: DateTime.parse("2016-01-31 18:00"),
   event: workshop,
   location: sheen_center
+})
+
+bienvenidos = Milonga.create({
+  title: 'Milonga Bienvenidos',
+  starts_at: DateTime.parse("2016-01-30"),
+  ends_at: DateTime.parse("2016-01-30"),
+  cover_photo: File.open("#{photos_dir}/bienvenidos_cover.png")
+})
+
+bluebird = Location.create({
+  name: 'Bluebird Brooklyn Food & Spirits',
+  address_line: '504 Flatbush Ave',
+  url: 'http://www.bluebirdbrooklyn.com/',
+  city: 'Brooklyn',
+  region_code: 'NY',
+  postal_code: '11225',
+  photo: File.open("#{photos_dir}/bluebird.png")
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2016-01-30 20:00"),
+  ends_at: DateTime.parse("2016-01-30 23:00"),
+  guest: Guest.create({
+    teacher: walter_perez,
+    role: 'DJ'
+  }),
+  event: bienvenidos,
+  location: bluebird
+})
+
+fever = Milonga.create({
+  title: 'Milonga Fever',
+  starts_at: DateTime.parse("2016-02-20"),
+  ends_at: DateTime.parse("2016-02-20"),
+  cover_photo: File.open("#{photos_dir}/fever_cover.png"),
+  description: "Catch the infectious personality, and style of our guest teachers Sidney Grant and Claudio Marcelo Vidal! Be inoculated by their joie de vivre so the only fever you'll catch for the rest of the year"
+})
+
+sid_and_claudio = Teacher.create({
+  name: 'Sidney Grant & Claudio Claudio Marcelo Vidal'
+})
+
+Session.create({
+  title: "Class",
+  starts_at: DateTime.parse("2016-02-20 18:15"),
+  ends_at: DateTime.parse("2015-02-20 19:15"),
+  guest: Guest.create({
+    teacher: sid_and_claudio,
+    role: 'Teacher'
+  }),
+  event: fever,
+  location: lgbt_center
+})
+
+Session.create({
+  title: "Milonga",
+  starts_at: DateTime.parse("2016-02-20 19:15"),
+  ends_at: DateTime.parse("2016-02-20 21:45"),
+  event: fever,
+  location: lgbt_center
 })
