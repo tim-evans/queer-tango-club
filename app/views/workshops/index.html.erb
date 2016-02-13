@@ -1,11 +1,23 @@
 <% content_for :title, "Workshops | Queer Tango Club" %>
 
 <section>
+  <% if @workshops.upcoming.count > 0 %>
+    <div class="grid-frame">
+      <h2>Workshops</h2>
+      <hr class="thick">
+      <br>
+    </div>
+    <% @workshops.upcoming.each do |event| %>
+      <%= render partial: 'cover_photo', locals: { event: event } %>
+    <% end %>
+  <% end %>
+
   <div class="grid-frame">
-    <h2>Workshops</h2>
+    <h2>Past Workshops</h2>
     <hr class="thick">
+    <br>
   </div>
-  <% @workshops.each do |event| %>
+  <% @workshops.historical.each do |event| %>
     <%= render partial: 'cover_photo', locals: { event: event } %>
   <% end %>
 </section>
