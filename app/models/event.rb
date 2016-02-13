@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
                       grayscale: {
                         convert_options: [
                           '-colorspace RGB',
-                          '-colorspace gray -gamma 1.1'
+                          '-colorspace gray'
                         ]
                       }
                     }
