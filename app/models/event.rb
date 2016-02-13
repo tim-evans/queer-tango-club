@@ -1,11 +1,6 @@
 class Event < ActiveRecord::Base
   has_attached_file :cover_photo, styles: {
-                      grayscale: {
-                        convert_options: [
-                          '-colorspace RGB',
-                          '-colorspace gray'
-                        ]
-                      }
+                      grayscale: { convert_options: '-set colorspace Gray -separate -average' }
                     }
   validates_attachment_content_type :cover_photo, content_type: %w(image/jpeg image/jpg image/png)
 
