@@ -1,6 +1,8 @@
 <% content_for :facebook do %>
   <meta property="og:title" content="<%= @event.title %>" />
-  <meta property="og:image" content="<%= @event.cover_photo.url(:original) %>" />
+  <% @event.cover_photos.each do |cover_photo| %>
+    <meta property="og:image" content="<%= cover_photo.url(:original) %>" />
+  <% end %>
   <meta property="og:site_name" content="Queer Tango Club" />
   <meta property="og:description" content="<%= @event.description %>" />
 <% end %>
