@@ -88,8 +88,12 @@ inauguration = Milonga.create({
   title: 'Inaugural Milonga',
   starts_at: DateTime.parse("2015-10-17"),
   ends_at: DateTime.parse("2015-10-17"),
-  cover_photo: File.open("#{photos_dir}/inaugural_cover.png"),
   description: "We are pleased to have the very lovely and creative dancer, performer and teacher, Rebecca Shulman as our very first guest teacher. She will be teaching a Beginner's class from 6:30 to 7:30pm right before the inaugural Milonga. Our DJ for the evening is the multi-talented Lexa Roséan."
+})
+
+inauguration.cover_photos.create({
+  attachment: File.open("#{photos_dir}/inaugural_cover.png"),
+  title: 'Inaugural Milonga'
 })
 
 rebecca_shulman = Teacher.create({
@@ -176,8 +180,12 @@ alter_ego = Milonga.create({
   title: 'Alter Ego',
   starts_at: DateTime.parse("2015-11-21"),
   ends_at: DateTime.parse("2015-11-21"),
-  cover_photo: File.open("#{photos_dir}/alter_ego_cover.png"),
   description: "With the change of seasons, the passing of halloween and the coming of thanksgiving, let us celebrate the duality of human nature, embrace our secret identities, and give free rein to our other selves. Let your Alter Ego loose on November 21st. Express, display, present your alter ego as freely as you desire in whatever shape or form it wishes to manifest!"
+})
+
+alter_ego.cover_photos.create({
+  attachment: File.open("#{photos_dir}/alter_ego_cover.png"),
+  title: 'Alter Ego'
 })
 
 Session.create({
@@ -208,8 +216,12 @@ holiday_milonga = Milonga.create({
   title: 'Holiday Milonga',
   starts_at: DateTime.parse("2015-12-19"),
   ends_at: DateTime.parse("2015-12-19"),
-  cover_photo: File.open("#{photos_dir}/holiday_cover.png"),
   description: "These two ladies need no introduction!!! You ought to find out for yourself on Dec 19th if you don't know why.\n\nWe can't think of a better way to spend the third Saturday of December with two of the most lovely tangueras in New York City. Come and keep warm with your Queer Tango family before the turn of the year!"
+})
+
+holiday_milonga.cover_photos.create({
+  attachment: File.open("#{photos_dir}/holiday_cover.png"),
+  title: 'Holiday Milonga'
 })
 
 Session.create({
@@ -240,8 +252,12 @@ milonga_janus = Milonga.create({
   title: 'Milonga Janus',
   starts_at: DateTime.parse("2016-01-16"),
   ends_at: DateTime.parse("2016-01-16"),
-  cover_photo: File.open("#{photos_dir}/janus_cover.png"),
   description: "This January 2016 we are honoring Janus, a symbol of new beginnings and transitions. We shall enter a new doorway, and tango our way through this passage of change in warmth and embrace with one another.\n\nLeading us with her spellbinding moves is a pioneer of Queer Tango in New York, Lexa Roséan. Do not miss this rare opportunity to learn from this bewitching figure of our community.\n\nOur DJ baton will be in the hands of Edit Farsi. We are extremely excited to 'out' her as not only a great leader on the dance floor but also a terrific Dj."
+})
+
+milonga_janus.cover_photos.create({
+  attachment: File.open("#{photos_dir}/janus_cover.png"),
+  title: 'Milonga Janus'
 })
 
 Session.create({
@@ -288,8 +304,12 @@ Photo.create({
 workshop = Workshop.create({
   title: 'Workshops with Marc Vanzwoll',
   starts_at: DateTime.parse("2016-01-30"),
-  ends_at: DateTime.parse("2016-01-31"),
-  cover_photo: File.open("#{photos_dir}/marc_cover.png")
+  ends_at: DateTime.parse("2016-01-31")
+})
+
+workshop.cover_photos.create({
+  attachment: File.open("#{photos_dir}/marc_cover.png"),
+  title: 'Workshops with Marc Vanzwoll'
 })
 
 guest = Guest.create({
@@ -400,8 +420,12 @@ fever = Milonga.create({
   title: 'Milonga Fever',
   starts_at: DateTime.parse("2016-02-20"),
   ends_at: DateTime.parse("2016-02-20"),
-  cover_photo: File.open("#{photos_dir}/fever_cover.png"),
   description: "Catch the infectious personality, and style of our guest teachers Sidney Grant and Claudio Marcelo Vidal! Be inoculated by their joie de vivre so the only fever you'll catch for the rest of the year"
+})
+
+fever.cover_photos.create({
+  attachment: File.open("#{photos_dir}/fever_cover.png"),
+  title: 'Milonga Fever'
 })
 
 sid_and_claudio = Teacher.create({
