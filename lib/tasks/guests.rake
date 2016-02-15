@@ -11,6 +11,8 @@ namespace :guests do
           )
         end
       end
+      guest.session = sessions.first
+      guest.save
     end
   end
 end
