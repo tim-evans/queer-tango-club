@@ -457,7 +457,7 @@ sid = Teacher.create({
   name: "Sidney Grant"
 })
 
-Photos.create({
+Photo.create({
   teacher: sid,
   attachment: File.open("#{photos_dir}/sidney_grant.jpg")
 })
@@ -466,7 +466,7 @@ claudio = Teacher.create({
   name: 'Claudio Marcelo Vidal'
 })
 
-Photos.create({
+Photo.create({
   teacher: claudio,
   attachment: File.open("#{photos_dir}/sidney_grant.jpg")
 })
