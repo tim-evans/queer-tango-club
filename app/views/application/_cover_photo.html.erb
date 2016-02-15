@@ -1,11 +1,12 @@
+<% event.cover_photos.each do |cover_photo| %>
 <div class="event">
   <div class="cover-photo">
-    <img src="<%= cover_photo_url(event) %>" alt="<%= event.title %>"/>
+    <img src="<%= cover_photo_url(cover_photo) %>" alt="<%= cover_photo.title %>"/>
   </div>
   <div class="grid-frame no-padding">
     <div class="align-bottom align-right">
       <%= link_to event_path(event) do %>
-        <h3 class="photo-overlay"><%= event.title %></h3>
+        <h3 class="photo-overlay"><%= cover_photo.title %></h3>
       <% end %>
       <div>
         <h6 class="photo-overlay">
@@ -23,3 +24,4 @@
     </div>
   </div>
 </div>
+<% end %>

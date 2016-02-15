@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118150902) do
+ActiveRecord::Schema.define(version: 20160215014512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20160118150902) do
   add_index "attendees", ["member_id"], name: "index_attendees_on_member_id", using: :btree
   add_index "attendees", ["session_id", "member_id"], name: "index_attendees_on_session_id_and_member_id", unique: true, using: :btree
   add_index "attendees", ["session_id"], name: "index_attendees_on_session_id", using: :btree
+
+  create_table "cover_photos", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "event_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"

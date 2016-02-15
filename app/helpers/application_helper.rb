@@ -38,11 +38,11 @@ module ApplicationHelper
     name.gsub(/([&:])/, '\1<br>').html_safe
   end
 
-  def cover_photo_url(event)
-    if DateTime.now > event.end_time
-      event.cover_photo.url(:grayscale)
+  def cover_photo_url(cover_photo)
+    if DateTime.now > cover_photo.event.end_time
+      cover_photo.attachment.url(:grayscale)
     else
-      event.cover_photo.url(:original)
+      cover_photo.attachment.url(:original)
     end
   end
 end
