@@ -3,7 +3,7 @@ class Session < ActiveRecord::Base
   has_many :members, through: 'attendees'
 
   has_one :teacher, through: 'guest'
-  belongs_to :guest
+  has_many :guests
   belongs_to :event
   belongs_to :location
 

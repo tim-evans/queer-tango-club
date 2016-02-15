@@ -152,28 +152,30 @@ Photo.create({
   attachment: File.open("#{photos_dir}/edit_fasi.jpg")
 })
 
-Session.create({
+s = Session.create({
   title: "Beginner's Class",
   starts_at: DateTime.parse("2015-10-17 18:30"),
   ends_at: DateTime.parse("2015-10-17 19:30"),
-  guest: Guest.create({
-    teacher: rebecca_shulman,
-    role: 'Teacher'
-  }),
   event: inauguration,
   location: lgbt_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: rebecca_shulman,
+  role: 'Teacher'
+})
+
+s = Session.create({
   title: "Milonga",
   starts_at: DateTime.parse("2015-10-17 19:30"),
   ends_at: DateTime.parse("2015-10-17 21:45"),
-  guest: Guest.create({
-    teacher: lexa_rosean,
-    role: 'DJ'
-  }),
   event: inauguration,
   location: lgbt_center
+})
+
+s.guests.create({
+  teacher: lexa_rosean,
+  role: 'DJ'
 })
 
 alter_ego = Milonga.create({
@@ -188,28 +190,30 @@ alter_ego.cover_photos.create({
   title: 'Alter Ego'
 })
 
-Session.create({
+s = Session.create({
   title: "Class",
   starts_at: DateTime.parse("2015-11-21 18:30"),
   ends_at: DateTime.parse("2015-11-21 19:30"),
-  guest: Guest.create({
-    teacher: walter_perez,
-    role: 'Teacher'
-  }),
   event: alter_ego,
   location: lgbt_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: walter_perez,
+  role: 'Teacher'
+})
+
+s =Session.create({
   title: "Milonga",
   starts_at: DateTime.parse("2015-11-21 19:30"),
   ends_at: DateTime.parse("2015-11-21 21:45"),
-  guest: Guest.create({
-    teacher: walter_perez,
-    role: 'DJ'
-  }),
   event: alter_ego,
   location: lgbt_center
+})
+
+s.guests.create({
+  teacher: walter_perez,
+  role: 'DJ'
 })
 
 holiday_milonga = Milonga.create({
@@ -224,28 +228,30 @@ holiday_milonga.cover_photos.create({
   title: 'Holiday Milonga'
 })
 
-Session.create({
+s = Session.create({
   title: "Class",
   starts_at: DateTime.parse("2015-12-19 18:15"),
   ends_at: DateTime.parse("2015-12-19 19:15"),
-  guest: Guest.create({
-    teacher: maria_jose,
-    role: 'Teacher'
-  }),
   event: holiday_milonga,
   location: lgbt_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: maria_jose,
+  role: 'Teacher'
+})
+
+s = Session.create({
   title: "Milonga",
   starts_at: DateTime.parse("2015-12-19 19:30"),
   ends_at: DateTime.parse("2015-12-19 21:45"),
-  guest: Guest.create({
-    teacher: meg_farrell,
-    role: 'DJ'
-  }),
   event: holiday_milonga,
   location: lgbt_center
+})
+
+s.guests.create({
+  teacher: meg_farrell,
+  role: 'DJ'
 })
 
 milonga_janus = Milonga.create({
@@ -260,29 +266,32 @@ milonga_janus.cover_photos.create({
   title: 'Milonga Janus'
 })
 
-Session.create({
+s = Session.create({
   title: "Class",
   starts_at: DateTime.parse("2016-01-16 18:15"),
   ends_at: DateTime.parse("2016-01-16 19:15"),
-  guest: Guest.create({
-    teacher: lexa_rosean,
-    role: 'Teacher'
-  }),
   event: milonga_janus,
   location: lgbt_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: lexa_rosean,
+  role: 'Teacher'
+})
+
+s = Session.create({
   title: "Milonga",
   starts_at: DateTime.parse("2016-01-16 19:15"),
   ends_at: DateTime.parse("2016-01-16 21:45"),
-  guest: Guest.create({
-    teacher: edit_fasi,
-    role: 'DJ'
-  }),
   event: milonga_janus,
   location: lgbt_center
 })
+
+s.guests.create({
+  teacher: edit_fasi,
+  role: 'DJ'
+})
+
 
 marc_vanzwoll = Teacher.create({
   name: 'Marc Vanzwoll',
@@ -312,12 +321,7 @@ workshop.cover_photos.create({
   title: 'Workshops with Marc Vanzwoll'
 })
 
-guest = Guest.create({
-  teacher: marc_vanzwoll,
-  role: 'Teacher'
-})
-
-Session.create({
+s = Session.create({
   title: 'From Walking to Dancing',
   description: 'Take the ho-hum out of your walk, and dance. 4 ways to perfect your cross system walking while developing your Jedi tango powers.',
   starts_at: DateTime.parse("2016-01-30 13:00"),
@@ -325,12 +329,16 @@ Session.create({
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
-  guest: guest,
   event: workshop,
   location: sheen_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: marc_vanzwoll,
+  role: 'Teacher'
+})
+
+s = Session.create({
   title: 'Not Your Average Intercambio',
   description: 'Switch roles with invisible transitions. Diversify, and make the Leader/Follower relationship dynamic. Your tango will never be the same.',
   starts_at: DateTime.parse("2016-01-30 15:00"),
@@ -338,9 +346,13 @@ Session.create({
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
-  guest: guest,
   event: workshop,
   location: sheen_center
+})
+
+s.guests.create({
+  teacher: marc_vanzwoll,
+  role: 'Teacher'
 })
 
 Session.create({
@@ -352,7 +364,7 @@ Session.create({
   location: sheen_center
 })
 
-Session.create({
+s = Session.create({
   title: 'Cadena for You and for Me!',
   description: 'A classic pattern to brighten up your tango. 4 basic steps linked together with identical foot work pattern for both Leader and Follower. Find out why this pattern travels or stays in place, and is perfect for switching roles seamlessly',
   starts_at: DateTime.parse("2016-01-31 13:00"),
@@ -360,12 +372,16 @@ Session.create({
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
-  guest: guest,
   event: workshop,
   location: sheen_center
 })
 
-Session.create({
+s.guests.create({
+  teacher: marc_vanzwoll,
+  role: 'Teacher'
+})
+
+s = Session.create({
   title: 'Ocho Cortado Reloaded',
   description: 'Make it fun for yourself and your partner. Learn how to ocho cortado, then hack it. Small spaces? No problem. Hey Leaders and Followers, get creative!',
   starts_at: DateTime.parse("2016-01-31 15:00"),
@@ -373,9 +389,13 @@ Session.create({
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
-  guest: guest,
   event: workshop,
   location: sheen_center
+})
+
+s.guests.create({
+  teacher: marc_vanzwoll,
+  role: 'Teacher'
 })
 
 Session.create({
@@ -391,7 +411,11 @@ bienvenidos = Milonga.create({
   title: 'Milonga Bienvenidos',
   starts_at: DateTime.parse("2016-01-30"),
   ends_at: DateTime.parse("2016-01-30"),
-  cover_photo: File.open("#{photos_dir}/bienvenidos_cover.png")
+})
+
+bienvenidos.cover_photos.create({
+  title: 'Milonga Bienvenidos',
+  attachment: File.open("#{photos_dir}/bienvenidos_cover.png")
 })
 
 bluebird = Location.create({
@@ -404,16 +428,17 @@ bluebird = Location.create({
   photo: File.open("#{photos_dir}/bluebird.png")
 })
 
-Session.create({
+s = Session.create({
   title: "Milonga",
   starts_at: DateTime.parse("2016-01-30 20:00"),
   ends_at: DateTime.parse("2016-01-30 23:00"),
-  guest: Guest.create({
-    teacher: walter_perez,
-    role: 'DJ'
-  }),
   event: bienvenidos,
   location: bluebird
+})
+
+s.guests.create({
+  teacher: walter_perez,
+  role: 'DJ'
 })
 
 fever = Milonga.create({
@@ -428,20 +453,40 @@ fever.cover_photos.create({
   title: 'Milonga Fever'
 })
 
-sid_and_claudio = Teacher.create({
-  name: 'Sidney Grant & Claudio Claudio Marcelo Vidal'
+sid = Teacher.create({
+  name: "Sidney Grant"
 })
 
-Session.create({
+Photos.create({
+  teacher: sid,
+  attachment: File.open("#{photos_dir}/sidney_grant.jpg")
+})
+
+claudio = Teacher.create({
+  name: 'Claudio Marcelo Vidal'
+})
+
+Photos.create({
+  teacher: claudio,
+  attachment: File.open("#{photos_dir}/sidney_grant.jpg")
+})
+
+s = Session.create({
   title: "Class",
   starts_at: DateTime.parse("2016-02-20 18:15"),
   ends_at: DateTime.parse("2015-02-20 19:15"),
-  guest: Guest.create({
-    teacher: sid_and_claudio,
-    role: 'Teacher'
-  }),
   event: fever,
   location: lgbt_center
+})
+
+s.guests.create({
+  teacher: sid,
+  role: 'Teacher'
+})
+
+s.guests.create({
+  teacher: claudio,
+  role: 'Teacher'
 })
 
 Session.create({
@@ -450,4 +495,223 @@ Session.create({
   ends_at: DateTime.parse("2016-02-20 21:45"),
   event: fever,
   location: lgbt_center
+})
+
+
+soledad = Teacher.create({
+  name: 'Soledad Nani',
+  bio: 'Soledad Nani began dancing tango at 21 and, from the beginning, learned to dance both roles. She graduated from the Educational Tango Center of Buenos Aires (the Tango University) and among her early influential teachers were Rodolfo Dinzel, Olga Besio, and Juan Miguel Expósito.
+
+Since 2004, Soledad has taught in various cultural centers and State community programs, teaching tango at public schools and public heath centers for seniors, young people, children, and women in situations of gender violence and domestic abuse. “Tango by and for Women,” a rare concept at the time, was one of her early collaborations.
+
+She became an adjunct teacher at Espacio Tango Queer in Buenos Aires in 2008 and now teaches regularly at the Queer Tango Festival in Buenos Aires and the weekly milonga Tango Queer de Buenos Aires. She has performed at a variety of milongas in Buenos Aires such as Confiteria Ideal, Tango Queer, La Marshall, and Salon Canning. She has also participated in events sponsored by the Argentine National Congress and at other cultural venues.
+
+Soledad is recognized throughout Buenos Aires, in traditional as well as queer settings, as a musical, creative dancer, one of the stunning female leaders of her generation.
+
+In 2012, Soledad began teaching and performing internationally and quickly became a special guest teacher in cities all around the globe: San Francisco Bay Area, Seattle, Boston, Berlin and throughout Germany, Paris, St. Petersburg, and Zurich.
+
+Her perspective of tango is that it is a paired dance with both partners contributing equally to the ensemble. This approach encourages the dancers to produce a balanced and more intense collaboration.'
+})
+
+Photo.create({
+  teacher: soledad,
+  attachment: File.open("#{photos_dir}/soledad_1.jpg")
+})
+
+Photo.create({
+  teacher: soledad,
+  attachment: File.open("#{photos_dir}/soledad_2.jpg")
+})
+
+nancy = Teacher.create({
+  name: 'Nancy Lavoie'
+})
+
+Photo.create({
+  teacher: nancy,
+  attachment: File.open("#{photos_dir}/nancy.jpg")
+})
+
+yannick = Teacher.create({
+  name: 'Yannick Allen-Vuillet'
+})
+
+Photo.create({
+  teacher: yannick,
+  attachment: File.open("#{photos_dir}/yannick.jpg")
+})
+
+workshop = Workshop.create({
+  title: 'Soledad Nani',
+  starts_at: DateTime.parse("2016-03-17"),
+  ends_at: DateTime.parse("2016-03-20")
+})
+
+workshop.cover_photos.create({
+  attachment: File.open("#{photos_dir}/soledad_cover.jpg"),
+  title: 'Soledad Nani'
+})
+
+workshop.cover_photos.create({
+  attachment: File.open("#{photos_dir}/nancy_yannick_cover.png"),
+  title: 'Nancy Lavoie & Yannick Allen-Vuillet'
+})
+
+alchemical = Location.create({
+  name: 'Alchemical Studios',
+  address_line: '104 W 14th St',
+  city: 'New York',
+  region_code: 'NY',
+  postal_code: '10011',
+  photo: File.open("#{photos_dir}/alchemical.png")
+})
+
+s = Session.create({
+  title: 'Meet & Greet Practica',
+  starts_at: DateTime.parse("2016-03-17 19:00"),
+  ends_at: DateTime.parse("2016-03-17 22:00"),
+  event: workshop,
+  location: alchemical
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Pre-Milonga Class',
+  starts_at: DateTime.parse("2016-03-18 20:00"),
+  ends_at: DateTime.parse("2016-03-18 21:00"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Milonga Queer Fundraiser',
+  starts_at: DateTime.parse("2016-03-18 21:00"),
+  ends_at: DateTime.parse("2016-03-19 01:00"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Performer'
+})
+
+s.guests.create({
+  teacher: nancy,
+  role: 'Performer'
+})
+
+s = Session.create({
+  title: 'Essentials of Tango Walking',
+  starts_at: DateTime.parse("2016-03-19 13:00"),
+  ends_at: DateTime.parse("2016-03-19 14:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Pivot Dynamic',
+  starts_at: DateTime.parse("2016-03-19 13:00"),
+  ends_at: DateTime.parse("2016-03-19 14:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: nancy,
+  role: 'Teacher'
+})
+
+s.guests.create({
+  teacher: yannick,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Milonga',
+  starts_at: DateTime.parse("2016-03-19 15:00"),
+  ends_at: DateTime.parse("2016-03-19 16:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Keys to Improvisation',
+  starts_at: DateTime.parse("2016-03-19 15:00"),
+  ends_at: DateTime.parse("2016-03-19 16:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: nancy,
+  role: 'Teacher'
+})
+
+s.guests.create({
+  teacher: yannick,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Practica',
+  starts_at: DateTime.parse("2016-03-19 16:30"),
+  ends_at: DateTime.parse("2016-03-19 18:00"),
+  event: workshop
+})
+
+s = Session.create({
+  title: 'Pre-Milonga Class',
+  starts_at: DateTime.parse("2016-03-19 20:00"),
+  ends_at: DateTime.parse("2016-03-19 21:00"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Milonga Equinox',
+  starts_at: DateTime.parse("2016-03-19 21:00"),
+  ends_at: DateTime.parse("2016-03-19 24:00"),
+  event: workshop
+})
+
+s = Session.create({
+  title: 'The Tango Body Intensive',
+  starts_at: DateTime.parse("2016-03-20 13:00"),
+  ends_at: DateTime.parse("2016-03-20 14:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
+})
+
+s = Session.create({
+  title: 'Communication',
+  starts_at: DateTime.parse("2016-03-20 15:00"),
+  ends_at: DateTime.parse("2016-03-20 16:30"),
+  event: workshop
+})
+
+s.guests.create({
+  teacher: soledad,
+  role: 'Teacher'
 })
