@@ -453,22 +453,19 @@ fever.cover_photos.create({
   title: 'Milonga Fever'
 })
 
-sid = Teacher.create({
-  name: "Sidney Grant"
+sid_and_claudio = Teacher.create({
+  name: "Sidney Grant & Claudio Marcelo Vidal",
+  url: "www.ballroombasix.org",
+  bio: "Sidney Grant‘s 25-year career in Ballroom, Latin & Tango has included performances and choreographies on and off Broadway, and in TV and Film. He has taught extensively in the U.S. (Boston, Chicago, Phoenix, Memphis), as well as globally in Central / South America, Europe and Asia, most notably Hong Kong. He is Founder / Artistic Director of the acclaimed arts program BALLROOM BASIX, for which he was named New Yorker of the Week on NY1 news. In just 5 years, Grant and his dedicated team of Teaching Artists have taught tango, among other partner dances, to over 6,000 schoolchildren.
+
+Sid was the 2011 USA Argentine Tango Salon Champion in NYC, the 1st time an openly gay man ever won. He and partner Gayle Madeira donated their winnings to BALLROOM BASIX. In 2012, he was Guest of Honor (with Walter and Leo) at the 6th International Queer Tango Festival in BA. More recently, he judged Argentine Tango at both the World Gay Games as well as April Follies, the largest same-sex dance competition in the US, where he performed his TIN MAN TANGO with Claudio&hellip; as Dorothy!
+
+Claudio Marcelo Vidal was the 1st man in the history of the Campeonato Mundial (World Tango Championships) to wear heels as a male follower. His story was featured in Clarin and Nación, Argentina’s largest newspapers. A nurse for terminally ill children in Buenos Aires by day, Claudio has become an integral part of Queer Tango ever since his first tanda with partner Sid Grant 7 years ago. Since that time, the two have taught and performed in BA, New York and San Francisco."
 })
 
 Photo.create({
-  teacher: sid,
-  attachment: File.open("#{photos_dir}/sidney_grant.jpg")
-})
-
-claudio = Teacher.create({
-  name: 'Claudio Marcelo Vidal'
-})
-
-Photo.create({
-  teacher: claudio,
-  attachment: File.open("#{photos_dir}/sidney_grant.jpg")
+  teacher: sid_and_claudio,
+  attachment: File.open("#{photos_dir}/sidney_and_claudio.jpg")
 })
 
 s = Session.create({
@@ -524,7 +521,9 @@ Photo.create({
 })
 
 nancy = Teacher.create({
-  name: 'Nancy Lavoie'
+  name: 'Nancy Lavoie',
+  url: 'http://avenuetango.com/',
+  bio: ''
 })
 
 Photo.create({
@@ -580,7 +579,7 @@ s.guests.create({
 })
 
 s = Session.create({
-  title: 'Pre-Milonga Class',
+  title: 'Pre-Milonga Class&mdash; Essentials of Walking',
   starts_at: DateTime.parse("2016-03-18 20:00"),
   ends_at: DateTime.parse("2016-03-18 21:00"),
   event: workshop
@@ -609,7 +608,7 @@ s.guests.create({
 })
 
 s = Session.create({
-  title: 'Essentials of Tango Walking',
+  title: 'Communication',
   starts_at: DateTime.parse("2016-03-19 13:00"),
   ends_at: DateTime.parse("2016-03-19 14:30"),
   event: workshop
@@ -638,7 +637,7 @@ s.guests.create({
 })
 
 s = Session.create({
-  title: 'Milonga',
+  title: 'Sensibility',
   starts_at: DateTime.parse("2016-03-19 15:00"),
   ends_at: DateTime.parse("2016-03-19 16:30"),
   event: workshop
@@ -674,7 +673,7 @@ s = Session.create({
 })
 
 s = Session.create({
-  title: 'Pre-Milonga Class',
+  title: 'Pre-Milonga Class&mdash; Essentials 8&rsquo;s',
   starts_at: DateTime.parse("2016-03-19 20:00"),
   ends_at: DateTime.parse("2016-03-19 21:00"),
   event: workshop
@@ -693,7 +692,7 @@ s = Session.create({
 })
 
 s = Session.create({
-  title: 'The Tango Body Intensive',
+  title: 'Improvisation without roles',
   starts_at: DateTime.parse("2016-03-20 13:00"),
   ends_at: DateTime.parse("2016-03-20 14:30"),
   event: workshop
@@ -705,7 +704,7 @@ s.guests.create({
 })
 
 s = Session.create({
-  title: 'Communication',
+  title: 'Entire Body',
   starts_at: DateTime.parse("2016-03-20 15:00"),
   ends_at: DateTime.parse("2016-03-20 16:30"),
   event: workshop
