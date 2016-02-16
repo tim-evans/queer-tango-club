@@ -311,14 +311,14 @@ Photo.create({
 })
 
 workshop = Workshop.create({
-  title: 'Workshops with Marc Vanzwoll',
+  title: 'Marc Vanzwoll',
   starts_at: DateTime.parse("2016-01-30"),
   ends_at: DateTime.parse("2016-01-31")
 })
 
 workshop.cover_photos.create({
   attachment: File.open("#{photos_dir}/marc_cover.png"),
-  title: 'Workshops with Marc Vanzwoll'
+  title: 'Marc Vanzwoll'
 })
 
 s = Session.create({
