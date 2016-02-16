@@ -32,7 +32,7 @@
                 <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %>>
               </span>
               <label for="session-<%= session.id %>">
-                <h3><%= session.title %></h3>
+                <h3><%= session.title.html_safe %></h3>
                 <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
                 <% if session.description %>
                   <%= simple_format session.description %>

@@ -477,12 +477,7 @@ s = Session.create({
 })
 
 s.guests.create({
-  teacher: sid,
-  role: 'Teacher'
-})
-
-s.guests.create({
-  teacher: claudio,
+  teacher: sid_and_claudio,
   role: 'Teacher'
 })
 

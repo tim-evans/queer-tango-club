@@ -9,7 +9,7 @@
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 
 <section class="grid-frame banner">
-  <h1><%= @event.title %></h1>
+  <h1><%= @event.title.html_safe %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <%= @event.location.name %>
   <% if current_user %>
