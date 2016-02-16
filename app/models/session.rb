@@ -13,6 +13,10 @@ class Session < ActiveRecord::Base
     !ticket_cost.blank?
   end
 
+  def overlaps?(other)
+    (starts_at <= other.ends_at) && (other.starts_at >= ends_at)
+  end
+
   def create_sku
     SyncSkusService.new(self).create!
   end

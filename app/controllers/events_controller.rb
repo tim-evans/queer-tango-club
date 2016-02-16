@@ -32,8 +32,22 @@ class EventsController < ApplicationController
 
   def add_to_cart
     if params[:sessions]
-      session[:cart] = params[:sessions].keys
-      redirect_to checkout_event_url(@event, protocol: protocol)
+      session_ids = params[:sessions].keys
+      sessions = Session.find(session_ids).to_a
+      has_overlapping_sessions = sessions.reduce do |session|
+        (sessions - session).reduce do |other|
+          session.overlaps?(other)
+        end
+      end
+
+      if has_overlapping_sessions
+        session.delete(:cart)
+        flash[:error] = "Select events that don't overlap."
+        redirect_to choose_event_url(@event, protocol: protocol)
+      else
+        session[:cart] = session_ids
+        redirect_to checkout_event_url(@event, protocol: protocol)
+      end
     else
       session.delete(:cart)
       if @event.is_a?(Workshop)
