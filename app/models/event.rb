@@ -8,7 +8,7 @@ AggregateGuest = Struct.new(:teacher, :roles) do
     end
   end
 
-  delegate :name, :url, :bio, :photos, to: :teacher
+  delegate :name, :url, :bio, :photos, :slug, to: :teacher
 end
 
 class Event < ActiveRecord::Base

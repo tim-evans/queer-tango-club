@@ -45,4 +45,14 @@ module ApplicationHelper
       cover_photo.attachment.url(:original)
     end
   end
+
+  def format_list(list, &block)
+    if list.size == 1
+      yield(list.first).html_safe
+    elsif list.size == 2
+      "#{yield(list.first)} & #{yield(list.last)}".html_safe
+    elsif list.size > 2
+      list[0..-1].map { |item| yield(item) }.join(", ") + " & #{list.last}".html_safe
+    end
+  end
 end
