@@ -2,7 +2,7 @@
   <h2><% if guests.count > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
   <hr class="thick">
   <% guests.each do |guest| %>
-    <div class="row guest" id="<%= guest.slug %>">
+    <div class="row" id="<%= guest.slug %>">
       <div class="half">
         <div class="guest-photos">
           <% guest.photos.each do |photo| %>
@@ -20,9 +20,7 @@
             <% end %>
           </h4>
           <h6><%= guest.role %></h6>
-          <div class="bio">
-            <%= simple_format guest.bio %>
-          </div>
+          <%= simple_format guest.bio %>
         </div>
       </div>
     </div>
