@@ -518,7 +518,11 @@ Photo.create({
 nancy = Teacher.create({
   name: 'Nancy Lavoie',
   url: 'http://avenuetango.com/',
-  bio: ''
+  bio: "Has a background in music but was seduced in her very first class by the wonderful expressiveness of Argentinian Tango. She travelled to Argentina to learn from teachers who had been there for the Golden Age of tango to better understand the history, the traditions and the language.
+
+In 1995 she started the very first Tango school in Québec: l'Avenue Tango. She teaches there to this day and organizes special classes and workshops with teachers from Europe and Argentina. In 2001 she created the very first improv-tango team in Buenos Aires. In 2005 she, became a member of the collective Tango Discovery, a research in movement group based in Buenos Aires. In 2014 she founded the collective Tango Nomade with Yannick Allen-Vuillet. Together they also lead a new group dedicated to the 20 years of Tango in Québec: Tango Vintage.
+
+Nancy is regularly invited to give workshops and shows in Berlin, San Fransisco, Buenos Aires, Rome, Stockholm, Hamburg, Zurich, Oslo, Paris."
 })
 
 Photo.create({
@@ -527,7 +531,8 @@ Photo.create({
 })
 
 yannick = Teacher.create({
-  name: 'Yannick Allen-Vuillet'
+  name: 'Yannick Allen-Vuillet',
+  bio: "Yannick started dancing the Tango at 17 and immediately fell in love with it's charm and expressiveness of it's language. From the beginning of his education he learned to master not only the role of the lead but also that of following. This gave him a deeper and richer understanding of Tango. He started to travel early for Tango, wanting to see new places and perfect his dance. Four years later he regularly teaches with his partner Nancy Lavoie, while also performing in numerous shows in Québec, Montreal, Porto, and Berlin, and also participated in the artistic direction of the TER Tango et Répiblica Tanguera Shows. Coming from a visual arts background, his mixed artistic sensibility informs all his creations."
 })
 
 Photo.create({
