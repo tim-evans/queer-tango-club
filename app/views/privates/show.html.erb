@@ -1,0 +1,57 @@
+<% content_for :facebook do %>
+  <meta property="og:title" content="Privates with <%= @private.teacher.name %>" />
+  <% @private.teacher.photos.each do |photo| %>
+    <meta property="og:image" content="<%= photo.attachment.url(:original) %>" />
+  <% end %>
+  <meta property="og:site_name" content="Queer Tango Club" />
+  <meta property="og:description" content="<%= @private.description %>" />
+<% end %>
+<% content_for :title, "Privates with #{@private.teacher.name} | Queer Tango Club" %>
+
+<section id="guests" class="grid-frame">
+  <h1>Privates with <%= @private.teacher.name.html_safe %></h1>
+  <hr class="thick">
+  <div class="row">
+    <div class="half">
+      <div class="guest-photos">
+        <% @private.teacher.photos.each do |photo| %>
+          <img src="<%= photo.src %>" alt="<%= @private.teacher.name %>"/>
+        <% end %>
+      </div>
+    </div>
+    <div class="half">
+      <div>
+        <h4>
+          <% if @private.teacher.url %>
+            <%= link_to @private.teacher.name, @private.teacher.url %>
+          <% else %>
+            <%= @private.teacher.name %>
+          <% end %>
+        </h4>
+        <%= simple_format @private.description %>
+        <hr>
+        <p><%= icon('alert') %><span class="smcp">NOTE</span> The fee for the private does <em>not</em> include the room rental.</p>
+        <p>Please Provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
+
+        <p>Privates are available from <%= format_date_range(@private.starts_at, @private.ends_at) %>.</p>
+
+        <%= form_tag inquire_event_private_path(@event, @private), method: :post do |f| %>
+          <div class="row">
+            <%= label_tag :name, 'Name *' %>
+            <%= text_field_tag :name, nil, class: 'whole' %>
+          </div>
+          <div class="row">
+            <%= label_tag :email, 'Email *' %>
+            <%= email_field_tag :email, nil, class: 'whole' %>
+          </div>
+          <div class="row">
+            <%= label_tag :body, 'Body' %>
+            <%= text_area_tag :body, nil, class: 'whole', rows: 5 %>
+          </div>
+          <br>
+          <button class="with-icon"><%= icon("fan") %> Schedule a Private</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

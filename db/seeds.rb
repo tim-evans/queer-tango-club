@@ -546,6 +546,13 @@ workshop = Workshop.create({
   ends_at: DateTime.parse("2016-03-20")
 })
 
+workshop.privates.create({
+  teacher: soledad,
+  description: "Soledad Nani is available for private lessons. Lessons are $90 each, with a discounted rate of $75 per each lesson if you book three or more. This does not include the floor fee.",
+  starts_at: DateTime.parse("2016-03-17"),
+  ends_at: DateTime.parse("2016-03-21")
+})
+
 workshop.cover_photos.create({
   attachment: File.open("#{photos_dir}/soledad_cover.jpg"),
   title: 'Soledad Nani'

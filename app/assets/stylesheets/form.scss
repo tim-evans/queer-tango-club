@@ -14,7 +14,8 @@ input[type=text],
 input[type=email],
 input[type=tel],
 input[type=password],
-input[type=number] {
+input[type=number],
+textarea {
   height: 40px;
   border: 2px solid $black;
   font-size: 1rem;
@@ -23,6 +24,11 @@ input[type=number] {
   border-radius: 0;
   box-shadow: none;
   max-width: 100%;
+}
+
+textarea {
+  padding: 0.5rem;
+  height: auto;
 }
 
 input[type=checkbox] {

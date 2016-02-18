@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   has_many :attendees, through: 'sessions'
   has_many :photos
   has_many :cover_photos
+  has_many :privates
 
   has_many :locations, -> { distinct }, through: 'sessions'
 
