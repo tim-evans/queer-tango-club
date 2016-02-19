@@ -48,7 +48,7 @@ class Event < ActiveRecord::Base
     teachers = {}
     guests = []
     sessions.order(starts_at: :asc).includes(:guests).each do |session|
-      session.guests.each do |guest|
+      session.guests.where(credited: true).each do |guest|
         if teachers[guest.teacher.id]
           teachers[guest.teacher.id][:roles] << guest.role
         else
