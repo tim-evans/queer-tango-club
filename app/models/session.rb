@@ -20,4 +20,8 @@ class Session < ActiveRecord::Base
   def create_sku
     SyncSkusService.new(self).create!
   end
+
+  def guests_by_role
+    guests.group_by { |guest| guest.role }.values
+  end
 end

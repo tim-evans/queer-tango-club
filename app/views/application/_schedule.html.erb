@@ -19,10 +19,12 @@
         <li class="session">
           <h3><%= session.title.html_safe %></h3>
           <% if session.event.guests.count > 1 && session.guests.count > 0 %>
-            <h6>
-              <%= format_list(session.guests) { |guest| "<a href='##{guest.slug}'>#{guest.name}</a>" } %>,
-              <%= session.guests.first.role.pluralize(session.guests.count) %>
-            </h6>
+            <% session.guests_by_role.each do |guests| %>
+              <h6>
+                <%= format_list(guests) { |guest| guest.name } %>,
+                <%= guests.first.role.pluralize(guests.count) %>
+              </h6>
+            <% end %>
           <% end %>
           <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
           <% if session.event.locations.count > 1 %>
