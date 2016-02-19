@@ -52,7 +52,7 @@ module ApplicationHelper
     elsif list.size == 2
       "#{yield(list.first)} & #{yield(list.last)}".html_safe
     elsif list.size > 2
-      list[0..-1].map { |item| yield(item) }.join(", ") + " & #{list.last}".html_safe
+      (list[0..-1].map { |item| yield(item) }.join(", ") + " & #{list.last}").html_safe
     end
   end
 end
