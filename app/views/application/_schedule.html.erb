@@ -26,6 +26,9 @@
               </h6>
             <% end %>
           <% end %>
+          <% if session.level %>
+            <h6>For <%= session.level %> Dancers</h6>
+          <% end %>
           <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
           <% if session.event.locations.count > 1 %>
             <h6><a href="#<%= session.location.slug %>"><%= session.location.name %></a></h6>
