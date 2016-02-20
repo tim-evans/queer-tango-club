@@ -34,8 +34,8 @@ class EventsController < ApplicationController
     if params[:sessions]
       session_ids = params[:sessions].keys
       sessions = Session.find(session_ids).to_a
-      has_overlapping_sessions = sessions.reduce do |session|
-        (sessions - session).reduce do |other|
+      has_overlapping_sessions = sessions.any? do |session|
+        (sessions - [session]).any? do |other|
           session.overlaps?(other)
         end
       end
@@ -97,16 +97,30 @@ class EventsController < ApplicationController
     end
 
     discounts = []
-    items.each do
+    workshops = sessions.select { |s| s.ticket_cost == 35_00 }
+    milonga_queer = sessions.select { |s| s.ticket_cost == 20_00 }
+    milonga_equinox = sessions.select { |s| s.ticket_cost == 15_00 }
+    practicas = sessions.select { |s| s.ticket_cost == 10_00 }
+
+    if milonga_queer.count == 2
+      discounts << {
+        type: 'discount',
+        amount: -15_00,
+        currency: 'usd',
+        description: 'Pre-Milonga Class + Milonga Queer Discount'
+      }
+    end
+
+    workshops.each do
       discounts << {
         type: 'discount',
         amount: -500,
         currency: 'usd',
-        description: 'Presale'
+        description: 'Early Bird Discount'
       }
     end
 
-    case items.count
+    case workshops.count
     when 3
       discounts << {
         type: 'discount',
@@ -123,13 +137,35 @@ class EventsController < ApplicationController
       }
     end
 
+    if milonga_equinox.count == 2
+      discounts << {
+        type: 'discount',
+        amount: -12_00,
+        currency: 'usd',
+        description: 'Pre-Milonga Class + Milonga Equinox Discount'
+      }
+    end
+
+    if milonga_queer.count == 2 &&
+       workshops.count == 4 &&
+       practicas.count == 2 &&
+       milonga_equinox.count == 2
+      discounts << {
+        type: 'discount',
+        amount: -13_00,
+        currency: 'usd',
+        description: 'Full Package discount'
+      }
+    end
+
     order = Stripe::Order.create(
       currency: 'usd',
       items: items + discounts,
       email: member.email
     )
 
-    order.pay(source: stripe_token)
+    order = order.pay(source: stripe_token)
+
     base_url = if Rails.env.development?
                  "https://dashboard.stripe.com/orders/test"
                else
@@ -150,6 +186,13 @@ class EventsController < ApplicationController
 
     session.delete(:cart)
     session[:current_member_id] = member.id
+
+    # Send the attendee an email
+    charge = Stripe::Charge.retrieve(order.charge)
+    charge.description = "Payment for #{@event.title}"
+    charge.receipt_email = member.email
+    charge.save
+
     redirect_to receipt_event_url(@event, protocol: protocol)
   end
 

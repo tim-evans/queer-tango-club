@@ -14,7 +14,7 @@ class Session < ActiveRecord::Base
   end
 
   def overlaps?(other)
-    (starts_at <= other.ends_at) && (other.starts_at >= ends_at)
+    (starts_at < other.ends_at) && (other.starts_at < ends_at)
   end
 
   def create_sku
