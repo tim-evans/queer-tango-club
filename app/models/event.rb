@@ -40,8 +40,9 @@ class Event < ActiveRecord::Base
   end
 
   def registerable?
-    Date.today < start_time.to_date &&
-                 sessions.any?(&:registerable?)
+    false
+#    Date.today < start_time.to_date &&
+#                 sessions.any?(&:registerable?)
   end
 
   def guests
