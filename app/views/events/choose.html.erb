@@ -41,6 +41,9 @@
                     </h6>
                   <% end %>
                 <% end %>
+                <% if session.level %>
+                  <h6>For <%= session.level %> Dancers</h6>
+                <% end %>
                 <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
                 <% if session.description %>
                   <%= simple_format session.description %>
