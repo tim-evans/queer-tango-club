@@ -21,20 +21,42 @@
     </div>
     <div class="half">
       <div>
-        <h4>
-          <% if @private.teacher.url %>
-            <%= link_to @private.teacher.name, @private.teacher.url %>
-          <% else %>
-            <%= @private.teacher.name %>
-          <% end %>
-        </h4>
         <%= simple_format @private.description %>
-        <hr>
-        <p><%= icon('alert') %><span class="smcp">NOTE</span> The fee for the private does <em>not</em> include the room rental.</p>
-        <p>Please Provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
+        <br>
+        <h6>Available Times</h6>
+        <hr class="thin">
+        <ul>
+          <% @private.availability.each do |time_slot| %>
+            <li class="row">
+              <span class="align-left half">
+                <%= time_slot.begin.strftime("%B %d, %Y") %>
+              </span>
+              <span class="align-right fill">
+                <%= format_time_range(time_slot.begin, time_slot.end) %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+        <hr class="thin">
+        <p>
+          <%= icon('alert') %><span class="smcp">NOTE</span>
+          The fee for your private lesson does not include room rentals.
+        </p>
+        <p>Please provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
 
-        <p>Privates are available from <%= format_date_range(@private.starts_at, @private.ends_at) %>.</p>
-
+        <% unless flash.empty? %>
+          <ul class="alert">
+            <% flash.each do |key, value| %>
+              <% if value.kind_of?(Array) %>
+                <% value.each do |message| %>
+                  <li class="alert-<%= key %>"><%= message %></li>
+                <% end %>
+              <% else %>
+                <li class="alert-<%= key %>"><%= value %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
         <%= form_tag inquire_event_private_path(@event, @private), method: :post do |f| %>
           <div class="row">
             <%= label_tag :name, 'Name *' %>
