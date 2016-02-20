@@ -57,23 +57,11 @@
             <% end %>
           </ul>
         <% end %>
-        <%= form_tag inquire_event_private_path(@event, @private), method: :post do |f| %>
-          <div class="row">
-            <%= label_tag :name, 'Name *' %>
-            <%= text_field_tag :name, nil, class: 'whole' %>
-          </div>
-          <div class="row">
-            <%= label_tag :email, 'Email *' %>
-            <%= email_field_tag :email, nil, class: 'whole' %>
-          </div>
-          <div class="row">
-            <%= label_tag :body, 'Body' %>
-            <%= text_area_tag :body, nil, class: 'whole', rows: 5 %>
-          </div>
-          <br>
-          <button class="with-icon"><%= icon("fan") %> Schedule a Private</button>
+        <br>
+        <%= mail_to @private.contact, subject: "[Private with #{@private.teacher.name}]", class:"button with-icon", role: "button" do %>
+          <%= icon("fan") %> Schedule a Private
         <% end %>
-      </div>
+       </div>
     </div>
   </div>
 </section>

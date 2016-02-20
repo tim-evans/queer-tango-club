@@ -12,11 +12,7 @@ Rails.application.routes.draw do
       get 'receipt'
     end
 
-    resources :privates, only: [:show] do
-      member do
-        post 'inquire'
-      end
-    end
+    resources :privates, only: [:show]
   end
 
   resources :milongas, only: [:index]
