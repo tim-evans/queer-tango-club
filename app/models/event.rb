@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
 
   has_many :locations, -> { distinct }, through: 'sessions'
 
-  scope :upcoming, -> { where('ends_at > ?', Time.now) }
+  scope :upcoming, -> { where('ends_at >= ?', Time.now) }
   scope :historical, -> { where('ends_at < ?', Time.now) }
 
   def location
