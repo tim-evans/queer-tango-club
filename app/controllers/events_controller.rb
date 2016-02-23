@@ -194,6 +194,9 @@ class EventsController < ApplicationController
     charge.save
 
     redirect_to receipt_event_url(@event, protocol: protocol)
+  rescue Stripe::CardError => e
+    flash[:error] = e.json_body[:error][:message]
+    return redirect_to checkout_event_url(@event, protocol: protocol)
   end
 
   def receipt
