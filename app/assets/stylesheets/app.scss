@@ -56,6 +56,23 @@ header {
   margin: 0;
 }
 
+.admin {
+  background: $black;
+  color: $white;
+  line-height: 40px;
+
+  a, a:hover, a:active, a:visited {
+    color: $white;
+  }
+
+  svg {
+    position: relative;
+    top: 8px;
+  }
+  svg path {
+    fill: $white;
+  }
+}
 
 nav {
   padding-top: 2rem;

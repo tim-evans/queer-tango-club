@@ -1,6 +1,6 @@
 <% content_for :title, "Sign In | Queer Tango Club" %>
 <div class="grid-frame">
-  <h2>Log in</h2>
-  <hr>
-  <%= render "devise/shared/links" %>
+  <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2') do %>
+    <%= icon('google') %> Sign in with Google
+  <% end %>
 </div>
