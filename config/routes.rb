@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'checkout'
       post 'purchase'
       get 'receipt'
+      get 'members'
     end
 
     resources :privates, only: [:show]
