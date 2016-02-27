@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable,
-         omniauth_providers: [:facebook]
+         omniauth_providers: [:google_oauth2]
 
   def self.from_omniauth(auth)
     users = where(provider: auth.provider, uid: auth.uid)
