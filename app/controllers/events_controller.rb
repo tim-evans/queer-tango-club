@@ -203,7 +203,9 @@ class EventsController < ApplicationController
     @current_member = Member.find(session[:current_member_id])
   end
 
-  def members; end
+  def members
+    redirect_to(event_path(@event)) unless current_user
+  end
 
   # POST /events
   def create
