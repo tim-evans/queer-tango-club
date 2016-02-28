@@ -11,42 +11,47 @@
         </h4>
         <hr>
         <div class="members" id="accordion-<%= session.id %>">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Paid</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% session.attendees.each do |attendee| %>
+          <% if session.attendees.count > 0 %>
+            <table>
+              <thead>
                 <tr>
-                  <td>
-                    <% if attendee.attended? %>
-                      <%= icon('check-solid') %>
-                    <% else %>
-                      <%= icon('check') %>
-                    <% end %>
-                  </td>
-                  <td><%= attendee.name %></td>
-                  <td><%= attendee.email %></td>
-                  <td>
-                    <% if attendee.payment_method == 'cash' %>
-                      Cash
-                    <% elsif attendee.payment_method == 'stripe' %>
-                      <a href="<%= attendee.payment_url %>">Online</a>
-                    <% elsif attendee.payment_method == 'square' %>
-                      <a href="<%= attendee.payment_url %>">Card</a>
-                    <% end %>
-                  </td>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Paid</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% session.attendees.each do |attendee| %>
+                  <tr>
+                    <td>
+                      <% if attendee.attended? %>
+                        <%= icon('check-solid') %>
+                      <% else %>
+                        <%= icon('check') %>
+                      <% end %>
+                    </td>
+                    <td><%= attendee.name %></td>
+                    <td><%= attendee.email %></td>
+                    <td>
+                      <% if attendee.payment_method == 'cash' %>
+                        Cash
+                      <% elsif attendee.payment_method == 'stripe' %>
+                        <a href="<%= attendee.payment_url %>">Online</a>
+                      <% elsif attendee.payment_method == 'square' %>
+                        <a href="<%= attendee.payment_url %>">Card</a>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <br>
+            <div class="smcp align-center"><%= icon('sad', class: 'empty-state') %></div>
+          <% end %>
         </div>
-      <% end %>
+       <% end %>
     <% end %>
   </section>
   <br>
