@@ -1,48 +1,22 @@
 class AttendeesController < ApplicationController
-  before_action :set_attendee, only: [:show, :edit, :update, :destroy]
-
-  # GET /attendees
-  def index
-    @attendees = Attendee.all
-  end
-
-  # GET /attendees/1
-  def show
-  end
-
-  # GET /attendees/new
-  def new
-    @attendee = Attendee.new
-  end
-
-  # GET /attendees/1/edit
-  def edit
-  end
-
-  # POST /attendees
-  def create
-    @attendee = Attendee.new(attendee_params)
-
-    if @attendee.save
-      redirect_to @attendee, notice: 'Attendee was successfully created.'
-    else
-      render :new
-    end
-  end
+  before_action :set_attendee, only: [:update]
 
   # PATCH/PUT /attendees/1
   def update
     if @attendee.update(attendee_params)
-      redirect_to @attendee, notice: 'Attendee was successfully updated.'
+      render json: {
+        attendee: {
+          id: @attendee.id,
+          name: @attendee.name,
+          attended: @attendee.attended
+        }
+      }
     else
-      render :edit
+      render status: :unprocessable_entity,
+             json: {
+               errors: @attendee.errors
+             }
     end
-  end
-
-  # DELETE /attendees/1
-  def destroy
-    @attendee.destroy
-    redirect_to attendees_url, notice: 'Attendee was successfully destroyed.'
   end
 
   private
@@ -53,6 +27,6 @@ class AttendeesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def attendee_params
-      params.require(:attendee).permit(:payment_method, :payment_amount, :attended)
+      params.require(:attendee).permit(:attended)
     end
 end

@@ -1,0 +1,29 @@
+<% environment.context_class.instance_eval { include ApplicationHelper; include InlineSvg::ActionView::Helpers } %>
+
+$(function () {
+  if (!$('.admin').length && !$('.toggle-attended').length) { return; }
+
+  $('.toggle-attended').on('click', function (evt) {
+    var $checkbox = $(this);
+    var data = {
+      attendee: {
+        attended: !$checkbox.data('attended')
+      }
+    };
+    data[$('meta[name="csrf-param"]').attr('content')] = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+      url: '/attendees/' + $checkbox.data('id'),
+      method: 'put',
+      data: data
+    }).then(function (result) {
+      if (result.attendee.attended) {
+        $checkbox.html('<%= icon('check-solid').gsub("\n", '') %>');
+      } else {
+        $checkbox.html('<%= icon('check').gsub("\n", '') %>');
+      }
+      $checkbox.data("attended", result.attendee.attended);
+    });
+    evt.preventDefault();
+  });
+});

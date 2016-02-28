@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [:create, :destroy]
+  resources :attendees, only: [:update]
 
   resources :milongas, only: [:index]
   resources :workshops, only: [:index]

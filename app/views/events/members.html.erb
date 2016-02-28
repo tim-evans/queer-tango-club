@@ -25,11 +25,13 @@
                 <% session.attendees.each do |attendee| %>
                   <tr>
                     <td>
-                      <% if attendee.attended? %>
-                        <%= icon('check-solid') %>
-                      <% else %>
-                        <%= icon('check') %>
-                      <% end %>
+                      <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">
+                        <% if attendee.attended? %>
+                          <%= icon('check-solid') %>
+                        <% else %>
+                          <%= icon('check') %>
+                        <% end %>
+                      </a>
                     </td>
                     <td><%= attendee.name %></td>
                     <td><%= attendee.email %></td>
