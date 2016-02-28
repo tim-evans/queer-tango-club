@@ -5,7 +5,7 @@ $(function () {
 
   var getImageSize = (function () {
     return function (success) {
-      let $img = $element.find('img');
+      var $img = $element.find('img');
       success({
         width: $img.attr('width'),
         height: $img.attr('height')
