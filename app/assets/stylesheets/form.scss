@@ -8,6 +8,9 @@ form {
   .pad {
     margin-left: 1rem;
   }
+  .fill input {
+    width: 100%;
+  }
 }
 
 input[type=text],
