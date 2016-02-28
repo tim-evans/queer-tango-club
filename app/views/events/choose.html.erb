@@ -27,7 +27,7 @@
       <ul class="sessions" id="accordion-<%= idx %>">
         <% sessions.select(&:registerable?).each do |session| %>
           <li class="session">
-            <span class="col">
+            <span class="row">
               <span class="static-80 align-center">
                 <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %> data-amount="<%= session.ticket_cost %>" data-starts-at="<%= session.starts_at.to_i %>" data-ends-at="<%= session.ends_at.to_i %>">
               </span>
