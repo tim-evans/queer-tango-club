@@ -3,26 +3,13 @@ $(function () {
   if (!$element.length) { return; }
   var element = $element[0];
 
-  function loadImage(src, success, error) {
-    var image = new Image();
-    image.onload = function () {
-      success({
-        width: image.width,
-        height: image.height
-      });
-    };
-    image.onerror = error;
-    image.src = src;
-  }
-
   var getImageSize = (function () {
-    var size = null;
     return function (success) {
-      if (size) { return success(size); }
-
-      loadImage($element.find('img').attr('src'), function (imageSize) {
-        success(imageSize);
-      }, function () {});
+      let $img = $element.find('img');
+      success({
+        width: $img.attr('width'),
+        height: $img.attr('height')
+      });
     };
   }())
 

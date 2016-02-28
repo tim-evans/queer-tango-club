@@ -37,5 +37,5 @@
 </main>
 <%= render partial: 'footer' %>
 <div class="hero-image">
-  <%= image_tag(@hero_src, alt: 'Queer Tango Club') %>
+  <%= image_tag(@hero_image.src, alt: 'Queer Tango Club', width: @hero_image.width, height: @hero_image.height) %>
 </div>
