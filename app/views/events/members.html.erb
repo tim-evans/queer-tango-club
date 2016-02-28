@@ -22,7 +22,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% session.attendees.each do |attendee| %>
+                <% session.attendees.order(:created_at).each do |attendee| %>
                   <tr>
                     <td>
                       <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">
