@@ -1,17 +1,22 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_photo, only: [:delete]
+  before_action :set_photo, only: [:destroy]
 
   # POST /photos
   def create
     photo = Photo.create(photo_params)
-    redirect_to(photos_event_path(photo.event))
+    render json: {
+      photo: {
+        id: photo.id,
+        src: photo.src
+      }
+    }
   end
 
-  def delete
+  def destroy
     event = @photo.event
     @photo.destroy
-    redirect_to(photos_event_path(event))
+    head :no_content
   end
 
   private

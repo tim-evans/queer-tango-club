@@ -95,6 +95,10 @@ nav {
   }
 }
 
+section > nav {
+  padding-top: 0;
+}
+
 .hero-image {
   position: absolute;
   top: 0;

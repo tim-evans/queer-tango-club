@@ -17,11 +17,7 @@ Rails.application.routes.draw do
     resources :privates, only: [:show]
   end
 
-  resources :photos, only: [:create] do
-    member do
-      get 'delete'
-    end
-  end
+  resources :photos, only: [:create, :destroy]
 
   resources :milongas, only: [:index]
   resources :workshops, only: [:index]
