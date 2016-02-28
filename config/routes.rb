@@ -11,9 +11,16 @@ Rails.application.routes.draw do
       post 'purchase'
       get 'receipt'
       get 'members'
+      get 'photos'
     end
 
     resources :privates, only: [:show]
+  end
+
+  resources :photos, only: [:create] do
+    member do
+      get 'delete'
+    end
   end
 
   resources :milongas, only: [:index]

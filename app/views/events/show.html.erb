@@ -8,15 +8,22 @@
 <% end %>
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 
+<% if current_user %>
+  <nav class="grid-frame align-right">
+    <hr>
+    <%= link_to members_event_path(@event) do %>
+      <%= icon("person") %> Sign Ups
+    <% end %>
+    <%= link_to photos_event_path(@event) do %>
+      <%= icon("photo") %> Photos
+    <% end %>
+    <hr>
+  </nav>
+<% end %>
 <section class="grid-frame banner">
   <h1><%= @event.title.html_safe %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <%= @event.location.name %>
-  <% if current_user %>
-    <%= link_to members_event_path(@event) do %>
-      <%= icon("person") %> Members
-    <% end %>
-  <% end %>
 
   <% if @event.description %>
   <%= simple_format @event.description %>

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt, :members]
+  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt, :members, :photos]
 
   def protocol
     if Rails.env.production?
@@ -205,6 +205,12 @@ class EventsController < ApplicationController
 
   def members
     redirect_to(event_path(@event)) unless current_user
+  end
+
+  def photos
+    return redirect_to(event_path(@event)) unless current_user
+
+    @photos = @event.photos.order(:created_at)
   end
 
   # POST /events
