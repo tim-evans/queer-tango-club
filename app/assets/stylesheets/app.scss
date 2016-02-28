@@ -290,13 +290,17 @@ footer {
     background: $black;
     color: $white;
   }
+}
 
-  a & {
-    transition: all 0.2s;
-    color: $black;
-    &:hover {
-      background: $cloudy;
-    }
+a.photo-link {
+  @extend h3;
+  @extend .photo-overlay;
+
+  transition: all 0.2s;
+  color: $black;
+  text-decoration: none;
+  &:hover {
+    background: $cloudy;
   }
 }
 

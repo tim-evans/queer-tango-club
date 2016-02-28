@@ -24,7 +24,6 @@
 
     &.align-right {
       text-align: right;
-      justify-content: flex-end;
     }
 
     &.align-justify {
@@ -33,6 +32,10 @@
 
     &.align-spaced {
       justify-content: space-around;
+    }
+
+    &.justify-end {
+      justify-content: flex-end;
     }
 
     &.align-bottom {

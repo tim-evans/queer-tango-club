@@ -19,9 +19,9 @@
     <div class="admin">
       <div class="grid-frame">
         <div class="row">
-          <div class="half">
+          <div>
             <%= icon("person") %> <%= current_user.email %>
-          </div><div class="half align-right">
+          </div><div class="fill align-right">
             <%= link_to('Log Out', destroy_user_session_path) %>
           </div>
         </div>
@@ -33,7 +33,7 @@
   <% else %>
     <header class="grid-frame">
       <div class="row align-justify">
-        <h1 class="logo block">
+        <h1 class="logo block align-left">
           <%= link_to(root_path) do %>
             <span class="q">Queer</span>
             <span class="t">Tango</span>

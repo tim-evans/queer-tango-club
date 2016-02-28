@@ -7,7 +7,7 @@
 
 <header>
   <div class="grid-frame">
-    <div class="row align-right">
+    <div class="row align-right justify-end">
       <nav>
         <%= link_to('About', about_path) %>
         <%= link_to('Events', milongas_path) %>
@@ -25,13 +25,11 @@
         <span class="c">Club</span>
       </h1>
     </div>
-    <div class="row align-right">
+    <div class="row align-right justify-end">
       <section id="upcoming-events">
         <h6 class="dark photo-overlay">Upcoming Events</h6><br>
         <% @upcoming.each do |event| %>
-          <%= link_to event_path(event) do %>
-            <h3 class="photo-overlay"><%= event.title %></h3>
-          <% end %><br>
+          <%= link_to(event.title, event_path(event), class: 'photo-link') %><br>
         <% end %>
       </section>
     </div>
