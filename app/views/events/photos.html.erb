@@ -10,11 +10,13 @@
 
 <section id="photos">
   <div class="grid-frame">
-    <% @photos.each do |photo| %>
-      <div class="photo">
-        <a href="#" tabindex="0" class="delete" data-id="<%= photo.id %>"><%= icon("cancel-solid", title: "Delete Photo") %></a>
-        <%= image_tag photo.src %>
-      </div>
-    <% end %>
+    <div class="row align-justify">
+      <% @photos.each do |photo| %>
+        <div class="photo">
+          <a href="#" tabindex="0" class="delete" data-id="<%= photo.id %>"><%= icon("cancel-solid", title: "Delete Photo") %></a>
+          <%= image_tag photo.src %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </section>

@@ -76,7 +76,7 @@
   }
 
   .col, .block {
-    flex-flow: col wrap;
+    flex-flow: column wrap;
     &.reverse {
       flex-direction: col-reverse;
     }
