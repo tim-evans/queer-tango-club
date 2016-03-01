@@ -96,6 +96,16 @@ input[type=radio] {
   }
 }
 
+label.radio {
+  padding: 0;
+
+  span {
+    position: relative;
+    top: -12px;
+    left: 5px;
+  }
+}
+
 .alert {
   border: 2px solid $life;
   color: $life;

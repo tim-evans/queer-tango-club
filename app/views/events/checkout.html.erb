@@ -38,11 +38,12 @@
     <div class="row">
       <% if current_user %>
         <div class="half tab-bar">
+          <br>
           <div class="row">
-            <label><input type="radio" name="payment_method" value="card" /> Card</label>
+            <label class="radio"><input type="radio" name="payment_method" value="card" checked="checked" /> <span>Card</span></label>
           </div>
           <div class="row">
-            <label><input type="radio" name="payment_method" value="cash" /> Cash</label>
+            <label class="radio"><input type="radio" name="payment_method" value="cash" /> <span>Cash</span></label>
           </div>
         </div>
       <% end %>
