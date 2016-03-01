@@ -60,7 +60,12 @@ class EventsController < ApplicationController
   end
 
   def checkout
-    unless @event.registerable?
+    if @event.registerable?
+      cents = itemize_order(Session.find(session[:cart]).to_a).reduce(0) do |acc, item|
+        acc + item[:amount]
+      end
+      @payment_amount = Money.new(cents, 'USD')
+    else
       redirect_to event_url(@event, protocol: protocol)
     end
   end
@@ -105,7 +110,48 @@ class EventsController < ApplicationController
     # Remove all sessions that a member has already signed up for
     sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
 
-    # Create an Order with Stripe and submit payment
+    order = Stripe::Order.create(
+      currency: 'usd',
+      items: itemize_order(sessions),
+      email: member.email
+    )
+
+    order = order.pay(source: stripe_token)
+
+    base_url = if Rails.env.development?
+                 "https://dashboard.stripe.com/orders/test"
+               else
+                 "https://dashboard.stripe.com/orders/"
+               end
+
+    sessions.each do |session|
+      Attendee.create(
+        member: member,
+        session: session,
+        payment_method: 'stripe',
+        payment_currency: order.currency,
+        payment_amount: order.amount,
+        payment_url: "#{base_url}/#{order.id}",
+        paid_at: order.created
+      )
+    end
+
+    session.delete(:cart)
+    session[:current_member_id] = member.id
+
+    # Send the attendee an email
+    charge = Stripe::Charge.retrieve(order.charge)
+    charge.description = "Payment for #{@event.title}"
+    charge.receipt_email = member.email
+    charge.save
+
+    redirect_to receipt_event_url(@event, protocol: protocol)
+  rescue Stripe::CardError => e
+    flash[:error] = e.json_body[:error][:message]
+    return redirect_to checkout_event_url(@event, protocol: protocol)
+  end
+
+  def itemize_order(sessions)
     items = sessions.map do |session|
       {
         type: 'sku',
@@ -177,45 +223,7 @@ class EventsController < ApplicationController
       }
     end
 
-    order = Stripe::Order.create(
-      currency: 'usd',
-      items: items + discounts,
-      email: member.email
-    )
-
-    order = order.pay(source: stripe_token)
-
-    base_url = if Rails.env.development?
-                 "https://dashboard.stripe.com/orders/test"
-               else
-                 "https://dashboard.stripe.com/orders/"
-               end
-
-    sessions.each do |session|
-      Attendee.create(
-        member: member,
-        session: session,
-        payment_method: 'stripe',
-        payment_currency: order.currency,
-        payment_amount: order.amount,
-        payment_url: "#{base_url}/#{order.id}",
-        paid_at: order.created
-      )
-    end
-
-    session.delete(:cart)
-    session[:current_member_id] = member.id
-
-    # Send the attendee an email
-    charge = Stripe::Charge.retrieve(order.charge)
-    charge.description = "Payment for #{@event.title}"
-    charge.receipt_email = member.email
-    charge.save
-
-    redirect_to receipt_event_url(@event, protocol: protocol)
-  rescue Stripe::CardError => e
-    flash[:error] = e.json_body[:error][:message]
-    return redirect_to checkout_event_url(@event, protocol: protocol)
+    items + discounts
   end
 
   def purchase
