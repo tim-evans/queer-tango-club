@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301041450) do
+ActiveRecord::Schema.define(version: 20160301045319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160301041450) do
     t.boolean  "credited",    default: true
   end
 
-  add_index "guests", ["teacher_id", "session_id"], name: "index_guests_on_teacher_id_and_session_id", unique: true, using: :btree
+  add_index "guests", ["teacher_id", "session_id", "role"], name: "index_guests_on_teacher_id_and_session_id_and_role", unique: true, using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
