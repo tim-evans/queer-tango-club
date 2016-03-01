@@ -29,7 +29,9 @@
       <section id="upcoming-events">
         <h6 class="dark photo-overlay">Upcoming Events</h6><br>
         <% @upcoming.each do |event| %>
-          <%= link_to(event.title, event_path(event), class: 'photo-link') %><br>
+          <% event.cover_photos.each do |cover| %>
+            <%= link_to(cover.full_title, event_path(event), class: 'photo-link') %><br>
+          <% end %>
         <% end %>
       </section>
     </div>
