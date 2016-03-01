@@ -57,6 +57,10 @@ $(function () {
   }
 
   $('form').submit(function () {
+    if ($('input[name="payment_method"]:checked').val() === 'cash') {
+      return true;
+    }
+
     var $form = $(this);
     var expiry = $('#card_expiration').payment('cardExpiryVal');
     var data = {

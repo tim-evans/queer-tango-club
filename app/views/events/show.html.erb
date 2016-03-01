@@ -8,27 +8,40 @@
 <% end %>
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 
+<br>
 <% if current_user %>
-  <nav class="grid-frame align-right">
-    <hr>
-    <%= link_to members_event_path(@event) do %>
-      <%= icon("person") %> Sign Ups
-    <% end %>
-    <%= link_to photos_event_path(@event) do %>
-      <%= icon("photo") %> Photos
-    <% end %>
-    <hr>
-  </nav>
-<% end %>
-<section class="grid-frame banner">
-  <h1><%= @event.title.html_safe %></h1>
-  <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
-  <%= @event.location.name %>
+  <div class="grid-frame">
+    <section>
+      <h2><%= @event.title.html_safe %></h2>
+      <nav class="align-right">
+        <hr>
+        <%= link_to event_members_path(@event) do %>
+          <%= icon("person") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %>
+        <% end %>
+        <%= link_to photos_event_path(@event) do %>
+          <%= icon("photo") %> Photos
+        <% end %>
+        <hr>
+      </nav>
+      <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
+      <%= @event.location.name %>
 
-  <% if @event.description %>
-  <%= simple_format @event.description %>
-  <% end %>
-</section>
+      <% if @event.description %>
+        <%= simple_format @event.description %>
+      <% end %>
+    </section>
+  </div>
+<% else %>
+  <section class="grid-frame banner">
+    <h1><%= @event.title.html_safe %></h1>
+    <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
+    <%= @event.location.name %>
+
+    <% if @event.description %>
+      <%= simple_format @event.description %>
+    <% end %>
+  </section>
+<% end %>
 
 <%= render partial: 'schedule', locals: { event: @event } %>
 <%= render partial: 'guests', locals: { guests: @event.guests } %>

@@ -2,8 +2,16 @@
 <br>
 <div class="grid-frame">
   <section id="schedule">
-    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> Sign Ups</h2>
-    <hr class="thick">
+    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %></h2>
+    <% if @event.is_a?(Workshop) %>
+      <nav class="align-right">
+        <hr>
+        <%= link_to choose_event_path(@event) do %>
+          <%= icon("ticket-solid") %> Sign Up
+        <% end %>
+        <hr class="thick">
+      </nav>
+    <% end %>
     <% @event.sessions.order(starts_at: :asc).each do |session| %>
       <% if session.ticket_cost %>
         <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
@@ -53,7 +61,7 @@
             <div class="smcp align-center"><%= icon('sad', class: 'empty-state') %></div>
           <% end %>
         </div>
-       <% end %>
+      <% end %>
     <% end %>
   </section>
   <br>

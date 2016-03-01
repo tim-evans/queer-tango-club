@@ -10,11 +10,11 @@ Rails.application.routes.draw do
       get 'checkout'
       post 'purchase'
       get 'receipt'
-      get 'members'
       get 'photos'
     end
 
     resources :privates, only: [:show]
+    resources :members, only: [:index]
   end
 
   resources :photos, only: [:create, :destroy]

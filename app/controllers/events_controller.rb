@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt, :members, :photos]
+  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt, :photos]
 
   def protocol
     if Rails.env.production?
@@ -65,19 +65,37 @@ class EventsController < ApplicationController
     end
   end
 
-  def purchase
-    if params[:name].blank?
-      flash[:error] = "We require your name for registration"
-      return redirect_to checkout_event_url(@event, protocol: protocol)
-    end
-
-    if params[:email].blank?
-      flash[:error] = "We require your email for registration so we can send you a receipt"
-      return redirect_to checkout_event_url(@event, protocol: protocol)
-    end
-
+  def pay_with_cash
     name = params[:name]
     email = params[:email]
+
+    member = Member.find_or_create_by(email: email)
+    member.update_attributes(name: name)
+
+    # Remove all sessions that a member has already signed up for
+    sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
+
+    sessions.each do |session|
+      Attendee.create(
+        member: member,
+        session: session,
+        payment_method: 'cash',
+        payment_currency: 'USD',
+        payment_amount: params[:payment_amount],
+        paid_at: DateTime.now
+      )
+    end
+
+    session.delete(:cart)
+    session[:current_member_id] = member.id
+
+    redirect_to event_members_path(@event)
+  end
+
+  def pay_with_stripe
+    name = params[:name]
+    email = params[:email]
+
     stripe_token = params[:stripe_token]
 
     member = Member.find_or_create_by(email: email)
@@ -199,12 +217,26 @@ class EventsController < ApplicationController
     return redirect_to checkout_event_url(@event, protocol: protocol)
   end
 
-  def receipt
-    @current_member = Member.find(session[:current_member_id])
+  def purchase
+    if params[:name].blank?
+      flash[:error] = "We require your name for registration"
+      return redirect_to checkout_event_url(@event, protocol: protocol)
+    end
+
+    if params[:email].blank?
+      flash[:error] = "We require your email for registration so we can send you a receipt"
+      return redirect_to checkout_event_url(@event, protocol: protocol)
+    end
+
+    if params[:payment_amount] && current_user
+      pay_with_cash
+    else
+      pay_with_stripe
+    end
   end
 
-  def members
-    redirect_to(event_path(@event)) unless current_user
+  def receipt
+    @current_member = Member.find(session[:current_member_id])
   end
 
   def photos
