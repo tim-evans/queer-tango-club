@@ -75,13 +75,14 @@ class EventsController < ApplicationController
     # Remove all sessions that a member has already signed up for
     sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
 
+    cash = Money.parse(params[:payment_amount], 'USD')
     sessions.each do |session|
       Attendee.create(
         member: member,
         session: session,
         payment_method: 'cash',
-        payment_currency: 'USD',
-        payment_amount: params[:payment_amount],
+        payment_currency: cash.currency.to_s,
+        payment_amount: cash.fractional,
         paid_at: DateTime.now
       )
     end
