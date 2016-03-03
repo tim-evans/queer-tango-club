@@ -1,0 +1,62 @@
+.table {
+  width: 100%;
+
+  .table-header {
+    border-bottom: 1px solid $soot;
+  }
+
+  .table-cell {
+    line-height: 40px;
+  }
+
+  .table-header .table-cell {
+    font-weight: 900;
+    text-align: left;
+  }
+
+  .table-body .row {
+    overflow: hidden;
+    border-bottom: 1px solid $cloudy;
+  }
+
+  .attended {
+    width: 40px;
+    .icon {
+      position: relative;
+      left: 5px;
+    }
+  }
+
+  .name {
+    width: calc(50% - 120px);
+    height: 40px;
+  }
+
+  .email {
+    width: 50%;
+    height: 40px;
+  }
+
+  .paid {
+    width: 80px;
+  }
+
+  @media screen and (max-width: 500px) {
+    .table-header {
+      display: none;
+    }
+
+    .row {
+      height: 120px;
+    }
+
+    .name {
+      width: calc(100% - 40px);
+    }
+    .email, .paid {
+      line-height: 40px;
+      padding-left: 40px;
+      width: 100%;
+    }
+  }
+}
