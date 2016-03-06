@@ -18,7 +18,7 @@
     <% @event.sessions.order(starts_at: :asc).each do |session| %>
       <% if session.ticket_cost %>
         <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
-          <%= session.title.html_safe %><%= icon("down") %>
+          <%= session.title.html_safe %> (<%= session.attendees.count %>) <%= icon("down") %>
         </h4>
         <hr>
         <div class="members" id="accordion-<%= session.id %>">
