@@ -162,10 +162,8 @@ class EventsController < ApplicationController
     end
 
     discounts = []
-    workshops = sessions.select { |s| s.ticket_cost == 35_00 }
     milonga_queer = sessions.select { |s| s.ticket_cost == 20_00 }
     milonga_equinox = sessions.select { |s| s.ticket_cost == 15_00 }
-    practicas = sessions.select { |s| s.ticket_cost == 10_00 }
 
     if milonga_queer.count == 2
       discounts << {
@@ -176,50 +174,12 @@ class EventsController < ApplicationController
       }
     end
 
-    workshops.each do
-      discounts << {
-        type: 'discount',
-        amount: -500,
-        currency: 'usd',
-        description: 'Early Bird Discount'
-      }
-    end
-
-    case workshops.count
-    when 3
-      discounts << {
-        type: 'discount',
-        amount: -1000,
-        currency: 'usd',
-        description: 'Package deal'
-      }
-    when 4
-      discounts << {
-        type: 'discount',
-        amount: -2000,
-        currency: 'usd',
-        description: 'Package deal'
-      }
-    end
-
     if milonga_equinox.count == 2
       discounts << {
         type: 'discount',
         amount: -12_00,
         currency: 'usd',
         description: 'Pre-Milonga Class + Milonga Equinox Discount'
-      }
-    end
-
-    if milonga_queer.count == 2 &&
-       workshops.count == 4 &&
-       practicas.count == 2 &&
-       milonga_equinox.count == 2
-      discounts << {
-        type: 'discount',
-        amount: -13_00,
-        currency: 'usd',
-        description: 'Full Package discount'
       }
     end
 

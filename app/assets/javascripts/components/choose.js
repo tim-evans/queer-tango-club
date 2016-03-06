@@ -30,19 +30,8 @@ $(function () {
 
     // Workshops discounts
     var discounts = 0;
-    var workshops = invoiceItems.filter(function (item) { return item.amount === 35 });
     var milongaQueer = invoiceItems.filter(function (item) { return item.amount === 20 });
     var milongaEquinox = invoiceItems.filter(function (item) { return item.amount === 15 });
-
-    discounts += workshops.length * 5;
-    switch(workshops.length) {
-    case 3:
-      discounts += 10;
-      break;
-    case 4:
-      discounts += 20;
-      break;
-    }
 
     // Class + Milonga has a discount; separately, they are the same
     if (milongaQueer.length === 2) {
@@ -51,11 +40,6 @@ $(function () {
 
     if (milongaEquinox.length === 2) {
       discounts += 12;
-    }
-
-    // Apply full package disconut
-    if ($('input:visible').length - 2 === invoiceItems.length) {
-      discounts += 13;
     }
 
     $('#subtotal').html('$' + subtotal);
