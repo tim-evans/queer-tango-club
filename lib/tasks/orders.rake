@@ -20,20 +20,18 @@ namespace :orders do
       when 'cash'
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
-        if order.total != payment_amount
-          title = "Adjusting #{member.name} (#{order.total.format} != #{payment_amount.format})"
-          puts title
-          puts '=' * title.size
-          order.final_attribution(payment_amount).each do |session, attribution|
-            puts "#{session.title}".ljust(50) + attribution.format
-#            attendee = attendees.find { |a| a.session.id == session.id }
-#            attendee.update_attributes({
-#              payment_currency: attribution.currency.to_s,
-#              payment_amount: attribution.fractional
-#            })
-          end
-          puts (" " * 50) + payment_amount.format
+        title = "#{member.name} / #{paid_at.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{payment_amount.format})"
+        puts title
+        puts '=' * title.size
+        order.final_attribution(payment_amount).each do |session, attribution|
+          puts "#{session.title}".ljust(50) + attribution.format
+#          attendee = attendees.find { |a| a.session.id == session.id }
+#          attendee.update_attributes({
+#            payment_currency: attribution.currency.to_s,
+#            payment_amount: attribution.fractional
+#          })
         end
+        puts (" " * 50) + payment_amount.format
         puts ""
         Timecop.return
       when 'stripe'
@@ -46,7 +44,7 @@ namespace :orders do
 
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
-        title = "Adjusting #{member.name} (#{order.total.format} != #{payment_amount.format})"
+        title = "#{member.name} / #{paid_at.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{net_total.format})"
         puts title
         puts '=' * title.size
 
