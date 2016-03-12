@@ -14,6 +14,7 @@
             <div class="table">
               <div class="table-header">
                 <div class="row">
+                  <div class="table-cell attended"></div>
                   <div class="table-cell name">Name</div>
                   <div class="table-cell email">Email</div>
                   <div class="table-cell paid">Amount</div>
@@ -22,7 +23,9 @@
               <div class="table-body block">
                 <% session.attendees.order(:created_at).each do |attendee| %>
                   <div class="row">
-                    <div class="table-cell name-email"><%= mail_to(attendee.email, attendee.name) %></div>
+                    <div class="table-cell attended"></div>
+                    <div class="table-cell name"><%= attendee.name %></div>
+                    <div class="table-cell email"><%= attendee.email %></div>
                     <div class="table-cell paid">
                       <%= attendee.amount_paid.format %>
                     </div>
@@ -31,7 +34,9 @@
               </div>
               <div class="table-footer block">
                 <div class="row">
-                  <div class="table-cell name-email"></div>
+                  <div class="table-cell attended"></div>
+                  <div class="table-cell name"></div>
+                  <div class="table-cell email"></div>
                   <div class="table-cell paid">
                     <%= session.income.format %>
                   </div>
