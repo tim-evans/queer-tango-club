@@ -45,6 +45,9 @@
           <div class="row">
             <label class="radio"><input type="radio" name="payment_method" value="cash" /> <span>Cash</span></label>
           </div>
+          <div class="row">
+            <label class="radio"><input type="radio" name="payment_method" value="gratis" /> <span>Gratis</span></label>
+          </div>
         </div>
       <% end %>
       <div class="half tab" id="card">
@@ -81,6 +84,14 @@
           <div class="row">
             <%= label_tag :payment_amount, 'Amount Received *' %>
             <%= text_field_tag :payment_amount, @payment_amount.format, class: 'whole' %>
+          </div>
+        </div>
+        <div class="half tab" id="gratis">
+          <div class="col align-center">
+            <div>
+              <%= icon("happy", class: "big margin-20") %>
+            </div>
+            <p>Super! They'll be on the list.</p>
           </div>
         </div>
       <% end %>

@@ -6,6 +6,9 @@
     <% if @event.is_a?(Workshop) %>
       <nav class="align-right">
         <hr>
+        <%= link_to ledger_event_members_path(@event) do %>
+          <%= icon("piggy-bank-solid") %> Ledger
+        <% end %>
         <%= mail_to(nil, subject: @event.title, bcc: @event.members.map(&:formatted_email).join(', ')) do %>
           <%= icon("email-solid") %> Email Members
         <% end %>
@@ -49,6 +52,8 @@
                     <div class="table-cell paid">
                       <% if attendee.payment_method == 'cash' %>
                         Cash
+                      <% elsif attendee.payment_method == 'gratis' %>
+                        Guest
                       <% elsif attendee.payment_method == 'stripe' %>
                         <a href="<%= attendee.payment_url %>">Online</a>
                       <% elsif attendee.payment_method == 'square' %>

@@ -235,6 +235,15 @@ footer {
 .icon {
   width: 24px;
   height: 24px;
+
+  &.big {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+.margin-20 {
+  margin-top: 20px;
 }
 
 .credit-card {

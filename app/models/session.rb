@@ -9,6 +9,8 @@ class Session < ActiveRecord::Base
 
   after_save :create_sku, if: :registerable?
 
+  monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency
+
   def registerable?
     !ticket_cost.blank?
   end
@@ -22,6 +24,10 @@ class Session < ActiveRecord::Base
       SyncSkusService.new(self).create!
     end
     true
+  end
+
+  def income
+    attendees.map(&:amount_paid).reduce(:+)
   end
 
   def guests_by_role

@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     end
 
     resources :privates, only: [:show]
-    resources :members, only: [:index]
+    resources :members, only: [:index] do
+      collection do
+        get 'ledger'
+      end
+    end
   end
 
   resources :photos, only: [:create, :destroy]

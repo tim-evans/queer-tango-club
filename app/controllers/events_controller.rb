@@ -61,10 +61,7 @@ class EventsController < ApplicationController
 
   def checkout
     if @event.registerable?
-      cents = itemize_order(Session.find(session[:cart]).to_a).reduce(0) do |acc, item|
-        acc + item[:amount]
-      end
-      @payment_amount = Money.new(cents, 'USD')
+      @payment_amount = OrderService.new(Session.where(id: session[:cart])).total
     else
       redirect_to event_url(@event, protocol: protocol)
     end
@@ -78,16 +75,44 @@ class EventsController < ApplicationController
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
-    sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
+    sessions = Session.where(id: session[:cart]).where.not(id: member.sessions.pluck(:id))
 
     cash = Monetize.parse(params[:payment_amount], 'USD')
+    order = OrderService.new(sessions)
+
+    order.final_attribution(cash).each do |session, attribution|
+      Attendee.create(
+        member: member,
+        session: session,
+        payment_method: 'cash',
+        payment_currency: attribution.currency.to_s,
+        payment_amount: attribution.fractional,
+        paid_at: DateTime.now
+      )
+    end
+
+    session.delete(:cart)
+    session[:current_member_id] = member.id
+
+    redirect_to event_members_path(@event)
+  end
+
+  def pay_nothing
+    name = params[:name]
+    email = params[:email]
+
+    member = Member.find_or_create_by(email: email)
+    member.update_attributes(name: name)
+
+    # Remove all sessions that a member has already signed up for
+    sessions = Session.where(id: session[:cart]).where.not(id: member.sessions.pluck(:id))
     sessions.each do |session|
       Attendee.create(
         member: member,
         session: session,
         payment_method: 'cash',
-        payment_currency: cash.currency.to_s,
-        payment_amount: cash.fractional,
+        payment_currency: 'usd',
+        payment_amount: 0,
         paid_at: DateTime.now
       )
     end
@@ -108,31 +133,36 @@ class EventsController < ApplicationController
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
-    sessions = Session.find(session[:cart]).to_a - member.sessions.to_a
+    sessions = Session.where(id: session[:cart]).where.not(id: member.sessions.pluck(:id))
 
-    order = Stripe::Order.create(
+    order = OrderService.new(sessions)
+    stripe_order = Stripe::Order.create(
       currency: 'usd',
-      items: itemize_order(sessions),
+      items: order.stripe_itemizations,
       email: member.email
     )
 
-    order = order.pay(source: stripe_token)
+    paid_order = stripe_order.pay(source: stripe_token)
 
     base_url = if Rails.env.development?
                  "https://dashboard.stripe.com/orders/test"
                else
-                 "https://dashboard.stripe.com/orders/"
+                 "https://dashboard.stripe.com/orders"
                end
 
-    sessions.each do |session|
+    charge = Stripe::Charge.retrieve(paid_order.charge)
+    balance_transaction = Stripe::BalanceTransaction.retrieve(charge.balance_transaction)
+    net_total = Money.new(balance_transaction.net, balance_transaction.currency)
+
+    order.final_attribution(net_total).each do |session, attribution|
       Attendee.create(
         member: member,
         session: session,
         payment_method: 'stripe',
-        payment_currency: order.currency,
-        payment_amount: order.amount,
-        payment_url: "#{base_url}/#{order.id}",
-        paid_at: order.created
+        payment_currency: attribution.currency.to_s,
+        payment_amount: attribution.fractional,
+        payment_url: "#{base_url}/#{stripe_order.id}",
+        paid_at: stripe_order.created
       )
     end
 
@@ -140,7 +170,7 @@ class EventsController < ApplicationController
     session[:current_member_id] = member.id
 
     # Send the attendee an email
-    charge = Stripe::Charge.retrieve(order.charge)
+    charge = Stripe::Charge.retrieve(paid_order.charge)
     charge.description = "Payment for #{@event.title}"
     charge.receipt_email = member.email
     charge.save
@@ -149,41 +179,6 @@ class EventsController < ApplicationController
   rescue Stripe::CardError => e
     flash[:error] = e.json_body[:error][:message]
     return redirect_to checkout_event_url(@event, protocol: protocol)
-  end
-
-  def itemize_order(sessions)
-    items = sessions.map do |session|
-      {
-        type: 'sku',
-        amount: session.ticket_cost,
-        currency: session.ticket_currency,
-        parent: session.sku
-      }
-    end
-
-    discounts = []
-    milonga_queer = sessions.select { |s| s.ticket_cost == 20_00 }
-    milonga_equinox = sessions.select { |s| s.ticket_cost == 15_00 }
-
-    if milonga_queer.count == 2
-      discounts << {
-        type: 'discount',
-        amount: -15_00,
-        currency: 'usd',
-        description: 'Pre-Milonga Class + Milonga Queer Discount'
-      }
-    end
-
-    if milonga_equinox.count == 2
-      discounts << {
-        type: 'discount',
-        amount: -12_00,
-        currency: 'usd',
-        description: 'Pre-Milonga Class + Milonga Equinox Discount'
-      }
-    end
-
-    items + discounts
   end
 
   def purchase
@@ -197,8 +192,10 @@ class EventsController < ApplicationController
       return redirect_to checkout_event_url(@event, protocol: protocol)
     end
 
-    if params[:payment_amount] && current_user
+    if params[:payment_method] == 'cash' && current_user
       pay_with_cash
+    elsif params[:payment_method] == 'gratis' && current_user
+      pay_nothing
     else
       pay_with_stripe
     end

@@ -14,6 +14,11 @@
     text-align: left;
   }
 
+  .table-footer {
+    border-top: 2px solid $soot;
+    height: 40px;
+  }
+
   .table-body .row {
     overflow: hidden;
     border-bottom: 1px solid $cloudy;
