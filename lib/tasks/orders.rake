@@ -21,7 +21,7 @@ namespace :orders do
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
         if order.total != payment_amount
-          title = "Adjusting #{member.name}"
+          title = "Adjusting #{member.name} (#{order.total.format} != #{payment_amount.format})"
           puts title
           puts '=' * title.size
           order.final_attribution(payment_amount).each do |session, attribution|
@@ -46,7 +46,7 @@ namespace :orders do
 
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
-        title = "Adjusting #{member.name}"
+        title = "Adjusting #{member.name} (#{order.total.format} != #{payment_amount.format})"
         puts title
         puts '=' * title.size
 
