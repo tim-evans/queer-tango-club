@@ -3,12 +3,12 @@ class Discount < ActiveRecord::Base
 
   belongs_to :event
 
-  def expired?
-    DateTime.now > valid_until
+  def expired?(at: DateTime.now)
+    at > valid_until
   end
 
-  def apply_to?(sessions)
-    return [] if expired?
+  def apply_to?(sessions, at: DateTime.now)
+    return [] if expired?(at: at)
 
     sessions = sessions.where(id: active_when['ids']) if active_when.key?('ids')
     if active_when['count']

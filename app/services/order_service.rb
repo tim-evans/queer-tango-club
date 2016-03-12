@@ -1,8 +1,9 @@
 class OrderService
-  def initialize(sessions)
+  def initialize(sessions, at: DateTime.now)
     @sessions = sessions
     @event = sessions.first.event
     @discounts = @event.discounts
+    @ordered_at = at
   end
 
   def stripe_itemizations
@@ -16,7 +17,7 @@ class OrderService
     end
 
     discounts = @discounts.select do |discount|
-      discount.apply_to?(@sessions).size > 0
+      discount.apply_to?(@sessions, at: @ordered_at).size > 0
     end
 
     items + discounts.map do |discount|
@@ -36,7 +37,7 @@ class OrderService
     end
 
     @discounts.each do |discount|
-      sessions = discount.apply_to?(@sessions)
+      sessions = discount.apply_to?(@sessions, at: @ordered_at)
       discount_amount = if sessions.count > 0
                           discount.amount
                         else

@@ -18,9 +18,8 @@ namespace :orders do
 
       case payment_method
       when 'cash'
-        Timecop.freeze(paid_at)
-        order = OrderService.new(sessions)
-        title = "#{member.name} / #{DateTime.now.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{payment_amount.format})"
+        order = OrderService.new(sessions, at: paid_at)
+        title = "#{member.name} (#{order.total.format} != #{payment_amount.format})"
         puts title
         puts '=' * title.size
         order.final_attribution(payment_amount).each do |session, attribution|
@@ -33,7 +32,6 @@ namespace :orders do
         end
         puts (" " * 50) + payment_amount.format
         puts ""
-        Timecop.return
       when 'stripe'
         payment_url = attendees.first.payment_url
         order_id = payment_url.split("/").last
@@ -42,9 +40,8 @@ namespace :orders do
         balance_transaction = Stripe::BalanceTransaction.retrieve(charge.balance_transaction)
         net_total = Money.new(balance_transaction.net, balance_transaction.currency)
 
-        Timecop.freeze(paid_at)
-        order = OrderService.new(sessions)
-        title = "#{member.name} / #{DateTime.now.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{net_total.format})"
+        order = OrderService.new(sessions, at: paid_at)
+        title = "#{member.name} (#{order.total.format} != #{net_total.format})"
         puts title
         puts '=' * title.size
 
@@ -58,7 +55,6 @@ namespace :orders do
         end
         puts (" " * 50) + net_total.format
         puts ""
-        Timecop.return
       end
     end
   end
