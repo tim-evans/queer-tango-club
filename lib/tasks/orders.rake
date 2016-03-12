@@ -20,7 +20,7 @@ namespace :orders do
       when 'cash'
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
-        title = "#{member.name} / #{paid_at.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{payment_amount.format})"
+        title = "#{member.name} / #{DateTime.now.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{payment_amount.format})"
         puts title
         puts '=' * title.size
         order.final_attribution(payment_amount).each do |session, attribution|
@@ -44,7 +44,7 @@ namespace :orders do
 
         Timecop.freeze(paid_at)
         order = OrderService.new(sessions)
-        title = "#{member.name} / #{paid_at.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{net_total.format})"
+        title = "#{member.name} / #{DateTime.now.strftime("%b %e, %l:%M %p")} (#{order.total.format} != #{net_total.format})"
         puts title
         puts '=' * title.size
 
