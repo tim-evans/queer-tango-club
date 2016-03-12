@@ -10,7 +10,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-
+gem 'rollbar', '~> 2.7.1'
 gem 'unirest' # Used for HTTP requests
 gem 'stripe'
 gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
