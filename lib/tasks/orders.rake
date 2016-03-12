@@ -24,11 +24,11 @@ namespace :orders do
         puts '=' * title.size
         order.final_attribution(payment_amount).each do |session, attribution|
           puts "#{session.title}".ljust(50) + attribution.format
-#          attendee = attendees.find { |a| a.session.id == session.id }
-#          attendee.update_attributes({
-#            payment_currency: attribution.currency.to_s,
-#            payment_amount: attribution.fractional
-#          })
+          attendee = attendees.find { |a| a.session.id == session.id }
+          attendee.update_attributes({
+            payment_currency: attribution.currency.to_s,
+            payment_amount: attribution.fractional
+          })
         end
         puts (" " * 50) + payment_amount.format
         puts ""
@@ -47,12 +47,12 @@ namespace :orders do
 
         order.final_attribution(net_total).each do |session, attribution|
           puts "#{session.title}".ljust(50) + attribution.format
-#          attendee = attendees.find { |a| a.session.id == session.id }
-#          attendee.update_attributes({
-#            paid_at: paid_at,
-#            payment_currency: attribution.currency.to_s,
-#            payment_amount: attribution.fractional
-#          })
+          attendee = attendees.find { |a| a.session.id == session.id }
+          attendee.update_attributes({
+            paid_at: paid_at,
+            payment_currency: attribution.currency.to_s,
+            payment_amount: attribution.fractional
+          })
         end
         puts (" " * 50) + net_total.format
         puts ""
