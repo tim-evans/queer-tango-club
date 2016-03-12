@@ -13,7 +13,7 @@ namespace :orders do
     orders.each do |member, attendees|
       payment_method = attendees.first.payment_method
       payment_amount = attendees.first.amount_paid
-      paid_at = attendees.first.paid_at
+      paid_at = attendees.first.paid_at || attendees.first.created_at
       sessions = Session.where(id: attendees.map(&:session).map(&:id))
 
       case payment_method
@@ -49,6 +49,7 @@ namespace :orders do
           puts "#{session.title}".ljust(50) + attribution.format
 #          attendee = attendees.find { |a| a.session.id == session.id }
 #          attendee.update_attributes({
+#            paid_at: paid_at,
 #            payment_currency: attribution.currency.to_s,
 #            payment_amount: attribution.fractional
 #          })

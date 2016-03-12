@@ -162,7 +162,7 @@ class EventsController < ApplicationController
         payment_currency: attribution.currency.to_s,
         payment_amount: attribution.fractional,
         payment_url: "#{base_url}/#{stripe_order.id}",
-        paid_at: stripe_order.created
+        paid_at: DateTime.now
       )
     end
 
