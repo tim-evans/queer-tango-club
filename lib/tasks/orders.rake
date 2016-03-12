@@ -32,6 +32,7 @@ namespace :orders do
 #              payment_amount: attribution.fractional
 #            })
           end
+          puts (" " * 50) + payment_amount.format
         end
         puts ""
         Timecop.return
@@ -57,6 +58,7 @@ namespace :orders do
 #            payment_amount: attribution.fractional
 #          })
         end
+        puts (" " * 50) + net_total.format
         puts ""
         Timecop.return
       end
