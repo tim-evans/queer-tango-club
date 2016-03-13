@@ -27,7 +27,7 @@ class Session < ActiveRecord::Base
   end
 
   def net_income
-    attendees.map(&:amount_paid).reduce(:+)
+    attendees.map(&:amount_paid).reduce(:+) || Money.new(0, 'usd')
   end
 
   def guests_by_role
