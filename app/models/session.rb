@@ -26,7 +26,7 @@ class Session < ActiveRecord::Base
     true
   end
 
-  def income
+  def net_income
     attendees.map(&:amount_paid).reduce(:+)
   end
 

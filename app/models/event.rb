@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
     sessions.order(ends_at: :desc).limit(1).pluck(:ends_at).first
   end
 
+  def net_income
+    sessions.map(&:net_income).reduce(:+)
+  end
+
   def registerable?
     Date.today < start_time.to_date &&
                  sessions.any?(&:registerable?)
