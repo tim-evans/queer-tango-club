@@ -12,7 +12,7 @@
 <section id="photos">
   <div class="grid-frame">
     <% if @photos.count > 0 %>
-      <div class="row align-justify">
+      <div class="row align-justify photo-uploader">
         <% @photos.each do |photo| %>
           <div class="photo">
             <a href="#" tabindex="0" class="delete" data-id="<%= photo.id %>"><%= icon("cancel-solid", title: "Delete Photo") %></a>

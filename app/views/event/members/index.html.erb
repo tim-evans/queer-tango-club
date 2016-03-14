@@ -6,9 +6,6 @@
     <% if @event.is_a?(Workshop) %>
       <nav class="align-right">
         <hr>
-        <%= link_to ledger_event_members_path(@event) do %>
-          <%= icon("piggy-bank-solid") %> Ledger
-        <% end %>
         <%= mail_to(nil, subject: @event.title, bcc: @event.members.map(&:formatted_email).join(', ')) do %>
           <%= icon("email-solid") %> Email Members
         <% end %>

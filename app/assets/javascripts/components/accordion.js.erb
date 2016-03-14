@@ -1,0 +1,91 @@
+<% environment.context_class.instance_eval { include ApplicationHelper; include InlineSvg::ActionView::Helpers } %>
+
+$(function () {
+  var $element = $('.accordion');
+  if (!$element.length) { return; }
+
+  function Accordion(element) {
+    this.id = $(element).data('accordion');
+    this.$ = $(element);
+    this.height = $('#' + this.id).height();
+    $('#' + this.id).css('overflow', 'hidden');
+    this.isLastChild = $('#' + this.id).index() === $(element).parent().children().length - 1;
+
+    this.expanded = !this.$.hasClass('collapsed');
+    if (!this.expanded) {
+      this.isLastChild = false;
+      $('#' + this.id).css({ height: 0, opacity: 0, marginBottom: 0 });
+    }
+
+    var self = this;
+    this.$.on('click', function () {
+      self.toggle();
+    });
+  }
+
+  Accordion.prototype = {
+    expand() {
+      this.expanded = true;
+      updateExpandAll();
+      this.$.addClass('collapsed');
+
+      var style = $('#' + this.id).attr('style');
+      $('#' + this.id).removeAttr('style');
+      height = $('#' + this.id).height();
+      $('#' + this.id).attr('style', style);
+      $('#' + this.id).animate({ height: this.height, opacity: 1, marginBottom: 0 }, 200);
+    },
+
+    collapse() {
+      this.expanded = false;
+      updateExpandAll();
+      this.$.removeClass('collapsed');
+      var margin = this.isLastChild ? 50 : 0;
+      $('#' + this.id).animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
+    },
+
+    toggle() {
+      if (this.expanded) {
+        this.collapse();
+      } else {
+        this.expand();
+      }
+    }
+  };
+
+  var accordions = [];
+  $element.each(function () {
+    accordions.push(new Accordion(this));
+  });
+
+  $('.accordion-expand-all').on('click', function (evt) {
+    var areAnyCollapsed = accordions.some(function (accordion) {
+      return !accordion.expanded;
+    });
+
+    if (areAnyCollapsed) {
+      accordions.forEach(function (accordion) {
+        accordion.expand();
+      });
+    } else {
+      accordions.forEach(function (accordion) {
+        accordion.collapse();
+      });
+    }
+    evt.stopPropagation();
+    evt.preventDefault();
+  });
+
+  var text = $('.accordion-expand-all').text();
+  function updateExpandAll() {
+    var areAnyCollapsed = accordions.some(function (accordion) {
+      return !accordion.expanded;
+    });
+
+    if (areAnyCollapsed) {
+      $('.accordion-expand-all').html('<%= icon('add-solid').gsub("\n", '') %>' + text);
+    } else {
+      $('.accordion-expand-all').html('<%= icon('cancel-solid').gsub("\n", '') %>' + text.replace(/expand/i, 'Collapse'));
+    }
+  }
+});

@@ -1,4 +1,4 @@
-class MembersController < ApplicationController
+class Event::MembersController < ApplicationController
   before_action :set_event
 
   def index

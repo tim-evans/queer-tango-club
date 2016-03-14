@@ -1,9 +1,18 @@
+.thick-border-bottom {
+  border-bottom: 3px solid $soot;
+}
+
+.thin-border-bottom {
+  border-bottom: 1px solid $soot;
+}
+
+.table-header .accordion {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .table {
   width: 100%;
-
-  .table-header {
-    border-bottom: 1px solid $soot;
-  }
 
   .table-cell {
     line-height: 40px;

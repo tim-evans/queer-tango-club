@@ -1,0 +1,67 @@
+<% content_for :title, "Ledger for #{@event.title} | Queer Tango Club" %>
+<br>
+<div class="grid-frame">
+  <section id="ledger">
+    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> Ledger</h2>
+    <nav class="align-right">
+      <hr>
+      <a class="accordion-expand-all cursor-pointer" tabindex="0">
+        <%= icon("add-solid") %> Expand All
+      </a>
+      <hr class="thick">
+    </nav>
+    <div class="table">
+      <div class="table-header thick-border-bottom">
+        <div class="row">
+          <div class="table-cell payer-name"><%= @event.title.html_safe %></div>
+          <div class="table-cell payment-method"></div>
+          <div class="table-cell payment-amount">
+            <%= @event.net_income.format %>
+          </div>
+        </div>
+      </div>
+      <div class="table-body block">
+        <% @event.sessions.order(starts_at: :asc).each do |session| %>
+          <% if session.ticket_cost %>
+            <div class="table">
+              <div class="table-header thin-border-bottom">
+                <div class="accordion row collapsed" data-accordion="accordion-<%= session.id %>">
+                  <div class="table-cell payer-name"><%= session.title.html_safe %></div>
+                  <div class="table-cell payment-method"></div>
+                  <div class="table-cell payment-amount">
+                    <%= session.net_income.format %>
+                  </div>
+                </div>
+              </div>
+              <% if session.attendees.count > 0 %>
+                <div class="table-body block" id="accordion-<%= session.id %>">
+                  <% session.attendees.order(:created_at).each do |attendee| %>
+                    <div class="row">
+                      <div class="table-cell payer-name"><%= mail_to(attendee.member.formatted_email, attendee.name) %></div>
+                      <div class="table-cell payment-method">
+                        <% if attendee.payment_method == 'cash' %>
+                          Cash
+                        <% elsif attendee.payment_method == 'gratis' %>
+                          Guest
+                        <% elsif attendee.payment_method == 'stripe' %>
+                          <a href="<%= attendee.payment_url %>">Online</a>
+                        <% elsif attendee.payment_method == 'square' %>
+                          <a href="<%= attendee.payment_url %>">Card</a>
+                        <% end %>
+                      </div>
+                      <div class="table-cell payment-amount">
+                        <%= attendee.amount_paid.format %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+</div>

@@ -10,16 +10,17 @@ Rails.application.routes.draw do
       get 'checkout'
       post 'purchase'
       get 'receipt'
-      get 'photos'
+      get 'privates/:id', to: redirect('/privates/%{id}')
     end
 
-    resources :privates, only: [:show]
-    resources :members, only: [:index] do
-      collection do
-        get 'ledger'
-      end
+    scope module: 'event' do
+      resources :photos, only: [:index]
+      resources :ledger, only: [:index]
+      resources :members, only: [:index]
     end
   end
+
+  resources :privates, only: [:show]
 
   resources :photos, only: [:create, :destroy]
   resources :attendees, only: [:update]

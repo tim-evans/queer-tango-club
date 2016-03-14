@@ -1,0 +1,11 @@
+<section id="photos" class="grid-frame">
+  <h2>Photos</h2>
+  <hr class="thick">
+  <div class="photo-gallery">
+    <% photos.each do |photo| %>
+      <div class="photo" id="photo-<%= photo.id %>">
+        <img src="<%= photo.attachment.url(:fitted_height) %>" alt="<%= photo.filename %>"/>
+      </div>
+    <% end %>
+  </div>
+</section>

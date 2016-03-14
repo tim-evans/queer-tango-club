@@ -15,10 +15,13 @@
       <h2><%= @event.title.html_safe %></h2>
       <nav class="align-right">
         <hr>
+        <%= link_to event_ledger_index_path(@event) do %>
+          <%= icon("piggy-bank-solid") %> Ledger
+        <% end %>
         <%= link_to event_members_path(@event) do %>
           <%= icon("person") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %>
         <% end %>
-        <%= link_to photos_event_path(@event) do %>
+        <%= link_to event_photos_path(@event) do %>
           <%= icon("photo") %> Photos
         <% end %>
         <hr>
@@ -46,8 +49,3 @@
 <%= render partial: 'schedule', locals: { event: @event } %>
 <%= render partial: 'guests', locals: { guests: @event.guests } %>
 <%= render partial: 'locations', locals: { locations: @event.locations } %>
-
-<% if @event.photos %>
-  <section id="photos">
-  </section>
-<% end %>
