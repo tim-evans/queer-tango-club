@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+  before_action :set_event, only: [:show, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
   def protocol
     if Rails.env.production?
@@ -16,10 +16,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-  end
-
-  # GET /events/1/edit
-  def edit
   end
 
   def choose
@@ -205,29 +201,15 @@ class EventsController < ApplicationController
     @current_member = Member.find(session[:current_member_id])
   end
 
-  # POST /events
-  def create
-    @event = Event.new(event_params)
-
-    if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /events/1
-  def update
-    if @event.update(event_params)
-      redirect_to @event, notice: 'Event was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.where(id: params[:id]).includes({
+        sessions: [{
+          guests: { teacher: :photos },
+          location: :nearby_locations
+        }],
+      },
+      :cover_photos, :photos).first
     end
 end

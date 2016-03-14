@@ -1,11 +1,21 @@
-<section id="photos" class="grid-frame">
-  <h2>Photos</h2>
-  <hr class="thick">
+<section id="photos">
+  <div class="grid-frame">
+    <h2>Photos</h2>
+    <hr class="thick">
+  </div>
   <div class="photo-gallery">
-    <% photos.each do |photo| %>
-      <div class="photo" id="photo-<%= photo.id %>">
-        <img src="<%= photo.attachment.url(:fitted_height) %>" alt="<%= photo.filename %>"/>
-      </div>
-    <% end %>
+    <div id="prev-photo" class="cursor-pointer">
+      <%= icon("left") %>
+    </div>
+    <ol class="overflow-x-auto">
+      <% photos.each do |photo| %>
+        <li class="photo" id="photo-<%= photo.id %>">
+          <img src="<%= photo.src(:thumb) %>" alt="<%= photo.filename %>"/>
+        </li>
+      <% end %>
+    </ol>
+    <div id="next-photo" class="cursor-pointer">
+      <%= icon("right") %>
+    </div>
   </div>
 </section>

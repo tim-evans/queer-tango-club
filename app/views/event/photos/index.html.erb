@@ -9,21 +9,19 @@
   </nav>
 </section>
 
-<section id="photos">
-  <div class="grid-frame">
-    <% if @photos.count > 0 %>
-      <div class="row align-justify photo-uploader">
-        <% @photos.each do |photo| %>
-          <div class="photo">
-            <a href="#" tabindex="0" class="delete" data-id="<%= photo.id %>"><%= icon("cancel-solid", title: "Delete Photo") %></a>
-            <%= image_tag photo.src %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <br>
-      <div class="smcp align-center"><%= icon('sad', class: 'empty-state') %><br>No Photos</div>
-      <div class="align-center">Drag and drop photos to upload.</div>
-    <% end %>
-  </div>
+<section class="grid-frame">
+  <% if @photos.count > 0 %>
+    <div class="row align-justify photo-uploader">
+      <% @photos.each do |photo| %>
+        <div class="photo">
+          <a href="#" tabindex="0" class="delete" data-id="<%= photo.id %>"><%= icon("cancel-solid", title: "Delete Photo") %></a>
+          <%= image_tag photo.src %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <br>
+    <div class="smcp align-center"><%= icon('sad', class: 'empty-state') %><br>No Photos</div>
+    <div class="align-center">Drag and drop photos to upload.</div>
+  <% end %>
 </section>

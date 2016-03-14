@@ -137,10 +137,13 @@ section {
   }
 }
 
+#events #photos {
+  position: relative;
+}
 .photo-gallery {
-  width: 100%;
+  width: 100vw;
 
-  ul {
+  ol {
     list-style: none;
     white-space: nowrap;
     overflow-x: auto;
@@ -152,21 +155,22 @@ section {
   li {
     display: inline-block;
   }
+}
 
-  .stream {
-    max-height: 60vh;
-    li {
-      padding-left: 5px;
-    }
-    img {
-      max-height: 60vh;
-    }
-  }
+#next-photo, #prev-photo {
+  position: absolute;
+  top: 50%;
+  height: 50px;
+  background: $black;
+  width: 30px;
 
-  .thumbnails {
-    max-height: 30px;
-    img {
-      max-height: 30px;
-    }
+  svg {
+    margin: 12px 3px;
   }
+  path {
+    fill: $white;
+  }
+}
+#next-photo {
+  right: 0;
 }

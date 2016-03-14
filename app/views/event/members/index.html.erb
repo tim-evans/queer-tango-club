@@ -6,7 +6,7 @@
     <% if @event.is_a?(Workshop) %>
       <nav class="align-right">
         <hr>
-        <%= mail_to(nil, subject: @event.title, bcc: @event.members.map(&:formatted_email).join(', ')) do %>
+        <%= mail_to(nil, subject: @event.title, bcc: @event.members.uniq.map(&:formatted_email).join(', ')) do %>
           <%= icon("email-solid") %> Email Members
         <% end %>
         <%= link_to choose_event_path(@event) do %>
@@ -15,7 +15,7 @@
         <hr class="thick">
       </nav>
     <% end %>
-    <% @event.sessions.order(starts_at: :asc).each do |session| %>
+    <% @event.sessions.each do |session| %>
       <% if session.ticket_cost %>
         <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
           <%= session.title.html_safe %> (<%= session.attendees.count %>) <%= icon("down") %>
@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="table-body block">
-                <% session.attendees.order(:created_at).each do |attendee| %>
+                <% session.attendees.each do |attendee| %>
                   <div class="row">
                     <div class="table-cell attended">
                       <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">

@@ -46,6 +46,6 @@
   </section>
 <% end %>
 
-<%= render partial: 'schedule', locals: { event: @event } %>
+<%= render partial: 'schedule', locals: { event: @event, locations: @event.locations.uniq } %>
 <%= render partial: 'guests', locals: { guests: @event.guests } %>
-<%= render partial: 'locations', locals: { locations: @event.locations } %>
+<%= render partial: 'locations', locals: { locations: @event.locations.uniq } %>

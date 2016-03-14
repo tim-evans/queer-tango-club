@@ -1,5 +1,5 @@
 <section id="guests" class="grid-frame">
-  <h2><% if guests.count > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
+  <h2><% if guests.size > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
   <hr class="thick">
   <% guests.each do |guest| %>
     <div class="row" id="<%= guest.slug %>">
@@ -16,7 +16,7 @@
             <% if guest.url %>
               <%= link_to guest.name, guest.url %>
             <% else %>
-              <%= guest.name%>
+              <%= guest.name %>
             <% end %>
           </h4>
           <h6><%= guest.role %></h6>

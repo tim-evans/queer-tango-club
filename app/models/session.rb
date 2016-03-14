@@ -1,5 +1,7 @@
 class Session < ActiveRecord::Base
-  has_many :attendees
+  default_scope { order(starts_at: :asc) }
+
+  has_many :attendees, -> { order(:created_at) }
   has_many :members, through: 'attendees'
 
   has_one :teacher, through: 'guest'

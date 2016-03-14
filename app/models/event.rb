@@ -19,22 +19,22 @@ class Event < ActiveRecord::Base
   has_many :privates
   has_many :discounts
 
-  has_many :members, -> { distinct }, through: 'attendees'
-  has_many :locations, -> { distinct }, through: 'sessions'
+  has_many :members, through: 'attendees'
+  has_many :locations, through: 'sessions'
 
-  scope :upcoming, -> { where('ends_at >= ?', Time.now) }
-  scope :historical, -> { where('ends_at < ?', Time.now) }
+  scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:cover_photos) }
+  scope :historical, -> { where('ends_at < ?', Time.now).includes(:cover_photos) }
 
   def location
     locations.first
   end
 
   def sessions_by_day
-    sessions.order(starts_at: :asc).group_by { |session| session.starts_at.to_date }.values
+    sessions.group_by { |session| session.starts_at.to_date }.values
   end
 
   def start_time
-    sessions.order(starts_at: :asc).limit(1).pluck(:starts_at).first
+    sessions.first.starts_at
   end
 
   def end_time
@@ -53,8 +53,9 @@ class Event < ActiveRecord::Base
   def guests
     teachers = {}
     guests = []
-    sessions.order(starts_at: :asc).includes(:guests).each do |session|
-      session.guests.where(credited: true).each do |guest|
+    sessions.each do |session|
+      session.guests.each do |guest|
+        next unless guest.credited
         if teachers[guest.teacher.id]
           teachers[guest.teacher.id][:roles] << guest.role
         else

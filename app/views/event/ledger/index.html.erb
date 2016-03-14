@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="table-body block">
-        <% @event.sessions.order(starts_at: :asc).each do |session| %>
+        <% @event.sessions.each do |session| %>
           <% if session.ticket_cost %>
             <div class="table">
               <div class="table-header thin-border-bottom">
@@ -35,7 +35,7 @@
               </div>
               <% if session.attendees.count > 0 %>
                 <div class="table-body block" id="accordion-<%= session.id %>">
-                  <% session.attendees.order(:created_at).each do |attendee| %>
+                  <% session.attendees.each do |attendee| %>
                     <div class="row">
                       <div class="table-cell payer-name"><%= mail_to(attendee.member.formatted_email, attendee.name) %></div>
                       <div class="table-cell payment-method">
