@@ -24,7 +24,7 @@ $(function () {
   }
 
   Accordion.prototype = {
-    expand() {
+    expand: function () {
       this.expanded = true;
       updateExpandAll();
       this.$.addClass('collapsed');
@@ -36,7 +36,7 @@ $(function () {
       $('#' + this.id).animate({ height: this.height, opacity: 1, marginBottom: 0 }, 200);
     },
 
-    collapse() {
+    collapse: function () {
       this.expanded = false;
       updateExpandAll();
       this.$.removeClass('collapsed');
@@ -44,7 +44,7 @@ $(function () {
       $('#' + this.id).animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
     },
 
-    toggle() {
+    toggle: function () {
       if (this.expanded) {
         this.collapse();
       } else {
