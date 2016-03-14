@@ -18,13 +18,13 @@
     <% @event.sessions.each do |session| %>
       <% if session.ticket_cost %>
         <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
-          <%= session.title.html_safe %> (<%= session.attendees.count %>) <%= icon("down") %>
+          <%= session.title.html_safe %> (<%= session.attendees.size %>) <%= icon("down") %>
         </h4>
         <hr>
         <div class="members" id="accordion-<%= session.id %>">
-          <% if session.attendees.count > 0 %>
+          <% if session.attendees.size > 0 %>
             <div class="table">
-              <div class="table-header">
+              <div class="table-header thin-border-bottom">
                 <div class="row">
                   <div class="table-cell attended"></div>
                   <div class="table-cell name">Name</div>
