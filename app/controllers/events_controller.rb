@@ -106,7 +106,7 @@ class EventsController < ApplicationController
       Attendee.create(
         member: member,
         session: session,
-        payment_method: 'cash',
+        payment_method: 'gratis',
         payment_currency: 'usd',
         payment_amount: 0,
         paid_at: DateTime.now
