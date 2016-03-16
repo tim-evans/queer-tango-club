@@ -57,7 +57,9 @@ $(function () {
   }
 
   $('form').submit(function () {
-    if ($('input[name="payment_method"]:checked').val() === 'cash') {
+    var paymentMethod = $('input[name="payment_method"]:checked').val();
+    if (paymentMethod === 'cash' ||
+        paymentMethod === 'gratis') {
       return true;
     }
 
