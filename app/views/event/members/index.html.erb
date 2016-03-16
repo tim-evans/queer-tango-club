@@ -6,7 +6,7 @@
     <% if @event.is_a?(Workshop) %>
       <nav class="align-right">
         <hr>
-        <%= mail_to(nil, subject: @event.title, bcc: @event.members.uniq.map(&:formatted_email).join(', ')) do %>
+        <%= mail_to(nil, subject: @event.title, bcc: @event.members.uniq.map(&:formatted_email).compact.join(', ')) do %>
           <%= icon("email-solid") %> Email Members
         <% end %>
         <%= link_to choose_event_path(@event) do %>
