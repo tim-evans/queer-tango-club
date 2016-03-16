@@ -183,7 +183,7 @@ class EventsController < ApplicationController
       return redirect_to checkout_event_url(@event, protocol: protocol)
     end
 
-    if params[:email].blank?
+    if params[:email].blank? && params[:payment_method] != 'gratis'
       flash[:error] = "We require your email for registration so we can send you a receipt"
       return redirect_to checkout_event_url(@event, protocol: protocol)
     end
