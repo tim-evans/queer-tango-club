@@ -37,7 +37,13 @@
                 <div class="table-body block" id="accordion-<%= session.id %>">
                   <% session.attendees.each do |attendee| %>
                     <div class="row">
-                      <div class="table-cell payer-name"><%= mail_to(attendee.member.formatted_email, attendee.name) %></div>
+                      <div class="table-cell payer-name">
+                        <% if attendee.member.formatted_email %>
+                          <%= mail_to(attendee.member.formatted_email, attendee.name) %>
+                        <% else %>
+                          <%= attendee.name %>
+                        <% end %>
+                      </div>
                       <div class="table-cell payment-method">
                         <% if attendee.payment_method == 'cash' %>
                           Cash

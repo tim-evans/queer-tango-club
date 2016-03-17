@@ -45,7 +45,7 @@
                       </a>
                     </div>
                     <div class="table-cell name"><%= attendee.name %></div>
-                    <div class="table-cell email"><%= attendee.email %></div>
+                    <div class="table-cell email"><% if attendee.email %><%= attendee.email %><% else %>&nbsp;<% end %></div>
                     <div class="table-cell paid">
                       <% if attendee.payment_method == 'cash' %>
                         Cash
