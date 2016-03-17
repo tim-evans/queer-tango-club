@@ -97,7 +97,11 @@ class EventsController < ApplicationController
     name = params[:name]
     email = params[:email]
 
-    member = Member.find_or_create_by(email: email)
+    member = if email.present?
+               Member.find_or_create_by(email: email)
+             else
+               Member.find_or_create_by(name: name)
+             end
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
