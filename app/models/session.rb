@@ -14,7 +14,7 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency
 
   def registerable?
-    Date.today < starts_at.to_date && !ticket_cost.blank?
+    Time.now.in_time_zone('Eastern Time (US & Canada)').to_date < starts_at.to_date && !ticket_cost.blank?
   end
 
   def overlaps?(other)
