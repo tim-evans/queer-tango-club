@@ -14,7 +14,7 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency
 
   def registerable?
-    !ticket_cost.blank?
+    Date.today < starts_at.to_date && !ticket_cost.blank?
   end
 
   def overlaps?(other)
