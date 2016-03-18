@@ -19,42 +19,40 @@
         <% end %>
       </ul>
     <% end %>
-    <% @event.sessions_by_day.each_with_index do |sessions, idx| %>
-      <% if sessions.select(&:registerable?).size > 0 %>
-        <h4 class="accordion" data-accordion="accordion-<%= idx %>">
-          <%= sessions.first.starts_at.strftime("%B %d, %Y") %><%= icon("down") %>
-        </h4>
-        <hr>
-        <ul class="sessions" id="accordion-<%= idx %>">
-          <% sessions.select(&:registerable?).each do |session| %>
-            <li class="session">
-              <span class="row">
-                <span class="static-80 align-center">
-                  <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %> data-amount="<%= session.ticket_cost %>" data-starts-at="<%= session.starts_at.to_i %>" data-ends-at="<%= session.ends_at.to_i %>">
-                </span>
-                <label for="session-<%= session.id %>">
-                  <h3><%= session.title.html_safe %></h3>
-                  <% if session.event.guests.size > 1 && session.guests.size > 0 %>
-                    <% session.guests_by_role.each do |guests| %>
-                      <h6>
-                        <%= format_list(guests) { |guest| guest.name } %>,
-                        <%= guests.first.role.pluralize(guests.count) %>
-                      </h6>
-                    <% end %>
-                  <% end %>
-                  <% if session.level %>
-                    <h6>For <%= session.level %> Dancers</h6>
-                  <% end %>
-                  <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
-                  <% if session.description %>
-                    <%= simple_format session.description %>
-                  <% end %>
-                </label>
+    <% @sessions_by_day.each_with_index do |sessions, idx| %>
+      <h4 class="accordion" data-accordion="accordion-<%= idx %>">
+        <%= sessions.first.starts_at.strftime("%B %d, %Y") %><%= icon("down") %>
+      </h4>
+      <hr>
+      <ul class="sessions" id="accordion-<%= idx %>">
+        <% sessions.each do |session| %>
+          <li class="session">
+            <span class="row">
+              <span class="static-80 align-center">
+                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %> data-amount="<%= session.ticket_cost %>" data-starts-at="<%= session.starts_at.to_i %>" data-ends-at="<%= session.ends_at.to_i %>">
               </span>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+              <label for="session-<%= session.id %>">
+                <h3><%= session.title.html_safe %></h3>
+                <% if session.event.guests.size > 1 && session.guests.size > 0 %>
+                  <% session.guests_by_role.each do |guests| %>
+                    <h6>
+                      <%= format_list(guests) { |guest| guest.name } %>,
+                      <%= guests.first.role.pluralize(guests.count) %>
+                    </h6>
+                  <% end %>
+                <% end %>
+                <% if session.level %>
+                  <h6>For <%= session.level %> Dancers</h6>
+                <% end %>
+                <h6><%= format_time_range(session.starts_at, session.ends_at) %></h6>
+                <% if session.description %>
+                  <%= simple_format session.description %>
+                <% end %>
+              </label>
+            </span>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
   </section>
   <hr class="thick">

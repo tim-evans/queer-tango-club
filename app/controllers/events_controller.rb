@@ -19,8 +19,18 @@ class EventsController < ApplicationController
   end
 
   def choose
-    if @event.registerable?
+    if current_user || @event.registerable?
       @cart = session[:cart] || []
+      @sessions_by_day = @event.sessions_by_day.map do |sessions|
+        if current_user
+          sessions.select { |session| session.ticket_cost.present? }
+        else
+          sessions.select(&:registerable?)
+        end
+      end
+      @sessions_by_day = @sessions_by_day.select do |sessions|
+        sessions.size > 0
+      end
     else
       redirect_to event_url(@event, protocol: protocol)
     end
@@ -67,7 +77,11 @@ class EventsController < ApplicationController
     name = params[:name]
     email = params[:email]
 
-    member = Member.find_or_create_by(email: email)
+    member = if email.present?
+               Member.find_or_create_by(email: email)
+             else
+               Member.find_or_create_by(name: name)
+             end
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
@@ -187,7 +201,7 @@ class EventsController < ApplicationController
       return redirect_to checkout_event_url(@event, protocol: protocol)
     end
 
-    if params[:email].blank? && params[:payment_method] != 'gratis'
+    if params[:email].blank? && params[:payment_method] == 'stripe'
       flash[:error] = "We require your email for registration so we can send you a receipt"
       return redirect_to checkout_event_url(@event, protocol: protocol)
     end

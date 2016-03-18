@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def cover_photo_url(cover_photo)
-    if DateTime.now > cover_photo.event.end_time
+    if Time.now > cover_photo.event.ends_at
       cover_photo.attachment.url(:grayscale)
     else
       cover_photo.attachment.url(:original)
