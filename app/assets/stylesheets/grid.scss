@@ -112,13 +112,17 @@
 }
 
 @media screen and (min-width: 500px) {
-  .desktop-nowrap {
-    flex-wrap: nowrap;
+  .row, .col, .block {
+    &.desktop-nowrap {
+      flex-wrap: nowrap;
+    }
   }
 }
 
 @media screen and (max-width: 500px) {
-  .mobile-nowrap {
-    flex-wrap: nowrap;
+  .row, .col, .block {
+    &.mobile-nowrap {
+      flex-wrap: nowrap;
+    }
   }
 }
