@@ -21,6 +21,7 @@ class EventsController < ApplicationController
   def choose
     if current_user || @event.registerable?
       @cart = session[:cart] || []
+      @smart_collapse = @event.highlight? && @event.sessions.any?(&:highlight?) && current_user
       @sessions_by_day = @event.sessions_by_day.map do |sessions|
         if current_user
           sessions.select { |session| session.ticket_cost.present? }

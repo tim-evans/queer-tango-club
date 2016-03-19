@@ -17,6 +17,11 @@ class Session < ActiveRecord::Base
     Time.now.in_time_zone('Eastern Time (US & Canada)').to_date < starts_at.to_date && !ticket_cost.blank?
   end
 
+  def highlight?
+    now = Time.now.utc - 4.hour + 1.hour
+    now + 2.hour >= starts_at && now - 1.hour <= ends_at
+  end
+
   def overlaps?(other)
     (starts_at < other.ends_at) && (other.starts_at < ends_at)
   end

@@ -46,8 +46,12 @@ class Event < ActiveRecord::Base
   end
 
   def registerable?
+    sessions.any?(&:registerable?)
+  end
 
-                 sessions.any?(&:registerable?)
+  def highlight?
+    today = Time.now.in_time_zone('Eastern Time (US & Canada)').to_date
+    today >= starts_at && today <= ends_at
   end
 
   def guests

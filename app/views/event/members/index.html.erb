@@ -17,7 +17,7 @@
     <% end %>
     <% @event.sessions.each do |session| %>
       <% if session.ticket_cost %>
-        <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
+        <h4 class="accordion <% if @smart_collapse %><%= "collapsed" unless session.highlight? %><% end %>" data-accordion="accordion-<%= session.id %>">
           <%= session.title.html_safe %> (<%= session.attendees.size %>) <%= icon("down") %>
         </h4>
         <hr>
