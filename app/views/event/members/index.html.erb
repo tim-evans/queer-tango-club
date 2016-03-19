@@ -34,7 +34,7 @@
               </div>
               <div class="table-body block">
                 <% session.attendees.each do |attendee| %>
-                  <div class="row nowrap">
+                  <div class="row desktop-nowrap">
                     <div class="table-cell attended">
                       <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">
                         <% if attendee.attended? %>
