@@ -18,7 +18,7 @@ class Session < ActiveRecord::Base
   end
 
   def highlight?
-    now = Time.now.utc - 4.hour + 1.hour
+    now = Time.now.utc - 4.hour
     now + 2.hour >= starts_at && now - 1.hour <= ends_at
   end
 
