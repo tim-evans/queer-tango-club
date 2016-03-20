@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   end
 
   def checkout
-    if @event.registerable?
+    if @event.registerable? || current_user
       @payment_amount = OrderService.new(Session.where(id: session[:cart])).total
     else
       redirect_to event_url(@event, protocol: protocol)
