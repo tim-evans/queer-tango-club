@@ -5,7 +5,7 @@
   </div>
   <div class="grid-frame no-padding">
     <div class="align-bottom align-right">
-      <%= link_to(cover_photo.title, event_path(event), class: 'photo-link') %>
+      <%= link_to(cover_photo.title || event.title, event_path(event), class: 'photo-link') %>
       <div>
         <h6 class="photo-overlay">
           <%= format_date_range(event.starts_at, event.ends_at) %><br>

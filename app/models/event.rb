@@ -12,10 +12,10 @@ AggregateGuest = Struct.new(:teacher, :roles) do
 end
 
 class Event < ActiveRecord::Base
-  has_many :sessions
+  has_many :sessions, dependent: :destroy
   has_many :attendees, through: 'sessions'
   has_many :photos
-  has_many :cover_photos
+  has_many :cover_photos, dependent: :destroy
   has_many :privates
   has_many :discounts
 
