@@ -3,9 +3,9 @@ require 'ostruct'
 class HomeController < ApplicationController
   def index
     @hero_image = OpenStruct.new({
-      width: 3147,
-      height: 2098,
-      src: 'triple.jpg'
+      width: 2048,
+      height: 1365,
+      src: 'triple.png'
     })
     @upcoming = Event.where('ends_at >= ?', DateTime.now).order(starts_at: :asc)
   end
