@@ -230,5 +230,6 @@ class EventsController < ApplicationController
         }],
       },
       :cover_photos, :photos).first
+      raise ActiveRecord::RecordNotFound.new if @event.nil?
     end
 end

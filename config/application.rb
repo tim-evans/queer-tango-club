@@ -40,5 +40,7 @@ module Tango
     }
 
     Rails.application.routes.default_url_options[:host] = ENV['HOST']
+
+    config.exceptions_app = self.routes
   end
 end

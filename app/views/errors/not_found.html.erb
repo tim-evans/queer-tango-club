@@ -1,0 +1,15 @@
+<% content_for :title, "404 | Queer Tango Club" %>
+<br>
+<div class="grid-frame">
+  <section class="align-center">
+    <h2>Bummer!</h2>
+    <br>
+    <%= icon('sad', class: 'empty-state') %>
+    <br>
+    <br>
+    <p>The page you were looking for isn’t here anymore.</p>
+    <p>If you think this is wrong, email us at <%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>.
+  </section>
+  <br>
+  <br>
+</div>

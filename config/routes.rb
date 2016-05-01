@@ -32,4 +32,8 @@ Rails.application.routes.draw do
   namespace :webhooks do
     post 'square', to: 'square#receive'
   end
+
+  match '/404', via: :all, to: 'application#not_found'
+  match '/500', via: :all, to: 'application#internal_server_error'
+  match '*any', via: :all, to: 'application#not_found'
 end
