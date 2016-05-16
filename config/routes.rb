@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/about' => 'about#index'
 
-  resources :events, only: [:show] do
+  resources :events, only: [:index, :show] do
     member do
       get 'choose'
       post 'add_to_cart'
@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   resources :photos, only: [:create, :destroy]
   resources :attendees, only: [:update]
 
-  resources :milongas, only: [:index]
-  resources :workshops, only: [:index]
+  get '/workshops', to: redirect('/events')
+  get '/milongas', to: redirect('/events')
   resources :locations, only: [:show]
 
   namespace :webhooks do

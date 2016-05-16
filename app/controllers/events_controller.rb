@@ -9,6 +9,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def index
+    @events = Event.all.order(starts_at: :desc)
+  end
+
   # GET /events/1
   def show
   end

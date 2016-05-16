@@ -1,13 +1,13 @@
 <% content_for :title, "Events | Queer Tango Club" %>
 
 <section>
-  <% if @milongas.upcoming.count > 0 %>
+  <% if @events.upcoming.count > 0 %>
     <div class="grid-frame">
       <h2>Events</h2>
       <hr class="thick">
       <br>
     </div>
-    <% @milongas.upcoming.each do |event| %>
+    <% @events.upcoming.each do |event| %>
       <%= render partial: 'cover_photo', locals: { event: event } %>
     <% end %>
   <% end %>
@@ -17,7 +17,7 @@
     <hr class="thick">
     <br>
   </div>
-  <% @milongas.historical.each do |event| %>
+  <% @events.historical.each do |event| %>
     <%= render partial: 'cover_photo', locals: { event: event } %>
   <% end %>
 </section>
