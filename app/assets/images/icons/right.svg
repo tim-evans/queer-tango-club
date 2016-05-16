@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="16px" height="30px" viewBox="0 0 16 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+<svg width="16px" height="30px" viewBox="0 0 16 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
     <title>right</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="right" sketch:type="MSArtboardGroup" fill="#050505">
-            <path d="M9.64213562,23.1421356 L-8.35786438,23.1421356 L-8.35786438,25.1421356 L10.6421356,25.1421356 L11.6421356,25.1421356 L11.6421356,5.14213562 L9.64213562,5.14213562 L9.64213562,23.1421356 L9.64213562,23.1421356 Z" id="Rectangle-49" sketch:type="MSShapeGroup" transform="translate(1.642136, 15.142136) scale(-1, 1) rotate(-225.000000) translate(-1.642136, -15.142136) "></path>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="right" fill="#050505">
+            <path d="M-3.45478537,21.5989048 C-3.84273129,21.9868507 -4.47108343,21.9874832 -4.86433039,21.5942362 L-4.86433039,21.5942362 C-5.25485468,21.2037119 -5.24948751,20.5651798 -4.87012646,20.1858187 L7.16299371,8.15269856 C7.94044758,7.3752447 9.20583052,7.38012589 9.9784032,8.15269856 L22.0115234,20.1858187 C22.3988466,20.5731419 22.3989743,21.2009893 22.0057273,21.5942362 L22.0057273,21.5942362 C21.615203,21.9847605 20.983996,21.9867185 20.5961823,21.5989048 L9.27313669,10.2758592 C8.88519077,9.88791326 8.25607392,9.88804548 7.86826022,10.2758592 L-3.45478537,21.5989048 Z" id="Rectangle-49" transform="translate(8.364953, 14.936390) scale(1, -1) rotate(-270.000000) translate(-8.364953, -14.936390) "></path>
         </g>
     </g>
 </svg>
