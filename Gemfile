@@ -31,6 +31,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
+gem 'icalendar'
+
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'

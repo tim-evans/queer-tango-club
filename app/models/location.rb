@@ -33,4 +33,9 @@ class Location < ActiveRecord::Base
       "https://www.google.com/maps/dir//#{latitude},#{longitude}/@#{latitude},#{longitude},15z"
     end
   end
+
+  def to_s
+    address = [address_line, extended_address].compact.join(' ')
+    "#{address} #{city}, #{region_code}, #{postal_code}"
+  end
 end
