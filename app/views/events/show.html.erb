@@ -30,7 +30,7 @@
       <%= @event.location.name %>
 
       <% if @event.description %>
-        <%= simple_format @event.description %>
+        <%= simple_format(@event.description, sanitize: false) %>
       <% end %>
     </section>
   </div>
@@ -41,7 +41,7 @@
     <%= @event.location.name %>
 
     <% if @event.description %>
-      <%= simple_format @event.description %>
+      <%= simple_format(@event.description, sanitize: false) %>
     <% end %>
   </section>
 <% end %>
