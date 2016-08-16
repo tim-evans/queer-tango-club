@@ -109,6 +109,7 @@ class EventsController < ApplicationController
     session.delete(:cart)
     session[:current_member_id] = member.id
 
+    OrderMailer.confirmation_email(member, order).deliver!
     redirect_to event_members_path(@event)
   end
 
@@ -194,6 +195,7 @@ class EventsController < ApplicationController
     charge.receipt_email = member.email
     charge.save
 
+    OrderMailer.confirmation_email(member, order).deliver!
     redirect_to receipt_event_url(@event, protocol: protocol)
   rescue Stripe::CardError => e
     flash[:error] = e.json_body[:error][:message]

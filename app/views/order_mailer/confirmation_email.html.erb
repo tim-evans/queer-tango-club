@@ -1,0 +1,94 @@
+<span class="preheader">Your Queer Tango Club schedule for <%= @order.event.title %></span>
+
+<table align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td align="center" valign="top">
+        <div style="display: block">
+          <table cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+              <tr>
+                <td>
+                  <header style="background: url(<%= @order.event.cover_photos.first.attachment.url(:original) %>) no-repeat; background-size: cover; background-position: 50% 50%; max-width: 1200px; height: calc(100vw / 3); max-height: 400px;">
+                    <h1 class="logo">
+                      <%= link_to(root_url) do %>
+                        <span class="q">Queer</span>
+                        <span class="t">Tango</span>
+                        <span class="c">Club</span>
+                      <% end %>
+                    </h1>
+                  </header>
+                  <main>
+                    <h2>Thank you, <%= @member.name %>!</h2>
+                    <p>We're excited to have you join us! Below you'll find your personal schedule as well as a calendar invite so you can easily keep track of your schedule on your phone or computer.</p>
+                    <p>If you have any questions, feel free to get in touch with us at <%= mail_to(Rails.application.secrets.email_address) %> or respond to this email.</p>
+                  </main>
+
+                  <section>
+                    <div>
+                    <h2>Your Schedule</h2>
+                    <hr>
+                    <% @order.sessions.each do |session| %>
+                      <table width="100%">
+                        <tbody>
+                          <tr>
+                            <td><%= session.title %></td>
+                            <td><%= @order.price_of(session).format %></td>
+                          </tr>
+                          <tr colspan=2>
+                            <td>
+                              <% if session.event.guests.size > 1 && session.guests.size > 0 %>
+                                <% session.guests_by_role.each do |guests| %>
+                                  <%= format_list(guests) { |guest| guest.name } %>,
+                                  <%= guests.first.role.pluralize(guests.size) %>
+                                <% end %>
+                              <% end %>
+                            </td>
+                          </tr>
+                          <% if session.level %>
+                            <tr colspan=2>
+                              <td>For <%= session.level %> Dancers</td>
+                            </tr>
+                          <% end %>
+                          <tr colspan=2>
+                            <td><%= format_time_range(session.starts_at, session.ends_at) %></td>
+                          </tr>
+                          <% if session.location %>
+                            <tr colspan=2>
+                              <td><a href="<%= session.location.directions_url %>"><%= session.location.name %></a></td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                      <% if session.description %>
+                        <%= simple_format session.description %>
+                      <% end %>
+                    <% end %>
+                    <hr>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Your Total</td>
+                          <td><%= @order.total.format %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                  </section>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <footer>
+          <div>
+            <a class="nolink" href="https://facebook.com/nycqueertangoclub" target="_blank"><%= icon("facebook") -%></a>
+            <a href="https://facebook.com/nycqueertangoclub" target="_blank">nycqueertangoclub</a>
+            <br>
+            <%= icon("email") %><%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
+          </div>
+        </footer>
+      </td>
+    </tr>
+  </tbody>
+</table>

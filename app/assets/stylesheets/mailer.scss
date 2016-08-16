@@ -1,0 +1,232 @@
+@import "reset";
+@import "colors";
+@import "grid";
+@import "logo";
+
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic,700,400);
+
+@font-face {
+  font-family: 'Arial Black';
+  src: font-url('kcalB-lairA.eot');
+  src: font-url('kcalB-lairA.eot?#iefix') format('embedded-opentype'),
+       font-url('kcalB-lairA.woff') format('woff'),
+       font-url('kcalB-lairA.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Libre Baskerville', Baskerville;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.005rem;
+  line-height: 1.5rem;
+  color: $black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+header {
+  padding: 0;
+  margin: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  max-width: 1200px;
+  height: calc(100vw / 3);
+  max-height: 400px;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+main {
+  background: $black;
+  padding: 2em;
+  color: $white;
+
+  h2, p {
+    padding-bottom: 1em;
+  }
+
+  a {
+    color: $white;
+  }
+}
+
+section {
+  div {
+    padding: 0 2em;
+    padding-bottom: 2em;
+  }
+  h2 {
+    padding: 1.5em 0 0.25em;
+  }
+  table tr:first-child td {
+    padding-top: 1em;
+  }
+  table tr:last-child td {
+    padding-bottom: 1em;
+  }
+}
+
+hr {
+  border: 0;
+  border-bottom: 2px solid $black;
+
+  &.thick {
+    border-bottom: 4px solid $black;
+  }
+
+  &.thin {
+    border-bottom: 1px solid $black;
+  }
+}
+
+button,
+a.button {
+  background: $black;
+  color: $white;
+  font-family: 'Libre Baskerville';
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  text-decoration: none;
+
+  &:hover {
+    background: $soot;
+  }
+
+  &.with-icon {
+    padding-left: 4rem;
+
+    svg {
+      position: absolute;
+      top: 0.7rem;
+      left: 1.5rem;
+      path {
+        fill: $white;
+      }
+    }
+  }
+}
+
+footer {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.125rem;
+  line-height: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  color: $white;
+
+  div {
+    padding: 0 2em;
+  }
+
+  background: $black;
+
+  a {
+    color: $white;
+  }
+
+  .vr {
+    display: inline-block;
+    content: ' ';
+    width: 1px;
+    background: $white;
+    height: 1.5rem;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0.5rem;
+  }
+
+  .icon {
+    position: relative;
+    top: 0.6rem;
+    margin-right: 5px;
+    path {
+      fill: $white;
+      transition: all .25s;
+    }
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+
+  &.big {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+.smcp {
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+}
+
+.logo {
+  color: $white;
+  font-size: 2.4em;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  margin: 0;
+}
+
+.preheader {
+  display: none !important;
+}
+
+table {
+  width: 100%;
+  td > div, td > footer {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
+  }
+  td {
+    text-align: left;
+  }
+  td + td {
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  body:not(#home) .logo {
+    font-size: 2.4em;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  body:not(#home) .logo {
+    font-size: 2.4em;
+  }
+}

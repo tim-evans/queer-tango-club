@@ -1,4 +1,7 @@
 class OrderService
+
+  attr_reader :sessions, :event
+
   def initialize(sessions, at: DateTime.now)
     @sessions = sessions
     @event = sessions.first.event
@@ -28,6 +31,10 @@ class OrderService
         description: discount.description
       }
     end
+  end
+
+  def price_of(session)
+    attribution[session]
   end
 
   def attribution

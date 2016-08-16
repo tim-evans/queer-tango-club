@@ -20,8 +20,10 @@ class ItineraryService
       event.dtend = session.ends_at
       event.summary = "#{session.event.title} / #{session.title}"
       event.description = session.description
-      event.location = session.location.to_s
-      event.geo = [session.location.latitude.to_f, session.location.longitude.to_f]
+      if session.location
+        event.location = session.location.to_s
+        event.geo = [session.location.latitude.to_f, session.location.longitude.to_f]
+      end
       event.organizer = Icalendar::Values::CalAddress.new("mailto:#{Rails.application.secrets.email_address}", cn: "Queer Tango Club")
       event
     end

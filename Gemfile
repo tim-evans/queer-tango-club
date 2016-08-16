@@ -32,10 +32,12 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
 gem 'icalendar'
+gem 'roadie-rails', '~> 1.0'
 
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
+  gem 'letter_opener'
 end
 
 group :development do
