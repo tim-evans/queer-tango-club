@@ -40,10 +40,6 @@ body {
   flex-direction: column;
 }
 
-main {
-  flex: 1 0 auto;
-}
-
 header {
   padding: 0;
   margin: 0;
@@ -60,7 +56,8 @@ h2 {
   font-style: italic;
 }
 
-main {
+.main {
+  flex: 1 0 auto;
   background: $black;
   padding: 2em;
   color: $white;
@@ -199,6 +196,7 @@ footer {
   padding-top: 2rem;
   padding-left: 2rem;
   margin: 0;
+  width: 6em;
 }
 
 .preheader {

@@ -18,11 +18,11 @@
                       <% end %>
                     </h1>
                   </header>
-                  <main>
+                  <div class="main">
                     <h2>Thank you, <%= @member.name %>!</h2>
                     <p>We're excited to have you join us! Below you'll find your personal schedule as well as a calendar invite so you can easily keep track of your schedule on your phone or computer.</p>
                     <p>If you have any questions, feel free to get in touch with us at <%= mail_to(Rails.application.secrets.email_address) %> or respond to this email.</p>
-                  </main>
+                  </div>
 
                   <section>
                     <div>
