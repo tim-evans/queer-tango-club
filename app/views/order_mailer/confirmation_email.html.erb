@@ -32,7 +32,7 @@
                       <table width="100%">
                         <tbody>
                           <tr>
-                            <td><%= session.title %></td>
+                            <td><%= session.title.html_safe %></td>
                             <td><%= @order.price_of(session).format %></td>
                           </tr>
                           <tr colspan=2>
