@@ -12,6 +12,6 @@ class OrderMailer < ApplicationMailer
     }
 
     mail(to: member.formatted_email,
-         subject: "💃  Thanks for signing up for #{order.event.title} with Queer Tango Club")
+         subject: "Your #{order.event.title} Order / Queer Tango Club")
   end
 end
