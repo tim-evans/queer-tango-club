@@ -37,11 +37,6 @@
                               <% end %>
                             </td>
                           </tr>
-                          <% if session.level %>
-                            <tr colspan=2>
-                              <td>For <%= session.level %> Dancers</td>
-                            </tr>
-                          <% end %>
                           <tr colspan=2>
                             <td><%= session.starts_at.strftime("%B %d, %Y") %> <%= format_time_range(session.starts_at, session.ends_at) %></td>
                           </tr>
@@ -52,9 +47,6 @@
                           <% end %>
                         </tbody>
                       </table>
-                      <% if session.description %>
-                        <%= simple_format session.description %>
-                      <% end %>
                     <% end %>
                     <hr>
                     <table>
