@@ -14,11 +14,11 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true
 
   def registerable?
-    Time.now.in_time_zone('Eastern Time (US & Canada)').to_date < starts_at.to_date && !ticket_cost.blank?
+    ticket_cost.present? && DateTime.now < starts_at
   end
 
   def highlight?
-    now = Time.now.utc - 4.hour
+    now = DateTime.now
     now + 2.hour >= starts_at && now - 1.hour <= ends_at
   end
 

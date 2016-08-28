@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
   end
 
   def highlight?
-    today = Time.now.in_time_zone('Eastern Time (US & Canada)').to_date
+    today = Date.today
     today >= starts_at && today <= ends_at
   end
 
