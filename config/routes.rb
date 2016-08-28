@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :photos, only: [:index]
       resources :ledger, only: [:index]
       resources :members, only: [:index]
+      resources :discounts, only: [:index]
+      resources :sessions, only: [:index]
     end
   end
 
