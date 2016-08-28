@@ -8,7 +8,7 @@ class Event::DiscountsController < ApplicationController
         {
           id: discount.id,
           description: discount.description,
-          valid_until: discount.valid_until.utc.iso8601,
+          valid_until: discount.valid_until.try(:utc).try(:iso8601),
           amount: {
             fractional: discount.fractional,
             currency: discount.currency

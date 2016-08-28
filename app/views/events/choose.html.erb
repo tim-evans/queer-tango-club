@@ -29,7 +29,7 @@
           <li class="session">
             <span class="row">
               <span class="static-80 align-center">
-                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %> data-amount="<%= session.ticket_cost %>" data-starts-at="<%= session.starts_at.to_i %>" data-ends-at="<%= session.ends_at.to_i %>">
+                <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %>>
               </span>
               <label for="session-<%= session.id %>">
                 <h3><%= session.title.html_safe %></h3>
