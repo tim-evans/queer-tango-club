@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
   end
 
   def highlight?
-    today = Date.today
+    today = Date.current
     today >= starts_at && today <= ends_at
   end
 
