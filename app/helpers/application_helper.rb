@@ -1,11 +1,11 @@
 module ApplicationHelper
   def format_date_range(start_date, end_date)
     if start_date == end_date
-      start_date.strftime("%B %d, %Y")
+      start_date.strftime("%B %e, %Y")
     elsif start_date.month == end_date.month
-      "#{start_date.strftime("%B %d")} - #{end_date.strftime("%d, %Y")}"
+      "#{start_date.strftime("%B %e")} - #{end_date.strftime("%e, %Y")}"
     else
-      "#{start_date.strftime("%B %d")} - #{end_date.strftime("%B %d, %Y")}"
+      "#{start_date.strftime("%B %e")} - #{end_date.strftime("%B %e, %Y")}"
     end
   end
 

@@ -29,7 +29,7 @@
           <% @private.availability.each do |time_slot| %>
             <li class="row">
               <span class="align-left half">
-                <%= time_slot.begin.strftime("%B %d, %Y") %>
+                <%= time_slot.begin.strftime("%B %e, %Y") %>
               </span>
               <span class="align-right fill">
                 <%= format_time_range(time_slot.begin, time_slot.end) %>

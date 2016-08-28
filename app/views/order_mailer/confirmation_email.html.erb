@@ -38,7 +38,7 @@
                             </td>
                           </tr>
                           <tr colspan=2>
-                            <td><%= session.starts_at.strftime("%B %d, %Y") %> <%= format_time_range(session.starts_at, session.ends_at) %></td>
+                            <td><%= session.starts_at.strftime("%B %e, %Y") %> <%= format_time_range(session.starts_at, session.ends_at) %></td>
                           </tr>
                           <% if session.location %>
                             <tr colspan=2>
