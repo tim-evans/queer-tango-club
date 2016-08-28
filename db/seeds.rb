@@ -86,8 +86,8 @@ Location.create({
 
 inauguration = Milonga.create({
   title: 'Inaugural Milonga',
-  starts_at: DateTime.parse("2015-10-17"),
-  ends_at: DateTime.parse("2015-10-17"),
+  starts_at: Time.zone.parse("2015-10-17"),
+  ends_at: Time.zone.parse("2015-10-17"),
   description: "We are pleased to have the very lovely and creative dancer, performer and teacher, Rebecca Shulman as our very first guest teacher. She will be teaching a Beginner's class from 6:30 to 7:30pm right before the inaugural Milonga. Our DJ for the evening is the multi-talented Lexa Roséan."
 })
 
@@ -154,8 +154,8 @@ Photo.create({
 
 s = Session.create({
   title: "Beginner's Class",
-  starts_at: DateTime.parse("2015-10-17 18:30"),
-  ends_at: DateTime.parse("2015-10-17 19:30"),
+  starts_at: Time.zone.parse("2015-10-17 18:30"),
+  ends_at: Time.zone.parse("2015-10-17 19:30"),
   event: inauguration,
   location: lgbt_center
 })
@@ -167,8 +167,8 @@ s.guests.create({
 
 s = Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2015-10-17 19:30"),
-  ends_at: DateTime.parse("2015-10-17 21:45"),
+  starts_at: Time.zone.parse("2015-10-17 19:30"),
+  ends_at: Time.zone.parse("2015-10-17 21:45"),
   event: inauguration,
   location: lgbt_center
 })
@@ -180,8 +180,8 @@ s.guests.create({
 
 alter_ego = Milonga.create({
   title: 'Alter Ego',
-  starts_at: DateTime.parse("2015-11-21"),
-  ends_at: DateTime.parse("2015-11-21"),
+  starts_at: Time.zone.parse("2015-11-21"),
+  ends_at: Time.zone.parse("2015-11-21"),
   description: "With the change of seasons, the passing of halloween and the coming of thanksgiving, let us celebrate the duality of human nature, embrace our secret identities, and give free rein to our other selves. Let your Alter Ego loose on November 21st. Express, display, present your alter ego as freely as you desire in whatever shape or form it wishes to manifest!"
 })
 
@@ -192,8 +192,8 @@ alter_ego.cover_photos.create({
 
 s = Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2015-11-21 18:30"),
-  ends_at: DateTime.parse("2015-11-21 19:30"),
+  starts_at: Time.zone.parse("2015-11-21 18:30"),
+  ends_at: Time.zone.parse("2015-11-21 19:30"),
   event: alter_ego,
   location: lgbt_center
 })
@@ -205,8 +205,8 @@ s.guests.create({
 
 s =Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2015-11-21 19:30"),
-  ends_at: DateTime.parse("2015-11-21 21:45"),
+  starts_at: Time.zone.parse("2015-11-21 19:30"),
+  ends_at: Time.zone.parse("2015-11-21 21:45"),
   event: alter_ego,
   location: lgbt_center
 })
@@ -218,8 +218,8 @@ s.guests.create({
 
 holiday_milonga = Milonga.create({
   title: 'Holiday Milonga',
-  starts_at: DateTime.parse("2015-12-19"),
-  ends_at: DateTime.parse("2015-12-19"),
+  starts_at: Time.zone.parse("2015-12-19"),
+  ends_at: Time.zone.parse("2015-12-19"),
   description: "These two ladies need no introduction!!! You ought to find out for yourself on Dec 19th if you don't know why.\n\nWe can't think of a better way to spend the third Saturday of December with two of the most lovely tangueras in New York City. Come and keep warm with your Queer Tango family before the turn of the year!"
 })
 
@@ -230,8 +230,8 @@ holiday_milonga.cover_photos.create({
 
 s = Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2015-12-19 18:15"),
-  ends_at: DateTime.parse("2015-12-19 19:15"),
+  starts_at: Time.zone.parse("2015-12-19 18:15"),
+  ends_at: Time.zone.parse("2015-12-19 19:15"),
   event: holiday_milonga,
   location: lgbt_center
 })
@@ -243,8 +243,8 @@ s.guests.create({
 
 s = Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2015-12-19 19:30"),
-  ends_at: DateTime.parse("2015-12-19 21:45"),
+  starts_at: Time.zone.parse("2015-12-19 19:30"),
+  ends_at: Time.zone.parse("2015-12-19 21:45"),
   event: holiday_milonga,
   location: lgbt_center
 })
@@ -256,8 +256,8 @@ s.guests.create({
 
 milonga_janus = Milonga.create({
   title: 'Milonga Janus',
-  starts_at: DateTime.parse("2016-01-16"),
-  ends_at: DateTime.parse("2016-01-16"),
+  starts_at: Time.zone.parse("2016-01-16"),
+  ends_at: Time.zone.parse("2016-01-16"),
   description: "This January 2016 we are honoring Janus, a symbol of new beginnings and transitions. We shall enter a new doorway, and tango our way through this passage of change in warmth and embrace with one another.\n\nLeading us with her spellbinding moves is a pioneer of Queer Tango in New York, Lexa Roséan. Do not miss this rare opportunity to learn from this bewitching figure of our community.\n\nOur DJ baton will be in the hands of Edit Farsi. We are extremely excited to 'out' her as not only a great leader on the dance floor but also a terrific Dj."
 })
 
@@ -268,8 +268,8 @@ milonga_janus.cover_photos.create({
 
 s = Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2016-01-16 18:15"),
-  ends_at: DateTime.parse("2016-01-16 19:15"),
+  starts_at: Time.zone.parse("2016-01-16 18:15"),
+  ends_at: Time.zone.parse("2016-01-16 19:15"),
   event: milonga_janus,
   location: lgbt_center
 })
@@ -281,8 +281,8 @@ s.guests.create({
 
 s = Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2016-01-16 19:15"),
-  ends_at: DateTime.parse("2016-01-16 21:45"),
+  starts_at: Time.zone.parse("2016-01-16 19:15"),
+  ends_at: Time.zone.parse("2016-01-16 21:45"),
   event: milonga_janus,
   location: lgbt_center
 })
@@ -312,8 +312,8 @@ Photo.create({
 
 workshop = Workshop.create({
   title: 'Marc Vanzwoll',
-  starts_at: DateTime.parse("2016-01-30"),
-  ends_at: DateTime.parse("2016-01-31")
+  starts_at: Time.zone.parse("2016-01-30"),
+  ends_at: Time.zone.parse("2016-01-31")
 })
 
 workshop.cover_photos.create({
@@ -324,8 +324,8 @@ workshop.cover_photos.create({
 s = Session.create({
   title: 'From Walking to Dancing',
   description: 'Take the ho-hum out of your walk, and dance. 4 ways to perfect your cross system walking while developing your Jedi tango powers.',
-  starts_at: DateTime.parse("2016-01-30 13:00"),
-  ends_at: DateTime.parse("2016-01-30 14:30"),
+  starts_at: Time.zone.parse("2016-01-30 13:00"),
+  ends_at: Time.zone.parse("2016-01-30 14:30"),
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
@@ -341,8 +341,8 @@ s.guests.create({
 s = Session.create({
   title: 'Not Your Average Intercambio',
   description: 'Switch roles with invisible transitions. Diversify, and make the Leader/Follower relationship dynamic. Your tango will never be the same.',
-  starts_at: DateTime.parse("2016-01-30 15:00"),
-  ends_at: DateTime.parse("2016-01-30 16:30"),
+  starts_at: Time.zone.parse("2016-01-30 15:00"),
+  ends_at: Time.zone.parse("2016-01-30 16:30"),
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
@@ -358,8 +358,8 @@ s.guests.create({
 Session.create({
   title: 'Practica',
   description: "Practice what you've learned after workshops or join us for some dancing.",
-  starts_at: DateTime.parse("2016-01-30 16:30"),
-  ends_at: DateTime.parse("2016-01-30 18:00"),
+  starts_at: Time.zone.parse("2016-01-30 16:30"),
+  ends_at: Time.zone.parse("2016-01-30 18:00"),
   event: workshop,
   location: sheen_center
 })
@@ -367,8 +367,8 @@ Session.create({
 s = Session.create({
   title: 'Cadena for You and for Me!',
   description: 'A classic pattern to brighten up your tango. 4 basic steps linked together with identical foot work pattern for both Leader and Follower. Find out why this pattern travels or stays in place, and is perfect for switching roles seamlessly',
-  starts_at: DateTime.parse("2016-01-31 13:00"),
-  ends_at: DateTime.parse("2016-01-31 14:30"),
+  starts_at: Time.zone.parse("2016-01-31 13:00"),
+  ends_at: Time.zone.parse("2016-01-31 14:30"),
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
@@ -384,8 +384,8 @@ s.guests.create({
 s = Session.create({
   title: 'Ocho Cortado Reloaded',
   description: 'Make it fun for yourself and your partner. Learn how to ocho cortado, then hack it. Small spaces? No problem. Hey Leaders and Followers, get creative!',
-  starts_at: DateTime.parse("2016-01-31 15:00"),
-  ends_at: DateTime.parse("2016-01-31 16:30"),
+  starts_at: Time.zone.parse("2016-01-31 15:00"),
+  ends_at: Time.zone.parse("2016-01-31 16:30"),
   ticket_cost: 3500,
   ticket_currency: 'usd',
   max_attendees: 30,
@@ -401,16 +401,16 @@ s.guests.create({
 Session.create({
   title: 'Practica',
   description: "Practice what you've learned after workshops or join us for some dancing.",
-  starts_at: DateTime.parse("2016-01-31 16:30"),
-  ends_at: DateTime.parse("2016-01-31 18:00"),
+  starts_at: Time.zone.parse("2016-01-31 16:30"),
+  ends_at: Time.zone.parse("2016-01-31 18:00"),
   event: workshop,
   location: sheen_center
 })
 
 bienvenidos = Milonga.create({
   title: 'Milonga Bienvenidos',
-  starts_at: DateTime.parse("2016-01-30"),
-  ends_at: DateTime.parse("2016-01-30"),
+  starts_at: Time.zone.parse("2016-01-30"),
+  ends_at: Time.zone.parse("2016-01-30"),
 })
 
 bienvenidos.cover_photos.create({
@@ -430,8 +430,8 @@ bluebird = Location.create({
 
 s = Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2016-01-30 20:00"),
-  ends_at: DateTime.parse("2016-01-30 23:00"),
+  starts_at: Time.zone.parse("2016-01-30 20:00"),
+  ends_at: Time.zone.parse("2016-01-30 23:00"),
   event: bienvenidos,
   location: bluebird
 })
@@ -443,8 +443,8 @@ s.guests.create({
 
 fever = Milonga.create({
   title: 'Milonga Fever',
-  starts_at: DateTime.parse("2016-02-20"),
-  ends_at: DateTime.parse("2016-02-20"),
+  starts_at: Time.zone.parse("2016-02-20"),
+  ends_at: Time.zone.parse("2016-02-20"),
   description: "Catch the infectious personality, and style of our guest teachers Sidney Grant and Claudio Marcelo Vidal! Be inoculated by their joie de vivre so the only fever you'll catch for the rest of the year"
 })
 
@@ -470,8 +470,8 @@ Photo.create({
 
 s = Session.create({
   title: "Class",
-  starts_at: DateTime.parse("2016-02-20 18:15"),
-  ends_at: DateTime.parse("2015-02-20 19:15"),
+  starts_at: Time.zone.parse("2016-02-20 18:15"),
+  ends_at: Time.zone.parse("2015-02-20 19:15"),
   event: fever,
   location: lgbt_center
 })
@@ -483,8 +483,8 @@ s.guests.create({
 
 Session.create({
   title: "Milonga",
-  starts_at: DateTime.parse("2016-02-20 19:15"),
-  ends_at: DateTime.parse("2016-02-20 21:45"),
+  starts_at: Time.zone.parse("2016-02-20 19:15"),
+  ends_at: Time.zone.parse("2016-02-20 21:45"),
   event: fever,
   location: lgbt_center
 })
@@ -542,15 +542,15 @@ Photo.create({
 
 workshop = Workshop.create({
   title: 'Soledad Nani',
-  starts_at: DateTime.parse("2016-03-17"),
-  ends_at: DateTime.parse("2016-03-20")
+  starts_at: Time.zone.parse("2016-03-17"),
+  ends_at: Time.zone.parse("2016-03-20")
 })
 
 workshop.privates.create({
   teacher: soledad,
   description: "Soledad Nani is available for private lessons. Lessons are $90 each, with a discounted rate of $75 per each lesson if you book three or more. This does not include the floor fee.",
-  starts_at: DateTime.parse("2016-03-17"),
-  ends_at: DateTime.parse("2016-03-21")
+  starts_at: Time.zone.parse("2016-03-17"),
+  ends_at: Time.zone.parse("2016-03-21")
 })
 
 workshop.cover_photos.create({
@@ -574,8 +574,8 @@ alchemical = Location.create({
 
 s = Session.create({
   title: 'Meet & Greet Practica',
-  starts_at: DateTime.parse("2016-03-17 19:00"),
-  ends_at: DateTime.parse("2016-03-17 22:00"),
+  starts_at: Time.zone.parse("2016-03-17 19:00"),
+  ends_at: Time.zone.parse("2016-03-17 22:00"),
   event: workshop,
   location: alchemical
 })
@@ -587,8 +587,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Pre-Milonga Class&mdash; Essentials of Walking',
-  starts_at: DateTime.parse("2016-03-18 20:00"),
-  ends_at: DateTime.parse("2016-03-18 21:00"),
+  starts_at: Time.zone.parse("2016-03-18 20:00"),
+  ends_at: Time.zone.parse("2016-03-18 21:00"),
   event: workshop
 })
 
@@ -599,8 +599,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Milonga Queer Fundraiser',
-  starts_at: DateTime.parse("2016-03-18 21:00"),
-  ends_at: DateTime.parse("2016-03-19 01:00"),
+  starts_at: Time.zone.parse("2016-03-18 21:00"),
+  ends_at: Time.zone.parse("2016-03-19 01:00"),
   event: workshop
 })
 
@@ -616,8 +616,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Communication',
-  starts_at: DateTime.parse("2016-03-19 13:00"),
-  ends_at: DateTime.parse("2016-03-19 14:30"),
+  starts_at: Time.zone.parse("2016-03-19 13:00"),
+  ends_at: Time.zone.parse("2016-03-19 14:30"),
   event: workshop
 })
 
@@ -628,8 +628,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Pivot Dynamic',
-  starts_at: DateTime.parse("2016-03-19 13:00"),
-  ends_at: DateTime.parse("2016-03-19 14:30"),
+  starts_at: Time.zone.parse("2016-03-19 13:00"),
+  ends_at: Time.zone.parse("2016-03-19 14:30"),
   event: workshop
 })
 
@@ -645,8 +645,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Sensibility',
-  starts_at: DateTime.parse("2016-03-19 15:00"),
-  ends_at: DateTime.parse("2016-03-19 16:30"),
+  starts_at: Time.zone.parse("2016-03-19 15:00"),
+  ends_at: Time.zone.parse("2016-03-19 16:30"),
   event: workshop
 })
 
@@ -657,8 +657,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Keys to Improvisation',
-  starts_at: DateTime.parse("2016-03-19 15:00"),
-  ends_at: DateTime.parse("2016-03-19 16:30"),
+  starts_at: Time.zone.parse("2016-03-19 15:00"),
+  ends_at: Time.zone.parse("2016-03-19 16:30"),
   event: workshop
 })
 
@@ -674,15 +674,15 @@ s.guests.create({
 
 s = Session.create({
   title: 'Practica',
-  starts_at: DateTime.parse("2016-03-19 16:30"),
-  ends_at: DateTime.parse("2016-03-19 18:00"),
+  starts_at: Time.zone.parse("2016-03-19 16:30"),
+  ends_at: Time.zone.parse("2016-03-19 18:00"),
   event: workshop
 })
 
 s = Session.create({
   title: 'Pre-Milonga Class&mdash; Essentials 8&rsquo;s',
-  starts_at: DateTime.parse("2016-03-19 20:00"),
-  ends_at: DateTime.parse("2016-03-19 21:00"),
+  starts_at: Time.zone.parse("2016-03-19 20:00"),
+  ends_at: Time.zone.parse("2016-03-19 21:00"),
   event: workshop
 })
 
@@ -693,15 +693,15 @@ s.guests.create({
 
 s = Session.create({
   title: 'Milonga Equinox',
-  starts_at: DateTime.parse("2016-03-19 21:00"),
-  ends_at: DateTime.parse("2016-03-19 24:00"),
+  starts_at: Time.zone.parse("2016-03-19 21:00"),
+  ends_at: Time.zone.parse("2016-03-19 24:00"),
   event: workshop
 })
 
 s = Session.create({
   title: 'Improvisation without roles',
-  starts_at: DateTime.parse("2016-03-20 13:00"),
-  ends_at: DateTime.parse("2016-03-20 14:30"),
+  starts_at: Time.zone.parse("2016-03-20 13:00"),
+  ends_at: Time.zone.parse("2016-03-20 14:30"),
   event: workshop
 })
 
@@ -712,8 +712,8 @@ s.guests.create({
 
 s = Session.create({
   title: 'Entire Body',
-  starts_at: DateTime.parse("2016-03-20 15:00"),
-  ends_at: DateTime.parse("2016-03-20 16:30"),
+  starts_at: Time.zone.parse("2016-03-20 15:00"),
+  ends_at: Time.zone.parse("2016-03-20 16:30"),
   event: workshop
 })
 
