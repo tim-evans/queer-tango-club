@@ -99,8 +99,6 @@ $(function () {
       return savings;
     }, 0) / 100;
 
-    console.log(discount);
-
     $('#subtotal').html('$' + subtotal);
     $('#discounts').html('-$' + Math.abs(discount));
     $('#total').html('$' + (subtotal + discount));
