@@ -10,8 +10,8 @@ class Event::SessionsController < ApplicationController
           title: session.title,
           description: session.description,
           level: session.level,
-          starts_at: session.starts_at.iso8601,
-          ends_at: session.ends_at.iso8601,
+          starts_at: session.starts_at.utc.iso8601,
+          ends_at: session.ends_at.utc.iso8601,
           cost: {
             fractional: session.ticket_cost,
             currency: session.ticket_currency

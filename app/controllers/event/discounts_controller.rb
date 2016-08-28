@@ -7,12 +7,14 @@ class Event::DiscountsController < ApplicationController
       discounts: @event.discounts.map do |discount|
         {
           id: discount.id,
-          valid_until: discount.valid_until.iso8601,
+          description: discount.description,
+          valid_until: discount.valid_until.utc.iso8601,
           amount: {
             fractional: discount.fractional,
             currency: discount.currency
           },
-          active_when: discount.active_when
+          active_when: discount.active_when,
+          distribute_among: discount.distribute_among
         }
       end
     }
