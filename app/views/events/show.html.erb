@@ -27,7 +27,11 @@
         <hr>
       </nav>
       <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
-      <%= @event.location.name %>
+      <% if @event.location %>
+        <%= @event.location.name %>
+      <% else %>
+        Location to be announced
+      <% end %>
 
       <% if @event.description %>
         <%= simple_format(@event.description, sanitize: false) %>
@@ -38,7 +42,11 @@
   <section class="grid-frame banner">
     <h1><%= @event.title.html_safe %></h1>
     <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
-    <%= @event.location.name %>
+    <% if @event.location %>
+      <%= @event.location.name %>
+    <% else %>
+      Location to be announced
+    <% end %>
 
     <% if @event.description %>
       <%= simple_format(@event.description, sanitize: false) %>
@@ -50,4 +58,6 @@
 <% if @event.guests.length > 0 %>
   <%= render partial: 'guests', locals: { guests: @event.guests } %>
 <% end %>
-<%= render partial: 'locations', locals: { locations: @event.locations.uniq } %>
+<% if @event.locations.length > 0 %>
+  <%= render partial: 'locations', locals: { locations: @event.locations.uniq } %>
+<% end %>
