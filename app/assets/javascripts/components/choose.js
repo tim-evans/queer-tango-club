@@ -102,6 +102,12 @@ $(function () {
     $('#subtotal').html('$' + subtotal);
     $('#discounts').html('-$' + Math.abs(discount));
     $('#total').html('$' + (subtotal + discount));
+
+    if (sessions.length === 0) {
+      $('button').attr('disabled', 'disabled');
+    } else {
+      $('button').attr('disabled', null);
+    }
   }
 
   calculate();

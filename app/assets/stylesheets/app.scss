@@ -175,8 +175,13 @@ a.button {
   position: relative;
   text-decoration: none;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: $soot;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 
   &.with-icon {
