@@ -1,6 +1,6 @@
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 <br>
-<div class="grid-frame">
+<div class="frame">
   <section id="schedule">
     <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %></h2>
     <% if @event.is_a?(Workshop) %>
@@ -25,7 +25,7 @@
           <% if session.attendees.size > 0 %>
             <div class="table">
               <div class="table-header thin-border-bottom">
-                <div class="row">
+                <div class="flex-row">
                   <div class="table-cell attended"></div>
                   <div class="table-cell name">Name</div>
                   <div class="table-cell email">Email</div>
@@ -34,7 +34,7 @@
               </div>
               <div class="table-body block">
                 <% session.attendees.each do |attendee| %>
-                  <div class="row desktop-nowrap">
+                  <div class="flex-row">
                     <div class="table-cell attended">
                       <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">
                         <% if attendee.attended? %>

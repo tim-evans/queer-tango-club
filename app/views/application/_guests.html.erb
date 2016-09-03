@@ -1,27 +1,23 @@
-<section id="guests" class="grid-frame">
+<section id="guests" class="frame">
   <h2><% if guests.size > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
   <hr class="thick">
   <% guests.each do |guest| %>
-    <div class="row" id="<%= guest.slug %>">
-      <div class="half">
-        <div class="guest-photos">
-          <% guest.photos.each do |photo| %>
-            <img src="<%= photo.src %>" alt="<%= guest.name %>"/>
-          <% end %>
-        </div>
+    <div class="flex-row half" id="<%= guest.slug %>">
+      <div class="guest-photos">
+        <% guest.photos.each do |photo| %>
+          <img src="<%= photo.src %>" alt="<%= guest.name %>"/>
+        <% end %>
       </div>
-      <div class="half">
-        <div>
-          <h4>
-            <% if guest.url %>
-              <%= link_to guest.name, guest.url %>
-            <% else %>
-              <%= guest.name %>
-            <% end %>
-          </h4>
-          <h6><%= guest.role %></h6>
-          <%= simple_format guest.bio %>
-        </div>
+      <div>
+        <h4>
+          <% if guest.url %>
+            <%= link_to guest.name, guest.url %>
+          <% else %>
+            <%= guest.name %>
+          <% end %>
+        </h4>
+        <h6><%= guest.role %></h6>
+        <%= simple_format guest.bio %>
       </div>
     </div>
   <% end %>

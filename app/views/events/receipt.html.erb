@@ -1,6 +1,6 @@
 <% content_for :title, "Thank You | Queer Tango Club" %>
 
-<section id="receipt" class="grid-frame align-center">
+<section id="receipt" class="frame align-center">
   <h1>We look forward to seeing you at <%= @event.title %></h1>
   <br>
   <p>You should receive an email receipt at <%= mail_to(@current_member.email) %><br>with the details of this purchase.</p>

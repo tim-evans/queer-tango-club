@@ -1,0 +1,11 @@
+<% content_for :title, "New Event | Queer Tango Club" %>
+<br>
+
+<%= form_for(@event, html: { class: "frame" }) do |f| %>
+  <section>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.submit 'Create Event' %>
+  </section>
+<% end %>

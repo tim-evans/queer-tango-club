@@ -8,60 +8,56 @@
 <% end %>
 <% content_for :title, "Privates with #{@private.teacher.name} | Queer Tango Club" %>
 
-<section id="guests" class="grid-frame">
+<section id="guests" class="frame">
   <h1>Privates with <%= @private.teacher.name.html_safe %></h1>
   <hr class="thick">
-  <div class="row">
-    <div class="half">
-      <div class="guest-photos">
-        <% @private.teacher.photos.each do |photo| %>
-          <img src="<%= photo.src %>" alt="<%= @private.teacher.name %>"/>
-        <% end %>
-      </div>
+  <div class="flex-row half">
+    <div class="guest-photos">
+      <% @private.teacher.photos.each do |photo| %>
+        <img src="<%= photo.src %>" alt="<%= @private.teacher.name %>"/>
+      <% end %>
     </div>
-    <div class="half">
-      <div>
-        <%= simple_format @private.description %>
-        <br>
-        <h6>Available Times</h6>
-        <hr class="thin">
-        <ul>
-          <% @private.availability.each do |time_slot| %>
-            <li class="row">
-              <span class="align-left half">
-                <%= time_slot.begin.strftime("%B %e, %Y") %>
-              </span>
-              <span class="align-right fill">
-                <%= format_time_range(time_slot.begin, time_slot.end) %>
-              </span>
-            </li>
+    <div>
+      <%= simple_format @private.description %>
+      <br>
+      <h6>Available Times</h6>
+      <hr class="thin">
+      <ul>
+        <% @private.availability.each do |time_slot| %>
+          <li class="flex-row half">
+            <span>
+              <%= time_slot.begin.strftime("%B %e, %Y") %>
+            </span>
+            <span>
+              <%= format_time_range(time_slot.begin, time_slot.end) %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+      <hr class="thin">
+      <p>
+        <%= icon('alert') %><span class="smcp">NOTE</span>
+        The fee for your private lesson does not include room rentals.
+      </p>
+      <p>Please provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
+
+      <% unless flash.empty? %>
+        <ul class="alert">
+          <% flash.each do |key, value| %>
+            <% if value.kind_of?(Array) %>
+              <% value.each do |message| %>
+                <li class="alert-<%= key %>"><%= message %></li>
+              <% end %>
+            <% else %>
+              <li class="alert-<%= key %>"><%= value %></li>
+            <% end %>
           <% end %>
         </ul>
-        <hr class="thin">
-        <p>
-          <%= icon('alert') %><span class="smcp">NOTE</span>
-          The fee for your private lesson does not include room rentals.
-        </p>
-        <p>Please provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
-
-        <% unless flash.empty? %>
-          <ul class="alert">
-            <% flash.each do |key, value| %>
-              <% if value.kind_of?(Array) %>
-                <% value.each do |message| %>
-                  <li class="alert-<%= key %>"><%= message %></li>
-                <% end %>
-              <% else %>
-                <li class="alert-<%= key %>"><%= value %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        <% end %>
-        <br>
-        <%= mail_to @private.contact, subject: "[Private with #{@private.teacher.name}]", class:"button with-icon", role: "button" do %>
-          <%= icon("fan") %> Schedule a Private
-        <% end %>
-       </div>
+      <% end %>
+      <br>
+      <%= mail_to @private.contact, subject: "[Private with #{@private.teacher.name}]", class:"button with-icon", role: "button" do %>
+        <%= icon("fan") %> Schedule a Private
+      <% end %>
     </div>
   </div>
 </section>

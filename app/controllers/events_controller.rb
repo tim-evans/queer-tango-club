@@ -1,11 +1,21 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+
+  before_filter :authorize, only: [:new, :edit, :create, :update, :delete]
 
   def protocol
     if Rails.env.production?
       'https://'
     else
       'http://'
+    end
+  end
+
+  def authorize
+    if current_user
+      true
+    else
+      render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
     end
   end
 
@@ -17,9 +27,21 @@ class EventsController < ApplicationController
   def show
   end
 
+  # GET /events/1/edit
+  def edit
+  end
+
   # GET /events/new
   def new
     @event = Event.new
+  end
+
+  # POST /events
+  def create
+    @event = Event.new(event_params)
+    if @event.save
+      redirect_to event_path(@event)
+    end
   end
 
   def choose
@@ -237,5 +259,10 @@ class EventsController < ApplicationController
       },
       :cover_photos, :photos).first
       raise ActiveRecord::RecordNotFound.new if @event.nil?
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def event_params
+      params.require(:event).permit(:title)
     end
 end

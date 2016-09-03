@@ -1,18 +1,25 @@
 <% content_for :title, "Events | Queer Tango Club" %>
 
 <section>
-  <% if @events.upcoming.count > 0 %>
-    <div class="grid-frame">
+  <% if @events.upcoming.count > 0 || current_user %>
+    <div class="frame">
       <h2>Events</h2>
       <hr class="thick">
       <br>
     </div>
+    <% if current_user %>
+      <div class='frame'>
+        <%= link_to(new_event_path, class: 'new-event') do %>
+          <%= icon("add-solid") %> Add Event
+        <% end %>
+      </div>
+    <% end %>
     <% @events.upcoming.each do |event| %>
       <%= render partial: 'cover_photo', locals: { event: event } %>
     <% end %>
   <% end %>
 
-  <div class="grid-frame">
+  <div class="frame">
     <h2>Past Events</h2>
     <hr class="thick">
     <br>

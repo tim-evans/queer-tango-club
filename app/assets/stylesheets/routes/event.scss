@@ -1,3 +1,27 @@
+.new-event {
+  display: block;
+  text-align: center;
+  font-size: 32px;
+  line-height: 2em;
+  text-decoration: none;
+  transition: all 120ms;
+
+  svg {
+    position: relative;
+    top: 8px;
+    width: 40px;
+    height: 40px;
+    transition: all 120ms;
+  }
+
+  &:hover {
+    color: $soot;
+    path {
+      fill: $soot;
+    }
+  }
+}
+
 .event {
   position: rleative;
   height: 400px;
@@ -10,7 +34,7 @@
     height: 400px;
   }
 
-  .grid-frame {
+  .frame {
     position: relative;
     height: 350px;
   }
@@ -30,10 +54,6 @@
   img {
     max-width: 100%;
     padding-top: 10px;
-  }
-  .half + .half {
-    padding-top: 1rem;
-    padding-left: 1rem;
   }
   h4 {
     padding: 0.4rem 0;
@@ -70,7 +90,15 @@ body#events #schedule {
     text-align: right;
   }
   dl {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    justify-content: flex-start;
     padding-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  div {
+    width: 100%;
   }
 }
 
@@ -101,11 +129,6 @@ body#events #schedule {
     padding-bottom: 0.4rem;
   }
 
-  .half + .half {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
   aside {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -116,7 +139,7 @@ body#events #schedule {
 @media screen and (max-width: 600px) {
   .event {
     height: 300px;
-    .grid-frame {
+    .grid-frame, .frame {
       position: relative;
       height: 300px;
     }

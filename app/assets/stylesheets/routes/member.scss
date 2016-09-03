@@ -70,17 +70,19 @@
 }
 
 body#members #schedule {
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     .table-header {
       display: none;
     }
 
-    .row {
+    .flex-row {
       height: 120px;
+      flex-wrap: wrap;
+      flex-direction: row;
     }
 
     .name {
-      width: calc(100% - 40px);
+      width: calc(100% - 45px);
     }
     .email, .paid {
       line-height: 40px;
@@ -91,7 +93,7 @@ body#members #schedule {
 }
 
 #ledger {
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     .payer-name {
       width: calc(100% - 100px);
     }

@@ -1,5 +1,5 @@
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
-<section class="grid-frame banner">
+<section class="frame banner">
   <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <% if @event.location %>
@@ -7,9 +7,9 @@
   <% end %>
 </section>
 
-<%= form_tag add_to_cart_event_path(@event), method: :post, class: "grid-frame" do |f| %>
+<%= form_tag add_to_cart_event_path(@event), method: :post, class: "frame" do |f| %>
   <section id="schedule">
-    <h2>Choose Your <%= @event.type.titleize.pluralize %></h2>
+    <h2>Choose Your Classes</h2>
     <hr class="thick">
 
     <% unless flash.empty? %>
@@ -27,8 +27,8 @@
       <ul class="sessions" id="accordion-<%= idx %>">
         <% sessions.each do |session| %>
           <li class="session">
-            <span class="row">
-              <span class="static-80 align-center">
+            <span class="flex-row collapse-none">
+              <span class="checkbox">
                 <input type="checkbox" name="sessions[<%= session.id %>]" id="session-<%= session.id %>" <% if @cart.include?(session.id.to_s) %>checked="checked"<% end %>>
               </span>
               <label for="session-<%= session.id %>">
@@ -57,7 +57,7 @@
   </section>
   <hr class="thick">
   <section id="itemizations">
-    <dl class="row">
+    <dl>
       <dt><h6>Subtotal</h6></dt>
       <dd><h6 id="subtotal">$0</h6></dd>
       <dt><h6>Discounts</h6></dt>

@@ -14,6 +14,8 @@ form {
 }
 
 input[type=text],
+input[type=date],
+input[type=datetime-local],
 input[type=email],
 input[type=tel],
 input[type=password],
@@ -96,6 +98,23 @@ input[type=radio] {
   }
 }
 
+select {
+  position: relative;
+  border: 0;
+  height: 40px;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0 1rem;
+  background: $black;
+  color: $white;
+  border-radius: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+      -ms-appearance: none;
+          appearance: none;
+  width: 100%;
+}
+
 label.radio {
   padding: 0;
 
@@ -107,8 +126,8 @@ label.radio {
 }
 
 .alert {
-  border: 2px solid $life;
-  color: $life;
+  background: $life;
+  color: $white;
   padding: 1rem;
   li:before {
     content: ' ';
@@ -123,12 +142,5 @@ label.radio {
 
   .alert-error, .alert-warn {
     background: image-url('icons/warn-solid.svg') no-repeat;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .grid-frame .row .half,
-  .grid-frame .col .half {
-    width: 100%;
   }
 }

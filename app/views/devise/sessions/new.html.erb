@@ -1,6 +1,7 @@
 <% content_for :title, "Sign In | Queer Tango Club" %>
-<div class="grid-frame">
-  <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2') do %>
+<div class="frame">
+  <br>
+  <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2'), class: 'button with-icon' do %>
     <%= icon('google') %> Sign in with Google
   <% end %>
 </div>

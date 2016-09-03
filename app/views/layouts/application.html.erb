@@ -17,11 +17,11 @@
 <body id="<%= controller.controller_name %>">
   <% if current_user %>
     <div class="admin">
-      <div class="grid-frame">
-        <div class="row">
+      <div class="frame">
+        <div class="flex-row collapse-none">
           <div>
             <%= icon("happy") %> <%= current_user.name || current_user.email %>
-          </div><div class="fill align-right">
+          </div><div class="align-right">
             <%= link_to('Log Out', destroy_user_session_path) %>
           </div>
         </div>
@@ -31,21 +31,19 @@
   <% if controller.controller_name == 'home' %>
     <%= yield %>
   <% else %>
-    <header class="grid-frame">
-      <div class="row align-justify">
-        <h1 class="logo block align-left">
+    <header class="frame">
+      <div class="flex-row collapse-none">
+        <h1 class="logo align-left">
           <%= link_to(root_path) do %>
             <span class="q">Queer</span>
             <span class="t">Tango</span>
             <span class="c">Club</span>
           <% end %>
         </h1>
-        <div class="block align-right">
-          <nav>
-            <%= link_to('About', about_path) %>
-            <%= link_to('Events', events_path) %>
-          </nav>
-        </div>
+        <nav>
+          <%= link_to('About', about_path) %>
+          <%= link_to('Events', events_path) %>
+        </nav>
       </div>
     </header>
     <main>

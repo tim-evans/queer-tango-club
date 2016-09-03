@@ -1,88 +1,109 @@
-.grid-frame {
-  width: 800px;
+.frame {
+  width: calc(100% - 40px);
+  max-width: 800px;
   margin: 0 auto;
 
-  .row, .col, .block {
-    display: flex;
-    position: relative;
-    backface-visibility: hidden;
-    flex: 1 1 auto;
-    align-items: stretch;
-    justify-content: flex-start;
-    order: 0;
-    height: auto;
+  &.padding-none {
+    width: 100%;
+  }
 
-    &.align-left {
-      text-align: left;
+  header {
+    @extend .flex-row;
+    border-bottom: 1px solid color('linen');
+    & > *:last-child {
+      &:not(button):not(a):not(iframe) {
+        flex: 1;
+      }
+      justify-content: flex-end;
+      text-align: right;
+      & > * {
+        text-align: initial;
+      }
+    }
+    & > *:first-child {
+      &:not(button) {
+        flex: 1;
+      }
+      align-self: center;
       justify-content: flex-start;
+      text-align: left;
     }
+  }
 
-    &.align-center {
-      justify-content: center;
-      text-align: center;
-    }
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background: none;
+    height: 100%;
+    text-align: right;
 
-    &.align-right {
+    form {
+      width: 40%;
+      min-width: 250px;
       text-align: right;
     }
+  }
 
-    &.align-justify {
-      justify-content: space-between;
-    }
+  nav, aside + * {
+    text-align: right;
+  }
 
-    &.align-spaced {
-      justify-content: space-around;
-    }
+  iframe {
+    margin-left: 1rem;
+  }
 
-    &.justify-end {
-      justify-content: flex-end;
-    }
+  input, select, textarea {
+    width: 100%;
+  }
 
-    &.align-bottom {
-      align-self: flex-end;
-    }
+  h1 {
+    text-align: left;
+    justify-content: flex-start;
+  }
+}
 
-    &.nowrap {
-      flex-wrap: nowrap;
-    }
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 
-    img {
-      max-width: 100%;
-    }
-
-    .whole {
+  & > * {
+    &:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell) {
+      flex: 1;
       width: 100%;
     }
-
-    .half {
-      width: 50%;
+    &:not(:last-child) {
+      padding-right: 1em;
     }
+  }
+  &.half > *:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell) {
+    width: 50%;
+  }
+  & > button, & > a {
+    margin-left: 1em;
+  }
 
-    .fill {
+  .checkbox {
+    width: 80px;
+    text-align: center;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+
+  & > * {
+    &:not(button):not(a):not(iframe) {
       flex: 1;
     }
-
-    .static-80 {
-      width: 80px;
-    }
-
-    .static-80 + * {
-      width: calc(100% - 80px);
-    }
   }
 
-  .row {
-    flex-flow: row wrap;
-    &.reverse {
-      flex-direction: row-reverse;
-    }
-  }
-
-  .col, .block {
-    flex-flow: column wrap;
-    &.reverse {
-      flex-direction: col-reverse;
-    }
+  & > *:not(:last-child) {
+    margin-bottom: 0.25em;
   }
 }
 
@@ -98,31 +119,26 @@
   text-align: center;
 }
 
-@media screen and (max-width: 860px) {
-  .grid-frame:not(.no-padding) {
-    width: 100%;
-    padding: 0 20px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .grid-frame {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  .row, .col, .block {
-    &.desktop-nowrap {
-      flex-wrap: nowrap;
+@media screen and (max-width: 600px) {
+  .flex-row:not(header):not(.collapse-none) {
+    flex-direction: column;
+    &.half > *:not(button):not(iframe) {
+      width: 100%;
+    }
+    & > *:not(:last-child) {
+      padding-right: 0;
+    }
+    nav, aside + * {
+      text-align: left;
     }
   }
-}
-
-@media screen and (max-width: 500px) {
-  .row, .col, .block {
-    &.mobile-nowrap {
-      flex-wrap: nowrap;
+  .flex-row:not(header):not(.collapse-none) .flex-row {
+    flex-direction: row;
+    &.half > *:not(button) {
+      width: 50%;
+    }
+    & > *:not(:last-child) {
+      padding-right: 1rem;
     }
   }
-}
+} 

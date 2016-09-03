@@ -2,9 +2,9 @@
   <div class="cover-photo">
     <img src="<%= @location.photo.url %>" alt="<%= @location.name %>" />
   </div>
-  <div class="grid-frame">
-    <div class="row">
-      <aside class="half">
+  <div class="frame">
+    <div class="flex-row half">
+      <aside>
         <h5><%= link_to format_location_name(@location.name), @location.url %></h5>
         <%= @location.address_line %><br>
         <% if @location.extended_address %>
@@ -12,30 +12,29 @@
         <% end %>
         <%= @location.city %>, <%= @location.region_code %> <%= @location.postal_code %><br>
       </aside>
-      <div class="half align-right">
-        <a href="<%= @location.directions_url %>"><%= icon("direction") %> Directions</a><br>
+      <div>
+        <a href="<%= @location.directions_url %>"><%= icon("direction-solid") %> Directions</a><br>
       </div>
     </div>
   </div>
   <br>
-  <div class="grid-frame">
+  <div class="frame">
     <h3>Nearby Caf&eacute;s</h3>
     <hr>
     <% @location.nearby_locations.to_a.each_with_index do |nearby, idx| %>
-      <div class="row <% if idx % 2 == 1 %>reverse<% end %>">
-        <div class="half">
-          <img src="<%= nearby.photo.url %>" alt="<%= nearby.name %>" />
-        </div>
-        <aside class="half <% if idx % 2 == 1 %>align-right<% end %>">
+      <div class="flex-row half">
+        <img src="<%= nearby.photo.url %>" alt="<%= nearby.name %>" />
+        <aside>
           <h5><%= link_to format_location_name(nearby.name), nearby.url %></h5>
           <%= nearby.address_line %><br>
           <% if nearby.extended_address %><%= nearby.extended_address %><br><% end %>
           <%= nearby.city %>, <%= nearby.region_code %> <%= nearby.postal_code %><br>
           <% unless nearby.inside?(@location) %>
-            <a href="<%= nearby.directions_url(@location) %>"><%= icon("direction") %> Directions</a>
+            <a href="<%= nearby.directions_url(@location) %>"><%= icon("direction-solid") %> Directions</a>
           <% end %>
         </aside>
       </div>
+      <br>
     <% end %>
   </div>
 </section>

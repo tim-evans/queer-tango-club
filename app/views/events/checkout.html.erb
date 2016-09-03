@@ -1,5 +1,5 @@
 <% content_for :title, "Checkout | Queer Tango Club" %>
-<section class="grid-frame banner">
+<section class="frame banner">
   <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <% if @event.location %>
@@ -7,7 +7,7 @@
   <% end %>
 </section>
 
-<%= form_tag purchase_event_path(@event), method: :post, class: "grid-frame" do |f| %>
+<%= form_tag purchase_event_path(@event), method: :post, class: "frame" do |f| %>
   <section id="information">
     <h2>Your Information</h2>
     <hr class="thick">
@@ -18,28 +18,30 @@
         <% end %>
       </ul>
     <% end %>
-    <div class="row">
-      <div class="half">
+    <div class="flex-row half">
+      <div>
         <%= label_tag :name, 'Name *' %>
         <%= text_field_tag :name, nil, class: 'whole' %>
       </div>
+      <div></div>
     </div>
-    <div class="row">
-      <div class="half">
+    <div class="flex-row half">
+      <div>
         <%= label_tag :email, 'Email *' %>
         <%= email_field_tag :email, nil, class: 'whole' %>
       </div>
+      <div></div>
     </div>
   </section>
   <section id="payment">
     <h2>Payment</h2>
     <hr class="thick">
     <div class="payment-errors"></div>
-    <div class="row">
+    <div class="flex-row half">
       <% if current_user %>
-        <div class="half tab-bar">
+        <div class="tab-bar">
           <br>
-          <div class="row">
+          <div class="flex-row">
             <label class="radio"><input type="radio" name="payment_method" value="card" checked="checked" /> <span>Card</span></label>
           </div>
           <div class="row">
@@ -50,32 +52,35 @@
           </div>
         </div>
       <% end %>
-      <div class="half tab" id="card">
-        <div class="row">
-          <label for="cardholder_name">Name on Card *</label>
-          <input type="text" id="cardholder_name" class="whole" />
+      <div class="tab" id="card">
+        <div class="flex-row half">
+          <div>
+            <label for="cardholder_name">Name on Card *</label>
+            <input type="text" id="cardholder_name" class="whole" />
+          </div>
         </div>
-        <div class="row">
-          <div class="whole">
+        <div class="flex-row half">
+          <div>
             <label for="card_number">Card Number *</label>
-          </div>
-          <div class="row">
+            <div class="flex-row">
               <input type="tel" id="card_number" class="fill" />
-              <iframe src="<%= asset_path("icons/credit-cards.svg#unknown") %>" class="credit-card pad"></iframe>
+              <iframe tabindex=-1 src="<%= asset_path("icons/credit-cards.svg#unknown") %>" class="credit-card pad"></iframe>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="fill">
-            <label for="card_expiration">Expiration *</label>
-            <input type="tel" id="card_expiration" placeholder="MM / YY" />
-          </div>
-          <div class="fill pad">
-            <label for="card_cvc">CVC *</label>
-            <input type="tel" id="card_cvc" />
-          </div>
-          <div class="pad">
-            <label>&nbsp;</label>
-            <iframe src="<%= asset_path("icons/credit-cards.svg#cvc") %>" class="credit-card cvc"></iframe>
+        <div class="flex-row">
+          <div class="flex-row half">
+            <div>
+              <label for="card_expiration">Expiration *</label>
+              <input type="tel" id="card_expiration" placeholder="MM / YY" />
+            </div>
+            <div>
+              <label for="card_cvc">CVC *</label>
+              <div class="flex-row">
+                <input type="tel" id="card_cvc" />
+                <iframe tabindex=-1 src="<%= asset_path("icons/credit-cards.svg#cvc") %>" class="credit-card cvc"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,6 +99,9 @@
             <p>Super! They'll be on the list.</p>
           </div>
         </div>
+      <% end %>
+      <% unless current_user %>
+        <div></div>
       <% end %>
     </div>
     <br>

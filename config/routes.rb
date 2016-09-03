@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/about' => 'about#index'
 
-  resources :events, only: [:index, :show] do
+  resources :events, only: [:index, :show, :new, :create, :edit] do
     member do
       get 'choose'
       post 'add_to_cart'
@@ -23,9 +23,11 @@ Rails.application.routes.draw do
   end
 
   resources :privates, only: [:show]
+  resources :cover_photos, only: [:create, :update, :destroy]
 
   resources :photos, only: [:create, :destroy]
   resources :attendees, only: [:update]
+  resources :sessions, only: [:create, :update, :destroy]
 
   get '/workshops', to: redirect('/events')
   get '/milongas', to: redirect('/events')

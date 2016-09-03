@@ -10,13 +10,16 @@
 
 <br>
 <% if current_user %>
-  <div class="grid-frame">
+  <div class="frame">
     <section>
       <h2><%= @event.title.html_safe %></h2>
-      <nav class="align-right">
+      <nav>
         <hr>
+        <%= link_to edit_event_path(@event) do %>
+          <%= icon("edit") %> Edit
+        <% end %>
         <%= link_to event_ledger_index_path(@event) do %>
-          <%= icon("piggy-bank-solid") %> Ledger
+          <%= icon("piggy-bank") %> Ledger
         <% end %>
         <%= link_to event_members_path(@event) do %>
           <%= icon("person") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %>
@@ -39,7 +42,7 @@
     </section>
   </div>
 <% else %>
-  <section class="grid-frame banner">
+  <section class="frame banner">
     <h1><%= @event.title.html_safe %></h1>
     <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
     <% if @event.location %>

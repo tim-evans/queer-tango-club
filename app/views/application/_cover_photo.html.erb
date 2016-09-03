@@ -1,10 +1,10 @@
 <% event.cover_photos.each do |cover_photo| %>
-<div class="event">
+<figure class="event">
   <div class="cover-photo">
     <img src="<%= cover_photo_url(cover_photo) %>" alt="<%= cover_photo.title %>"/>
   </div>
-  <div class="grid-frame no-padding">
-    <div class="align-bottom align-right">
+  <div class="frame padding-none">
+    <figcaption>
       <%= link_to(cover_photo.title || event.title, event_path(event), class: 'photo-link') %>
       <div>
         <h6 class="photo-overlay">
@@ -19,7 +19,7 @@
           <% end %>
         </div>
       <% end %>
-    </div>
+    </figcaption>
   </div>
-</div>
+</figure>
 <% end %>

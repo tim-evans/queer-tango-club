@@ -6,8 +6,9 @@
 <% end %>
 
 <header>
-  <div class="grid-frame">
-    <div class="row align-right justify-end">
+  <div class="frame">
+    <div class="flex-row collapse-none">
+      <div></div>
       <nav>
         <%= link_to('About', about_path) %>
         <%= link_to('Events', events_path) %>
@@ -16,15 +17,15 @@
   </div>
 </header>
 <main>
-  <div class="grid-frame no-padding">
-    <div class="row">
+  <div class="frame padding-none">
+    <div class="flex-row">
       <h1 class="logo">
         <span class="q">Queer</span>
         <span class="t">Tango</span>
         <span class="c">Club</span>
       </h1>
     </div>
-    <div class="row align-right justify-end">
+    <figcaption>
       <section id="upcoming-events">
         <h6 class="dark photo-overlay">Upcoming Events</h6><br>
         <% @upcoming.each do |event| %>
@@ -33,7 +34,7 @@
           <% end %>
         <% end %>
       </section>
-    </div>
+    </figcaption>
   </div>
 </main>
 <%= render partial: 'footer' %>
