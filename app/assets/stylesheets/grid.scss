@@ -11,7 +11,7 @@
     @extend .flex-row;
     border-bottom: 1px solid color('linen');
     & > *:last-child {
-      &:not(button):not(a):not(iframe) {
+      &:not(button):not(a):not(svg) {
         flex: 1;
       }
       justify-content: flex-end;
@@ -50,7 +50,7 @@
     text-align: right;
   }
 
-  iframe {
+  .cvc {
     margin-left: 1rem;
   }
 
@@ -70,7 +70,7 @@
   width: 100%;
 
   & > * {
-    &:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {
+    &:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
       flex: 1;
       width: 100%;
     }
@@ -78,7 +78,7 @@
       padding-right: 1em;
     }
   }
-  &.half > *:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {
+  &.half > *:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
     width: 50%;
   }
   & > button, & > a {
@@ -97,7 +97,7 @@
   width: auto;
 
   & > * {
-    &:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {
+    &:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
       flex: 1;
     }
   }
@@ -122,7 +122,7 @@
 @media screen and (max-width: 500px) {
   .flex-row:not(header):not(.collapse-none) {
     flex-direction: column;
-    &.half > *:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {
+    &.half > *:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
       width: 100%;
     }
     & > *:not(:last-child) {
@@ -134,7 +134,7 @@
   }
   .flex-row:not(header):not(.collapse-none) .flex-row {
     flex-direction: row;
-    &.half > *:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {
+    &.half > *:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
       width: 50%;
     }
     & > *:not(:last-child) {

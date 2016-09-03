@@ -5,18 +5,18 @@ $(function () {
   $('#card_expiration').payment('formatCardExpiry');
   $('#card_cvc').payment('formatCardCVC');
 
-  var image = $('.credit-card.cvc').attr('src').replace("#cvc", '');
-
   $('#card_number').on('change', updateCardType);
   $('#card_number').on('keyup', updateCardType);
 
   function updateCardType() {
-    var type = $.payment.cardType($('#card_number').val()) || 'unknown';
-    $('.credit-card').attr('src', image + '#' + type);
+    var type = $.payment.cardType($('#card_number').val()) || 'other';
+    var cc = $('.credit-card:first use')[0];
+    var cvv = $('.credit-card.cvc use')[0];
+    cc.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + type);
     if (type === 'amex') {
-      $('.credit-card.cvc').attr('src', image + '#amex-cvc');
+      cvv.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#amex-cvv');
     } else {
-      $('.credit-card.cvc').attr('src', image + '#cvc');
+      cvv.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#cvv');
     }
   }
 

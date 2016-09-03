@@ -64,7 +64,9 @@
             <label for="card_number">Card Number *</label>
             <div class="flex-row">
               <input type="tel" id="card_number" class="fill" />
-              <iframe tabindex=-1 src="<%= asset_path("icons/credit-cards.svg#unknown") %>" class="credit-card pad"></iframe>
+              <svg class="credit-card pad">
+                <use xlink:href="#other">
+              </svg>
             </div>
           </div>
         </div>
@@ -78,7 +80,9 @@
               <label for="card_cvc">CVC *</label>
               <div class="flex-row">
                 <input type="tel" id="card_cvc" />
-                <iframe tabindex=-1 src="<%= asset_path("icons/credit-cards.svg#cvc") %>" class="credit-card cvc"></iframe>
+                <svg class="credit-card cvc">
+                  <use xlink:href="#cvv">
+                </svg>
               </div>
             </div>
           </div>
@@ -114,3 +118,4 @@
   // This identifies your website in the createToken call below
   Stripe.setPublishableKey("<%= ENV['STRIPE_KEY'] %>");
 </script>
+<%= inline_svg("icons/credit-cards.svg", class: 'sprite') %>
