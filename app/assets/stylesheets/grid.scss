@@ -119,7 +119,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   .flex-row:not(header):not(.collapse-none) {
     flex-direction: column;
     &.half > *:not(button):not(a):not(iframe):not(.checkbox):not(.table-cell):not(.tab) {

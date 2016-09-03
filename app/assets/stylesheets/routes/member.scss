@@ -16,6 +16,7 @@
 
   .table-cell {
     line-height: 40px;
+    overflow: hidden;
   }
 
   .table-header .table-cell {
@@ -70,7 +71,7 @@
 }
 
 body#members #schedule {
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     .table-header {
       display: none;
     }
@@ -93,7 +94,7 @@ body#members #schedule {
 }
 
 #ledger {
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     .payer-name {
       width: calc(100% - 100px);
     }
