@@ -24,11 +24,21 @@ textarea {
   height: 40px;
   border: 2px solid $black;
   font-size: 1rem;
-  padding: 0 0.5rem;
+  padding: 0 0.5em;
   font-family: 'Libre Baskerville', Baskerville;
   border-radius: 0;
   box-shadow: none;
   max-width: 100%;
+  transition: all 120ms;
+
+  &:hover {
+    box-shadow: 0 0 0 3px $heather;
+  }
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($soot, 0.25);
+  }
 }
 
 textarea {
@@ -46,25 +56,32 @@ input[type=checkbox] {
           appearance: none;
 
   position: relative;
+  transition: all 120ms;
   &:after {
     position: absolute;
     content: ' ';
     display: block;
-    left: 13px;
-    top: 13px;
-    width: 0px;
-    height: 0px;
-    background: $black;
-    transition: all 0.2s;
+    left: 3px;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    background: $white;
+    transition: all 120ms;
   }
   &:checked {
     background: $white;
   }
   &:checked:after {
-    left: 3px;
-    top: 3px;
-    width: 20px;
-    height: 20px;
+    background: $black;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 3px $heather;
+  }
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($soot, 0.5);
   }
 }
 
@@ -147,8 +164,19 @@ label.radio {
   }
 }
 
+.cvc {
+  margin-top: 3rem;
+}
+
 @media screen and (max-width: 500px) {
-  input {
-    font-size: 1rem;
+  input[type=text],
+  input[type=date],
+  input[type=datetime-local],
+  input[type=email],
+  input[type=tel],
+  input[type=password],
+  input[type=number],
+  textarea {
+    font-size: 1.2rem;
   }
 }

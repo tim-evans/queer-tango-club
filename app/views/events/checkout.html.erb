@@ -71,21 +71,21 @@
           </div>
         </div>
         <div class="flex-row">
-          <div class="flex-row half">
-            <div>
-              <label for="card_expiration">Expiration *</label>
-              <input type="tel" id="card_expiration" placeholder="MM / YY" />
-            </div>
-            <div>
-              <label for="card_cvc">CVC *</label>
-              <div class="flex-row">
+          <div>
+            <div class="flex-row half">
+              <div>
+                <label for="card_expiration">Expiration *</label>
+                <input type="tel" id="card_expiration" placeholder="MM / YY" />
+              </div>
+              <div>
+                <label for="card_cvc">CVC *</label>
                 <input type="tel" id="card_cvc" />
-                <svg class="credit-card cvc">
-                  <use xlink:href="#cvv">
-                </svg>
               </div>
             </div>
           </div>
+          <svg class="credit-card cvc">
+            <use xlink:href="#cvv">
+          </svg>
         </div>
       </div>
       <% if current_user %>
