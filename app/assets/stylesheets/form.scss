@@ -23,7 +23,7 @@ input[type=number],
 textarea {
   height: 40px;
   border: 2px solid $black;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 0 0.5rem;
   font-family: 'Libre Baskerville', Baskerville;
   border-radius: 0;
@@ -144,5 +144,11 @@ label.radio {
 
   .alert-error, .alert-warn {
     background: image-url('icons/warn-solid.svg') no-repeat;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  input {
+    font-size: 1rem;
   }
 }
