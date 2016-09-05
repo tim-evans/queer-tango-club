@@ -1,7 +1,7 @@
 <section id="guests" class="frame">
   <h2><% if guests.size > 1 %>Our Guests<% else %>Our Guest<% end %></h2>
   <hr class="thick">
-  <% guests.each do |guest| %>
+  <% guests.select { |g| g.photos.length > 0 }.each do |guest| %>
     <div class="flex-row half" id="<%= guest.slug %>">
       <div class="guest-photos">
         <% guest.photos.each do |photo| %>
