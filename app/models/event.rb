@@ -22,6 +22,7 @@ class Event < ActiveRecord::Base
   has_many :members, through: 'attendees'
   has_many :locations, through: 'sessions'
 
+  scope :published, -> { where(published: true) }
   scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:cover_photos) }
   scope :historical, -> { where('ends_at < ?', Time.now).includes(:cover_photos) }
 

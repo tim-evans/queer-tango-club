@@ -20,7 +20,11 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.order(starts_at: :desc)
+    if current_user
+      @events = Event.all.order(starts_at: :desc)
+    else
+      @events = Event.published.order(starts_at: :desc)
+    end
   end
 
   # GET /events/1

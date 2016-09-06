@@ -7,6 +7,6 @@ class HomeController < ApplicationController
       height: 1867,
       src: 'may2016.png'
     })
-    @upcoming = Event.where('ends_at >= ?', DateTime.now).order(starts_at: :asc)
+    @upcoming = Event.published.upcoming.order(starts_at: :asc)
   end
 end
