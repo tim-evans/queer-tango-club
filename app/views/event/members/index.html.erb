@@ -2,19 +2,17 @@
 <br>
 <div class="frame">
   <section id="schedule">
-    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> <% if @event.is_a?(Workshop) %>Sign Ups<% else %>Attendees<% end %></h2>
-    <% if @event.is_a?(Workshop) %>
-      <nav class="align-right">
-        <hr>
-        <%= mail_to(nil, subject: @event.title, bcc: @event.members.uniq.map(&:formatted_email).compact.join(', ')) do %>
-          <%= icon("email-solid") %> Email Members
-        <% end %>
-        <%= link_to choose_event_path(@event) do %>
-          <%= icon("ticket-solid") %> Sign Up
-        <% end %>
-        <hr class="thick">
-      </nav>
-    <% end %>
+    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> Sign Ups</h2>
+    <nav class="align-right">
+      <hr>
+      <%= mail_to(nil, subject: @event.title, bcc: @event.members.uniq.map(&:formatted_email).compact.join(', ')) do %>
+        <%= icon("email-solid") %> Email Members
+      <% end %>
+      <%= link_to choose_event_path(@event) do %>
+        <%= icon("ticket-solid") %> Sign Up
+      <% end %>
+      <hr class="thick">
+    </nav>
     <% @event.sessions.each do |session| %>
       <% if session.ticket_cost %>
         <h4 class="accordion <% if @smart_collapse %><%= "collapsed" unless session.highlight? %><% end %>" data-accordion="accordion-<%= session.id %>">

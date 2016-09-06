@@ -77,9 +77,6 @@
   &.half > *:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
     width: 50%;
   }
-  & > button, & > a {
-    margin-left: 1em;
-  }
 
   .checkbox {
     width: 80px;

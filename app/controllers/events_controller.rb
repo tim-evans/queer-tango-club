@@ -83,11 +83,7 @@ class EventsController < ApplicationController
       end
     else
       session.delete(:cart)
-      if @event.is_a?(Workshop)
-        flash[:error] = "Select workshops to attend."
-      else
-        flash[:error] = "Select events to attend."
-      end
+      flash[:error] = "Select classes to attend."
       redirect_to choose_event_url(@event, protocol: protocol)
     end
   end

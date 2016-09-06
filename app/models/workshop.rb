@@ -1,1 +1,0 @@
-class Workshop < Event; end

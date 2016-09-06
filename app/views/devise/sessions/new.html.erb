@@ -1,7 +1,9 @@
 <% content_for :title, "Sign In | Queer Tango Club" %>
 <div class="frame">
+  <div class="flex-row half">
+    <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2'), class: 'button with-icon' do %>
+      <%= icon('google') %> Sign in with Google
+    <% end %>
+  </div>
   <br>
-  <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2'), class: 'button with-icon' do %>
-    <%= icon('google') %> Sign in with Google
-  <% end %>
 </div>

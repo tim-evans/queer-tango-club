@@ -7,17 +7,19 @@ class User < ActiveRecord::Base
          omniauth_providers: [:google_oauth2]
 
   def self.from_omniauth(auth)
-    users = where(provider: auth.provider, uid: auth.uid)
-    if auth.info.email == Rails.application.secrets.email_address
-      users.first_or_create do |user|
+    user = where(provider: auth.provider, uid: auth.uid).first
+    if user.nil?
+      user = find_by_email(auth.info.email)
+      # Instantiate the user for the first time
+      if user
         user.provider = auth.provider
         user.uid = auth.uid
         user.name = auth.info.name
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
+        user.save
       end
-    else
-      users.first
     end
+    user
   end
 end

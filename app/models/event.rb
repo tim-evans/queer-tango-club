@@ -45,6 +45,10 @@ class Event < ActiveRecord::Base
     sessions.map(&:net_income).reduce(:+)
   end
 
+  def ticketable?
+    sessions.any? { |s| s.ticket_cost.present? }
+  end
+
   def registerable?
     sessions.any?(&:registerable?)
   end
