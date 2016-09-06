@@ -71,7 +71,7 @@
     </header>
     <hr>
     <% @event.sessions.each do |session| %>
-      <%= form_for(session, html: { class: 'flex-column' }) do |f| %>
+      <%= form_for(session, namespace: "session_#{session.id}", html: { class: 'flex-column' }) do |f| %>
         <div>
           <div class="flex-row half">
             <div>
@@ -92,19 +92,19 @@
                 </div>
               </div>
             </div>
-          <div>
-            <div class="flex-column">
-              <div>
-                <%= f.label :description %>
-                <%= f.text_area :description, rows: 6 %>
+            <div>
+              <div class="flex-column">
+                <div>
+                  <%= f.label :description %>
+                  <%= f.text_area :description, rows: 6 %>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
         <div>
           <%= f.label :location_id %>
-          <%= f.select(:location_id, options_from_collection_for_select(Location.all, :id, :name), prompt: 'Select a Location...') %>
+          <%= f.collection_select(:location_id, Location.all, :id, :name, { prompt: 'Select a Location...' }, autocomplete: 'off') %>
         </div>
       <% end %>
       <br>
