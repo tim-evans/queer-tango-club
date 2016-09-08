@@ -33,6 +33,13 @@ class Session < ActiveRecord::Base
     true
   end
 
+  def display_cost
+    cost.try(:format)
+  end
+
+  def display_cost=(money)
+  end
+
   def net_income
     attendees.map(&:amount_paid).reduce(:+) || Money.new(0, 'usd')
   end

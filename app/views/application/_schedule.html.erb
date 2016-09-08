@@ -11,7 +11,7 @@
 
   <% event.sessions_by_day.each_with_index do |sessions, idx| %>
     <h4 class="accordion" data-accordion="accordion-<%= idx %>">
-      <%= sessions.first.starts_at.strftime("%B %e, %Y") %><%= icon("down") %>
+      <%= sessions.first.starts_at.strftime("%B %e, %Y") %><%= icon("down-chevron") %>
     </h4>
     <hr>
     <ul class="sessions" id="accordion-<%= idx %>">

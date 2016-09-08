@@ -31,7 +31,7 @@ module ApplicationHelper
     else
       options[:class] = 'icon'
     end
-    inline_svg("icons/#{name}", options)
+    "<svg class='#{options[:class]}'><use xlink:href='##{name}'></svg>".html_safe
   end
 
   def format_location_name(name)

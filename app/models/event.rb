@@ -23,8 +23,11 @@ class Event < ActiveRecord::Base
   has_many :locations, through: 'sessions'
 
   scope :published, -> { where(published: true) }
+  scope :draft,     -> { where(published: false) }
   scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:cover_photos) }
   scope :historical, -> { where('ends_at < ?', Time.now).includes(:cover_photos) }
+
+  accepts_nested_attributes_for :sessions, :cover_photos, :discounts
 
   def location
     locations.first

@@ -66,10 +66,11 @@
         </div>
         <footer>
           <div>
-            <a class="nolink" href="https://facebook.com/nycqueertangoclub" target="_blank"><%= icon("facebook") -%></a>
+            <a class="nolink" href="https://facebook.com/nycqueertangoclub" target="_blank"><%= inline_svg("facebook") -%></a>
             <a href="https://facebook.com/nycqueertangoclub" target="_blank">nycqueertangoclub</a>
             <br>
-            <%= icon("email") %><%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
+            <%= mail_to(Rails.application.secrets.email_address, inline_svg("email-solid").html_safe, class: 'contact') %>
+            <%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
           </div>
         </footer>
       </td>

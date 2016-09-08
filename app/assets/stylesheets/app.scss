@@ -72,9 +72,9 @@ header {
     position: relative;
     top: 8px;
     margin-right: 5px;
-  }
-  svg path {
-    fill: $white;
+    use {
+      fill: $white;
+    }
   }
 }
 
@@ -160,7 +160,7 @@ p {
   }
 }
 
-.photo-overlay:not(form) {
+.photo-overlay {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   margin: 0;
@@ -201,6 +201,7 @@ input[type=submit] {
   position: relative;
   text-decoration: none;
   max-height: 3rem;
+  width: auto;
 
   &:hover:not(:disabled) {
     background: $soot;
@@ -218,9 +219,9 @@ input[type=submit] {
       position: absolute;
       top: 0.7rem;
       left: 1.5rem;
-      path {
-        fill: $white;
-      }
+    }
+    use {
+      fill: $white;
     }
   }
 }
@@ -255,7 +256,7 @@ footer {
     position: relative;
     top: 0.6rem;
     margin-right: 5px;
-    path {
+    use {
       fill: $white;
       transition: all .25s;
     }
@@ -283,6 +284,9 @@ footer {
 .credit-card {
   width: 60px;
   height: 40px;
+  &.pad {
+    width: 75px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -329,11 +333,14 @@ footer {
 .icon.empty-state {
   width: 60px;
   height: 60px;
-  path {
+  use {
     fill: $heather;
   }
 }
 
 .sprite {
   display: none;
+  &.icons path {
+    fill: inherit;
+  }
 }

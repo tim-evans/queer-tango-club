@@ -1,5 +1,3 @@
-<% environment.context_class.instance_eval { include ApplicationHelper; include InlineSvg::ActionView::Helpers } %>
-
 $(function () {
   if (!$('.admin').length && !$('.toggle-attended').length) { return; }
 
@@ -18,9 +16,9 @@ $(function () {
       data: data
     }).then(function (result) {
       if (result.attendee.attended) {
-        $checkbox.html('<%= icon('check-solid').gsub("\n", '') %>');
+        icon($checkbox, 'check-solid');
       } else {
-        $checkbox.html('<%= icon('check').gsub("\n", '') %>');
+        icon($checkbox, 'check');
       }
       $checkbox.data("attended", result.attendee.attended);
     });

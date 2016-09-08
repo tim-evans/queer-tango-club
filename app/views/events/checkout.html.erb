@@ -64,9 +64,7 @@
             <label for="card_number">Card Number *</label>
             <div class="flex-row">
               <input type="tel" id="card_number" class="fill" />
-              <svg class="credit-card pad">
-                <use xlink:href="#other">
-              </svg>
+              <%= icon('other', class: 'credit-card pad') %>
             </div>
           </div>
         </div>
@@ -83,9 +81,7 @@
               </div>
             </div>
           </div>
-          <svg class="credit-card cvc">
-            <use xlink:href="#cvv">
-          </svg>
+          <%= icon('cvv', class: 'credit-card cvc') %>
         </div>
       </div>
       <% if current_user %>

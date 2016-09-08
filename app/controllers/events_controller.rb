@@ -42,7 +42,7 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_params.merge(published: false))
     if @event.save
       redirect_to event_path(@event)
     end

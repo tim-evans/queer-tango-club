@@ -1,16 +1,17 @@
 <% content_for :title, "#{@event.title} | Queer Tango Club" %>
 <br>
 
+<%= form_for(@event) do |f| %>
 <section id="edit">
   <div class="frame">
     <header>
       <h2>
-        <%= link_to(@event.title, event_path(@event)) %> <%= icon("right") %> Edit
+        <%= link_to(@event.title, event_path(@event)) %> <%= icon("right-chevron") %> Edit
       </h2>
-      <button>Save</button>
+      <%= f.submit "Save" %>
     </header>
     <hr class="thick">
-    <%= form_for(@event, html: { class: 'flex-row half' }) do |f| %>
+    <div class="flex-row half">
       <div>
         <div class="flex-column">
           <div>
@@ -37,7 +38,7 @@
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
   <br>
   <br>
@@ -49,16 +50,16 @@
     </header>
     <hr>
   </div>
-  <% @event.cover_photos.each do |cover_photo| %>
+  <%= f.fields_for :cover_photos do |cpf| %>
     <figure class="event">
       <div class="cover-photo">
-        <img src="<%= cover_photo.attachment.url(:original) %>" alt="<%= cover_photo.title %>"/>
+        <img src="<%= cpf.object.attachment.url(:original) %>" alt="<%= cpf.object.title %>"/>
       </div>
       <div class="frame padding-none">
         <figcaption>
-          <%= form_for(cover_photo, html: { class: 'photo-overlay' }) do |fc| %>
-            <%= fc.text_field :title %>
-          <% end %>
+          <div class="photo-overlay">
+            <%= cpf.text_field :title %>
+          </div>
         </figcaption>
       </div>
     </figure>
@@ -70,43 +71,62 @@
       <a><%= icon("add-solid") %> Add Session</a>
     </header>
     <hr>
-    <% @event.sessions.each do |session| %>
-      <%= form_for(session, namespace: "session_#{session.id}", html: { class: 'flex-column' }) do |f| %>
-        <div>
-          <div class="flex-row half">
-            <div>
-              <div class="flex-column">
-                <div>
-                  <%= f.label :title %>
-                  <%= f.text_field :title %>
-                </div>
-                <div class="flex-row half">
-                  <div>
-                    <%= f.label :starts_at %>
-                    <%= f.datetime_local_field :starts_at %>
-                  </div>
-                  <div>
-                    <%= f.label :ends_at %>
-                    <%= f.datetime_local_field :ends_at %>
-                  </div>
-                </div>
+    <%= f.fields_for :sessions, html: { class: 'flex-column' } do |sf| %>
+      <div>
+        <div class="flex-row half">
+          <div>
+            <div class="flex-column">
+              <div>
+                <%= sf.label :title %>
+                <%= sf.text_field :title %>
               </div>
-            </div>
-            <div>
-              <div class="flex-column">
+              <div class="flex-row half">
                 <div>
-                  <%= f.label :description %>
-                  <%= f.text_area :description, rows: 6 %>
+                  <%= sf.label :starts_at %>
+                  <%= sf.datetime_local_field :starts_at %>
+                </div>
+                <div>
+                  <%= sf.label :ends_at %>
+                  <%= sf.datetime_local_field :ends_at %>
                 </div>
               </div>
             </div>
           </div>
+          <div>
+            <div class="flex-column">
+              <div>
+                <%= sf.label :description %>
+                <%= sf.text_area :description, rows: 6 %>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <%= f.label :location_id %>
-          <%= f.collection_select(:location_id, Location.all, :id, :name, { prompt: 'Select a Location...' }, autocomplete: 'off') %>
+      </div>
+      <div>
+        <%= sf.label :location_id %>
+        <%= sf.collection_select(:location_id, Location.all, :id, :name, { prompt: 'Select a Location...' }, autocomplete: 'off') %>
+      </div>
+      <div>
+        <div class="flex-row half">
+          <div>
+            <label class="accordion <%= 'collapsed' unless sf.object.registerable? %>" data-accordion="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
+              <%= sf.check_box :registerable? %> Online Sales
+            </label>
+          </div>
+          <div id="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
+            <div class="flex-column">
+              <div>
+                <%= sf.label :display_cost, 'Ticket cost' %>
+                <%= sf.text_field :display_cost %>
+              </div>
+              <div>
+                <%= sf.label :max_attendees, 'Total tickets' %>
+                <%= sf.number_field :max_attendees %>
+              </div>
+            </div>
+          </div>
         </div>
-      <% end %>
+      </div>
       <br>
       <br>
       <hr>
@@ -114,3 +134,4 @@
     <% end %>
   </div>
 </section>
+<% end %>

@@ -10,13 +10,11 @@ $(function () {
 
   function updateCardType() {
     var type = $.payment.cardType($('#card_number').val()) || 'other';
-    var cc = $('.credit-card:first use')[0];
-    var cvv = $('.credit-card.cvc use')[0];
-    cc.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + type);
+    icon('.credit-card:first', type);
     if (type === 'amex') {
-      cvv.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#amex-cvv');
+      icon('.credit-card.cvc', 'amex-cvv');
     } else {
-      cvv.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#cvv');
+      icon('.credit-card.cvc', 'cvv');
     }
   }
 

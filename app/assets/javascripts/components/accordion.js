@@ -1,5 +1,3 @@
-<% environment.context_class.instance_eval { include ApplicationHelper; include InlineSvg::ActionView::Helpers } %>
-
 $(function () {
   var $element = $('.accordion');
   if (!$element.length) { return; }
@@ -7,7 +5,6 @@ $(function () {
   function Accordion(element) {
     this.id = $(element).data('accordion');
     this.$ = $(element);
-    this.height = $('#' + this.id).height();
     $('#' + this.id).css('overflow', 'hidden');
     this.isLastChild = $('#' + this.id).index() === $(element).parent().children().length - 1;
 
@@ -18,28 +15,35 @@ $(function () {
     }
 
     var self = this;
-    this.$.on('click', function () {
-      self.toggle();
-    });
+    if (this.$.find('input[type="checkbox"]').length) {
+      this.$.on('change', function () {
+        self.toggle();
+      });
+    } else {
+      this.$.on('click', function () {
+        self.toggle();
+      });
+    }
   }
 
   Accordion.prototype = {
     expand: function () {
       this.expanded = true;
       updateExpandAll();
-      this.$.addClass('collapsed');
+      this.$.removeClass('collapsed');
 
       var style = $('#' + this.id).attr('style');
       $('#' + this.id).removeAttr('style');
       height = $('#' + this.id).height();
       $('#' + this.id).attr('style', style);
-      $('#' + this.id).animate({ height: this.height, opacity: 1, marginBottom: 0 }, 200);
+      $('#' + this.id).animate({ height: height, opacity: 1, marginBottom: 0 }, 200);
     },
 
     collapse: function () {
       this.expanded = false;
       updateExpandAll();
-      this.$.removeClass('collapsed');
+      this.$.addClass('collapsed');
+
       var margin = this.isLastChild ? 50 : 0;
       $('#' + this.id).animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
     },
@@ -76,16 +80,18 @@ $(function () {
     evt.preventDefault();
   });
 
-  var text = $('.accordion-expand-all').text();
   function updateExpandAll() {
+    if ($('.accordion-expand-all').length === 0) { return; }
     var areAnyCollapsed = accordions.some(function (accordion) {
       return !accordion.expanded;
     });
 
     if (areAnyCollapsed) {
-      $('.accordion-expand-all').html('<%= icon('add-solid').gsub("\n", '') %>' + text);
+      icon('.accordion-expand-all', 'add-solid');
+      $('.accordion-expand-all span').html('Expand all');
     } else {
-      $('.accordion-expand-all').html('<%= icon('cancel-solid').gsub("\n", '') %>' + text.replace(/expand/i, 'Collapse'));
+      icon('.accordion-expand-all', 'cancel-solid');
+      $('.accordion-expand-all span').html('Collapse all');
     }
   }
 });

@@ -11,7 +11,7 @@
     @extend .flex-row;
     border-bottom: 1px solid color('linen');
     & > *:last-child {
-      &:not(button):not(a):not(svg) {
+      &:not(button):not(a):not(svg):not(input) {
         flex: 1;
       }
       justify-content: flex-end;
@@ -21,7 +21,7 @@
       }
     }
     & > *:first-child {
-      &:not(button) {
+      &:not(button):not(a):not(svg):not(input) {
         flex: 1;
       }
       align-self: center;
@@ -39,7 +39,8 @@
     height: 100%;
     text-align: right;
 
-    form {
+    form & > * {
+      padding: 0;
       width: 40%;
       min-width: 250px;
       text-align: right;
@@ -66,7 +67,7 @@
   width: 100%;
 
   & > * {
-    &:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
+    &:not(button):not(a):not(input):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
       flex: 1;
       width: 100%;
     }
@@ -74,7 +75,7 @@
       padding-right: 1em;
     }
   }
-  &.half > *:not(button):not(a):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
+  &.half > *:not(button):not(a):not(input):not(svg):not(.checkbox):not(.table-cell):not(.tab) {
     width: 50%;
   }
 

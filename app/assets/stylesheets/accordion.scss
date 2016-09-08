@@ -6,7 +6,9 @@
     position: relative;
     top: 3px;
     left: 10px;
-    transition: all 0.2s;
+    transition: all 0.5s;
+    transform-origin: 50% 50%;
+    shape-rendering:geometricPrecision;
   }
 
   &.collapsed {

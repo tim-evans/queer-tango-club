@@ -1,11 +1,44 @@
 <% content_for :title, "New Event | Queer Tango Club" %>
 <br>
 
-<%= form_for(@event, html: { class: "frame" }) do |f| %>
-  <section>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-
-    <%= f.submit 'Create Event' %>
-  </section>
-<% end %>
+<section id="edit">
+  <div class="frame">
+    <header>
+      <h2>
+        <%= link_to('Events', events_path) %> <%= icon("right-chevron") %> New
+      </h2>
+      <button>Create</button>
+    </header>
+    <hr class="thick">
+    <%= form_for(@event, html: { class: 'flex-row half' }) do |f| %>
+      <div>
+        <div class="flex-column">
+          <div>
+            <%= f.label :title %>
+            <%= f.text_field :title %>
+          </div>
+          <div class="flex-row half">
+            <div>
+              <%= f.label :starts_at %>
+              <%= f.date_field :starts_at %>
+            </div>
+            <div>
+              <%= f.label :ends_at %>
+              <%= f.date_field :ends_at %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex-column">
+          <div>
+            <%= f.label :description %>
+            <%= f.text_area :description, rows: 6 %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <br>
+    <a><%= icon("add-solid") %> Add Cover Photo</a>
+  </div>
+</section>

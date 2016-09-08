@@ -32,12 +32,12 @@ textarea {
   transition: all 120ms;
 
   &:hover {
-    box-shadow: 0 0 0 3px $heather;
+    box-shadow: 0 0 0 3px rgba($soot, 0.1);
   }
 
   &:focus, &:active {
     outline: none;
-    box-shadow: 0 0 0 3px rgba($soot, 0.25);
+    box-shadow: 0 0 0 3px rgba($soot, 0.2);
   }
 }
 
@@ -157,10 +157,6 @@ label.radio {
     position: relative;
     top: 0.5rem;
     padding-right: 0.5rem;
-  }
-
-  .alert-error, .alert-warn {
-    background: image-url('icons/warn-solid.svg') no-repeat;
   }
 }
 

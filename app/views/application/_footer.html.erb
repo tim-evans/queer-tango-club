@@ -3,6 +3,7 @@
     <a class="nolink" href="https://facebook.com/nycqueertangoclub" target="_blank"><%= icon("facebook") -%></a>
     <a href="https://facebook.com/nycqueertangoclub" target="_blank">nycqueertangoclub</a>
     <span class='vr'></span>
-    <%= icon("email-solid") %><%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
+    <%= mail_to(Rails.application.secrets.email_address, icon('email-solid'), class: 'contact') %>
+    <%= mail_to(Rails.application.secrets.email_address, nil, class: 'contact') %>
   </div>
 </footer>
