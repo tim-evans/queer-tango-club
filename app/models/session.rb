@@ -9,6 +9,8 @@ class Session < ActiveRecord::Base
   belongs_to :event
   belongs_to :location
 
+  validates_presence_of :title, :starts_at, :ends_at
+
   after_save :create_sku, if: :registerable?
 
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true

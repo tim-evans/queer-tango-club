@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+  before_action :set_event, only: [:show, :edit, :update, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
   before_filter :authorize, only: [:new, :edit, :create, :update, :delete]
 
@@ -33,18 +33,32 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @event.cover_photos.build
+    @event.sessions.build
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    @event.cover_photos.build
   end
 
   # POST /events
   def create
     @event = Event.new(event_params.merge(published: false))
     if @event.save
-      redirect_to event_path(@event)
+      redirect_to edit_event_path(@event)
+    else
+      redirect_to new_event_path, flash: { error: @event.errors.full_messages }
+    end
+  end
+
+  # PUT /events
+  def update
+    if @event.update_attributes(event_params)
+      redirect_to edit_event_path(@event), flash: { notice: "Saved #{@event.title}" }
+    else
+      redirect_to edit_event_path(@event), flash: { error: @event.errors.full_messages }
     end
   end
 
@@ -263,6 +277,18 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:title)
+      sanitized_params = params.require(:event).permit(:title, :starts_at, :ends_at, :description, {
+        cover_photos_attributes: [:id, :attachment, :title],
+        sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id]
+      })
+
+      # Remove an unfilled session
+      new_session = sanitized_params[:sessions_attributes].values.find { |session| session[:id].blank? }
+      if [:title, :starts_at, :ends_at].all? { |key| new_session[key].blank? }
+        sanitized_params[:sessions_attributes].delete(
+          sanitized_params[:sessions_attributes].key(new_session)
+        )
+      end
+      sanitized_params
     end
 end

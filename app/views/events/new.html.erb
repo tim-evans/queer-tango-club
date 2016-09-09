@@ -1,44 +1,62 @@
 <% content_for :title, "New Event | Queer Tango Club" %>
 <br>
 
-<section id="edit">
-  <div class="frame">
-    <header>
-      <h2>
-        <%= link_to('Events', events_path) %> <%= icon("right-chevron") %> New
-      </h2>
-      <button>Create</button>
-    </header>
-    <hr class="thick">
-    <%= form_for(@event, html: { class: 'flex-row half' }) do |f| %>
-      <div>
-        <div class="flex-column">
-          <div>
-            <%= f.label :title %>
-            <%= f.text_field :title %>
-          </div>
-          <div class="flex-row half">
+<%= form_for(@event) do |f| %>
+  <section id="edit">
+    <div class="frame">
+      <header>
+        <h2>
+          <%= link_to('Events', events_path) %> <%= icon("right-chevron") %> New
+        </h2>
+        <%= f.submit "Create" %>
+      </header>
+      <hr class="thick">
+      <% if flash[:error] %>
+        <ul class="alert">
+          <% flash[:error].each do |message| %>
+            <li><%= icon('alert-solid') %> <%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="flex-row half">
+        <div>
+          <div class="flex-column">
             <div>
-              <%= f.label :starts_at %>
-              <%= f.date_field :starts_at %>
+              <%= f.label :title %>
+              <%= f.text_field :title %>
             </div>
+            <div class="flex-row half">
+              <div>
+                <%= f.label :starts_at %>
+                <%= f.date_field :starts_at %>
+              </div>
+              <div>
+                <%= f.label :ends_at %>
+                <%= f.date_field :ends_at %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flex-column">
             <div>
-              <%= f.label :ends_at %>
-              <%= f.date_field :ends_at %>
+              <%= f.label :description %>
+              <%= f.text_area :description, rows: 6 %>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <div class="flex-column">
-          <div>
-            <%= f.label :description %>
-            <%= f.text_area :description, rows: 6 %>
-          </div>
-        </div>
+        <%= f.fields_for :cover_photos do |cpf| %>
+          <label>
+            <%= cpf.file_field :attachment, multiple: false %>
+            <a><%= icon("add-solid") %> Add Cover Photo</a>
+          </label>
+        <% end %>
       </div>
-    <% end %>
-    <br>
-    <a><%= icon("add-solid") %> Add Cover Photo</a>
-  </div>
-</section>
+    </div>
+    <figure class="event preview" style="display: none">
+      <div class="cover-photo"></div>
+    </figure>
+  </section>
+<% end %>

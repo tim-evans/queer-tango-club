@@ -165,6 +165,10 @@ label.radio {
   margin-top: 3rem;
 }
 
+label input[type=file] {
+  display: none;
+}
+
 @media screen and (max-width: 500px) {
   input[type=text],
   input[type=date],

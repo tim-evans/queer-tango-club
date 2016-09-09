@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/about' => 'about#index'
 
-  resources :events, only: [:index, :show, :new, :create, :edit] do
+  resources :events, only: [:index, :show, :new, :create, :update, :edit] do
     member do
       get 'choose'
       post 'add_to_cart'

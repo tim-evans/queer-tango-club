@@ -11,6 +11,13 @@
       <%= f.submit "Save" %>
     </header>
     <hr class="thick">
+    <% if flash[:error] %>
+      <ul class="alert">
+        <% flash[:error].each do |message| %>
+          <li><%= icon('alert-solid') %> <%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <div class="flex-row half">
       <div>
         <div class="flex-column">
@@ -46,33 +53,46 @@
   <div class="frame">
     <header>
       <h6 class="block align-bottom">Cover Photos</h6>
-      <a><%= icon("add-solid") %> Add Cover Photo</a>
+      <%= f.fields_for :cover_photos do |cpf| %>
+        <% unless cpf.object.attachment.present? %>
+          <label>
+            <%= cpf.file_field :attachment, multiple: false %>
+            <a><%= icon("add-solid") %> Add Cover Photo</a>
+          </label>
+        <% end %>
+      <% end %>
     </header>
     <hr>
   </div>
   <%= f.fields_for :cover_photos do |cpf| %>
-    <figure class="event">
-      <div class="cover-photo">
-        <img src="<%= cpf.object.attachment.url(:original) %>" alt="<%= cpf.object.title %>"/>
-      </div>
-      <div class="frame padding-none">
-        <figcaption>
-          <div class="photo-overlay">
-            <%= cpf.text_field :title %>
-          </div>
-        </figcaption>
-      </div>
-    </figure>
+    <% if cpf.object.attachment.present? %>
+      <figure class="event">
+        <div class="cover-photo">
+          <img src="<%= cpf.object.attachment.url(:original) %>" alt="<%= cpf.object.title %>"/>
+        </div>
+        <div class="frame padding-none">
+          <figcaption>
+            <div class="photo-overlay">
+              <%= cpf.text_field :title %>
+            </div>
+          </figcaption>
+        </div>
+      </figure>
+    <% else %>
+      <figure class="event preview" style="display: none">
+        <div class="cover-photo"></div>
+      </figure>
+    <% end %>
   <% end %>
 
   <div class="frame">
     <header>
       <h6>Sessions</h6>
-      <a><%= icon("add-solid") %> Add Session</a>
+      <a class="add-session"><%= icon("add-solid") %> Add Session</a>
     </header>
     <hr>
     <%= f.fields_for :sessions, html: { class: 'flex-column' } do |sf| %>
-      <div>
+      <div class="session-form" style="<% if sf.object.id.nil? %>display: none<% end %>">
         <div class="flex-row half">
           <div>
             <div class="flex-column">
@@ -101,12 +121,10 @@
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <%= sf.label :location_id %>
-        <%= sf.collection_select(:location_id, Location.all, :id, :name, { prompt: 'Select a Location...' }, autocomplete: 'off') %>
-      </div>
-      <div>
+        <div>
+          <%= sf.label :location_id %>
+          <%= sf.collection_select(:location_id, Location.all, :id, :name, { prompt: 'Select a Location...' }, autocomplete: 'off') %>
+        </div>
         <div class="flex-row half">
           <div>
             <label class="accordion <%= 'collapsed' unless sf.object.registerable? %>" data-accordion="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
@@ -126,11 +144,11 @@
             </div>
           </div>
         </div>
+        <br>
+        <br>
+        <hr>
+        <br>
       </div>
-      <br>
-      <br>
-      <hr>
-      <br>
     <% end %>
   </div>
 </section>

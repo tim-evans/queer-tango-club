@@ -1,10 +1,17 @@
 class CoverPhoto < ActiveRecord::Base
+  belongs_to :event
+
   has_attached_file :attachment, styles: {
                       grayscale: { convert_options: '-colorspace Gray' }
                     }
-  validates_attachment_content_type :attachment, content_type: %w(image/jpeg image/jpg image/png)
 
-  belongs_to :event
+  validates_attachment_content_type :attachment, content_type: %w(image/jpeg image/jpg image/png)
+  validates_presence_of :attachment
+
+  before_save :nullify_blank_values
+  def nullify_blank_values
+    self.title = nil if title.blank?
+  end
 
   def full_title
     if title
