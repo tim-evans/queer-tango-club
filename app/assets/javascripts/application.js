@@ -4,7 +4,7 @@
 
 function icon(selector, value) {
   if (typeof value !== 'string') {
-    let attrs = Object.keys(value || {}).map(function (key) {
+    var attrs = Object.keys(value || {}).map(function (key) {
       return key + '="' + value[key] + '"';
     }).join(' ');
     return '<svg ' + attrs + '><use xlink:href="#' + selector + '"></svg>';
