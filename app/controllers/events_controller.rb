@@ -277,18 +277,19 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      sanitized_params = params.require(:event).permit(:title, :starts_at, :ends_at, :description, {
+      params.require(:event).permit(:title, :starts_at, :ends_at, :description, {
         cover_photos_attributes: [:id, :attachment, :title],
         sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id]
-      })
-
-      # Remove an unfilled session
-      new_session = sanitized_params[:sessions_attributes].values.find { |session| session[:id].blank? }
-      if [:title, :starts_at, :ends_at].all? { |key| new_session[key].blank? }
-        sanitized_params[:sessions_attributes].delete(
-          sanitized_params[:sessions_attributes].key(new_session)
-        )
+      }).tap do |params|
+        # Remove an unfilled session
+        if params[:sessions_attributes]
+          new_session = params[:sessions_attributes].values.find { |session| session[:id].blank? }
+          if [:title, :starts_at, :ends_at].all? { |key| new_session[key].blank? }
+            params[:sessions_attributes].delete(
+              params[:sessions_attributes].key(new_session)
+            )
+          end
+        end
       end
-      sanitized_params
     end
 end
