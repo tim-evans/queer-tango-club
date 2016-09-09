@@ -11,11 +11,9 @@
   <section id="information">
     <h2>Your Information</h2>
     <hr class="thick">
-    <% unless flash.empty? %>
+    <% if flash[:error] %>
       <ul class="alert">
-        <% flash.each do |key, value| %>
-          <li class="alert-<%= key %>"><%= value %></li>
-        <% end %>
+        <li><%= icon('alert-solid') %> <%= flash[:error] %></li>
       </ul>
     <% end %>
     <div class="flex-row half">

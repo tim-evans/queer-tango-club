@@ -41,15 +41,14 @@
       </p>
       <p>Please provide information about when / where you would like to take classes with <%= @private.teacher.name %>.</p>
 
-      <% unless flash.empty? %>
+      <% if flash[:error] %>
         <ul class="alert">
-          <% flash.each do |key, value| %>
-            <% if value.kind_of?(Array) %>
-              <% value.each do |message| %>
-                <li class="alert-<%= key %>"><%= message %></li>
+          <% if flash[:error].kind_of?(Array) %>
+            <% flash[:error].each do |message| %>
+              <li><%= icon('alert-solid') %> <%= message %></li>
               <% end %>
             <% else %>
-              <li class="alert-<%= key %>"><%= value %></li>
+              <li><%= icon('alert-solid') %> <%= flash[:error] %></li>
             <% end %>
           <% end %>
         </ul>

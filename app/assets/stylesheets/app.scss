@@ -344,3 +344,26 @@ footer {
     fill: inherit;
   }
 }
+
+.flash {
+  line-height: 40px;
+  color: $white;
+
+  use {
+    fill: $white;
+  }
+
+  svg {
+    position: relative;
+    top: 8px;
+    margin-right: 5px;
+  }
+
+  &.notice {
+    background: $black;
+  }
+
+  &.alert {
+    background: $life;
+  }
+}

@@ -28,6 +28,15 @@
       </div>
     </div>
   <% end %>
+  <% if flash[:notice] %>
+    <div class="flash notice">
+      <div class="frame">
+        <div class="flex-row collapse-none">
+          <%= icon('check-solid') %> <%= flash[:notice] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <% if controller.controller_name == 'home' %>
     <%= yield %>
   <% else %>

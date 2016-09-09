@@ -47,7 +47,7 @@ $(function () {
     if (errors.length) {
       $form.find('.payment-errors').html('<ul class="alert">' +
                                          errors.map(function (error) {
-                                           return '<li class="alert-error">' + error + '</li>';
+                                           return '<li class="alert-error">' + icon('alert-solid') + error + '</li>';
                                          }).join('') + '</ul>');
     }
 
