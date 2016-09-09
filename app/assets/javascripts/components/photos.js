@@ -1,5 +1,3 @@
-<% environment.context_class.instance_eval { include ApplicationHelper; include InlineSvg::ActionView::Helpers } %>
-
 $(function () {
   if (!$('.admin').length && !$('#photos').length) { return; }
 
@@ -37,7 +35,7 @@ $(function () {
 
   uploader.bind('FileUploaded', function (uploader, file, response) {
     var photo = $.parseJSON(response.response).photo;
-    $('#photos .row').append('<div class="photo"><a href="#" tabindex="0" class="delete" data-id="' + photo.id + '"><%= icon("cancel-solid", title: "Delete Photo").gsub("\n", '') %></a><img src="' + photo.src + '"/></div>');
+    $('#photos .row').append('<div class="photo"><a href="#" tabindex="0" class="delete" data-id="' + photo.id + '">' +  icon("cancel-solid", { title: 'Delete Photo' }) + '</a><img src="' + photo.src + '"/></div>');
   });
 
   $('#photos').on('click', '.photo .delete', function (evt) {
