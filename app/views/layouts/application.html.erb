@@ -21,9 +21,8 @@
         <div class="flex-row collapse-none">
           <div>
             <%= icon("happy") %> <%= current_user.name || current_user.email %>
-          </div><div class="align-right">
-            <%= link_to('Log Out', destroy_user_session_path) %>
           </div>
+          <%= link_to('Log Out', destroy_user_session_path) %>
         </div>
       </div>
     </div>

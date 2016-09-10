@@ -289,12 +289,6 @@ footer {
   }
 }
 
-@media screen and (max-width: 800px) {
-  header .row.end {
-    justify-content: center;
-  }
-}
-
 @media screen and (max-width: 610px) {
   header nav a {
     padding-left: 20px;
@@ -310,7 +304,7 @@ footer {
 }
 
 @media screen and (max-width: 550px) {
-  body:not(#home) header nav a {
+  body:not(#home) nav a {
     display: block;
   }
 
