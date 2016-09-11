@@ -34,6 +34,8 @@ textarea {
      -moz-appearance: textfield;
       -ms-appearance: textfield;
           appearance: textfield;
+
+  box-shadow: none;
   &:hover {
     box-shadow: 0 0 0 3px rgba($soot, 0.1);
   }
@@ -42,6 +44,16 @@ textarea {
     outline: none;
     box-shadow: 0 0 0 3px rgba($soot, 0.2);
   }
+}
+
+input[type=text],
+input[type=date],
+input[type=datetime-local],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=number] {
+  white-space: nowrap;
 }
 
 textarea {

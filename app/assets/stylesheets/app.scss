@@ -202,6 +202,10 @@ input[type=submit] {
   text-decoration: none;
   max-height: 3rem;
   width: auto;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+      -ms-appearance: none;
+          appearance: none;
 
   &:hover:not(:disabled) {
     background: $soot;
