@@ -5,10 +5,14 @@ $(function () {
     $(element).parent().hide(200);
     var reader = new FileReader();
     reader.onload = function () {
-      var top = $('.cover-photo:visible').offset().top + $('.cover-photo').height();
-      $('html,body').animate({ scrollTop: top }, 500, function () {
+      if ($('.cover-photo:visible').length) {
+        var top = $('.cover-photo:visible').offset().top + $('.cover-photo').height();
+        $('html,body').animate({ scrollTop: top }, 500, function () {
+          $('.preview').show(500);
+        });
+      } else {
         $('.preview').show(500);
-      });
+      }
       $('.preview .cover-photo').html('<img src="' + reader.result + '"/>');
     }
     reader.readAsDataURL(element.files[0]);
