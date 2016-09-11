@@ -30,7 +30,10 @@ textarea {
   box-shadow: none;
   max-width: 100%;
   transition: all 120ms;
-
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+      -ms-appearance: textfield;
+          appearance: textfield;
   &:hover {
     box-shadow: 0 0 0 3px rgba($soot, 0.1);
   }
@@ -177,7 +180,8 @@ label input[type=file] {
   input[type=tel],
   input[type=password],
   input[type=number],
-  textarea {
+  textarea,
+  select {
     font-size: 1.2rem;
   }
 }
