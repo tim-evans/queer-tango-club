@@ -87,13 +87,21 @@ nav {
     display: inline-block;
     color: $black;
     text-decoration: none;
-    padding-left: 30px;
+    padding-right: 30px;
     padding-bottom: 10px;
     transition: all 0.25s;
 
     .icon {
       margin-right: 5px;
       top: 7px;
+    }
+  }
+
+  header & {
+    text-align: right;
+    a {
+      padding-left: 30px;
+      padding-right: 0;
     }
   }
 }

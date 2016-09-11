@@ -3,14 +3,14 @@
 <section>
   <% if current_user %>
     <div class="frame">
-      <h2>Drafted Events</h2>
-      <hr class="thick">
-      <br>
-    </div>
-    <div class='frame'>
-      <%= link_to(new_event_path, class: 'new-event') do %>
-        <%= icon("add-solid") %> Add Event
-      <% end %>
+      <nav>
+        <h2>Drafted Events</h2>
+        <hr>
+        <%= link_to(new_event_path) do %>
+          <%= icon("add-solid") %> Add Event
+        <% end %>
+        <hr class="thick">
+      </nav>
     </div>
     <% @events.draft.each do |event| %>
     <% if event.cover_photos.length > 0 %>
