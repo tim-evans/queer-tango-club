@@ -206,6 +206,7 @@ input[type=submit] {
      -moz-appearance: none;
       -ms-appearance: none;
           appearance: none;
+  border-radius: 0;
 
   &:hover:not(:disabled) {
     background: $soot;
