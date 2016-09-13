@@ -279,7 +279,7 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :starts_at, :ends_at, :description, {
         cover_photos_attributes: [:id, :attachment, :title],
-        sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id]
+        sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id, :display_cost, :max_attendees]
       }).tap do |params|
         # Remove an unfilled session
         if params[:sessions_attributes]

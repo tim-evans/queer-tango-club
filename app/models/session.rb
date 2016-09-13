@@ -29,17 +29,28 @@ class Session < ActiveRecord::Base
   end
 
   def create_sku
-    if sku.blank?
+    if sku.blank? && event.published
       SyncSkusService.new(self).create!
     end
     true
   end
 
   def display_cost
-    cost.try(:format)
+    if cost.try(:zero?)
+      ''
+    else
+      cost.try(:format)
+    end
   end
 
   def display_cost=(money)
+    Monetize.assume_from_symbol = true
+    cost = Monetize.parse(money)
+    if cost.zero?
+      self.cost = nil
+    else
+      self.cost = cost
+    end
   end
 
   def net_income

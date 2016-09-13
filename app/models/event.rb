@@ -53,11 +53,11 @@ class Event < ActiveRecord::Base
   end
 
   def ticketable?
-    sessions.any? { |s| s.ticket_cost.present? }
+    published && sessions.any? { |s| s.ticket_cost.present? }
   end
 
   def registerable?
-    sessions.any?(&:registerable?)
+    published && sessions.any?(&:registerable?)
   end
 
   def highlight?

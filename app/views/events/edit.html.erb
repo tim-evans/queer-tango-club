@@ -127,19 +127,19 @@
         </div>
         <div class="flex-row half">
           <div>
-            <label class="accordion <%= 'collapsed' unless sf.object.registerable? %>" data-accordion="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
-              <%= sf.check_box :registerable? %> Online Sales
+            <label class="accordion <%= 'collapsed' unless sf.object.ticket_cost? %>" data-accordion="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
+              <%= sf.check_box :ticket_cost? %> Online Sales
             </label>
           </div>
           <div id="<%= sf.object_name.gsub(/[\[\]]+/, '_').chop %>">
             <div class="flex-column">
               <div>
                 <%= sf.label :display_cost, 'Ticket cost' %>
-                <%= sf.text_field :display_cost %>
+                <%= sf.text_field :display_cost, readonly: sf.object.sku %>
               </div>
               <div>
                 <%= sf.label :max_attendees, 'Total tickets' %>
-                <%= sf.number_field :max_attendees %>
+                <%= sf.number_field :max_attendees, readonly: sf.object.sku %>
               </div>
             </div>
           </div>
