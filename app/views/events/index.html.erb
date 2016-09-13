@@ -1,32 +1,27 @@
 <% content_for :title, "Events | Queer Tango Club" %>
 
 <section>
-  <% if current_user %>
+  <% if @events.upcoming.count > 0 || current_user %>
     <div class="frame">
-      <nav>
-        <h2>Drafted Events</h2>
-        <hr>
-        <%= link_to(new_event_path) do %>
-          <%= icon("add-solid") %> Add Event
-        <% end %>
-        <hr class="thick">
-      </nav>
-    </div>
-    <% @events.draft.each do |event| %>
-    <% if event.cover_photos.length > 0 %>
-        <%= render partial: 'cover_photo', locals: { event: event } %>
+      <% if current_user %>
+        <nav>
+          <h2>Events</h2>
+          <hr>
+          <%= link_to(new_event_path) do %>
+            <%= icon("add-solid") %> Add Event
+          <% end %>
+        </nav>
       <% else %>
-        <%= link_to(event.title, edit_event_path(event), class: 'new-event') %>
+        <h2>Events</h2>
       <% end %>
-    <% end %>
-  <% end %>
-
-  <% if @events.upcoming.count > 0 %>
-    <div class="frame">
-      <h2>Events</h2>
       <hr class="thick">
       <br>
     </div>
+    <% if current_user %>
+      <% @events.draft.each do |event| %>
+        <%= render partial: 'cover_photo', locals: { event: event } %>
+      <% end %>
+    <% end %>
     <% @events.upcoming.each do |event| %>
       <%= render partial: 'cover_photo', locals: { event: event } %>
     <% end %>
