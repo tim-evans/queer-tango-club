@@ -29,7 +29,8 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :sessions, :cover_photos, :discounts
 
-  validates_presence_of :title, :starts_at, :ends_at
+  validates_presence_of :title, :starts_at, :ends_at, :cover_photos
+  validates_associated :cover_photos, :sessions
 
   def location
     locations.first

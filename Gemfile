@@ -15,7 +15,9 @@ gem 'unirest' # Used for HTTP requests
 gem 'stripe'
 gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
 
-gem 'money-rails' # Used to parse money
+# Money handling
+gem 'monetize'
+gem 'money-rails'
 
 gem 'inline_svg'
 gem 'jquery-rails'

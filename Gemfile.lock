@@ -247,6 +247,7 @@ DEPENDENCIES
   inline_svg
   jquery-rails
   letter_opener
+  monetize
   money-rails
   omniauth
   omniauth-facebook
