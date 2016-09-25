@@ -307,12 +307,9 @@ footer {
     padding-left: 20px;
   }
 
-  footer {
-    padding-left: 1rem;
-    .vr {
-      display: block;
-      height: 0;
-    }
+  footer .vr {
+    display: block;
+    height: 0;
   }
 }
 
