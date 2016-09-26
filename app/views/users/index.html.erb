@@ -22,7 +22,7 @@
             <%= link_to user_path(user), class:"flex-row" do %>
               <div class="table-cell name"><%= user.name %></div>
               <div class="table-cell email"><%= user.email %></div>
-              <div class="table-cell login"><%= user.last_sign_in_at.strftime('%b %e, %Y %l:%M%P') %></div>
+              <div class="table-cell login"><%= user.last_sign_in_at.try(:strftime, '%b %e, %Y %l:%M%P') %></div>
             <% end %>
           <% end %>
         </div>
