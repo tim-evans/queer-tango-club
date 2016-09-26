@@ -1,0 +1,14 @@
+<% content_for :title, "#{@user.name} | Queer Tango Club" %>
+<br>
+<div class="frame">
+  <section id="user">
+    <h2><%= link_to('Users', users_path) %> <%= icon("right-chevron") %> <%= @user.name %></h2>
+    <nav>
+      <hr>
+      <%= icon("email-solid") %> Invite User
+      <hr class="thick">
+    </nav>
+  </section>
+  <br>
+  <br>
+</div>

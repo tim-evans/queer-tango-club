@@ -1,0 +1,34 @@
+<% content_for :title, "Users | Queer Tango Club" %>
+<br>
+<div class="frame">
+  <section id="schedule">
+    <h2>Users</h2>
+    <nav>
+      <hr>
+      <%= icon("email-solid") %> Invite User
+      <hr class="thick">
+    </nav>
+    <div class="users">
+      <div class="table">
+        <div class="table-header thin-border-bottom">
+          <div class="flex-row">
+            <div class="table-cell name">Name</div>
+            <div class="table-cell email">Email</div>
+            <div class="table-cell login">Last Login</div>
+          </div>
+        </div>
+        <div class="table-body block">
+          <% @users.each do |user| %>
+            <%= link_to user_path(user), class:"flex-row" do %>
+              <div class="table-cell name"><%= user.name %></div>
+              <div class="table-cell email"><%= user.email %></div>
+              <div class="table-cell login"><%= user.last_sign_in_at.strftime('%b %e, %Y %l:%M%P') %></div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+</div>

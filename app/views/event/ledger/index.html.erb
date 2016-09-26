@@ -1,7 +1,7 @@
 <% content_for :title, "Ledger for #{@event.title} | Queer Tango Club" %>
 <br>
 <div class="frame">
-  <section id="ledger">
+  <section id="ledger" class="members">
     <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right-chevron") %> Ledger</h2>
     <nav>
       <hr>

@@ -40,7 +40,34 @@
       left: 5px;
     }
   }
+}
 
+.users {
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid $black;
+
+    &:hover {
+      background: $cloudy;
+    }
+  }
+
+  .name {
+    width: calc(40% - 120px);
+    height: 40px;
+  }
+
+  .email {
+    width: 50%;
+    height: 40px;
+  }
+
+  .login {
+    width: calc(10% + 80px);
+  }
+}
+
+.members {
   .name {
     width: calc(50% - 120px);
     height: 40px;
