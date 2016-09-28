@@ -29,6 +29,7 @@ gem 'aws-sdk-v1'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
+gem 'devise_invalidatable'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

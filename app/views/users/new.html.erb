@@ -1,0 +1,37 @@
+<% content_for :title, "New User | Queer Tango Club" %>
+<br>
+
+<%= form_for(@user) do |f| %>
+  <section id="new">
+    <div class="frame">
+      <header>
+        <h2>
+          <%= link_to('Users', users_path) %> <%= icon("right-chevron") %> New
+        </h2>
+        <%= f.submit "Invite" %>
+      </header>
+      <hr class="thick">
+      <% if flash[:error] %>
+        <ul class="alert">
+          <% flash[:error].each do |message| %>
+            <li><%= icon('alert-solid') %> <%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <p>Provide an email address that's connected to a <a href="https://facebook.com">Facebook</a> or <a href="https://mail.google.com">Google</a> account.</p>
+      <p>Once added, they'll be able to login to the site using their social network of choice.</p>
+      <div class="flex-row half">
+        <div>
+          <div class="flex-column">
+            <div>
+              <%= f.label :email %>
+              <%= f.email_field :email %>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

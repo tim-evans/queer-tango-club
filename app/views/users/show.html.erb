@@ -1,13 +1,33 @@
-<% content_for :title, "#{@user.name} | Queer Tango Club" %>
+<% content_for :title, "#{@user.name || @user.email} | Queer Tango Club" %>
 <br>
 <div class="frame">
   <section id="user">
-    <h2><%= link_to('Users', users_path) %> <%= icon("right-chevron") %> <%= @user.name %></h2>
+    <h2><%= link_to('Users', users_path) %> <%= icon("right-chevron") %> <%= @user.name || @user.email %></h2>
     <nav>
       <hr>
-      <%= icon("email-solid") %> Invite User
-      <hr class="thick">
+      <% if @user.user_sessions.size > 0 %>
+        <%= link_to logout_user_path(@user) do %>
+          <%= icon("cancel-solid") %> Sign out User
+        <% end %>
+        <hr class="thick">
+      <% end %>
     </nav>
+    <br>
+    <div class="flex-row half">
+      <div>
+        <img src="<%= @user.avatar_url %>" alt="<%= @user.name || @user.email %>">
+      </div>
+      <div>
+        <h3><%= @user.name %></h3>
+        <p>
+          <%= @user.email %>
+        </p>
+        <p>
+          Last seen on <%= @user.last_sign_in_at.try(:strftime, '%B %e, %Y at %l:%M%P') %><br>
+          Invited on <%= @user.created_at.try(:strftime, '%B %e, %Y at %l:%M%P') %>
+        </p>
+      </div>
+    </div>
   </section>
   <br>
   <br>

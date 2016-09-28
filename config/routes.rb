@@ -22,7 +22,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show, :new, :create] do
+    member do
+      get 'logout'
+    end
+  end
+
   resources :privates, only: [:show]
   resources :cover_photos, only: [:create, :update, :destroy]
 

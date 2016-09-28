@@ -5,7 +5,9 @@
     <h2>Users</h2>
     <nav>
       <hr>
-      <%= icon("email-solid") %> Invite User
+      <%= link_to new_user_path do %>
+        <%= icon("email-solid") %> Invite User
+      <% end %>
       <hr class="thick">
     </nav>
     <div class="users">

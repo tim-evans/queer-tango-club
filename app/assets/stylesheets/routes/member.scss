@@ -65,6 +65,29 @@
   .login {
     width: calc(10% + 80px);
   }
+  @media screen and (max-width: 500px) {
+    .table-header {
+      display: none;
+    }
+
+    .flex-row {
+      padding: 1rem 0;
+      height: auto;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+
+    .name, .email, .login {
+      &:not(:empty) {
+        width: 100%;
+        line-height: 1.5rem;
+        height: auto;
+      }
+      &:empty {
+        height: 0rem;
+      }
+    }
+  }
 }
 
 .members {

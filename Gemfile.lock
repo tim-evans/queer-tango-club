@@ -70,6 +70,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_invalidatable (0.0.2)
+      devise
+      rails
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.0.2)
@@ -242,6 +245,7 @@ DEPENDENCIES
   aws-sdk-v1
   byebug
   devise
+  devise_invalidatable
   dotenv-rails
   icalendar
   inline_svg
