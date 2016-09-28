@@ -2,6 +2,7 @@
   padding-top: 1rem;
   padding-bottom: 0.5rem;
   cursor: pointer;
+  -webkit-tap-highlight-color: $transparent;
   -webkit-touch-callout: none;
 
   svg {

@@ -215,11 +215,13 @@ input[type=submit] {
       -ms-appearance: none;
           appearance: none;
   border-radius: 0;
-  -webkit-tap-highlight-color: $soot;
+  -webkit-tap-highlight-color: $transparent;
   -webkit-touch-callout: none;
 
-  &:hover:not(:disabled) {
-    background: $soot;
+  &:hover, &:active {
+    &:not(:disabled) {
+      background: $soot;
+    }
   }
 
   &:disabled {

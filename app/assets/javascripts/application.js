@@ -13,3 +13,5 @@ function icon(selector, value) {
     el.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + value);
   }
 }
+
+document.addEventListener("touchstart", function () {}, true);
