@@ -83,7 +83,7 @@
     width: 50%;
   }
 
-  .checkbox {
+  .checkbox:not(label) {
     width: 80px;
     text-align: center;
   }

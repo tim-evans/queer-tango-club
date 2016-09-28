@@ -2,6 +2,8 @@
   padding-top: 1rem;
   padding-bottom: 0.5rem;
   cursor: pointer;
+  -webkit-touch-callout: none;
+
   svg {
     position: relative;
     top: 3px;
