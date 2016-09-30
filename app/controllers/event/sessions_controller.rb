@@ -1,5 +1,10 @@
 class Event::SessionsController < ApplicationController
   before_action :set_event
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
+  def json_request?
+    request.format.json?
+  end
 
   # INDEX /events/1/sessions
   def index
