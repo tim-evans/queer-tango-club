@@ -56,7 +56,7 @@ $(function () {
     }
   };
 
-  var eventId = location.pathname.match(/\/events\/(\d+)/)[1];
+  var eventId = location.toString().match(/\/events\/(\d+)/)[1];
   var store = {
     sessions: [],
     discounts: []
