@@ -1,14 +1,15 @@
 $(function () {
   if (!$('.admin').length && !$('.toggle-attended').length) { return; }
 
-  $('.toggle-attended').on('click', function (evt) {
-    var $checkbox = $(this);
+  function setAttended($checkbox) {
     var data = {
       attendee: {
         attended: !$checkbox.data('attended')
       }
     };
     data[$('meta[name="csrf-param"]').attr('content')] = $('meta[name="csrf-token"]').attr('content');
+
+    icon($checkbox, 'spinner');
 
     $.ajax({
       url: '/attendees/' + $checkbox.data('id'),
@@ -22,6 +23,17 @@ $(function () {
       }
       $checkbox.data("attended", result.attendee.attended);
     });
+  }
+
+  $('.toggle-attended').on('click', function (evt) {
+    setAttended($(this));
     evt.preventDefault();
   });
+
+  if ($(window).width() <= 500) {
+    $('.table .flex-row').on('click', function (evt) {
+      setAttended($(this).find('.toggle-attended'));
+    });
+  }
+
 });

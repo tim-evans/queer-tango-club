@@ -375,3 +375,44 @@ footer {
     background: $life;
   }
 }
+
+@keyframes fluid-spin {
+  0% {
+    opacity: 1;
+  }
+  12.5% {
+    opacity: 0.8;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  37.5% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  62.5% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  87.5% {
+    opacity: 0.2;
+  }
+  95% {
+    opacity: 0.6;
+  }
+}
+
+.spinner {
+  rect {
+    fill: color('black');
+  }
+  @for $i from 0 through 7 {
+    rect:nth-child(#{$i + 1}) {
+      animation: 800ms ($i * 100ms) infinite fluid-spin;
+    }
+  }
+}

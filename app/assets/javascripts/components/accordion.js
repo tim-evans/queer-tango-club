@@ -32,11 +32,14 @@ $(function () {
       updateExpandAll();
       this.$.removeClass('collapsed');
 
-      var style = $('#' + this.id).attr('style');
-      $('#' + this.id).removeAttr('style');
-      height = $('#' + this.id).height();
-      $('#' + this.id).attr('style', style);
-      $('#' + this.id).animate({ height: height, opacity: 1, marginBottom: 0 }, 200);
+      var $element =  $('#' + this.id);
+      var style = $element.attr('style');
+      $element.removeAttr('style');
+      height = $element.height();
+      $element.attr('style', style);
+      $element.animate({ height: height, opacity: 1, marginBottom: 0 }, 200, function () {
+        $element.removeAttr('style');
+      });
     },
 
     collapse: function () {

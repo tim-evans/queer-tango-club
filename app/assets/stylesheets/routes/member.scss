@@ -120,14 +120,14 @@
   }
 }
 
-body#members #schedule {
+#sign-ups .table {
   @media screen and (max-width: 500px) {
     .table-header {
       display: none;
     }
 
     .flex-row {
-      height: 120px;
+      height: 40px;
       flex-wrap: wrap;
       flex-direction: row;
     }
@@ -136,9 +136,7 @@ body#members #schedule {
       width: calc(100% - 45px);
     }
     .email, .paid {
-      line-height: 40px;
-      padding-left: 40px;
-      width: 100%;
+      display: none;
     }
   }
 }
