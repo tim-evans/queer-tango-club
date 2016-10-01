@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
   root to: 'home#index'
   get '/about' => 'about#index'
+  get '/privacy' => 'about#privacy'
 
   resources :events, only: [:index, :show, :new, :create, :update, :edit] do
     member do
