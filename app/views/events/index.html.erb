@@ -17,11 +17,6 @@
       <hr class="thick">
       <br>
     </div>
-    <% if current_user %>
-      <% @events.draft.each do |event| %>
-        <%= render partial: 'cover_photo', locals: { event: event } %>
-      <% end %>
-    <% end %>
     <% @events.upcoming.each do |event| %>
       <%= render partial: 'cover_photo', locals: { event: event } %>
     <% end %>

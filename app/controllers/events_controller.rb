@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
   before_filter :authorize, only: [:new, :edit, :create, :update, :delete]
+  before_filter :check_published, only: [:show, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
   def protocol
     if Rails.env.production?
@@ -13,6 +14,14 @@ class EventsController < ApplicationController
 
   def authorize
     if current_user
+      true
+    else
+      render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
+    end
+  end
+
+  def check_published
+    if current_user || @event.published
       true
     else
       render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
