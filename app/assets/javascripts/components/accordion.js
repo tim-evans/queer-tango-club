@@ -39,6 +39,7 @@ $(function () {
       $element.attr('style', style);
       $element.animate({ height: height, opacity: 1, marginBottom: 0 }, 200, function () {
         $element.removeAttr('style');
+        $element.css({ overflow: 'hidden' });
       });
     },
 
@@ -47,8 +48,9 @@ $(function () {
       updateExpandAll();
       this.$.addClass('collapsed');
 
+      var $element = $('#' + this.id);
       var margin = this.isLastChild ? 50 : 0;
-      $('#' + this.id).animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
+      $element.animate({ height: 0, opacity: 0, marginBottom: margin }, 200);
     },
 
     toggle: function () {
