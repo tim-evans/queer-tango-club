@@ -3,7 +3,7 @@ class AddExpenseTable < ActiveRecord::Migration
     create_table :expenses do |t|
       t.string  :name
       t.text    :description
-      t.date    :expensed_at
+      t.datetime    :expensed_at
       t.integer :event_id
       t.attachment :receipt
       t.integer  :amount

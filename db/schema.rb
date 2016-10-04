@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20161004010936) do
   create_table "expenses", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.date     "expensed_at"
+    t.datetime "expensed_at"
     t.integer  "event_id"
     t.string   "receipt_file_name"
     t.string   "receipt_content_type"
