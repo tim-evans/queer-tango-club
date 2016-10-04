@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928041040) do
+ActiveRecord::Schema.define(version: 20161004010936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,23 @@ ActiveRecord::Schema.define(version: 20160928041040) do
     t.datetime "updated_at",  null: false
     t.boolean  "published"
   end
+
+  create_table "expenses", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "expensed_at"
+    t.integer  "event_id"
+    t.string   "receipt_file_name"
+    t.string   "receipt_content_type"
+    t.integer  "receipt_file_size"
+    t.datetime "receipt_updated_at"
+    t.integer  "amount"
+    t.string   "currency"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "expenses", ["event_id"], name: "index_expenses_on_event_id", using: :btree
 
   create_table "guests", force: :cascade do |t|
     t.integer  "teacher_id"

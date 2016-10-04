@@ -1,0 +1,60 @@
+<% content_for :title, "Edit Expense | Queer Tango Club" %>
+<br>
+<%= form_for(@expense, url: event_ledger_path(@event, @expense)) do |f| %>
+  <section id="expense">
+    <div class="frame">
+      <header>
+        <h2><%= link_to(@expense.event.title, event_path(@expense.event)) %> <%= icon("right-chevron") %> <%= link_to('Ledger', event_ledger_index_path(@expense.event)) %> <%= icon("right-chevron") %> <%= @expense.name %></h2>
+        <%= f.submit "Save" %>
+      </header>
+      <hr class="thick">
+      <% if flash[:error] %>
+        <ul class="alert">
+          <% flash[:error].each do |message| %>
+            <li><%= icon('alert-solid') %> <%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="flex-row half">
+        <div>
+          <div class="flex-column">
+            <div>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+            <div>
+              <%= f.label :display_amount, 'Amount' %>
+              <%= f.text_field :display_amount %>
+            </div>
+            <div>
+              <%= f.label :expensed_at, 'Expensed on' %>
+              <%= f.datetime_local_field :expensed_at %>
+            </div>
+            <div>
+              <%= f.label :description %>
+              <%= f.text_area :description, rows: 3 %>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flex-column">
+            <div>
+              <br>
+              <% if f.object.receipt.present? %>
+                <img src="<%= f.object.receipt.url(:original) %>" alt="<%= f.object.name %>"/>
+              <% else %>
+                <label>
+                  <%= f.file_field :receipt, multiple: false %>
+                  <a><%= icon("add-solid") %> Attach Receipt</a>
+                </label>
+                <div class="preview" style="display: none">
+                  <div class="receipt"></div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

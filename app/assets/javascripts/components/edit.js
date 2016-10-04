@@ -13,7 +13,7 @@ $(function () {
       } else {
         $('.preview').show(500);
       }
-      $('.preview .cover-photo').html('<img src="' + reader.result + '"/>');
+      $('.preview > div').html('<img src="' + reader.result + '"/>');
     }
     reader.readAsDataURL(element.files[0]);
   });

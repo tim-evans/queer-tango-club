@@ -1,0 +1,50 @@
+<% content_for :title, "Add Expense for #{@expense.event.title} | Queer Tango Club" %>
+<br>
+<%= form_for(@expense, url: event_ledger_index_path(@event)) do |f| %>
+  <section id="expense">
+    <div class="frame">
+      <header>
+        <h2><%= link_to(@expense.event.title, event_path(@expense.event)) %> <%= icon("right-chevron") %> <%= link_to('Ledger', event_ledger_index_path(@expense.event)) %> <%= icon("right-chevron") %> Add Expense</h2>
+        <%= f.submit "Create" %>
+      </header>
+      <hr class="thick">
+      <% if flash[:error] %>
+        <ul class="alert">
+          <% flash[:error].each do |message| %>
+            <li><%= icon('alert-solid') %> <%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="flex-row half">
+        <div>
+          <div class="flex-column">
+            <div>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+            <div>
+              <%= f.label :display_amount, 'Amount' %>
+              <%= f.text_field :display_amount %>
+            </div>
+            <div>
+              <%= f.label :expensed_at, 'Expensed on' %>
+              <%= f.datetime_local_field :expensed_at %>
+            </div>
+            <div>
+              <%= f.label :description %>
+              <%= f.text_area :description, rows: 3 %>
+            </div>
+            <div>
+              <label>
+                <%= f.file_field :receipt, multiple: false %>
+                <a><%= icon("add-solid") %> Attach Receipt</a>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

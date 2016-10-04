@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
     scope module: 'event' do
       resources :photos, only: [:index]
-      resources :ledger, only: [:index]
+      resources :ledger, only: [:index, :new, :create, :edit, :update]
       resources :members, only: [:index]
       resources :discounts, only: [:index]
       resources :sessions, only: [:index]

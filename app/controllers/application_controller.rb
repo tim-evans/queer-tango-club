@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  def authorize
+    if current_user
+      true
+    else
+      render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
+    end
+  end
+
   def not_found
     respond_to do |format|
       format.html { render template: 'errors/not_found', layout: 'layouts/application', status: 404 }

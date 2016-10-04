@@ -8,6 +8,9 @@
       <a class="accordion-expand-all cursor-pointer" tabindex="0">
         <%= icon("add-solid") %> <span>Expand All</span>
       </a>
+      <%= link_to new_event_ledger_path(@event) do %>
+        <%= icon("piggy-bank-solid") %> Add Expense
+      <% end %>
       <hr class="thick">
     </nav>
     <div class="table">
@@ -62,6 +65,15 @@
                   <% end %>
                 </div>
               <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <% @event.expenses.each do |expense| %>
+          <%= link_to edit_event_ledger_path(@event, expense), class: "flex-row collapse-none" do %>
+            <div class="table-cell payer-name"><%= expense.name.html_safe %></div>
+            <div class="table-cell payment-method"></div>
+            <div class="table-cell payment-amount">
+              <%= expense.display_amount(:negative) %>
             </div>
           <% end %>
         <% end %>

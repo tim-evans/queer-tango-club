@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   has_many :cover_photos, dependent: :destroy
   has_many :privates
   has_many :discounts, dependent: :destroy
+  has_many :expenses, dependent: :destroy
 
   has_many :members, through: 'attendees'
   has_many :locations, through: 'sessions'
@@ -49,7 +50,7 @@ class Event < ActiveRecord::Base
   end
 
   def net_income
-    sessions.map(&:net_income).reduce(:+)
+    sessions.map(&:net_income).reduce(:+) - expenses.map(&:cost).reduce(:+)
   end
 
   def ticketable?
