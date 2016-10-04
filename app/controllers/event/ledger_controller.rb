@@ -43,7 +43,7 @@ class Event::LedgerController < ApplicationController
     end
 
     def expense_params
-      params.require(:expense).permit(:name, :expensed_at, :description, :receipt, :display_expensed)
+      params.require(:expense).permit(:name, :expensed_at, :description, :receipt, :display_amount)
     end
 
 end
