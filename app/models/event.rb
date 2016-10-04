@@ -50,7 +50,9 @@ class Event < ActiveRecord::Base
   end
 
   def net_income
-    sessions.map(&:net_income).reduce(:+) - expenses.map(&:cost).reduce(:+)
+    profits = sessions.map(&:net_income).reduce(:+) || Money.new(0, 'USD')
+    costs = expenses.map(&:cost).reduce(:+) || Money.new(0, 'USD')
+    profits - costs
   end
 
   def ticketable?
