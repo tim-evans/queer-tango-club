@@ -318,9 +318,9 @@ class EventsController < ApplicationController
           end
 
           params[:sessions_attributes].each do |_, session_params|
-            session_params[:guests_attributes].each do |_, guest_params|
-              if [:id, :role, :teacher_id].all? { |key| guest_params[key].blank? }
-                session_params.delete(session_params.key(guest_params))
+            session_params[:guests_attributes].each do |idx, guest_params|
+              if [:role, :teacher_id].all? { |key| guest_params[key].blank? }
+                params[:sessions_attributes][params[:sessions_attributes].key(session_params)][:guests_attributes].delete(idx)
               else
                 guest_params.tap do |guest_params|
                   if guest_params[:teacher_attributes][:id].present? &&
