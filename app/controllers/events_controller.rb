@@ -44,6 +44,18 @@ class EventsController < ApplicationController
   def edit
     @event.cover_photos.build
     @event.sessions.build
+    @event.sessions.map(&:guests).flatten.map(&:teacher).uniq.each do |teacher|
+      teacher.photos.build
+    end
+    @event.sessions.each do |session|
+      session.guests.build
+      session.guests.each do |guest|
+        if guest.teacher.nil?
+          guest.teacher = Teacher.new
+          guest.teacher.photos.build
+        end
+      end
+    end
   end
 
   # GET /events/new
@@ -288,7 +300,13 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :starts_at, :ends_at, :description, {
         cover_photos_attributes: [:id, :attachment, :title],
-        sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id, :display_cost, :max_attendees]
+        sessions_attributes: [:id, :title, :starts_at, :ends_at, :description, :location_id, :display_cost, :max_attendees, {
+          guests_attributes: [:id, :teacher_id, :role, {
+            teacher_attributes: [:id, :name, :bio, :url, {
+              photos_attributes: [:id, :attachment]
+            }]
+          }]
+        }]
       }).tap do |params|
         # Remove an unfilled session
         if params[:sessions_attributes]
@@ -297,6 +315,21 @@ class EventsController < ApplicationController
             params[:sessions_attributes].delete(
               params[:sessions_attributes].key(new_session)
             )
+          end
+
+          params[:sessions_attributes].each do |_, session_params|
+            session_params[:guests_attributes].each do |_, guest_params|
+              if [:id, :role, :teacher_id].all? { |key| guest_params[key].blank? }
+                session_params.delete(session_params.key(guest_params))
+              else
+                guest_params.tap do |guest_params|
+                  if guest_params[:teacher_attributes][:id].present? &&
+                     guest_params[:teacher_id] != guest_params[:teacher_attributes][:id]
+                    guest_params.delete(:teacher_attributes)
+                  end
+                end
+              end
+            end
           end
         end
       end

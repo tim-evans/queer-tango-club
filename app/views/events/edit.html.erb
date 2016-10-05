@@ -144,6 +144,50 @@
             </div>
           </div>
         </div>
+        <%= sf.fields_for :guests do |gf| %>
+          <div class="flex-row half">
+            <div>
+              <div class="flex-column">
+                <div>
+                  <%= gf.label :teacher_id %>
+                  <%= gf.collection_select(:teacher_id, Teacher.all, :id, :name, { prompt: 'Select a Teacher...' }, autocomplete: 'off') %>
+                </div>
+                <div>
+                  <%= gf.label :role, 'Role' %>
+                  <%= gf.text_field :role %>
+                </div>
+              </div>
+            </div>
+            <div class="teacher-form">
+              <%= gf.fields_for :teacher do |tf| %>
+                <div class="flex-column">
+                  <div>
+                    <%= tf.label :name %>
+                    <%= tf.text_field :name %>
+                  </div>
+                  <div>
+                    <%= tf.label :url %>
+                    <%= tf.url_field :url %>
+                  </div>
+                  <div>
+                    <%= tf.label :bio, 'Biography' %>
+                    <%= tf.text_area :bio, rows: 5 %>
+                  </div>
+                  <%= tf.fields_for :photos do |pf| %>
+                    <% if pf.object.attachment.present? %>
+                      <img src="<%= pf.object.attachment.url(:original) %>" alt="<%= tf.object.name %>"/>
+                    <% else %>
+                      <label>
+                        <%= pf.file_field :attachment, multiple: false %>
+                        <a><%= icon("add-solid") %> Add Photo</a>
+                      </label>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
         <br>
         <br>
         <hr>

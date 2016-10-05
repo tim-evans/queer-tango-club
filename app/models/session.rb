@@ -9,6 +9,8 @@ class Session < ActiveRecord::Base
   belongs_to :event
   belongs_to :location
 
+  accepts_nested_attributes_for :guests, reject_if: :all_blank
+
   validates_presence_of :title, :starts_at, :ends_at
 
   after_save :create_sku, if: :registerable?
