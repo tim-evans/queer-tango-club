@@ -66,6 +66,7 @@
   </div>
   <%= f.fields_for :cover_photos do |cpf| %>
     <% if cpf.object.attachment.present? %>
+      <%= cpf.hidden_field '_destroy' %>
       <figure class="event">
         <div class="cover-photo">
           <img src="<%= cpf.object.attachment.url(:original) %>" alt="<%= cpf.object.title %>"/>
@@ -75,6 +76,9 @@
             <div class="photo-overlay">
               <%= cpf.text_field :title %>
             </div>
+            <label class="remove">
+              <a data-id="<%= cpf.object_name.gsub(/[\[\]]+/, '_').chop %>__destroy"><%= icon("cancel-solid") %> Delete Cover Photo</a>
+            </label>
           </figcaption>
         </div>
       </figure>

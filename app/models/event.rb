@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
   scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:cover_photos) }
   scope :historical, -> { where('ends_at < ?', Time.now).includes(:cover_photos) }
 
-  accepts_nested_attributes_for :sessions, :cover_photos, :discounts
+  accepts_nested_attributes_for :sessions, :cover_photos, :discounts, allow_destroy: true
 
   validates_presence_of :title, :starts_at, :ends_at, :cover_photos
   validates_associated :cover_photos, :sessions

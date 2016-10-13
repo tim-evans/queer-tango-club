@@ -24,4 +24,12 @@ $(function () {
     var top = $('.session-form:last-child').offset().top + $('.session-form:last-child').height();
     $('html,body').animate({ scrollTop: top }, 500);
   });
+
+  $('figure .remove a').on('click', function (evt) {
+    $('#' + $(evt.target).data('id')).attr('value', true);
+    var figure = $(evt.target).closest('figure')
+    figure.fadeOut(function () {
+      figure.remove();
+    });
+  });
 });
