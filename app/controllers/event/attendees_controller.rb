@@ -36,16 +36,22 @@ class Event::AttendeesController < ApplicationController
     end
 
     def create_or_find_member!
-      if attendee_params[:email].present?
-        Member.find_by_email(attendee_params[:email]) ||
-          Member.create(attendee_params.permit(:name, :email))
+      by_name = Member.where('lower(name) = ', attendee_params[:name].downcase)
+      if by_name.count == 1 && attendee_params[:name].present?
+        by_name = by_name[0]
       else
-        Member.create(attendee_params.permit(:name, :email))
+        by_name = nil
       end
+
+      Member.find_by_email(attendee_params[:email]) ||
+        by_name
+        Member.create(attendee_params.permit(:name, :email))
     end
 
     def attendee_params
       params.require(:attendee).permit(:name, :email, :display_amount_paid).tap do |attrs|
+        attrs[:email] = nil if attrs[:email].blank?
+
         Monetize.assume_from_symbol = true
         amount = Monetize.parse(attrs[:display_amount_paid])
         attrs.delete(:display_amount_paid)
