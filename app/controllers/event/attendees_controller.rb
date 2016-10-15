@@ -36,8 +36,12 @@ class Event::AttendeesController < ApplicationController
     end
 
     def create_or_find_member!
-      Member.find_by_email(attendee_params[:email]) ||
+      if attendee_params[:email]
+        Member.find_by_email(attendee_params[:email]) ||
+          Member.create(attendee_params.permit(:name, :email))
+      else
         Member.create(attendee_params.permit(:name, :email))
+      end
     end
 
     def attendee_params
