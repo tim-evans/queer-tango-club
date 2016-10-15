@@ -1,0 +1,61 @@
+<% content_for :title, "#{@event.title} | Queer Tango Club" %>
+<br>
+<div class="frame">
+  <section id="sign-ups">
+    <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right-chevron") %> Sign Ups</h2>
+    <nav>
+      <hr>
+      <%= link_to new_event_attendee_path(@event) do %>
+        <%= icon("happy") %> Add Attendee
+      <% end %>
+      <hr class="thick">
+    </nav>
+    <% @event.sessions.each do |session| %>
+      <h4 class="accordion" data-accordion="accordion-<%= session.id %>">
+        <%= session.title.html_safe %> (<%= session.attendees.size %>) <%= icon("down-chevron") %>
+      </h4>
+      <hr>
+      <div class="members" id="accordion-<%= session.id %>">
+        <% if session.attendees.size > 0 %>
+          <div class="table">
+            <div class="table-header thin-border-bottom">
+              <div class="flex-row">
+                <div class="table-cell attended"></div>
+                <div class="table-cell name">Name</div>
+                <div class="table-cell email">Email</div>
+                <div class="table-cell paid">Paid</div>
+              </div>
+            </div>
+            <div class="table-body block">
+              <% session.attendees.each do |attendee| %>
+                <div class="flex-row">
+                  <div class="table-cell attended">
+                    <a href="#" tabindex="0" class="toggle-attended" data-id="<%= attendee.id %>" data-attended="<%= attendee.attended? %>">
+                      <%= icon('check-solid') %>
+                    </a>
+                  </div>
+                  <div class="table-cell name"><%= attendee.name %></div>
+                  <div class="table-cell email"><%= attendee.email %></div>
+                  <div class="table-cell paid">
+                    <% if attendee.payment_method == 'cash' %>
+                      Cash
+                    <% elsif attendee.payment_method == 'gratis' %>
+                      Guest
+                    <% elsif attendee.payment_method == 'square' %>
+                      <a href="<%= attendee.payment_url %>">Card</a>
+                    <% end %>
+                  </div>
+                 </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <br>
+           <div class="smcp align-center"><%= icon('sad', class: 'empty-state') %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+  <br>
+  <br>
+</div>

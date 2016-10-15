@@ -8,4 +8,12 @@ class Attendee < ActiveRecord::Base
                             as: 'amount_paid'
 
   validates :payment_method, inclusion: { in: %w(stripe square cash gratis) }
+
+  def display_amount_paid
+    if amount_paid.try(:zero?)
+      ''
+    else
+      amount_paid.try(:format, no_cents_if_whole: true)
+    end
+  end
 end

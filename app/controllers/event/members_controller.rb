@@ -1,9 +1,9 @@
 class Event::MembersController < ApplicationController
   before_action :set_event
+  before_filter :authorize
 
   def index
     @smart_collapse = @event.highlight? && @event.sessions.any?(&:highlight?)
-    redirect_to(event_path(@event)) unless current_user
   end
 
   private

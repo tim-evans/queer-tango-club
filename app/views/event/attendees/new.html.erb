@@ -1,0 +1,50 @@
+<% content_for :title, "Add Attendee for #{@event.title} | Queer Tango Club" %>
+<br>
+<%= form_for(@attendee, url: event_attendees_path(@event)) do |f| %>
+  <section id="attendee">
+    <div class="frame">
+      <header>
+        <h2><%= link_to(@event.title, event_path(@event)) %> <%= icon("right-chevron") %> <%= link_to('Attendees', event_attendees_path(@event)) %> <%= icon("right-chevron") %> Add Attendee</h2>
+        <%= f.submit "Create" %>
+      </header>
+      <hr class="thick">
+      <% if flash[:error] %>
+        <ul class="alert">
+          <% flash[:error].each do |message| %>
+            <li><%= icon('alert-solid') %> <%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="flex-row half">
+        <div>
+          <div class="flex-column">
+            <div>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+            <div>
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </div>
+            <div>
+              <%= f.label :display_amount_paid, 'Donation' %>
+              <%= f.text_field :display_amount_paid, placeholder: '$' %>
+            </div>
+          </div>
+        </div>
+        <div>
+        <div>
+          <div class="flex-column">
+            <div>
+              <% @event.sessions.each do |session| %>
+                <label>
+                  <input type="checkbox" name="attendee[sessions][<%= session.id %>]"> <%= session.title %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

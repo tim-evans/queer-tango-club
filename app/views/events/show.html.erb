@@ -18,12 +18,16 @@
         <%= link_to edit_event_path(@event) do %>
           <%= icon("edit") %> Edit
         <% end %>
+        <%= link_to event_ledger_index_path(@event) do %>
+          <%= icon("piggy-bank") %> Ledger
+        <% end %>
         <% if @event.ticketable? %>
-          <%= link_to event_ledger_index_path(@event) do %>
-            <%= icon("piggy-bank") %> Ledger
-            <% end %>
           <%= link_to event_members_path(@event) do %>
             <%= icon("person") %> Sign Ups
+          <% end %>
+        <% else %>
+          <%= link_to event_attendees_path(@event) do %>
+            <%= icon("person") %> Attendees
           <% end %>
         <% end %>
         <%= link_to event_photos_path(@event) do %>

@@ -25,7 +25,7 @@
       </div>
       <div class="table-body block">
         <% @event.sessions.each do |session| %>
-          <% if session.ticket_cost %>
+          <% if session.ticket_cost || session.attendees.size > 0 %>
             <div class="table">
               <div class="table-header thin-border-bottom">
                 <div class="accordion flex-row collapsed collapse-none" data-accordion="accordion-<%= session.id %>">

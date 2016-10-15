@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :photos, only: [:index]
       resources :ledger, only: [:index, :new, :create, :edit, :update]
       resources :members, only: [:index]
+      resources :attendees, only: [:index, :new, :create, :delete]
       resources :discounts, only: [:index]
       resources :sessions, only: [:index]
     end
