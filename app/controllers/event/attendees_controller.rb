@@ -36,16 +36,19 @@ class Event::AttendeesController < ApplicationController
     end
 
     def create_or_find_member!
-      by_name = Member.where('lower(name) = ?', attendee_params[:name].downcase)
-      if by_name.count == 1 && attendee_params[:name].present?
-        by_name = by_name[0]
-      else
-        by_name = nil
+      if attendee_params[:email].present?
+        member = Member.find_by_email(attendee_params[:email])
+        return member if member
       end
 
-      Member.find_by_email(attendee_params[:email]) ||
-        by_name
-        Member.create(attendee_params.permit(:name, :email))
+      if attendee_params[:name].present?
+        by_name = Member.where('lower(name) = ?', attendee_params[:name].downcase)
+        if by_name.count == 1
+          return by_name[0]
+        end
+      end
+
+      Member.create(attendee_params.permit(:name, :email))
     end
 
     def attendee_params
