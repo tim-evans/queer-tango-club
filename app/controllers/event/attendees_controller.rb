@@ -36,7 +36,7 @@ class Event::AttendeesController < ApplicationController
     end
 
     def create_or_find_member!
-      by_name = Member.where('lower(name) = ', attendee_params[:name].downcase)
+      by_name = Member.where('lower(name) = ?', attendee_params[:name].downcase)
       if by_name.count == 1 && attendee_params[:name].present?
         by_name = by_name[0]
       else
