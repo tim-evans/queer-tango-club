@@ -49,7 +49,7 @@ class Event::AttendeesController < ApplicationController
           # If there is an email, don't match it up with another person that
           # has the same name
           if by_name.email.blank? || attendee_params[:email].blank? ||
-             by_name.email != attendee_params[:email]
+             by_name.email == attendee_params[:email]
             if attendee_params[:email].present?
               by_name.update_attributes(email: attendee_params[:email])
             end
