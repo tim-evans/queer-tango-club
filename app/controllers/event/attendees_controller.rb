@@ -45,10 +45,16 @@ class Event::AttendeesController < ApplicationController
         by_name = Member.where('lower(name) = ?', attendee_params[:name].downcase)
         if by_name.count == 1
           by_name = by_name[0]
-          if attendee_params[:email].present?
-            by_name.update_attributes(email: attendee_params[:email])
+
+          # If there is an email, don't match it up with another person that
+          # has the same name
+          if by_name.email.blank? || attendee_params[:email].blank? ||
+             by_name.email != attendee_params[:email]
+            if attendee_params[:email].present?
+              by_name.update_attributes(email: attendee_params[:email])
+            end
+            return by_name
           end
-          return by_name
         end
       end
 
