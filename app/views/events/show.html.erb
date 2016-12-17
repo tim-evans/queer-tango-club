@@ -33,6 +33,15 @@
         <%= link_to event_photos_path(@event) do %>
           <%= icon("photo") %> Photos
         <% end %>
+        <% if @event.published? %>
+          <%= link_to unpublish_event_path(@event) do %>
+            <%= icon("import") %> Unpublish
+          <% end %>
+        <% else %>
+          <%= link_to publish_event_path(@event) do %>
+            <%= icon("export") %> Publish
+          <% end %>
+        <% end %>
         <hr>
       </nav>
       <%= format_date_range(@event.starts_at, @event.ends_at) %><br>

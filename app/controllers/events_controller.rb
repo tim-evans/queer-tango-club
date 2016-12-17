@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :choose, :add_to_cart, :checkout, :purchase, :receipt]
+  before_action :set_event, only: [:show, :edit, :update, :choose, :add_to_cart, :checkout, :purchase, :receipt, :publish, :unpublish]
 
-  before_filter :authorize, only: [:new, :edit, :create, :update, :delete]
+  before_filter :authorize, only: [:new, :edit, :create, :update, :delete, :publish]
   before_filter :check_published, only: [:show, :choose, :add_to_cart, :checkout, :purchase, :receipt]
 
   def protocol
@@ -25,6 +25,19 @@ class EventsController < ApplicationController
       true
     else
       render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
+    end
+  end
+
+  def publish
+    if @event.update_attributes({ published: true })
+      @event.sessions.each { |session| session.create_sku }
+      redirect_to event_path(@event)
+    end
+  end
+
+  def unpublish
+    if @event.update_attributes({ published: false })
+      redirect_to event_path(@event)
     end
   end
 

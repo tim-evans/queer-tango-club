@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get 'checkout'
       post 'purchase'
       get 'receipt'
+      get 'publish'
+      get 'unpublish'
       get 'privates/:id', to: redirect('/privates/%{id}')
     end
 
