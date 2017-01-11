@@ -2,35 +2,12 @@ class OrderService
 
   attr_reader :sessions, :event
 
-  def initialize(sessions, at: DateTime.now)
+  def initialize(sessions, at: DateTime.now, stripe: false)
     @sessions = sessions
     @event = sessions.first.event
     @discounts = @event.discounts
     @ordered_at = at
-  end
-
-  def stripe_itemizations
-    items = @sessions.map do |session|
-      {
-        type: 'sku',
-        amount: session.ticket_cost,
-        currency: session.ticket_currency.downcase,
-        parent: session.sku
-      }
-    end
-
-    discounts = @discounts.select do |discount|
-      discount.apply_to?(@sessions, at: @ordered_at).size > 0
-    end
-
-    items + discounts.map do |discount|
-      {
-        type: 'discount',
-        amount: discount.fractional,
-        currency: discount.currency.downcase,
-        description: discount.description
-      }
-    end
+    @stripe = stripe
   end
 
   def price_of(session)
@@ -63,14 +40,30 @@ class OrderService
     attribution
   end
 
-  def total
+  def processing_fee
+    if @stripe
+      amount = total_before_fees.fractional
+      Money.new(
+        ((amount + 30) / (1 - 0.029)).round - amount,
+        'USD'
+      )
+    else
+      Money.new(0, 'USD')
+    end
+  end
+
+  def total_before_fees
     attribution.values.reduce(Money.new(0, 'USD')) do |total, item|
       total + item
     end
   end
 
+  def total
+    total_before_fees + processing_fee
+  end
+
   def final_attribution(amount_paid)
-    difference = amount_paid - total
+    difference = amount_paid - total_before_fees
     fraction = difference / attribution.keys.size
 
     if difference.zero?

@@ -51,6 +51,12 @@
                     <hr>
                     <table>
                       <tbody>
+                        <% unless @order.processing_fee.zero? %>
+                          <tr>
+                            <td>Processing Fee</td>
+                            <td><%= @order.processing_fee.format %></td>
+                          </tr>
+                        <% end %>
                         <tr>
                           <td>Your Total</td>
                           <td><%= @order.total.format %></td>
