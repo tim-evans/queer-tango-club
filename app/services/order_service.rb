@@ -3,8 +3,8 @@ class OrderService
   attr_reader :sessions, :event
 
   def initialize(sessions, at: DateTime.now, stripe: false)
-    @sessions = sessions.compact
-    @event = @sessions.first.event
+    @sessions = sessions
+    @event = @sessions.compact.first.event
     @discounts = @event.discounts
     @ordered_at = at
     @stripe = stripe
