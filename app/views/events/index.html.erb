@@ -17,7 +17,7 @@
       <hr class="thick">
       <br>
     </div>
-    <% @events.upcoming.each do |event| %>
+    <% @events.upcoming.order(starts_at: :asc).each do |event| %>
       <%= render partial: 'cover_photo', locals: { event: event } %>
     <% end %>
   <% end %>
