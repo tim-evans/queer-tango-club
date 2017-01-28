@@ -13,8 +13,6 @@ class Session < ActiveRecord::Base
 
   validates_presence_of :title, :starts_at, :ends_at
 
-  after_save :create_sku, if: :registerable?
-
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true
 
   def registerable?
@@ -28,13 +26,6 @@ class Session < ActiveRecord::Base
 
   def overlaps?(other)
     (starts_at < other.ends_at) && (other.starts_at < ends_at)
-  end
-
-  def create_sku
-    if sku.blank? && event.published
-      SyncSkusService.new(self).create!
-    end
-    true
   end
 
   def display_cost
