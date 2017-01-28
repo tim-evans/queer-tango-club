@@ -30,7 +30,6 @@ class EventsController < ApplicationController
 
   def publish
     if @event.update_attributes({ published: true })
-      @event.sessions.each { |session| session.create_sku }
       redirect_to event_path(@event)
     end
   end
