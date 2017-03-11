@@ -1,9 +1,9 @@
 class CoverPhoto < ActiveRecord::Base
   belongs_to :event
 
-  has_attached_file :attachment
+  has_attached_file :attachment, { preserve_files: true }
 
-  validates_attachment_content_type :attachment, content_type: %w(image/jpeg image/jpg image/png)
+  validates_attachment_content_type :attachment, content_type: %w(image/jpeg image/jpg image/png image/gif)
   validates_presence_of :attachment
 
   before_save :nullify_blank_values
