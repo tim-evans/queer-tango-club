@@ -47,12 +47,12 @@ class TinyletterService
     request("service:MC_Import_Emails.import", [[email]])
   end
 
-  def find(email:)
+  def find(email)
     request("query:Contact", [{ email: email }, "created_at desc", "0 10"])[0]
   end
 
   def unsubscribe(email)
-    contact = find(email: email)
+    contact = find(email)
     request('delete:Contact', [contact['id']])
   end
 end
