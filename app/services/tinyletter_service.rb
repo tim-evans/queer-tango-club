@@ -20,7 +20,7 @@ class TinyletterService
     response.get_fields('Set-Cookie').each { |c| @cookies.add_cookies(c) }
     result = JSON.parse(response.body)[0][0]
     if result['success']
-      result['result']
+      result['result'] || true
     else
       result['errmsg']
     end
