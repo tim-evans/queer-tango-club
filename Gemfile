@@ -15,6 +15,8 @@ gem 'unirest' # Used for HTTP requests
 gem 'stripe'
 gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
 
+gem 'httparty'
+
 # Money handling
 gem 'monetize'
 gem 'money-rails'
@@ -39,6 +41,7 @@ gem 'roadie-rails', '~> 1.0'
 
 group :development, :test do
   gem 'byebug'
+  gem 'certified'
   gem 'dotenv-rails'
   gem 'letter_opener'
 end
