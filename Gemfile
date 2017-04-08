@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.7'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -13,7 +14,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rollbar', '~> 2.7.1'
 gem 'unirest' # Used for HTTP requests
 gem 'stripe'
-gem 'square-ruby', git: 'https://github.com/tim-evans/square-ruby.git'
 
 gem 'httparty'
 

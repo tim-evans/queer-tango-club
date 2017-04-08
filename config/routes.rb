@@ -43,9 +43,6 @@ Rails.application.routes.draw do
   get '/milongas', to: redirect('/events')
   resources :locations, only: [:show]
 
-  namespace :webhooks do
-    post 'square', to: 'square#receive'
-  end
 
   match '/404', via: :all, to: 'application#not_found'
   match '/500', via: :all, to: 'application#internal_server_error'
