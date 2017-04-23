@@ -1,1 +1,0 @@
-class Milonga < Event; end
