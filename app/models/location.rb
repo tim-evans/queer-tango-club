@@ -1,15 +1,20 @@
 class Location < ActiveRecord::Base
+  include PgSearch
+
+  belongs_to :group
+  # belongs_to :photo, dependent: :destroy
   belongs_to :event_location, class_name: 'Location'
   has_many :nearby_locations, class_name: 'Location',
                               foreign_key: 'event_location_id'
 
-  has_attached_file :photo, styles: { wide: 'x400', thumbnail: '400x' }
-  validates_attachment_content_type :photo, content_type: %w(image/jpeg image/jpg image/png)
+  has_attached_file :photo, { preserve_files: true }
+  before_save :geolocate
 
-  before_create :geolocate
+  pg_search_scope :search_for, against: %w(name address_line city), using: [:dmetaphone], ignoring: :accents
 
   def geolocate
-    return if latitude && longitude
+    return unless region_code_changed? || city_changed? || postal_code_changed? ||
+                  address_line_changed? || extended_address_changed?
 
     lon, lat = MapboxService.new.geolocate(self)
     self.longitude = lon
@@ -18,7 +23,7 @@ class Location < ActiveRecord::Base
   end
 
   def slug
-    name.parameterize
+    name.try(:parameterize)
   end
 
   def inside?(location)

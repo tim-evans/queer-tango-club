@@ -1,8 +1,13 @@
 class Expense < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :event
-  has_attached_file :receipt
-  validates_presence_of :name, :amount
-  validates_attachment_content_type :receipt, content_type: %w(image/jpeg image/jpg image/png)
+  belongs_to :group
+  belongs_to :payment, class_name: 'Transaction', foreign_key: :transaction_id
+
+  has_attached_file :receipt, { preserve_files: true }
+
+  pg_search_scope :search_for, against: %w(name expensed_by)
 
   monetize :amount, as: :cost, with_model_currency: :currency, allow_nil: true
 

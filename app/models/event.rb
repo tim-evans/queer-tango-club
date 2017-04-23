@@ -12,10 +12,11 @@ AggregateGuest = Struct.new(:teacher, :roles) do
 end
 
 class Event < ActiveRecord::Base
+  include PgSearch
+
   has_many :sessions, dependent: :destroy
   has_many :attendees, through: 'sessions'
-  has_many :photos
-  has_many :cover_photos, dependent: :destroy
+  has_many :photos, dependent: :destroy
   has_many :privates
   has_many :discounts, dependent: :destroy
   has_many :expenses, dependent: :destroy
@@ -23,15 +24,16 @@ class Event < ActiveRecord::Base
   has_many :members, through: 'attendees'
   has_many :locations, through: 'sessions'
 
+  belongs_to :group
+
+  pg_search_scope :search_for, against: %w(title)
+
   scope :published, -> { where(published: true) }
   scope :draft,     -> { where(published: false) }
-  scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:cover_photos) }
-  scope :historical, -> { where('ends_at < ?', Time.now).includes(:cover_photos) }
+  scope :upcoming, -> { where('ends_at >= ?', Time.now).includes(:photos) }
+  scope :historical, -> { where('ends_at < ?', Time.now).includes(:photos) }
 
-  accepts_nested_attributes_for :sessions, :cover_photos, :discounts, allow_destroy: true
-
-  validates_presence_of :title, :starts_at, :ends_at, :cover_photos
-  validates_associated :cover_photos, :sessions
+  validates_presence_of :title, :starts_at, :ends_at
 
   def location
     locations.first

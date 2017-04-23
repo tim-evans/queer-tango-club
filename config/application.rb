@@ -39,6 +39,15 @@ module Tango
 
     Rails.application.routes.default_url_options[:host] = ENV['HOST']
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :post, :delete, :put, :patch, :options, :head]
+      end
+    end
+
     config.exceptions_app = self.routes
   end
 end

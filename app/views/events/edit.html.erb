@@ -139,11 +139,7 @@
             <div class="flex-column">
               <div>
                 <%= sf.label :display_cost, 'Ticket cost' %>
-                <%= sf.text_field :display_cost, readonly: sf.object.sku %>
-              </div>
-              <div>
-                <%= sf.label :max_attendees, 'Total tickets' %>
-                <%= sf.number_field :max_attendees, readonly: sf.object.sku %>
+                <%= sf.text_field :display_cost %>
               </div>
             </div>
           </div>

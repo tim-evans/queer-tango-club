@@ -6,6 +6,7 @@ ruby '2.2.7'
 gem 'rails', '4.2.4'
 # Use postgres as the database for Active Record
 gem 'pg'
+gem 'pg_search'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -14,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rollbar', '~> 2.7.1'
 gem 'unirest' # Used for HTTP requests
 gem 'stripe'
+gem 'jsonapi-resources', '~> 0.9.0'
 
 gem 'httparty'
 
@@ -25,6 +27,7 @@ gem 'inline_svg'
 gem 'jquery-rails'
 
 gem 'paperclip', '~> 4.3.2'
+gem 'fastimage'
 gem 'aws-sdk-v1'
 
 # Use ActiveModel has_secure_password
@@ -38,6 +41,8 @@ gem 'omniauth-facebook'
 
 gem 'icalendar'
 gem 'roadie-rails', '~> 1.0'
+
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug'

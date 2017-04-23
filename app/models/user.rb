@@ -1,37 +1,34 @@
 class User < ActiveRecord::Base
+  include PgSearch
+
   devise :invalidatable
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable,
-         omniauth_providers: [:google_oauth2, :facebook]
+         :recoverable, :rememberable, :trackable, :validatable
+
+  belongs_to :group
+
+  pg_search_scope :search_for, against: %w(name email)
 
   def avatar_url
-    if provider == 'facebook'
-      avatar + "?width=800"
-    else
-      avatar
-    end
+    avatar
   end
 
-  def self.from_omniauth(auth)
-    user = where(provider: auth.provider, uid: auth.uid).first
+  def self.from_oauth(auth)
+    user = where(provider: auth[:provider], uid: auth[:uid]).first
     if user.nil?
-      user = find_by_email(auth.info.email)
+      user = find_by_email(auth[:email])
       # Instantiate the user for the first time
       if user
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.name = auth.info.name
-        user.email = auth.info.email
+        user.provider = auth[:provider]
+        user.uid = auth[:uid]
+        user.name = auth[:name]
+        user.email = auth[:email]
+        user.avatar = auth[:image]
         user.password = Devise.friendly_token[0,20]
         user.save
       end
-    end
-
-    if user.avatar.nil?
-      user.avatar = auth.info.image
     end
     user
   end

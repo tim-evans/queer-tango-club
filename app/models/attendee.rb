@@ -1,6 +1,7 @@
 class Attendee < ActiveRecord::Base
   belongs_to :member
   belongs_to :session
+  belongs_to :payment, class_name: 'Transaction', foreign_key: :transaction_id
 
   delegate :name, :email, to: :member
 

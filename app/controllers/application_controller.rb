@@ -1,29 +1,49 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  include JSONAPI::ActsAsResourceController
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
+  before_filter :current_user
+
+  def context
+    {
+      current_user: current_user,
+      group: group
+    }
+  end
+
+  def current_user
+    return @current_user if @current_user && access_token
+    user = UserSession.find_by_session_id(access_token).try(:user)
+    user_group = user.try(:group)
+    @current_user = user if user_group == group
+  end
+
+  def group
+    Group.find_by_api_key(api_key)
+  end
+
+  def api_key
+    request.headers['ApiKey'] || request.headers['Api-Key']
+  end
+
+  def access_token
+    request.headers['AccessToken'] || request.headers['Access-Token']
+  end
 
   def authorize
     if current_user
       true
     else
-      render file: "#{Rails.root}/app/views/errors/not_found.html" , status: :not_found
+      head :unauthorized
     end
   end
 
   def not_found
-    respond_to do |format|
-      format.html { render template: 'errors/not_found', layout: 'layouts/application', status: 404 }
-      format.all  { render nothing: true, status: 404 }
-    end
+    head :not_found
   end
 
   def internal_server_error
-    respond_to do |format|
-      format.html { render template: 'errors/internal_server_error', layout: 'layouts/application', status: 500 }
-      format.all  { render nothing: true, status: 500 }
-    end
+    head :internal_server_error
   end
 end

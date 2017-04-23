@@ -1,11 +1,9 @@
 class OrderService
 
-  attr_reader :sessions, :event
+  attr_reader :sessions
 
   def initialize(sessions, at: DateTime.now, stripe: false)
     @sessions = sessions
-    @event = @sessions.compact.first.event
-    @discounts = @event.discounts
     @ordered_at = at
     @stripe = stripe
   end
@@ -20,7 +18,8 @@ class OrderService
       attribution[session] = session.cost
     end
 
-    @discounts.each do |discount|
+    discounts = @sessions.map(&:event).compact.uniq.map(&:discounts).flatten
+    discounts.each do |discount|
       sessions = discount.apply_to?(@sessions, at: @ordered_at)
       discount_amount = if sessions.count > 0
                           discount.amount

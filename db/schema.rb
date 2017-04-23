@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004010936) do
+ActiveRecord::Schema.define(version: 20170306033957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
+  enable_extension "unaccent"
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "member_id"
@@ -27,6 +29,7 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.boolean  "attended"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "transaction_id"
   end
 
   add_index "attendees", ["member_id"], name: "index_attendees_on_member_id", using: :btree
@@ -43,6 +46,11 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.integer  "event_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "url"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "filename"
+    t.integer  "filesize"
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -63,6 +71,7 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "published"
+    t.integer  "group_id"
   end
 
   create_table "expenses", force: :cascade do |t|
@@ -78,9 +87,33 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.string   "currency"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "group_id"
+    t.text     "expensed_by"
+    t.integer  "receipt_id"
+    t.integer  "transaction_id"
   end
 
   add_index "expenses", ["event_id"], name: "index_expenses_on_event_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",              null: false
+    t.string   "email",             null: false
+    t.string   "api_key",           null: false
+    t.text     "about"
+    t.string   "hostname",          null: false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "hero_file_name"
+    t.string   "hero_content_type"
+    t.integer  "hero_file_size"
+    t.datetime "hero_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "logo_id"
+    t.integer  "hero_id"
+  end
 
   create_table "guests", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -114,6 +147,8 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.boolean  "safe_space"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "group_id"
+    t.integer  "photo_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -121,6 +156,7 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
@@ -134,6 +170,14 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "url"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "filename"
+    t.integer  "filesize"
+    t.string   "title"
+    t.text     "caption"
+    t.text     "tags",                                 array: true
   end
 
   add_index "photos", ["event_id"], name: "index_photos_on_event_id", using: :btree
@@ -147,6 +191,15 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.tsrange  "availability",              array: true
+  end
+
+  create_table "reimbursements", force: :cascade do |t|
+    t.integer  "amount",        null: false
+    t.string   "currency",      null: false
+    t.datetime "reimbursed_at", null: false
+    t.integer  "expense_id",    null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -175,7 +228,26 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.text     "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
   end
+
+  create_table "transactions", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "paid_at"
+    t.text     "paid_by"
+    t.integer  "group_id"
+    t.integer  "receipt_id"
+    t.integer  "amount"
+    t.integer  "iou"
+    t.string   "currency"
+    t.string   "method"
+    t.string   "url"
+    t.text     "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "transactions", ["group_id"], name: "index_transactions_on_group_id", using: :btree
 
   create_table "user_sessions", force: :cascade do |t|
     t.integer  "user_id"
@@ -204,6 +276,7 @@ ActiveRecord::Schema.define(version: 20161004010936) do
     t.string   "uid"
     t.string   "name"
     t.string   "avatar"
+    t.integer  "group_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
