@@ -14,9 +14,8 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return @current_user if @current_user && access_token
-    user = UserSession.find_by_session_id(access_token).try(:user)
-    user_group = user.try(:group)
-    @current_user = user if user_group == group
+    user_id = UserSession.find_by_session_id(access_token).try(:user_id)
+    @current_user = group.users.find(user_id) if user_id
   end
 
   def group
