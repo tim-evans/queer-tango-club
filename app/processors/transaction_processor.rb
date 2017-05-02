@@ -1,8 +1,10 @@
-class TransactionProcessor < JSONAPI::Processor
+class TransactionProcessor < BaseProcessor
   after_find do
     unless @result.is_a?(JSONAPI::ErrorsOperationResult)
-      @result.meta[:total] = @result.resources.map(&:amount).reduce(&:+)
-      # @result.meta[:currency] = @context[:group].currency
+      @result.meta[:balance] = {
+        amount: @result.resources.map(&:amount).reduce(&:+) || 0,
+        currency: @result.resources.first.try(:currency) || 'USD'
+      }
     end
   end
 end
