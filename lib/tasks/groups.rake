@@ -9,7 +9,6 @@ namespace :groups do
       )
       puts "API KEY: #{qtc.api_key}"
 
-      Attendee.all.update_all(group_id: qtc.id)
       Event.all.update_all(group_id: qtc.id)
       Location.all.update_all(group_id: qtc.id)
       Member.all.update_all(group_id: qtc.id)
