@@ -2,6 +2,7 @@ class Transaction < ActiveRecord::Base
   include PgSearch
 
   belongs_to :group
+  belongs_to :event
   belongs_to :receipt, class_name: 'Photo'
   validates_presence_of :description, :amount, :currency, :paid_by
 

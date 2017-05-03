@@ -12,15 +12,11 @@ namespace :transactions do
           amount: expense.amount * -1,
           currency: expense.currency || 'USD',
           receipt_id: expense.receipt_id,
+          event_id: expense.event_id,
           group: group
         })
 
-        if expense.event
-          expense.payment = transaction
-          expense.save!
-        else
-          expense.destroy!
-        end
+        expense.destroy!
       end
 
       Attendee.all.each do |attendee|
@@ -32,6 +28,7 @@ namespace :transactions do
           currency: attendee.payment_currency || 'USD',
           url: attendee.payment_url,
           method: attendee.payment_method,
+          event_id: attendee.session.event_id,
           group: group
         })
 
