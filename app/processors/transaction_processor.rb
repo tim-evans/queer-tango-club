@@ -25,9 +25,19 @@ class TransactionProcessor < BaseProcessor
     end
 
     result = JSONAPI::ResourcesOperationResult.new(:ok, resources, { record_count: records.count })
+
+    currency = records.first.try(:currency)
     result.meta[:balance] = {
       amount: records.sum(:amount),
-      currency: records.first.try(:currency)
+      currency: currency
+    }
+    result.meta[:credit] = {
+      amount: records.where('amount > 0').sum(:amount),
+      currency: currency
+    }
+    result.meta[:debit] = {
+      amount: records.where('amount < 0').sum(:amount),
+      currency: currency
     }
 
     result
