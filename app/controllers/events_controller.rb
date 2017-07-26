@@ -141,7 +141,9 @@ class EventsController < ApplicationController
 
   def checkout
     if @event.registerable? || current_user
-      @payment_amount = OrderService.new(Session.where(id: session[:cart])).total
+      @payment_amount = OrderService.new(
+        @event.sessions.to_a
+      ).total
     else
       redirect_to event_url(@event, protocol: protocol)
     end
@@ -159,7 +161,7 @@ class EventsController < ApplicationController
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
-    sessions = Session.where(id: session[:cart]).where.not(id: member.sessions.pluck(:id))
+    sessions = @event.sessions
 
     cash = Monetize.parse(params[:payment_amount], 'USD')
     order = OrderService.new(sessions)
@@ -222,7 +224,7 @@ class EventsController < ApplicationController
     member.update_attributes(name: name)
 
     # Remove all sessions that a member has already signed up for
-    sessions = Session.where(id: session[:cart]).where.not(id: member.sessions.pluck(:id))
+    sessions = @event.sessions
 
     order = OrderService.new(sessions, stripe: true)
     charge = Stripe::Charge.create({
