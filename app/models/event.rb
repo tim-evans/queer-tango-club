@@ -60,7 +60,7 @@ class Event < ActiveRecord::Base
   end
 
   def registerable?
-    published && sessions.any?(&:registerable?) && (ends_at - starts_at).to_i > 1
+    published && sessions.any?(&:registerable?)
   end
 
   def highlight?
