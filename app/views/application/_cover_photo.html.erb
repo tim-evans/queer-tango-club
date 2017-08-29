@@ -14,7 +14,7 @@
       </div>
       <% if event.registerable? %>
         <div>
-          <%= link_to checkout_event_path(event), class: 'photo-overlay button with-icon' do %>
+          <%= link_to choose_event_path(event), class: 'photo-overlay button with-icon' do %>
             <%= icon("ticket") %> Sign Up
           <% end %>
         </div>

@@ -16,7 +16,7 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true
 
   def registerable?
-    true && DateTime.current < starts_at
+    ticket_cost.present? && DateTime.current < starts_at
   end
 
   def highlight?

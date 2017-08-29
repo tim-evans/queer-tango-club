@@ -1,6 +1,6 @@
 <% content_for :title, "Checkout | Queer Tango Club" %>
 <section class="frame banner">
-  <h1><%= @event.title %> <span style='float:right'>$125</span></h1>
+  <h1><%= @event.title %></h1>
   <%= format_date_range(@event.starts_at, @event.ends_at) %><br>
   <% if @event.location %>
     <%= format_location_name(@event.location.name) %>

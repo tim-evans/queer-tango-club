@@ -2,7 +2,7 @@
   <header>
     <h2>Schedule</h2>
     <% if event.registerable? %>
-      <%= link_to checkout_event_path(event), class: 'button with-icon' do %>
+      <%= link_to choose_event_path(event), class: 'button with-icon' do %>
         <%= icon("ticket") %> Sign Up
       <% end %>
     <% end %>
