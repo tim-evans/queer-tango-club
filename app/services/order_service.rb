@@ -16,9 +16,9 @@ class OrderService
 
   def attribution
     attribution = {}
-    discount_amount = Money.new(18_00, 'USD')
+    discount_amount = Money.new(0_00, 'USD')
     @sessions.each do |session|
-      attribution[session] = Money.new(30_00, 'USD') + (discount_amount / @sessions.size)
+      attribution[session] = Money.new(24_00, 'USD') + (discount_amount / @sessions.size)
     end
 
     attribution
