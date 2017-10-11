@@ -4,7 +4,7 @@
     <hr class="thick">
   </div>
   <% locations.each do |location| %>
-    <% if location.photo %>
+    <% if location.photo.present? %>
       <div class="cover-photo" id="<%= location.slug %>">
         <img src="<%= location.photo.url %>" alt="<%= location.name %>" />
       </div>
