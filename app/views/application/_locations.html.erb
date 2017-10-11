@@ -4,9 +4,11 @@
     <hr class="thick">
   </div>
   <% locations.each do |location| %>
-    <div class="cover-photo" id="<%= location.slug %>">
-      <img src="<%= location.photo.url %>" alt="<%= location.name %>" />
-    </div>
+    <% if location.photo %>
+      <div class="cover-photo" id="<%= location.slug %>">
+        <img src="<%= location.photo.url %>" alt="<%= location.name %>" />
+      </div>
+    <% end %>
     <div class="frame">
       <div class="flex-row half">
         <aside>
