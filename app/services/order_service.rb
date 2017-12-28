@@ -20,7 +20,7 @@ class OrderService
     total = if @event.id == 40
               Money.new(24_00, 'USD')
             elsif @event.id == 41
-              Money.new(22_00, 'USD')
+              Money.new(21_50, 'USD')
             else
               Money.new(24_00, 'USD')
             end
