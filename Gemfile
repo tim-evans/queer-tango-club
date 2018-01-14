@@ -3,7 +3,7 @@ ruby '2.2.7'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '~> 4.2.7.1'
 # Use postgres as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -22,7 +22,7 @@ gem 'monetize'
 gem 'money-rails'
 
 gem 'inline_svg'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0.4'
 
 gem 'paperclip', '~> 4.3.2'
 gem 'aws-sdk-v1'
