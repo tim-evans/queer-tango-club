@@ -11,7 +11,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-gem 'rollbar', '~> 2.7.1'
+gem 'rollbar', '~> 2.11.3'
 gem 'unirest' # Used for HTTP requests
 gem 'stripe'
 
