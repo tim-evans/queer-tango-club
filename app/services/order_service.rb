@@ -17,13 +17,7 @@ class OrderService
   def attribution
     attribution = {}
     discount_amount = Money.new(0_00, 'USD')
-    total = if @event.id == 40
-              Money.new(24_00, 'USD')
-            elsif @event.id == 41
-              Money.new(21_50, 'USD')
-            else
-              Money.new(24_00, 'USD')
-            end
+    total = Money.new(25_00, 'USD')
 
     @sessions.each do |session|
       attribution[session] = total + (discount_amount / @sessions.size)
