@@ -18,9 +18,9 @@ class OrderService
     attribution = {}
     discount_amount = Money.new(0_00, 'USD')
     total = if @event.id == 50
-              Money.new(50_00, 'USD')
+              Money.new(25_00, 'USD')
             elsif @event.id == 49
-              Money.new(80_00, 'USD')
+              Money.new(40_00, 'USD')
             else
               Money.new(25_00, 'USD')
             end
