@@ -16,7 +16,8 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true
 
   def registerable?
-    (event.id == 45 || event.id == 46 || event.id == 48) && DateTime.current < starts_at
+    (event.id == 45 || event.id == 46 || event.id == 48 ||
+     event.id == 49 || event.id == 50) && DateTime.current < starts_at
   end
 
   def highlight?
