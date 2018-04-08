@@ -16,7 +16,8 @@ class Session < ActiveRecord::Base
   monetize :ticket_cost, as: :cost, with_model_currency: :ticket_currency, allow_nil: true
 
   def registerable?
-    (id == 130 || id == 131 || id == 176 || event.id == 46 || event.id == 48) && DateTime.current < s  end
+    (id == 130 || id == 131 || id == 176 || event.id == 46 || event.id == 48) && DateTime.current < starts_at
+  end
 
   def highlight?
     now = DateTime.current
