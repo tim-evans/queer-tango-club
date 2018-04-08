@@ -142,7 +142,7 @@ class EventsController < ApplicationController
   def checkout
     if @event.registerable? || current_user
       @payment_amount = OrderService.new(
-        @event.sessions.to_a
+        @event.registerable_sessions.to_a
       ).total
     else
       redirect_to event_url(@event, protocol: protocol)

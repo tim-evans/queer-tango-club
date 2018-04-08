@@ -33,6 +33,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :title, :starts_at, :ends_at, :cover_photos
   validates_associated :cover_photos, :sessions
 
+  def registerable_sessions
+    sessions.select(&:registerable?)
+  end
+
   def location
     locations.first
   end
